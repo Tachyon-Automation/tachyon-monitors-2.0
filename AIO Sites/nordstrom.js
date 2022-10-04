@@ -35,6 +35,7 @@ async function monitor(sku) {
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)',
             'Accept': 'application/vnd.nord.pdp.v1+json',
+            'consumer-id': 'recs-PDP_1',
         }
         let method = 'GET';
         let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`
