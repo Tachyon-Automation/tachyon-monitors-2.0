@@ -5,9 +5,9 @@ const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '810745640837185547'
-const site = 'NORDSTROM';
-const version = `Nordstrom v1.0`
+const CHANNEL = '810745640837185547' //channel id
+const site = 'NORDSTROM'; //site name
+const version = `Nordstrom v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -27,7 +27,6 @@ async function startMonitoring() {
 
 async function monitor(sku) {
     try {
-        console.log(sku)
         let product = PRODUCTS[sku]
         if (!product)
             return;
@@ -84,6 +83,7 @@ async function monitor(sku) {
             }
         }
         if (inStock) {
+            console.log({time: new Date().toISOString(), product: sku, title: title})
             inStock = false;
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))

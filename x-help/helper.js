@@ -47,7 +47,7 @@ const helper = {
             let json = await response.json()
             return { json, response }
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         requestJson(site, method, proxy, headers)
         return 
@@ -121,7 +121,7 @@ const helper = {
         if(response.status !== 204)
         throw "Failed to send webhook"
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, site)
         return
