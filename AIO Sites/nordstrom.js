@@ -31,20 +31,23 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = helper.getRandomProxy();
+        let proxy = helper.getRandomProxy(); //proxy per site
+        //these headers change per site
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)',
             'Accept': 'application/vnd.nord.pdp.v1+json',
             'consumer-id': 'recs-PDP_1',
         }
-        let method = 'GET';
-        let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`
-        let set = await helper.requestJson(req, method, proxy, headers)
+        let method = 'GET'; //request method
+        let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
+        let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
+        //Custom error handling
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
         }
+        //Define body variables
         let ids = body.skus.allIds
         if (ids.length < 0) {
             await helper.sleep(1000)
@@ -52,14 +55,13 @@ async function monitor(sku) {
             return
         }
         let inStock = false;
-        let title = body.productTitle
+        let url = `https://www.nordstrom.com/s/tachyon/${sku}`//product url
+        let title = body.productTitle //title 
+        let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId
         let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
-        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop }
-        catch (e) { }
+        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop }catch(e){} //try set image
         let stock = 0
-        let price = ''
-        let url = `https://www.nordstrom.com/s/tachyon/${sku}`
         let sizes = []
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
         let oldSizeList = await query.rows[0].sizes
@@ -69,7 +71,8 @@ async function monitor(sku) {
         let inid = body.skus.byId
         let insku = body.skus.allIds
         let vars = Object.assign(oosid, inid)
-        let skus = Object.assign(oossku, insku)
+        let skus = Object.assign(oossku, insku) //For loop parse
+        //pars sizes for loop
         for (let id of skus) {
             if (vars[id].isAvailable === true || vars[id].totalQuantityAvailable > 0) {
                 sizes += `${vars[id].sizeId} (${vars[id].totalQuantityAvailable}) - ${vars[id].rmsSkuId}\n`
@@ -98,6 +101,7 @@ async function monitor(sku) {
         return
     }
 }
+//Discord Bot channel login
     discordBot.getClient.on('message', async function (msg) {
         if (msg.channel.id !== CHANNEL)
             return;
