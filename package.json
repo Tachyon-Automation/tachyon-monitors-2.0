@@ -1,0 +1,24 @@
+{
+  "name": "tachyon-monitors-2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "discord": "^0.8.2",
+    "discord.js": "^14.4.0",
+    "https-proxy-agent": "^5.0.1",
+    "latest": "^0.2.0",
+    "n": "^9.0.0",
+    "node-fetch": "^2.6.1",
+    "setimmediate": "^1.0.5",
+    "stable": "^0.1.8",
+    "uuid": "^9.0.0",
+    "webhook-discord": "^3.7.8"
+  }
+}

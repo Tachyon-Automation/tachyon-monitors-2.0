@@ -1,0 +1,46 @@
+{
+    "TACHYON": {
+        "name": "Tachyon",
+        "color": "6cb3e3",
+        "image": "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    },
+    "COOKOLOGY": {
+        "name": "Cookology",
+        "color": "7557c8",
+        "image": "https://media.discordapp.net/attachments/894983430952063047/894983493984088084/Group_41.png",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+
+    },
+    "ELEPHANTAIO": {
+        "name": "Elephant AIO",
+        "color": "cd8fff",
+        "image": "https://media.discordapp.net/attachments/804617985498546177/989026781023580190/Frame_1.jpg",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    },
+    "CARBON": {
+        "name": "Carbon",
+        "color": "04f5ff",
+        "image": "https://cdn.discordapp.com/attachments/998307425536983182/1000495532625645728/unknown.png",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    },
+    "SYNTHESIS": {
+        "name": "Synthesis",
+        "color": "000000",
+        "image": "https://media.discordapp.net/attachments/920011201390473256/1023486327854993488/3a3b60151b252a1b09ad5c01ec9a967b.webp",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    },
+    "FLIPD": {
+        "name": "Flipd",
+        "color": "42e2c0",
+        "image": "https://media.discordapp.net/attachments/927970321062055997/1011285624986271754/profilepic.jpg",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    },
+    "DROPALERT": {
+        "name": "Drop Alert",
+        "color": "eb6339",
+        "image": "https://cdn.discordapp.com/attachments/973659244723310643/983215242668539934/win.png",
+        "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32"
+    }
+
+}
