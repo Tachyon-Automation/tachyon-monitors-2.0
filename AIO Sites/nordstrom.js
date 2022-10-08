@@ -11,6 +11,7 @@ const version = `Nordstrom v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
+helper.discordbot(CHANNEL, PRODUCTS, table, monitor)
 startMonitoring()
 async function startMonitoring() {
     let SKUList = await database.query(`SELECT * from ${table}`);
@@ -20,7 +21,7 @@ async function startMonitoring() {
             waittime: row.waittime,
             sizes: row.sizes
         }
-        monitor(row.sku);
+        monitor(row.sku)
     }
     console.log(`[${site}] Monitoring all SKUs!`)
 }
@@ -55,11 +56,11 @@ async function monitor(sku) {
         }
         let inStock = false;
         let url = `https://www.nordstrom.com/s/tachyon/${sku}`//product url
-        let title = body.productTitle //title 
+        let title = body.productTitle + " "
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId
-        let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
-        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop }catch(e){} //try set image
+        let image = 'https://pbs.twimg.com/profile_images/1159538934977662976/4gmIcgkZ_400x400.png'
+        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop } catch (e) {} //try set image
         let stock = 0
         let sizes = []
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -72,155 +73,37 @@ async function monitor(sku) {
         let vars = Object.assign(oosid, inid)
         let skus = Object.assign(oossku, insku) //For loop parse
         //pars sizes for loop
-        for (let id of skus) {
-            if (vars[id].isAvailable === true || vars[id].totalQuantityAvailable > 0) {
-                sizes += `${vars[id].sizeId} (${vars[id].totalQuantityAvailable}) - ${vars[id].rmsSkuId}\n`
-                stock += Number(vars[id].totalQuantityAvailable)
+        for (let id of skus) { //loops through all sizes
+            if (vars[id].isAvailable === true || vars[id].totalQuantityAvailable > 0) { //if oss or in stock
+                sizes += `${vars[id].sizeId} (${vars[id].totalQuantityAvailable}) - ${vars[id].rmsSkuId}\n`//size parse
+                stock += Number(vars[id].totalQuantityAvailable) //total count or quantity
                 sizeList.push(vars[id].rmsSkuId);
-                price = vars[id].displayPrice
-                if (!oldSizeList.includes(vars[id].rmsSkuId))
+                price = vars[id].displayPrice //price set for vars
+                if (!oldSizeList.includes(vars[id].rmsSkuId))// oldSizeList.includes this size
                     inStock = true;
+                    title = title + vars[id].colorDisplayValue + ","
             }
         }
         if (inStock) {
-            console.log({time: new Date().toISOString(), product: sku, title: title})
+            title = title.split(',')[0]
+            helper.posElephentNord(sizes, sku, title, price, image)
+            console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-            await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
+            helper.posElephentNord(sizes, sku, title, price, image)
             for (let group of sites[site]) {
                 await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
             }
-    }
+            await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
+
+        }
         await helper.sleep(product.waittime);
         monitor(sku);
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(sku)
         return
     }
 }
-//Discord Bot channel login
-    discordBot.getClient.on('message', async function (msg) {
-        if (msg.channel.id !== CHANNEL)
-            return;
-    
-        if (msg.content.startsWith(discordBot.commandPrefix + 'monitorSKU')) {
-            let args = msg.content.split(" ");
-            if (args.length !== 3) {
-                discordBot.sendChannelMessage(msg.channel.id, "Command: !monitorSKU <SKU> <waitTime>");
-                return;
-            }
-            let sku = args[1];
-            let waitTime = args[2];
-            let query = await database.query(`SELECT * from ${DATABASE_TABLE} where sku='${sku}'`);
-            if (query.rows.length > 0) {
-                PRODUCTS[sku] = null
-                await database.query(`delete from ${table} where sku='${sku}'`);
-                discordBot.sendChannelMessage(msg.channel.id, `No longer monitoring SKU '${sku}'!`);
-                return;
-            }
-            PRODUCTS[sku] = {
-                sku: sku,
-                waittime: waitTime,
-                sizes: ''
-            }
-            await database.query(`insert into ${table}(sku, sizes, waittime) values('${sku}', '', ${waitTime})`);
-            monitor(sku);
-            // console.log("added " + sku)
-            discordBot.sendChannelMessage(msg.channel.id, `Started monitoring SKU '${sku}'!  (waitTime ${waitTime})`);
-        }
-        if (msg.content.startsWith(discordBot.commandPrefix + 'monitorMultipleSKUs')) {
-            let splits = msg.content.split(" ")
-            if (splits.length < 2) {
-                discordBot.sendChannelMessage(msg.channel.id, `Wrong format douchebag`);
-                return;
-            }
-            let args = splits[1].split('\n');
-            if (!args || args.length < 2) {
-                discordBot.sendChannelMessage(msg.channel.id, `Wrong Format`);
-                return;
-            }
-            // console.log(args)
-            let waitTime = parseInt(args[0].trim());
-            let skus = args.splice(1);
-            let monitoringSKUs = [];
-            let notMonitoringSKUs = [];
-            let errorSKUs = [];
-            let tempSKUs = [];
-            for (let sku of skus) {
-                if (!tempSKUs.includes(sku))
-                    tempSKUs.push(sku);
-            }
-            skus = tempSKUs;
-            // console.log(skus);
-            for (let sku of skus) {
-                sku = sku.trim();
-                // console.log(sku);
-                try {
-                    if (sku === '')
-                        continue;
-                    let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
-                    if (query.rows.length > 0) {
-                        PRODUCTS[sku] = null
-                        database.query(`delete from ${table} where sku='${sku}'`);
-                        notMonitoringSKUs.push(sku);
-                        continue;
-                    }
-                    PRODUCTS[sku] = {
-                        sku: sku,
-                        waittime: waitTime,
-                        sizes: ''
-                    }
-                    database.query(`insert into ${table}(sku, sizes, waittime) values('${sku}', '', ${waitTime})`);
-                    monitor(sku);
-                    // console.log("added " + sku)
-                    monitoringSKUs.push(sku);
-                }
-                catch (err) {
-                    errorSKUs.push(sku);
-                    console.log("*********NORDSTROM-SKU-ERROR*********");
-                    console.log("SKU: " + sku);
-                    console.log(err);
-                }
-            }
-            // console.log(notMonitoringSKUs.length)
-            const monitoringMessage = new Discord.MessageEmbed()
-                .setColor('#6cb3e3')
-                .setTitle('Now monitoring')
-                .setDescription(monitoringSKUs.join('\n'))
-            if (monitoringSKUs.length > 0) msg.reply(monitoringMessage);
-            const notMonitoringMessage = new Discord.MessageEmbed()
-                .setColor('#6cb3e3')
-                .setTitle('NOW NOT monitoring')
-                .setDescription(notMonitoringSKUs.join('\n'))
-            if (notMonitoringSKUs.length > 0) msg.reply(notMonitoringMessage);
-            const monitoringErrorMessage = new Discord.MessageEmbed()
-                .setColor('#6cb3e3')
-                .setTitle('ERROR monitoring')
-                .setDescription(errorSKUs.join('\n'))
-            if (errorSKUs.length > 0) msg.reply(monitoringErrorMessage);
-        }
-        if (msg.content.startsWith(discordBot.commandPrefix + 'monitorList')) {
-            if (msg.channel.id === CHANNEL) {
-                let query = await database.query(`SELECT * from ${table}`);
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle(`${site} Monitor`);
-                embed.setColor('#6cb3e3')
-                if (query.rows.length > 0) {
-                    let SKUList = [];
-                    for (let row of query.rows) {
-                        SKUList.push(`${row.sku} - ${row.waittime}ms`);
-                    }
-                    embed.addField(`**Monitored SKUs** (${SKUList.length})`, SKUList)
-                }
-                else {
-                    embed.setDescription("Not Monitoring any SKU!")
-                }
-                msg.reply(embed);
-            }
-        }
-    });
-
-

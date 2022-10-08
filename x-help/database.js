@@ -9,5 +9,7 @@ const pool = new pg.Pool({
 });
 
 module.exports = pool;
-
-helper.sleep(1000)
+ function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+sleep(1000)

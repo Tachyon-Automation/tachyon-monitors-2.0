@@ -1,12 +1,6 @@
 const fs = require('fs')
-const { Client, GatewayIntentBits }  = require('discord.js');
-const client = new Client(
-    {
-        intents: [
-            GatewayIntentBits.Guilds,
-        ],
-    }
-);
+const Discord = require('discord.js');
+const client = new Discord.Client();
 const helper = require('./helper');
 const bot = {
 commandPrefix: '!',

@@ -1,15 +1,24 @@
 {
     "NORDSTROM": [
         "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
         "ELEPHANTAIO",
         "COOKOLOGY",
-        "CARBON",
         "DROPALERT"
     ],
     "HIBBETT": [
-        "COOKOLOGY",
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
         "ELEPHANTAIO",
-        "CARBON",
-        "DROPALERT"
+        "COOKOLOGY",
+        "DROPALERT",
+        "FLIPD",
+        "ACORNFLIPS",
+        "BOOMINATI"
+    ],
+    "NORDSTROM2": [
+        "TACHYON"
     ]
 }
