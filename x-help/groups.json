@@ -12,6 +12,7 @@
         "color": "6cb3e3",
         "image": "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png",
         "NORDSTROM": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
+        "NORDSTROM2": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
         "HIBBETT": "https://ptb.discord.com/api/webhooks/831551438135623720/SoW_Cz5Lau3uyDtxzANoYZCv0p-h8iS2Z2SIOROD08NLp-j7n8GlDync3atuxo-SMg_-"
     },
     "COOKOLOGY": {
@@ -19,6 +20,7 @@
         "color": "7557c8",
         "image": "https://media.discordapp.net/attachments/894983430952063047/894983493984088084/Group_41.png",
         "NORDSTROM": "https://discord.com/api/webhooks/849478344902705163/AXduq03EnyTJW8omYAUeFF3QacSU5aGyyFu0VJFMaWOG5nPWmlQGFdbZ5gR6EmYGm_nd",
+        "NORDSTROM2": "https://discord.com/api/webhooks/849478344902705163/AXduq03EnyTJW8omYAUeFF3QacSU5aGyyFu0VJFMaWOG5nPWmlQGFdbZ5gR6EmYGm_nd",
         "HIBBETT": "https://discord.com/api/webhooks/709983906560213023/nz4Rm_skf5ngz73M-pvw-SeZe3PhesWlxXT4kFiUGUNiHopOfmhrR6y6wwVUNvHIWWxe"
     },
     "ELEPHANTAIO": {
@@ -26,6 +28,7 @@
         "color": "cd8fff",
         "image": "https://media.discordapp.net/attachments/804617985498546177/989026781023580190/Frame_1.jpg",
         "NORDSTROM": "https://discord.com/api/webhooks/989020422974619658/GUIF147sE5LI2ZRuOuKQ2HCPW-MBJuFVBG9qNqnPSgB9I3uBdt3tsvimMNyagbfI1-3o",
+        "NORDSTROM2": "https://discord.com/api/webhooks/989020422974619658/GUIF147sE5LI2ZRuOuKQ2HCPW-MBJuFVBG9qNqnPSgB9I3uBdt3tsvimMNyagbfI1-3o",
         "HIBBETT": "https://discord.com/api/webhooks/993227472554446848/ETZ-AxgXLQtqohbS1QX5Go537aFSqt7XXeRPPth28d_esM6iEXnE_AOnMOe0_Tf9FJ_h"
     },
     "CARBON": {
@@ -39,6 +42,7 @@
         "color": "000000",
         "image": "https://media.discordapp.net/attachments/920011201390473256/1023486327854993488/3a3b60151b252a1b09ad5c01ec9a967b.webp",
         "NORDSTROM": "https://discord.com/api/webhooks/969379711400693840/F89-OgPFQB3NWePzmLkKrHaBw9c_cXa9WhREp_pw0tkJOw5YIpjeRuemU2zqYhRcMWhR",
+        "NORDSTROM2": "https://discord.com/api/webhooks/969379711400693840/F89-OgPFQB3NWePzmLkKrHaBw9c_cXa9WhREp_pw0tkJOw5YIpjeRuemU2zqYhRcMWhR",
         "HIBBETT": "https://discord.com/api/webhooks/969379470081417256/TDL4We-9VubDyXbGOMXpcBZ8Jqq0C525e14dvT0jA1S54BJdC54CuKTbfIgT6cje9GGq"
     },
     "FLIPD": {
@@ -52,6 +56,7 @@
         "color": "eb6339",
         "image": "https://cdn.discordapp.com/attachments/973659244723310643/983215242668539934/win.png",
         "NORDSTROM": "https://discord.com/api/webhooks/982665840543551510/FI7FKKWtGuiotKdrXQAD1IHLX6VDwHGWN8-Gh_17MEGOYLasNiX1kepLHK7JXiU6z_sU",
+        "NORDSTROM2": "https://discord.com/api/webhooks/982665840543551510/FI7FKKWtGuiotKdrXQAD1IHLX6VDwHGWN8-Gh_17MEGOYLasNiX1kepLHK7JXiU6z_sU",
         "HIBBETT": "https://discord.com/api/webhooks/915337547952042014/ZBJX_qOJLZggH2HtQrmTu8NXFmLak33vkPadKIbPnELWj4hNNnVPusBmVgPZtbpreMAL"
     },
     "ACORNFLIPS": {
@@ -79,7 +84,9 @@
         "color": "70CFB1",
         "image": "https://images-ext-1.discordapp.net/external/-ONspX-_hCDKFcY7D_lyi6qnPBp8eeE9_p7mGRrCEvc/https/i.imgur.com/KQszFC9.png",
         "HIBBETT": "https://discord.com/api/webhooks/1028413242671898696/mNFKzdyLRJSsfA0AjIvLamL-u1OgSgD6NtBwlJKAX2sN6DuxcePY2QkCoFXrdcnVyVc3",
-        "NORDSTROM": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm"
+        "NORDSTROM": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
+        "NORDSTROM2": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm"
+
     }
 
 }
