@@ -22,6 +22,12 @@
         "FITTEDACO"
     ],
     "NORDSTROM2": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
+        "ELEPHANTAIO",
+        "COOKOLOGY",
+        "DROPALERT",
+        "FITTEDACO"
     ]
 }
