@@ -87,6 +87,13 @@
         "NORDSTROM": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
         "NORDSTROM2": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm"
 
+    },
+    "AKIRA": {
+        "name": "Akira",
+        "color": "34deeb",
+        "image": "https://media.discordapp.net/attachments/1022010703474872340/1023817944846848120/F729AB0F-A329-4784-AAF3-104841902F1F_1.png",
+        "HIBBETT": "https://discord.com/api/webhooks/1028436072591527966/E9MIWTLGOFh90tTg3ku1f31u7IEdleKFpzt_4Yo0bA6eeZmmSqkZN98tng1GfHKW7D5Y"
+
     }
 
 }
