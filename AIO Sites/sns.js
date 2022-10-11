@@ -39,15 +39,14 @@ async function monitor(sku) {
         }
         let method = 'GET'; //request method
         let req = `https://www-sneakersnstuff-com.translate.goog/en/product/${sku}?cache=${v4()}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
-        let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        let root = HTMLParser.parse(await set.text)
-        console.log(set.response.status)
+        let set = await helper.requestHtml(req, method, proxy, headers)
         if (set.response.status != 200) {
             monitor(sku);
             return
-        }
+        } //request function
+        let root = HTMLParser.parse(await set.text)
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
-            console.log('OOS!')
+            //console.log('OOS!')
             await helper.sleep(1000);
             monitor(sku);
             return;
@@ -59,7 +58,6 @@ async function monitor(sku) {
             return;
         }
         if (root.querySelector('.price__current')) {
-            sku = sku.split('/')[0]
             let title = root.querySelector('.product-view__title span').textContent.trim()
             let price = root.querySelector('.price__current').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
@@ -67,14 +65,13 @@ async function monitor(sku) {
             let url = `https://www.sneakersnstuff.com/en/product/${sku}#tachyon`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
+            let newsku = sku.split('/')[0]
             let oldSizeList = await query.rows[0].sizes
             let inStock = false
             let sizeList = []
-            let varian = root.querySelector('#product-size')
-            let variants = varian.querySelectorAll('option')
+            let variants = root.querySelector('#product-size').querySelectorAll('option')
             let stock = 0
             for (let variant of variants) {
-                console.log(variant.attributes.value)
                 if(variant.attributes.value.length == 0)
                 continue
                 sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`
@@ -89,7 +86,7 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites[site]) {
-                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                    helper.postAIO(url, title, newsku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
             }
