@@ -31,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
             'user-agent': 'Screaming Frog SEO Spider/7.2',
