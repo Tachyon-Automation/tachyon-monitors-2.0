@@ -44,7 +44,7 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal }, await new HTTPSProxyAgent(proxy) || null)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             clearTimeout(timeoutId)
             let json = await response.json()
             return { json, response }
@@ -57,7 +57,7 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal }, await new HTTPSProxyAgent(proxy) || null)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             clearTimeout(timeoutId)
             let text = await getBodyAsText(await response)
             return { text, response }
@@ -152,7 +152,7 @@ const helper = {
             ]
         }
         try {
-            let response = fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }, await new HTTPSProxyAgent(proxy))
+            let response = fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {

@@ -17,6 +17,7 @@
     "n": "^9.0.0",
     "node-fetch": "^2.6.1",
     "node-html-parser": "^6.1.1",
+    "pg": "^8.8.0",
     "random-useragent": "^0.5.0",
     "request-promise": "^4.2.6",
     "setimmediate": "^1.0.5",

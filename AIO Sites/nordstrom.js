@@ -34,7 +34,7 @@ async function monitor(sku) {
         let proxy = helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)',
+            'user-agent': 'Mozilla/5.0 (compatible; YandexMetrika/2.0; +http://yandex.com/bots mtweb01t.yandex.ru)',
             'Accept': 'application/vnd.nord.pdp.v1+json',
             'consumer-id': 'recs-PDP_1',
         }
@@ -55,7 +55,7 @@ async function monitor(sku) {
             return
         }
         let inStock = false;
-        let url = `https://www.nordstrom.com/s/tachyon/${sku}`//product url
+        let url = `https://www.nordstrom.com/s/${sku}#tachyon`//product url
         let title = body.productTitle + " "
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId
