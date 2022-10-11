@@ -31,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
             'user-agent': 'Screaming Frog SEO Spider/7.2',
@@ -42,7 +42,6 @@ async function monitor(sku) {
         let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        console.log(set.response.status)
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
