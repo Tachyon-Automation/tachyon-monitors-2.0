@@ -100,7 +100,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(sku)
         return
     }
