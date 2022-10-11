@@ -34,7 +34,7 @@ async function monitor(sku) {
         let proxy = helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)',
+            'user-agent': 'Screaming Frog SEO Spider/7.2',
             'Accept': 'application/vnd.nord.pdp.v1+json',
             'consumer-id': 'recs-PDP_1',
         }
