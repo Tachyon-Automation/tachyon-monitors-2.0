@@ -22,7 +22,9 @@
         "image": "https://media.discordapp.net/attachments/894983430952063047/894983493984088084/Group_41.png",
         "NORDSTROM": "https://discord.com/api/webhooks/849478344902705163/AXduq03EnyTJW8omYAUeFF3QacSU5aGyyFu0VJFMaWOG5nPWmlQGFdbZ5gR6EmYGm_nd",
         "NORDSTROM2": "https://discord.com/api/webhooks/849478344902705163/AXduq03EnyTJW8omYAUeFF3QacSU5aGyyFu0VJFMaWOG5nPWmlQGFdbZ5gR6EmYGm_nd",
-        "HIBBETT": "https://discord.com/api/webhooks/709983906560213023/nz4Rm_skf5ngz73M-pvw-SeZe3PhesWlxXT4kFiUGUNiHopOfmhrR6y6wwVUNvHIWWxe"
+        "HIBBETT": "https://discord.com/api/webhooks/709983906560213023/nz4Rm_skf5ngz73M-pvw-SeZe3PhesWlxXT4kFiUGUNiHopOfmhrR6y6wwVUNvHIWWxe",
+        "SNS": "https://discord.com/api/webhooks/1027453463594020914/NlnmskZYSwaTpdioqsNVCCsbhh4bwHEu6-JvBgDrwbw4doWSKcJjbrKAIXHBn5shSNLS"
+
     },
     "ELEPHANTAIO": {
         "name": "Elephant AIO",
