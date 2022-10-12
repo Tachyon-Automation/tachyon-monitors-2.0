@@ -92,8 +92,9 @@
         "image": "https://images-ext-1.discordapp.net/external/-ONspX-_hCDKFcY7D_lyi6qnPBp8eeE9_p7mGRrCEvc/https/i.imgur.com/KQszFC9.png",
         "HIBBETT": "https://discord.com/api/webhooks/1028413242671898696/mNFKzdyLRJSsfA0AjIvLamL-u1OgSgD6NtBwlJKAX2sN6DuxcePY2QkCoFXrdcnVyVc3",
         "NORDSTROM": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
-        "NORDSTROM2": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm"
-
+        "NORDSTROM2": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
+        "FINISHLINE": "https://discord.com/api/webhooks/1028413337677078608/jU6zRaYj-zrGwdu5Mym3pDqbWBDeLl51Lxj983YUSu2SY9JMyDfP2S31V__wGOyV8p9d",
+        "JDSPORTS": "https://discord.com/api/webhooks/1028413337677078608/jU6zRaYj-zrGwdu5Mym3pDqbWBDeLl51Lxj983YUSu2SY9JMyDfP2S31V__wGOyV8p9d"
     },
     "AKIRA": {
         "name": "Akira",
