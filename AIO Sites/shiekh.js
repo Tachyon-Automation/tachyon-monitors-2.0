@@ -45,7 +45,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.ico`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (set.response.status == 404) {

@@ -34,6 +34,7 @@
     "SNS": [
         "TACHYON",
         "TACHYONCLIENT",
+        "ELEPHANTAIO",
         "COOKOLOGY"
     ],
     "FINISHLINE": [
@@ -47,6 +48,9 @@
         "FITTEDACO"
     ],
     "SHIEKH": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT",
+        "ELEPHANTAIO"
+        
     ]
 }
