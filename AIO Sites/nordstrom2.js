@@ -55,7 +55,7 @@ async function monitor(sku) {
         }
         let inStock = false;
         let url = `https://www.nordstrom.com/s/${sku}tachyon`//product url
-        let title = body.productTitle
+        let title = body.productTitle + " "
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId
         let image = 'https://pbs.twimg.com/profile_images/1159538934977662976/4gmIcgkZ_400x400.png'
