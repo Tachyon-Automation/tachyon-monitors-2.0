@@ -44,6 +44,10 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Define body variables
+        if (set.response.status != 200) {
+            monitor(sku)
+            return
+        }
         if (body.productSizes.length < 0) {
             await helper.sleep(productCache.waittime);
             monitor(sku)

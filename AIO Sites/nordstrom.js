@@ -43,10 +43,15 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Custom error handling
+        if (set.response.status != 200) {
+            monitor(sku)
+            return
+        }
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
         }
+        
         //Define body variables
         let ids = body.skus.allIds
         if (ids.length < 0) {

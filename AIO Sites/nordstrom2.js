@@ -42,6 +42,10 @@ async function monitor(sku) {
         let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
         let set = await helper.requestJson2(req, method, headers) //request function
         let body = await set.json
+        if (set.response.status != 200) {
+            monitor(sku)
+            return
+        }
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
