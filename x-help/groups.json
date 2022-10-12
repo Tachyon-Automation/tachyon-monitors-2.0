@@ -6,7 +6,8 @@
         "NORDSTROM": "https://discord.com/api/webhooks/810745684118208513/Wu9WL5kshg-hkoIxbDW0hyTS32oH_3w-Bass5X-4zOLKH0036l-xH-UOdLTTsq2t1L32",
         "HIBBETT": "https://ptb.discord.com/api/webhooks/902728303637577738/yE9eRI2rn-WUXRUXhy3CUrvu8DOXf-vGYOaRI3M1wSXIa70VkHHttyz4a8JVfNPNxuOP",
         "NORDSTROM2": "https://ptb.discord.com/api/webhooks/994684078894874634/i7xOo7s47yvYx1TmXJS4RC7p23Mmk7186apuGQ9D_Azxj4GumVrDA7HH-7v1qw0k3ZOb",
-        "SNS": "https://discordapp.com/api/webhooks/858520463231287296/y-7h0lPYCElzjZ16Hy4YaKC0HW7uYiYLygZn6HlCY2rNJkeDuP6QPXOorX9OfyEJGYbY"
+        "SNS": "https://discordapp.com/api/webhooks/858520463231287296/y-7h0lPYCElzjZ16Hy4YaKC0HW7uYiYLygZn6HlCY2rNJkeDuP6QPXOorX9OfyEJGYbY",
+        "FINISHLINE": "https://discordapp.com/api/webhooks/814076886413737984/rBeykPOVp35RO865TZO3QjkoRuqz8QMrugZ6Dm6ATF0r70lL_Al6n7-NVuOZETaHQPLr"
     },
     "TACHYONCLIENT": {
         "name": "Tachyon Monitors",
@@ -14,7 +15,8 @@
         "image": "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png",
         "NORDSTROM": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
         "NORDSTROM2": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
-        "HIBBETT": "https://ptb.discord.com/api/webhooks/831551438135623720/SoW_Cz5Lau3uyDtxzANoYZCv0p-h8iS2Z2SIOROD08NLp-j7n8GlDync3atuxo-SMg_-"
+        "HIBBETT": "https://ptb.discord.com/api/webhooks/831551438135623720/SoW_Cz5Lau3uyDtxzANoYZCv0p-h8iS2Z2SIOROD08NLp-j7n8GlDync3atuxo-SMg_-",
+        "SNS": "https://discordapp.com/api/webhooks/1029546909276323861/sFOk8NtlcIkDLRhP85kuKcUb1E7gfb_NAaqT4cGOzEk050xcG29W011BkxmNp1jGDu4e"
     },
     "COOKOLOGY": {
         "name": "Cookology",

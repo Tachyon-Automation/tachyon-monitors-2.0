@@ -33,6 +33,10 @@
     ],
     "SNS": [
         "TACHYON",
+        "TACHYONCLIENT",
         "COOKOLOGY"
+    ],
+    "FINISHLINE": [
+        "TACHYON"
     ]
 }
