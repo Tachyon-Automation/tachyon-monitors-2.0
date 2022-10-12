@@ -55,7 +55,7 @@ async function monitor(sku) {
             return
         }
         let inStock = false;
-        let url = `https://www.nordstrom.com/s/${sku}#tachyon`//product url
+        let url = `https://www.nordstrom.com/s/${sku}#Tachyon`//product url
         let title = body.productTitle + " "
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId

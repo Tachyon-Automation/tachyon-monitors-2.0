@@ -53,6 +53,19 @@ const helper = {
         }
         return
     },
+    requestJson2: async function (site, method, headers) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal})
+            clearTimeout(timeoutId)
+            let json = await response.json()
+            return { json, response }
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
     requestHtml: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();

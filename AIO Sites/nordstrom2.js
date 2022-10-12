@@ -40,7 +40,7 @@ async function monitor(sku) {
         }
         let method = 'GET'; //request method
         let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
-        let set = await helper.requestJson(req, method, proxy, headers) //request function
+        let set = await helper.requestJson2(req, method, proxy, headers) //request function
         let body = await set.json
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
@@ -54,7 +54,7 @@ async function monitor(sku) {
             return
         }
         let inStock = false;
-        let url = `https://www.nordstrom.com/s/${sku}tachyon`//product url
+        let url = `https://www.nordstrom.com/s/${sku}Tachyon`//product url
         let title = body.productTitle + " "
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId

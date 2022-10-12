@@ -42,8 +42,8 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}&productId=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
+        console.log(set.res)
         let body = await set.json
-        //Custom error handling
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
@@ -55,7 +55,7 @@ async function monitor(sku) {
             return
         }
         let sizes = ''
-        let query = await database.query(`SELECT * from ${DATABASE_TABLE} where sku='${sku}'`);
+        let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
         let oldSizeList = query.rows[0].sizes
         let inStock = false
         let sizeList = []
@@ -81,7 +81,7 @@ async function monitor(sku) {
             let title = body2.productsArray[0].displayName;
             let price = body2.productsArray[0].price.nowPrice
             let image = body2.productsArray[0].image
-            let url = `https://www.jdsports.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}`
+            let url = `https://www.jdsports.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')
