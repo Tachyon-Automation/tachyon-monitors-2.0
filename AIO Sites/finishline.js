@@ -43,10 +43,6 @@ async function monitor(sku) {
         let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}&productId=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
-            console.log('[NORDSTROM] ' + sku + ' not found!')
-            return
-        }
         //Define body variables
         if (body.productSizes.length < 0) {
             await helper.sleep(productCache.waittime);
@@ -80,7 +76,7 @@ async function monitor(sku) {
             let title = body2.productsArray[0].displayName;
             let price = body2.productsArray[0].price.nowPrice
             let image = body2.productsArray[0].image
-            let url = `https://www.jdsports.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
+            let url = `https://www.finishline.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')

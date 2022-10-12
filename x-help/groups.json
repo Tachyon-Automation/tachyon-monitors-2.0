@@ -7,7 +7,9 @@
         "HIBBETT": "https://ptb.discord.com/api/webhooks/902728303637577738/yE9eRI2rn-WUXRUXhy3CUrvu8DOXf-vGYOaRI3M1wSXIa70VkHHttyz4a8JVfNPNxuOP",
         "NORDSTROM2": "https://ptb.discord.com/api/webhooks/994684078894874634/i7xOo7s47yvYx1TmXJS4RC7p23Mmk7186apuGQ9D_Azxj4GumVrDA7HH-7v1qw0k3ZOb",
         "SNS": "https://discordapp.com/api/webhooks/858520463231287296/y-7h0lPYCElzjZ16Hy4YaKC0HW7uYiYLygZn6HlCY2rNJkeDuP6QPXOorX9OfyEJGYbY",
-        "FINISHLINE": "https://discordapp.com/api/webhooks/814076886413737984/rBeykPOVp35RO865TZO3QjkoRuqz8QMrugZ6Dm6ATF0r70lL_Al6n7-NVuOZETaHQPLr"
+        "FINISHLINE": "https://discordapp.com/api/webhooks/814076886413737984/rBeykPOVp35RO865TZO3QjkoRuqz8QMrugZ6Dm6ATF0r70lL_Al6n7-NVuOZETaHQPLr",
+        "JDSPORTS": "https://discordapp.com/api/webhooks/899898255213744148/aELGdfXgAd1k6qGV5QyCyKSuGyLCauP5BHPpMyXGceMpB8QwP-i0oDAwgyfuuYsbQT9M"
+
     },
     "TACHYONCLIENT": {
         "name": "Tachyon Monitors",
