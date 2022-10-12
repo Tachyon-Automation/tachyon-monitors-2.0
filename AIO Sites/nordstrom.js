@@ -96,7 +96,6 @@ async function monitor(sku) {
             inStock = false;
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-            helper.posElephentNord(sizes, sku, title, price, image)
             for (let group of sites[site]) {
                 await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
             }

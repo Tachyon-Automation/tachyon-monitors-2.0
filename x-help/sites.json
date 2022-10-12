@@ -45,5 +45,8 @@
         "TACHYON",
         "TACHYONCLIENT",
         "FITTEDACO"
+    ],
+    "SHIEKH": [
+        "TACHYON"
     ]
 }
