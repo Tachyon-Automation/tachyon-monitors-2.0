@@ -42,7 +42,6 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}&productId=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.res)
         let body = await set.json
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
