@@ -18,7 +18,10 @@
         "NORDSTROM": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
         "NORDSTROM2": "https://ptb.discord.com/api/webhooks/834169799990837258/DIi9BSDhjerP_hR7zx1d-MbWFONYTwAVro7lOfuMmBxtKyK-nNluyOsdoq3urxCcc2EY",
         "HIBBETT": "https://ptb.discord.com/api/webhooks/831551438135623720/SoW_Cz5Lau3uyDtxzANoYZCv0p-h8iS2Z2SIOROD08NLp-j7n8GlDync3atuxo-SMg_-",
-        "SNS": "https://discordapp.com/api/webhooks/1029546909276323861/sFOk8NtlcIkDLRhP85kuKcUb1E7gfb_NAaqT4cGOzEk050xcG29W011BkxmNp1jGDu4e"
+        "SNS": "https://discordapp.com/api/webhooks/1029546909276323861/sFOk8NtlcIkDLRhP85kuKcUb1E7gfb_NAaqT4cGOzEk050xcG29W011BkxmNp1jGDu4e",
+        "FINISHLINE": "https://discordapp.com/api/webhooks/1029561730801602631/qh6V_kLua4kzzPjvLb_reEUu4AI9idtHZOUTBWnppV_shdGGuu7CHcmunUV7c8NTxp2v",
+        "JDSPORTS": "https://discordapp.com/api/webhooks/1029561976118059070/nD-7Yd4HVyQJdsAScu89KnPNj7UgBCXMg6O0TUslv7epsYvQxZ3XOnrta-czcEMOPicL"
+
     },
     "COOKOLOGY": {
         "name": "Cookology",

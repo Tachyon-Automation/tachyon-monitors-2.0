@@ -38,10 +38,12 @@
     ],
     "FINISHLINE": [
         "TACHYON",
+        "TACHYONCLIENT",
         "FITTEDACO"
     ],
     "JDSPORTS": [
         "TACHYON",
+        "TACHYONCLIENT",
         "FITTEDACO"
     ]
 }
