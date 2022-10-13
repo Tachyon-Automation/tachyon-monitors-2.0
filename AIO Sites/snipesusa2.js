@@ -71,13 +71,15 @@ async function monitor(sku) {
             for (let variant of variants) {
                 if (body[0].variants[variant].stock.available != true)
                     continue
-                image = 'https://imageresize.24i.com/?w=300&url=' + body[0].variants[variant].images.default[0]
+
                 price = body[0].variants[variant].prices.USD.nowFormatted
                 sizes += `[${body[0].variants[variant].forms.size.value}](https://www.snipesusa.com/${body[0].variants[variant].id}.html#Tachyon) (${body[0].variants[variant].stock.quantity}) - ${body[0].variants[variant].id}\n`
                 stock += Number(body[0].variants[variant].stock.quantity)
                 sizeList.push(body[0].variants[variant].id);
-                if (!oldSizeList.includes(body[0].variants[variant].id))
+                if (!oldSizeList.includes(body[0].variants[variant].id)) {
                     inStock = true;
+                    image = 'https://imageresize.24i.com/?w=300&url=' + body[0].variants[variant].images.default[0]
+                }
             }
             if (inStock) {
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
