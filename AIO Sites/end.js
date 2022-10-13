@@ -52,7 +52,7 @@ async function monitor(sku) {
         //Define body variables
         if (body.props.initialProps.pageProps.product.in_stock === true) {
             let inStock = false;
-            let url = `https://www.endclothing.com/us/${sku}#Tachyon`//product url
+            let url = `https://www.endclothing.com/us/${sku}`//product url
             let title = body.props.initialProps.pageProps.product.name
             let price = '$' + body.props.initialProps.pageProps.product.price
             let image = 'https://play-lh.googleusercontent.com/OuZqDwJcoCna3sbEjlV58dwBxk2bFYdgwRqe3xOphhAm5RymSSfud3qNSy4pSaRYB9M'
