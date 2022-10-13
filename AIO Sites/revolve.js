@@ -61,7 +61,7 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let size of variants) {
                 if (size.quantity > 0) {
-                    sizes += `[${size.size}](https://www.revolve.com/tachyon/dp/${sku}/?size) (${size.quantity})` + '\n';
+                    sizes += `${size.size} - (${size.quantity})\n`;
                     stock += Number(size.quantity)
                     sizeList.push(size.size);
                     if (!oldSizeList.includes(size.size)) {
