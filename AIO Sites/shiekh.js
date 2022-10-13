@@ -38,12 +38,12 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Shiekh Shoes/10.6 (com.shiekh.shoes.ios; build:1233; iOS 16.0.0) Alamofire/5.6.1',
-            'X-PX-AUTHORIZATION': "2:ddd9ed21c09a3158ed4d11571cfb161ddda498109093d59b566a6653c1ea66c7:ZazHcmU+l3oOIkNd9VG2XswRxuAWbH9K3tMCX3aPGUMik764Ik3xftFmUUtBC9uyLXWHzy9FCHOibvELUe0b9g==:1000:VtQX3VR10JMMNVa+CH3iluzaMTF5Z6vTo73bIHrfq1MC6DUW36YSTznxExT7R3fGVy5va9+04hXqdKhrnoooZV26PYfX/1VsiyH4+YjL+cCMjGvVujeLaIzXCgha/0KIl3tFxxd+bGjh6scEMsVH2JeCEbEcE0rAspOxmuxglk62qQpgCy1yf76H/lPqP+N5ToXCosfUCx132Ptv9FPKdA==",
+            'X-PX-AUTHORIZATION': `2:${v4()}`,
         }
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.ico`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (set.response.status == 404) {
