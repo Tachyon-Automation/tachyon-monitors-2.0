@@ -54,15 +54,18 @@
     ],
     "ENDCLOTHING": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "ELEPHANTAIO"
     ],
     "REVOLVE": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "ELEPHANTAIO"
     ],
     "SNIPESUSA2": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "ELEPHANTAIO"
     ],
     "SOLEBOX": [
         "TACHYON",
