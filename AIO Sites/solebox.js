@@ -3,6 +3,7 @@ const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
+const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810930267102773248' //channel id
@@ -33,9 +34,9 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
-            'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `2`,        
+            'User-Agent': randomUseragent.getRandom(),
+            //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
+            'X-PX-AUTHORIZATION': `3:a43d8a6d2696e24fa4a8e4d5d6887235fd7c6fc07adf4840860e874e0ae3074a:GudZvyIBuLlXrgg4Lt7Dgi50v+d160wf4SF/nMtR+5iUmMdT84C+Pdk/SJJr5JrS1be6XVjfbCRxvm3fWdi/eQ==:1000:XCVAq0N9AklcJC5lWerNjNhqRI9MEqtWiH0rvpFfKPpOBEdzXlLhrluFocD5EzK+kHtLvs0m6mNx/QuIgs7wX33DeSi3mHXvTk+CiT/GaOSS1IfrvcYmYSRlKIWgCSBUWa1hvjdHjFlzjx3pa5Jj2yCexszWZziTMuQvtyBk+oEb2N4ah7FKAUxCQpn4pwkb/LD81iv+Dpn+Ft4Jqd5PAQ==`,        
         }
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
@@ -91,7 +92,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(sku)
         return
     }
