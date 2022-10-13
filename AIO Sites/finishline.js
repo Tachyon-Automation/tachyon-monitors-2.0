@@ -48,7 +48,7 @@ async function monitor(sku) {
             return
         }
         if (body.productSizes.length < 0) {
-            await helper.sleep(productCache.waittime);
+            await helper.sleep(product.waittime);
             monitor(sku)
             return
         }
