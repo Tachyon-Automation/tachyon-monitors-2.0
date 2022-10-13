@@ -11,7 +11,6 @@ const version = `Shiekh v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
-helper.discordbot(CHANNEL, PRODUCTS, table, monitor)
 startMonitoring()
 async function startMonitoring() {
     let SKUList = await database.query(`SELECT * from ${table}`);
@@ -39,13 +38,12 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Shiekh Shoes/10.6 (com.shiekh.shoes.ios; build:1233; iOS 16.0.0) Alamofire/5.6.1',
-            'X-PX-AUTHORIZATION': "2:eyJ1IjoiNzkxZTY4ODAtNDljZS0xMWVkLWJkMzQtYjMwMTkxYzZiYTM4IiwidiI6IjdhNGIwODUyLTQ5YzgtMTFlZC05MjAyLTYxNTc1OTZhNzA3YSIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiJiMWNiNGRkNTMyNjI3YzViYjU3ZDBlODNiNDg2NWEwM2ExN2U5OTVjNzBlZDAyMzk2M2UyZDc0NjhlOWQ2YjU5In0=",
-            //'cookie': '_pxhd=ed9ce29b130292c1a66f33b91ae627ab52a4fed66784efe440d7071da0b8c503:S52ftuakQbyeyjvnStqNDTeKzH2xE2/JKOkq+rC8hORkrCWIrwqWtmJp5OHzDtSueMaUe4P9a+oklc0I+fzs9A==:1000:aeq0oGYQIkyAaFDp7ZUnn1Z3yso6JRPO3Onqha2zjazfBDsaP1onMcJ6esYIMIGFVma15wIuFn78TSZcM021oxw7hMvlv2UMAgJRtk9lVTUzLg0ZmeOc5703HTc9eJ8jTLczEOAD/5wZsMK2R3VLayixZxY1kQS4wBkV9hDtBHxKoUx6Bix99pzQXtfxqtIBI8TQL+1ZCFH00ZhmNyeQiA=='
+            'X-PX-AUTHORIZATION': "2:ddd9ed21c09a3158ed4d11571cfb161ddda498109093d59b566a6653c1ea66c7:ZazHcmU+l3oOIkNd9VG2XswRxuAWbH9K3tMCX3aPGUMik764Ik3xftFmUUtBC9uyLXWHzy9FCHOibvELUe0b9g==:1000:VtQX3VR10JMMNVa+CH3iluzaMTF5Z6vTo73bIHrfq1MC6DUW36YSTznxExT7R3fGVy5va9+04hXqdKhrnoooZV26PYfX/1VsiyH4+YjL+cCMjGvVujeLaIzXCgha/0KIl3tFxxd+bGjh6scEMsVH2JeCEbEcE0rAspOxmuxglk62qQpgCy1yf76H/lPqP+N5ToXCosfUCx132Ptv9FPKdA==",
         }
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.ico`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (set.response.status == 404) {
@@ -114,3 +112,4 @@ async function monitor(sku) {
         return
     }
 }
+helper.discordbot(CHANNEL, PRODUCTS, table, monitor, site)

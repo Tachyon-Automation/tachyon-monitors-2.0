@@ -5,6 +5,7 @@ const AbortController = require('abort-controller')
 const HTTPSProxyAgent = require('https-proxy-agent')
 const request = require('request-promise');
 const discordBot = require('./discord')
+const Discord = require('discord.js');
 const webhook = require("webhook-discord");
 const database = require('../x-help/database');
 const hexToDecimal = hex => parseInt(hex, 16)
@@ -173,7 +174,7 @@ const helper = {
         }
         return
     },
-    discordbot: async function (CHANNEL, PRODUCTS, TABLE, monitor) {
+    discordbot: async function (CHANNEL, PRODUCTS, TABLE, monitor, SITE) {
         try {
             discordBot.getClient.on('message', async function (msg) {
                 if (msg.channel.id !== CHANNEL)
@@ -253,7 +254,7 @@ const helper = {
                         }
                         catch (err) {
                             errorSKUs.push(sku);
-                            console.log("*********NORDSTROM-SKU-ERROR*********");
+                            console.log(`*********${SITE}-SKU-ERROR*********`);
                             console.log("SKU: " + sku);
                             console.log(err);
                         }
@@ -279,7 +280,7 @@ const helper = {
                     if (msg.channel.id === CHANNEL) {
                         let query = await database.query(`SELECT * from ${TABLE}`);
                         const embed = new Discord.MessageEmbed();
-                        embed.setTitle(`NORDSTROM Monitor`);
+                        embed.setTitle(`${SITE} Monitor`);
                         embed.setColor('#6cb3e3')
                         if (query.rows.length > 0) {
                             let SKUList = [];
@@ -291,7 +292,7 @@ const helper = {
                         else {
                             embed.setDescription("Not Monitoring any SKU!")
                         }
-                        await msg.reply(embed);
+                        msg.reply(embed);
                     }
                 }
 

@@ -11,7 +11,6 @@ const version = `Nordstrom v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
-helper.discordbot(CHANNEL, PRODUCTS, table, monitor)
 startMonitoring()
 async function startMonitoring() {
     let SKUList = await database.query(`SELECT * from ${table}`);
@@ -108,3 +107,4 @@ async function monitor(sku) {
         return
     }
 }
+helper.discordbot(CHANNEL, PRODUCTS, table, monitor, site)

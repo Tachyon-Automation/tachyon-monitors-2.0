@@ -98,4 +98,4 @@ async function monitor(sku) {
         return
     }
 }
-helper.discordbot(CHANNEL, PRODUCTS, table, monitor)
+helper.discordbot(CHANNEL, PRODUCTS, table, monitor, site)
