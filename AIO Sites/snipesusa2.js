@@ -35,13 +35,13 @@ async function monitor(sku) {
         let headers = {
             'User-Agent': 'Snipes-Live/19.4.0 iOS/16.0',
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `2`,        
+            //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
+            'X-PX-AUTHORIZATION': `3:${v4()}`,        
         }
         let method = 'GET'; //request method
         let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
