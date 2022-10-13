@@ -6,9 +6,9 @@ const discordBot = require('../x-help/discord')
 const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '810930267102773248' //channel id
-const site = 'SOLEBOX'; //site name
-const version = `Solebox v2.0` //Site version
+const CHANNEL = '834542352394879046' //channel id
+const site = 'SNIPESEU'; //site name
+const version = `Snipes v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -34,14 +34,14 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
+            'User-Agent': helper.getRandomProxy(),
             //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `3:62a8c30961b81541bcbb29f0eb043b16bc6be2d7b1d0c64b5dcf1b850330b0d1:3P9mQ7i7jh4ZEpE4l6tGGRk5wtk7Kj+i0eeljlNbxZyi0ysxsEtupkfWuwBntjgxFCjoNpAN8OZoUaFF1DW0yg==:1000:byJ1Hrz4SIiClbdQn4Y1o/sr4qYOCT0J1oaSeGAVJN7iCOHMGhqSRXqGJVdosF1j/d/MGcRMJ9bByG9RKNo7ja7PJUy9sjxibEMjcGXnqLryGYhL/Ew7jbJgMiIE4JuNjgVy1OA04ZspU69po1PdLrXHOL6btkVhbznib9bLbsF+NgUZ7iTB1Vwk3eAKKpJtlor95CGt8FCxi5DJjRrnhw==`,        
+            'X-PX-AUTHORIZATION': `3:2d3f5759c5a6a4c0e0afae371a33b9d06ee21f482bf5df697d4bdd554ebff6af:rOXSzmAL5oiO7G6ZfgvPkBKuWyowtzm+ziK+/mdw6hk7gB7qPGiWYerxDzRCe62mFAobCkKlp9JIW/Ovgco1KQ==:1000:q3eXl6RNnL/95RkgDVrr5BLQkzmgmCPiKDYrvIcod8Ks1QFogE8iPsAm0F/aPjGRaFlfOvUEjl+XFhddYXjaIMsZ8pwHuFbtg9EgIF9MY7dOqPBSsPLnkafZgz2XD/oSwdLlKJBc5KS2YTqKGDXbprPyilvOpCidCIu6SDTzT42N4D8xy9YVklugzXDipyRZkUIL3Y5efDAJR+T2RlgeQQ==`,        
         }
         let method = 'GET'; //request method
-        let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
+        let req = `https://www.snipes.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
@@ -55,7 +55,7 @@ async function monitor(sku) {
         //Define body variables
         if (body.product.productName) {
             let inStock = false
-            let url = `https://www.solebox.com/${sku}.html#Tachyon`
+            let url = `https://www.snipes.com/${sku}.html#Tachyon`
             let title = body.product.brand + ' ' + body.product.productName
             let price = body.product.price.sales.formatted
             let image = body.product.images[0].pdp.srcM
@@ -68,7 +68,7 @@ async function monitor(sku) {
             //pars sizes for l
             for (let size of variants) {
                 if (size.isOrderable === true) {
-                    sizes += `[${size.value}](https://www.solebox.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
+                    sizes += `[${size.value}](https://www.snipes.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
                     stock++
                     sizeList.push(size.value);
                     if (!oldSizeList.includes(size.value)) {
