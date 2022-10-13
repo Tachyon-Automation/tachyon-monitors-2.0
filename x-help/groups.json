@@ -33,7 +33,6 @@
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1029955583585034240/bExXmorCPhJqqx4HA9K0uWBhZ8EmqWD7EfOo6q1KRtgIaKMjKhbjPu-CI5d5PLA9hb9I",
         "SOLEBOX": "https://discordapp.com/api/webhooks/1029978800026566757/p1bK1UUgxEUi5DFrqgO0hDJU7EByoRPb3ly4LTP0pAxG-VpCn5ileIQVmD8jxG-Zoxnn",
         "SNIPESEU": "https://discordapp.com/api/webhooks/1030002256482938891/8nwBDnzSYmTQSuD3vyeXzKZ6tO_XIn7JVN26olhuMio0qgY_qTFKZjSwvp2uhCA6W5sA"
-
     },
     "COOKOLOGY": {
         "name": "Cookology",
@@ -53,8 +52,10 @@
         "NORDSTROM2": "https://discord.com/api/webhooks/989020422974619658/GUIF147sE5LI2ZRuOuKQ2HCPW-MBJuFVBG9qNqnPSgB9I3uBdt3tsvimMNyagbfI1-3o",
         "HIBBETT": "https://discord.com/api/webhooks/993227472554446848/ETZ-AxgXLQtqohbS1QX5Go537aFSqt7XXeRPPth28d_esM6iEXnE_AOnMOe0_Tf9FJ_h",
         "SNS": "https://discordapp.com/api/webhooks/990477201449304085/pxXRO9yJEpDNsp9CsiDZYIXi4w_PdlAtzEtcXLk5bA3MMEwnR0g_HVujfvNr1eHi2dDG",
-        "SHIEKH": "https://discordapp.com/api/webhooks/1023248014975979530/tWmcqN2opdx1WiB3sP8MjpobelYPvt0bw41VESK5mBDSkPndrQQwfh_Fu6MmBa-GllXc"
-
+        "SHIEKH": "https://discordapp.com/api/webhooks/1023248014975979530/tWmcqN2opdx1WiB3sP8MjpobelYPvt0bw41VESK5mBDSkPndrQQwfh_Fu6MmBa-GllXc",
+        "SNIPESUSA2": "https://discordapp.com/api/webhooks/1017569211100430427/gjF9aymUGGkadtKIUmCWFB3XzI8EamLUptAXp1vjXSbjl-9CeYYe_ZjGVxWTyPxo6Oql",
+        "ENDCLOTHING": "https://discordapp.com/api/webhooks/1017575269449613434/SB4ZJ2kIMsrFHWBXV9I3atlGxq3DduipAUR0pN1VAUxdagwZwGkJV2kvF7pxk5FO1sOY",
+        "REVOLVE": "https://discordapp.com/api/webhooks/1017674353564975164/7a1mr2TdVxxlO2oIY9J1wEXRWFJ2iIi6PfGpSuCpSkUr0BnGtrsYrt_Xkipv1Qd-58OJ"
     },
     "CARBON": {
         "name": "Carbon",
