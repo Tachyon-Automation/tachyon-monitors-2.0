@@ -69,10 +69,12 @@
     ],
     "SOLEBOX": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "ATOMFNF"
     ],
     "SNIPESEU": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "ATOMFNF"
     ]
 }
