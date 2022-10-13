@@ -3,6 +3,7 @@ const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
+const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '1015135505769320528' //channel id
@@ -33,7 +34,7 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Snipes-Live/19.4.0 iOS/16.0',
+            'User-Agent': randomUseragent.getRandom(),
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
             //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
             'X-PX-AUTHORIZATION': `3:${v4()}`,        
@@ -41,7 +42,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
