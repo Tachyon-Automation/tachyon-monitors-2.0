@@ -121,6 +121,14 @@
         "image": "https://media.discordapp.net/attachments/1022010703474872340/1023817944846848120/F729AB0F-A329-4784-AAF3-104841902F1F_1.png",
         "HIBBETT": "https://discord.com/api/webhooks/1028436072591527966/E9MIWTLGOFh90tTg3ku1f31u7IEdleKFpzt_4Yo0bA6eeZmmSqkZN98tng1GfHKW7D5Y"
 
+    },
+    "ATOMFNF": {
+        "name": "Atom FNF",
+        "color": "561085",
+        "image": "https://media.discordapp.net/attachments/974781854643269714/990651283390222387/unknown.png?width=618&height=618",
+        "SNIPESEU": "https://discord.com/api/webhooks/1007702983527632906/Q1PUD5UqARktq_iSquLitxX7_x-2IF30p1nHgWQu4LmERDCV7hN6ZvCrrjiLeTph81EG",
+        "SOLEBOX": "https://discord.com/api/webhooks/1007703174909546636/HJUm6ci4N2jw3aoq1xc-MLm4DaiqkMySPbb27vQ0RPhz2aECE8VEPiaIqt24i14sbLSY"
+
     }
 
 }

@@ -38,13 +38,12 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Shiekh Shoes/10.6 (com.shiekh.shoes.ios; build:1233; iOS 16.0.0) Alamofire/5.6.1',
-            'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `2`, 
+            'X-PX-AUTHORIZATION': `2:eyJ1IjoiZDYzOWM0NTAtNGFhNi0xMWVkLThkNTUtNTU3M2Q1NTQyMjgyIiwidiI6IjdhNGIwODUyLTQ5YzgtMTFlZC05MjAyLTYxNTc1OTZhNzA3YSIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiIzYWU1YmMzOGZhZDBhOGQ3MTc4ZDY5ZDQwMGExYjVlMjBhM2E5YTRmM2E5YjUwZjBiMDQ0NDJjNmVhMzNmMTAxIn0=`,     
         }
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.ico`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (set.response.status == 404) {
