@@ -57,25 +57,26 @@ async function monitor(sku) {
             let inStock = false
             let url = `https://www.snipesusa.com/${sku}.html#Tachyon`//product url
             let title = body[0].details.name
-            let price = body.productData[0].priceDisplay
             let image = 'https://i.pinimg.com/736x/b0/64/bd/b064bd42822816bff61ce59f24da4018--revolve-clothing-texts.jpg'
-            try { image = body.productData[0].images[0] } catch (e) { } //try set image
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let oldSizeList = await query.rows[0].sizes
             let sizeList = []
-            let variants = body.productData[0].sizes
-            //pars sizes for loop
-            for (let size of variants) {
-                if (size.quantity > 0) {
-                    sizes += `[${size.size}](https://www.revolve.com/tachyon/dp/${sku}/?size) (${size.quantity})` + '\n';
-                    stock += Number(size.quantity)
-                    sizeList.push(size.size);
-                    if (!oldSizeList.includes(size.size)) {
-                        inStock = true;
-                    }
-                }
+            let bodvar = body[0].variants
+            let variants = Object.keys(bodvar)
+            //pars sizes for l
+            let price = ''
+            for (let variant of variants) {
+                if (body[0].variants[variant].stock.available != true)
+                    continue
+                image = 'https://imageresize.24i.com/?w=300&url=' + body[0].variants[variant].images.default[0]
+                price = body[0].variants[variant].prices.USD.nowFormatted
+                sizes += `[${body[0].variants[variant].forms.size.value}](https://www.snipesusa.com/${body[0].variants[variant].id}.html#Tachyon) (${body[0].variants[variant].stock.quantity}) - ${body[0].variants[variant].id}\n`
+                stock += Number(body[0].variants[variant].stock.quantity)
+                sizeList.push(body[0].variants[variant].id);
+                if (!oldSizeList.includes(body[0].variants[variant].id))
+                    inStock = true;
             }
             if (inStock) {
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
