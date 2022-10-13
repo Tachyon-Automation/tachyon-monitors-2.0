@@ -63,5 +63,9 @@
     "SNIPESUSA2": [
         "TACHYON",
         "TACHYONCLIENT"
+    ],
+    "SOLEBOX": [
+        "TACHYON",
+        "TACHYONCLIENT"
     ]
 }

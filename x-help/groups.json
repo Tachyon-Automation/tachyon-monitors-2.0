@@ -12,7 +12,8 @@
         "SHIEKH": "https://discordapp.com/api/webhooks/1020932684408684594/EHuTdnJSIeFui4WHPBhYWQcTkGVa6kw4OeIiRK0X-hGJGhce0C4bCThyRaOTHjZTcqp3",
         "ENDCLOTHING": "https://discordapp.com/api/webhooks/858533199219130368/fCDemY_bococKXlXixgtssCLM2nZuQLbFMsdzWLEi-PZvJbcl4ed9VDRVPW_Unz-YcCb",
         "REVOLVE": "https://discordapp.com/api/webhooks/892427510917259264/C1YHMCIl9D9Vr0VvjtpPFEy2iAYN8WAK7BzqeTRV43Syx47YHKaWp7bV4xAYf-ADY2Vp",
-        "SNIPESUSA2": "https://discordapp.com/api/webhooks/1015135550442840124/xpTngFPs4cN5cIPQ-WQQ4Chr8vu4rm0sqpRfWvvudizvCn_n39YjgHU3Dbf6x172o4A7"
+        "SNIPESUSA2": "https://discordapp.com/api/webhooks/1015135550442840124/xpTngFPs4cN5cIPQ-WQQ4Chr8vu4rm0sqpRfWvvudizvCn_n39YjgHU3Dbf6x172o4A7",
+        "SOLEBOX": "https://discordapp.com/api/webhooks/811107530180526100/5eUXKvh-2ilOa7mqWe_oBZzax3M9V1xXNP_zhUxMWQyhOgqaxFO60tv9E35Ywm7qwb0f"
 
     },
     "TACHYONCLIENT": {
@@ -28,7 +29,9 @@
         "SHIEKH": "https://discordapp.com/api/webhooks/1029571590473646140/XIwnM5Tr2Iq_vhJGk1rG8akWOpiYdlHBg8k8IIDXbnH0lkCpAF6V5SZ6g1N_ahYwgQYh",
         "ENDCLOTHING": "https://discordapp.com/api/webhooks/1029930313813590026/sc8EAK_EMSAUNkHi6B-kbXqo2B3pY-VQH_OPD3YcgN-_lzsrsGp6ZZMplDSMIKg7Cdq9",
         "REVOLVE": "https://discordapp.com/api/webhooks/1029952465086451852/M3Px8693Pw8Qz4f-Fc5sWDTS0hN62Z2zCVlkKGG-OEtESJplFF52uAPxLGppcUU_E1_w",
-        "SNIPESUSA2": "https://discordapp.com/api/webhooks/1029955583585034240/bExXmorCPhJqqx4HA9K0uWBhZ8EmqWD7EfOo6q1KRtgIaKMjKhbjPu-CI5d5PLA9hb9I"
+        "SNIPESUSA2": "https://discordapp.com/api/webhooks/1029955583585034240/bExXmorCPhJqqx4HA9K0uWBhZ8EmqWD7EfOo6q1KRtgIaKMjKhbjPu-CI5d5PLA9hb9I",
+        "SOLEBOX": "https://discordapp.com/api/webhooks/1029978800026566757/p1bK1UUgxEUi5DFrqgO0hDJU7EByoRPb3ly4LTP0pAxG-VpCn5ileIQVmD8jxG-Zoxnn"
+
     },
     "COOKOLOGY": {
         "name": "Cookology",
