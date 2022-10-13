@@ -5,9 +5,9 @@ const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '892317409925554197' //channel id
-const site = 'REVOLVE'; //site name
-const version = `Revolve v1.0` //Site version
+const CHANNEL = '1015135505769320528' //channel id
+const site = 'SNIPESUSA2'; //site name
+const version = `Snipes USA v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -30,25 +30,33 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+            'User-Agent': 'Snipes-Live/19.4.0 iOS/16.0',
+            'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
+            'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
+            'X-PX-AUTHORIZATION': `2`,        
         }
         let method = 'GET'; //request method
-        let req = `https://drops-revolve-com.translate.goog/r/ipadApp/ProductDetails.jsp?code=${sku}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         //console.log(set.response.status)
         let body = await set.json
+        if (response.status == 404) {
+            await helper.sleep(productCache.waittime);
+            monitor(sku);
+            return
+        }
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
         //Define body variables
         if (body.productData[0].name) {
-            let inStock = false;
-            let url = `https://www.revolve.com/dp/${sku}/#Tachyon`//product url
-            let title = body.productData[0].brand + ' ' + body.productData[0].name
+            let inStock = false
+            let url = `https://www.snipesusa.com/${sku}.html#Tachyon`//product url
+            let title = body[0].details.name
             let price = body.productData[0].priceDisplay
             let image = 'https://i.pinimg.com/736x/b0/64/bd/b064bd42822816bff61ce59f24da4018--revolve-clothing-texts.jpg'
             try { image = body.productData[0].images[0] } catch (e) { } //try set image
