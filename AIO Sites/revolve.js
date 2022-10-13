@@ -30,26 +30,26 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         let pid = ''
         try { pid = await sku.split('-').join('%20'); }
         catch (e) { pid = sku }
 
         //these headers change per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom()
+            'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
         }
         let method = 'GET'; //request method
         let req = `https://drops-revolve-com.translate.goog/r/ipadApp/ProductDetails.jsp?code=${sku}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
         //Define body variables
-        if (body.size.length > 0) {
+        if (body.productData[0].name) {
             let inStock = false;
             let url = `https://shiekh.com/${body.url_path}.html#Tachyon`//product url
             let title = body.productData[0].brand + ' ' + body.productData[0].name

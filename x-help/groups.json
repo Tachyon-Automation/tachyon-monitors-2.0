@@ -10,7 +10,8 @@
         "FINISHLINE": "https://discordapp.com/api/webhooks/814076886413737984/rBeykPOVp35RO865TZO3QjkoRuqz8QMrugZ6Dm6ATF0r70lL_Al6n7-NVuOZETaHQPLr",
         "JDSPORTS": "https://discordapp.com/api/webhooks/899898255213744148/aELGdfXgAd1k6qGV5QyCyKSuGyLCauP5BHPpMyXGceMpB8QwP-i0oDAwgyfuuYsbQT9M",
         "SHIEKH": "https://discordapp.com/api/webhooks/1020932684408684594/EHuTdnJSIeFui4WHPBhYWQcTkGVa6kw4OeIiRK0X-hGJGhce0C4bCThyRaOTHjZTcqp3",
-        "ENDCLOTHING": "https://discordapp.com/api/webhooks/858533199219130368/fCDemY_bococKXlXixgtssCLM2nZuQLbFMsdzWLEi-PZvJbcl4ed9VDRVPW_Unz-YcCb"
+        "ENDCLOTHING": "https://discordapp.com/api/webhooks/858533199219130368/fCDemY_bococKXlXixgtssCLM2nZuQLbFMsdzWLEi-PZvJbcl4ed9VDRVPW_Unz-YcCb",
+        "REVOLVE": "https://discordapp.com/api/webhooks/892427510917259264/C1YHMCIl9D9Vr0VvjtpPFEy2iAYN8WAK7BzqeTRV43Syx47YHKaWp7bV4xAYf-ADY2Vp"
     },
     "TACHYONCLIENT": {
         "name": "Tachyon Monitors",
@@ -23,7 +24,9 @@
         "FINISHLINE": "https://discordapp.com/api/webhooks/1029561730801602631/qh6V_kLua4kzzPjvLb_reEUu4AI9idtHZOUTBWnppV_shdGGuu7CHcmunUV7c8NTxp2v",
         "JDSPORTS": "https://discordapp.com/api/webhooks/1029561976118059070/nD-7Yd4HVyQJdsAScu89KnPNj7UgBCXMg6O0TUslv7epsYvQxZ3XOnrta-czcEMOPicL",
         "SHIEKH": "https://discordapp.com/api/webhooks/1029571590473646140/XIwnM5Tr2Iq_vhJGk1rG8akWOpiYdlHBg8k8IIDXbnH0lkCpAF6V5SZ6g1N_ahYwgQYh",
-        "ENDCLOTHING": "https://discordapp.com/api/webhooks/1029930313813590026/sc8EAK_EMSAUNkHi6B-kbXqo2B3pY-VQH_OPD3YcgN-_lzsrsGp6ZZMplDSMIKg7Cdq9"
+        "ENDCLOTHING": "https://discordapp.com/api/webhooks/1029930313813590026/sc8EAK_EMSAUNkHi6B-kbXqo2B3pY-VQH_OPD3YcgN-_lzsrsGp6ZZMplDSMIKg7Cdq9",
+        "REVOLVE": "https://discordapp.com/api/webhooks/1029952465086451852/M3Px8693Pw8Qz4f-Fc5sWDTS0hN62Z2zCVlkKGG-OEtESJplFF52uAPxLGppcUU_E1_w"
+
     },
     "COOKOLOGY": {
         "name": "Cookology",

@@ -55,5 +55,9 @@
     "ENDCLOTHING": [
         "TACHYON",
         "TACHYONCLIENT"
+    ],
+    "REVOLVE": [
+        "TACHYON",
+        "TACHYONCLIENT"
     ]
 }
