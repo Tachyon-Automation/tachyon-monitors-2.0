@@ -30,7 +30,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
             'User-Agent': 'Snipes-Live/19.4.0 iOS/16.0',
@@ -43,8 +43,8 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         //console.log(set.response.status)
         let body = await set.json
-        if (response.status == 404) {
-            await helper.sleep(productCache.waittime);
+        if (set.response.status == 404) {
+            await helper.sleep(product.waittime);
             monitor(sku);
             return
         }
@@ -53,7 +53,7 @@ async function monitor(sku) {
             return
         }
         //Define body variables
-        if (body.productData[0].name) {
+        if (body[0].details.name) {
             let inStock = false
             let url = `https://www.snipesusa.com/${sku}.html#Tachyon`//product url
             let title = body[0].details.name
