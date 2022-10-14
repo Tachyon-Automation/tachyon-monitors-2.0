@@ -38,12 +38,12 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Shiekh Shoes/10.6 (com.shiekh.shoes.ios; build:1233; iOS 16.0.0) Alamofire/5.6.1',
-            'X-PX-AUTHORIZATION': `2:eyJ1IjoiZDYzOWM0NTAtNGFhNi0xMWVkLThkNTUtNTU3M2Q1NTQyMjgyIiwidiI6IjdhNGIwODUyLTQ5YzgtMTFlZC05MjAyLTYxNTc1OTZhNzA3YSIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiIzYWU1YmMzOGZhZDBhOGQ3MTc4ZDY5ZDQwMGExYjVlMjBhM2E5YTRmM2E5YjUwZjBiMDQ0NDJjNmVhMzNmMTAxIn0=`,     
+            'X-PX-AUTHORIZATION': `2:eyJ1IjoiYzkxMWVlODAtNGIxNy0xMWVkLWI5ZjYtZGJjMjZlM2QyNzZhIiwidiI6IjdhNGIwODUyLTQ5YzgtMTFlZC05MjAyLTYxNTc1OTZhNzA3YSIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiJjNjE0YzJkOGQwYjJkMzgxMTQ2YWVhMmIyMjc3NmIzOTFhNmM4OTRmZjljZDljZmMzYjkzY2QyYzMzOGE5MjEzIn0=`,     
         }
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.ico`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (set.response.status == 404) {
