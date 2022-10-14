@@ -14,7 +14,8 @@
         "REVOLVE": "https://discordapp.com/api/webhooks/892427510917259264/C1YHMCIl9D9Vr0VvjtpPFEy2iAYN8WAK7BzqeTRV43Syx47YHKaWp7bV4xAYf-ADY2Vp",
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1015135550442840124/xpTngFPs4cN5cIPQ-WQQ4Chr8vu4rm0sqpRfWvvudizvCn_n39YjgHU3Dbf6x172o4A7",
         "SOLEBOX": "https://discordapp.com/api/webhooks/811107530180526100/5eUXKvh-2ilOa7mqWe_oBZzax3M9V1xXNP_zhUxMWQyhOgqaxFO60tv9E35Ywm7qwb0f",
-        "SNIPESEU": "https://discordapp.com/api/webhooks/850687456487538718/c_0X5wnAEE9CJW3tiuFso7hAauaH7GQ80dcrfyHq-SmPExSduRdqM44vsM05i2Ao6PlD"
+        "SNIPESEU": "https://discordapp.com/api/webhooks/850687456487538718/c_0X5wnAEE9CJW3tiuFso7hAauaH7GQ80dcrfyHq-SmPExSduRdqM44vsM05i2Ao6PlD",
+        "ASOS": "https://discordapp.com/api/webhooks/861772562082299906/5FQZam_xUNYQXSpRstkRrvH6ps-dsW5pfvqGE_DXUnoewGh-acOE1Rt9JzXovXJOBGMd"
 
     },
     "TACHYONCLIENT": {
@@ -32,7 +33,9 @@
         "REVOLVE": "https://discordapp.com/api/webhooks/1029952465086451852/M3Px8693Pw8Qz4f-Fc5sWDTS0hN62Z2zCVlkKGG-OEtESJplFF52uAPxLGppcUU_E1_w",
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1029955583585034240/bExXmorCPhJqqx4HA9K0uWBhZ8EmqWD7EfOo6q1KRtgIaKMjKhbjPu-CI5d5PLA9hb9I",
         "SOLEBOX": "https://discordapp.com/api/webhooks/1029978800026566757/p1bK1UUgxEUi5DFrqgO0hDJU7EByoRPb3ly4LTP0pAxG-VpCn5ileIQVmD8jxG-Zoxnn",
-        "SNIPESEU": "https://discordapp.com/api/webhooks/1030002256482938891/8nwBDnzSYmTQSuD3vyeXzKZ6tO_XIn7JVN26olhuMio0qgY_qTFKZjSwvp2uhCA6W5sA"
+        "SNIPESEU": "https://discordapp.com/api/webhooks/1030002256482938891/8nwBDnzSYmTQSuD3vyeXzKZ6tO_XIn7JVN26olhuMio0qgY_qTFKZjSwvp2uhCA6W5sA",
+        "ASOS": "https://discordapp.com/api/webhooks/1030305590636982343/Ju0QSBVljjmXGLTd_tfbuvp5PPVlJai0a5qvGlt5E3Ml98QaaF0cSAm56o33n7w4ZeJK"
+
     },
     "COOKOLOGY": {
         "name": "Cookology",

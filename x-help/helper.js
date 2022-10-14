@@ -47,11 +47,6 @@ const helper = {
             const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             clearTimeout(timeoutId)
-            if (response.status == 404) {
-                await helper.sleep(1000);
-                monitor(sku);
-                return
-            }
             let json = await response.json()
             return { json, response }
         } catch (e) {

@@ -34,16 +34,14 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
+            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'accept-encoding': 'gzip, deflate, br',
+            'accept-language': 'en-US,en;q=0.9',
+            'cache-control': 'max-age=0',
             'User-Agent': randomUseragent.getRandom(),
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'Poq-App-Version': `${v4()}`,
-            'Poq-Platform': 'iOS',
-            'Poq-Platform-Version': `${v4()}`,
-            'Poq-Device-Model': 'iPhone',
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:${v4()}`,     
-            'cookie': `_px3=${v4()};_pxhd=${v4()}`
+            'X-PX-AUTHORIZATION': `3:ac4ca691af90c6aee08a9a9ae64e35aef086d81ed58c423af07e8e775cf4baac:M+WFlZAUSzrr2qAjSFb0Y0md9uwwznhFybPeyPGOhcVCdBMRBUpDa9mm115dwOM9D3VbWqRD042YW2FSb/5OIQ==:1000:WszdB3VL5YOs0CmKxRasaVHW90RNBQu7/95UKxlelCZMJnAUy1zZo59ldyCXSAFE9NXMX8N6RJrHUkTtqoTf4X7x/fvMuvzjshkIdT9mUNnjj/8/ylWj3sIZdIZDOfcMY/k75O6NK9uNMXMFteMF8cJF8QAf6Rp52Djt1IOZyUupx5fVmx9XzVQMM7fVnyz/roJ8cO7aLD2qfuUbuRVbcg==`,
+            'referer': `https://platform.poq.io/clients/snipes/products?ids=${sku}`
         }
         let method = 'GET'; //request method
         let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
@@ -58,7 +56,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        console.log(set.response.status)
+        //console.log(set.response.status)
         //Define body variables
         if (body[0].details.name) {
             let inStock = false
