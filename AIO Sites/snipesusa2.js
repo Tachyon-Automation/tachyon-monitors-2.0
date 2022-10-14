@@ -56,7 +56,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        console.log(set.response.status)
+        //console.log(set.response.status)
         //Define body variables
         if (body[0].details.name) {
             let inStock = false
