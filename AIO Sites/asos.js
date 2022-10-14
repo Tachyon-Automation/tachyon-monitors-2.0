@@ -41,8 +41,9 @@ async function monitor(sku) {
         //console.log(set.response.status)
         let body = await set.json
         //Custom error handling
-        if (set.response.status == 404) {
-            console.log(sku)
+        if (body.errorCode == "pdt_011") {
+            await helper.sleep(product.waittime);
+            monitor(sku);
             return
         }
         if (set.response.status != 200) {
