@@ -78,6 +78,7 @@
         "ATOMFNF"
     ],
     "ASOS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ]
 }
