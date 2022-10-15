@@ -60,8 +60,8 @@ async function monitor(sku) {
             let title = root.querySelector('h2').textContent.trim().split('&#39;').join("'").split('&quot;').join('"')
             let price = root.querySelector('.price-sales').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
-            try { image = 'https:' + root.querySelector('img').attributes.src.split(' ').join('').replace('thumb', 'medium') } catch (e) { }
-            let color = root.querySelector('img').attributes.src.split(' ').join('').replace('?$thumb$', '').split('_')[1]
+            try { image = 'https:' + root.querySelector('.color.unselectable.selected img').attributes.src.split(' ').join('').replace('thumb', 'medium') } catch (e) { }
+            let color = root.querySelector('.color.unselectable.selected img').attributes.src.split(' ').join('').replace('?$thumb$', '').split('_')[1]
             let url = `https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_color=${color}#Tachyon`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
