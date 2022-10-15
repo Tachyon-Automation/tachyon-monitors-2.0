@@ -8,7 +8,7 @@ const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '1007048948374056987' //channel id
-const site = 'HIBBETT2'; //site name
+const site = 'HIBBETT3'; //site name
 const version = `Hibbett v3.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
