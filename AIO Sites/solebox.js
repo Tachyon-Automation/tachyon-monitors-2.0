@@ -34,7 +34,7 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 7.0; LG-H918 Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Mobile Safari/537.36',
+            'User-Agent': randomUseragent.getRandom(),
             'Poq-App-Version': `${v4()}`,
             'Poq-Platform': 'iOS',
             'Poq-Platform-Version': `${v4()}`,
