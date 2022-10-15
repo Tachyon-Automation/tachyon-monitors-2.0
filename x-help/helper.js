@@ -114,6 +114,31 @@ const helper = {
             //console.log(e)
         }
     },
+
+    posElephentHibbett: async function (sku, title, image, variants) {
+        const options = {
+            method: 'POST',
+            url: 'https://cloudapii.herokuapp.com/bdgfhbdfghbtb',
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                mode: '1',
+                sku: sku,
+                title: title,
+                picture: image,
+                variants: variants
+            },
+            json: true
+        };
+        try {
+            request(options)
+            //console.log("success")
+        } catch (e) {
+            //console.log(e)
+        }
+        request(options, function (error) {
+            if (error) throw new Error(error);
+        });
+    },
     postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version) {
         let color = hexToDecimal(group.color)
         let uri = url.split('/')[2]
