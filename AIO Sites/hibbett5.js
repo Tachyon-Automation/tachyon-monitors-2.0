@@ -33,8 +33,9 @@ async function monitor(sku) {
             return;
         let proxy = 'http://aggiekouv3:0ZuLB6y30id6lQdD_country-UnitedStates@proxy.packetstream.io:31112'; //proxy per site
         //these headers change per site
+        let agent = randomUseragent.getRandom()
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
+            'User-Agent': agent,
             'Poq-App-Version': `${v4()}`,
             'Poq-Platform': 'iOS',
             'Poq-Platform-Version': `${v4()}`,

@@ -115,7 +115,7 @@ const helper = {
         }
     },
 
-    posElephentHibbett: async function (sku, title, image, variants) {
+    posElephentHibbett: async function (sku, title, image) {
         const options = {
             method: 'POST',
             url: 'https://cloudapii.herokuapp.com/bdgfhbdfghbtb',
@@ -125,7 +125,6 @@ const helper = {
                 sku: sku,
                 title: title,
                 picture: image,
-                variants: variants
             },
             json: true
         };
