@@ -42,6 +42,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.hibbett.com/product;.js?pid=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
+        console.log(set.response.status)
         let root = HTMLParser.parse(await set.text) 
         if (set.response.status == 410) {
             console.log('Removed - ' + sku)

@@ -19,6 +19,10 @@ const helper = {
         let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
+    getRandomProxy2: async function () {
+        let WEBSHARE = await require('./oculus.json');
+        return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
+    },
 
     getUSARotatingProxy: function () {
         return 'http://global.rotating.proxyrack.net:9000';
@@ -149,7 +153,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": group.name,
@@ -342,8 +346,8 @@ const helper = {
         }
     }
 }
-async function getRandomProxy() {
-    let WEBSHARE = await require('./webshare.json');
+async function getRandomProxy2() {
+    let WEBSHARE = await require('./oculus.json');
     return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
 }
 async function getBodyAsText(response, ms = 1000) {
