@@ -61,7 +61,7 @@ async function monitor(sku) {
             let price = root.querySelector('.price-sales').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
             try { image = root.querySelector('.zoom-trap img').attributes.src.split(' ').join('').replace('small', 'medium') } catch (e) { }
-            let color = root.querySelector('.thumb-link.has-alt-image').attributes.href.split('_color=')[0]
+            let color = root.querySelector('.thumb-link.has-alt-image').attributes.href.split('_color=')[1]
             let url = `https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_color=${color}#Tachyon`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
