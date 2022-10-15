@@ -65,8 +65,8 @@
         "name": "Carbon",
         "color": "04f5ff",
         "image": "https://cdn.discordapp.com/attachments/998307425536983182/1000495532625645728/unknown.png",
-        "HIBBETT": "https://discord.com/api/webhooks/834236640792543263/w0zKq3zHgAfPEBMCg59uWJz6R7wnTyRaLWzqmViYm3eNq9b86PilLzdye-0rcePkdUic",
-        "HIBBETT5": "https://discord.com/api/webhooks/834236640792543263/w0zKq3zHgAfPEBMCg59uWJz6R7wnTyRaLWzqmViYm3eNq9b86PilLzdye-0rcePkdUic"
+        "HIBBETT": "https://discordapp.com/api/webhooks/834236640792543263/w0zKq3zHgAfPEBMCg59uWJz6R7wnTyRaLWzqmViYm3eNq9b86PilLzdye-0rcePkdUic",
+        "HIBBETT5": "https://discordapp.com/api/webhooks/834236640792543263/w0zKq3zHgAfPEBMCg59uWJz6R7wnTyRaLWzqmViYm3eNq9b86PilLzdye-0rcePkdUic"
     },
     "SYNTHESIS": {
         "name": "Synthesis",
