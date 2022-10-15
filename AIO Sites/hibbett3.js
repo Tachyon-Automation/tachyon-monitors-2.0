@@ -40,7 +40,7 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://www.hibbett.com/product;.js?pid=${sku}`//request url
+        let req = `https://hibbett.com/product;.js?pid=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
         console.log(set.response.status)
         let root = HTMLParser.parse(await set.text) 

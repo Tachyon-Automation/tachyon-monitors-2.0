@@ -40,7 +40,7 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://www.hibbett.com/on/demandware.store/Sites-Hibbett-US-Site/default/Stylitics-ShowProductDetails;.js?pid=${sku}&pid=${v4()}`//request url
+        let req = `https://hibbett.com/on/demandware.store/Sites-Hibbett-US-Site/default/Stylitics-ShowProductDetails;.js?pid=${sku}&pid=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
         let root = HTMLParser.parse(await set.text) 
         if (set.response.status == 410) {

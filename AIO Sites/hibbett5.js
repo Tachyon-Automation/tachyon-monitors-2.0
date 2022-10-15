@@ -35,7 +35,7 @@ async function monitor(sku) {
         //these headers change per site
         let agent = randomUseragent.getRandom()
         let headers = {
-            'User-Agent': agent,
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
             'Poq-App-Version': `${v4()}`,
             'Poq-Platform': 'iOS',
             'Poq-Platform-Version': `${v4()}`,
