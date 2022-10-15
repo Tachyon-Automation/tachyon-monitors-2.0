@@ -23,6 +23,9 @@
         "AKIRA",
         "CARBON"
     ],
+    "HIBBETT2": [
+        "TACHYON"
+    ],
     "HIBBETT5": [
         "TACHYON",
         "TACHYONCLIENT",
