@@ -80,7 +80,7 @@ async function monitor(sku) {
             }
 
             if (inStock) {
-                //helper.posElephentHibbett(sku, title, image)
+                helper.posElephentHibbett(sku, title, image)
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
