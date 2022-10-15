@@ -104,7 +104,8 @@
     "SOLEBOX": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ATOMFNF"
+        "ATOMFNF",
+        "SUPPLYFRANCE"
     ],
     "SNIPESEU": [
         "TACHYON",
@@ -113,6 +114,7 @@
     ],
     "ASOS": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "SUPPLYFRANCE"
     ]
 }
