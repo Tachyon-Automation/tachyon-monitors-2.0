@@ -62,9 +62,7 @@ async function monitor(sku) {
         let url = `https://www.nordstrom.com/s/${sku}#Tachyon`//product url
         let title = body.productTitle + " "
         let price = '' //price set
-        let parse = body.defaultGalleryMedia.styleMediaId
         let image = 'https://pbs.twimg.com/profile_images/1159538934977662976/4gmIcgkZ_400x400.png'
-        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop } catch (e) {} //try set image
         let stock = 0
         let sizes = []
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -83,6 +81,7 @@ async function monitor(sku) {
                 stock += Number(vars[id].totalQuantityAvailable) //total count or quantity
                 sizeList.push(vars[id].rmsSkuId);
                 price = vars[id].displayPrice //price set for vars
+                image = vars[id].imageMediaUri.smallDesktop
                 if (!oldSizeList.includes(vars[id].rmsSkuId))// oldSizeList.includes this size
                     inStock = true;
                     title = title + vars[id].colorDisplayValue + ","
