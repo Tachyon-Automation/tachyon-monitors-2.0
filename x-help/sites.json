@@ -24,7 +24,19 @@
         "CARBON"
     ],
     "HIBBETT2": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
+        "ELEPHANTAIO",
+        "COOKOLOGY",
+        "DROPALERT",
+        "FLIPD",
+        "ACORNFLIPS",
+        "BOOMINATI",
+        "HELIXFLIPS",
+        "FITTEDACO",
+        "AKIRA",
+        "CARBON"
     ],
     "HIBBETT5": [
         "TACHYON",
