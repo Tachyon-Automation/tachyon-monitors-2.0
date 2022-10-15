@@ -34,9 +34,15 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
-            //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `3:62a8c30961b81541bcbb29f0eb043b16bc6be2d7b1d0c64b5dcf1b850330b0d1:3P9mQ7i7jh4ZEpE4l6tGGRk5wtk7Kj+i0eeljlNbxZyi0ysxsEtupkfWuwBntjgxFCjoNpAN8OZoUaFF1DW0yg==:1000:byJ1Hrz4SIiClbdQn4Y1o/sr4qYOCT0J1oaSeGAVJN7iCOHMGhqSRXqGJVdosF1j/d/MGcRMJ9bByG9RKNo7ja7PJUy9sjxibEMjcGXnqLryGYhL/Ew7jbJgMiIE4JuNjgVy1OA04ZspU69po1PdLrXHOL6btkVhbznib9bLbsF+NgUZ7iTB1Vwk3eAKKpJtlor95CGt8FCxi5DJjRrnhw==`,        
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 7.0; LG-H918 Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Mobile Safari/537.36',
+            'Poq-App-Version': `${v4()}`,
+            'Poq-Platform': 'iOS',
+            'Poq-Platform-Version': `${v4()}`,
+            'Poq-Device-Model': 'iPhone',
+            'x-px-bypass-reason': `${v4()}`,
+            'x-px-bypass': `${v4()}`,
+            'X-PX-AUTHORIZATION': `3:${v4()}`,     
+            'cookie': `_px3=${v4()};_pxhd=${v4()}`  
         }
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
