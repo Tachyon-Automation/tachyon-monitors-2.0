@@ -35,14 +35,8 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
-            'Poq-App-Version': `${v4()}`,
-            'Poq-Platform': 'iOS',
-            'Poq-Platform-Version': `${v4()}`,
-            'Poq-Device-Model': 'iPhone',
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:${v4()}`,     
-            'cookie': `_px3=${v4()};_pxhd=${v4()}`  
+            'x-px-authorization': "1",
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
