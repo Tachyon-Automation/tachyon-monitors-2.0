@@ -192,7 +192,7 @@ const helper = {
                         {
                             "name": "**Sizes**",
                             "value": sizeright,
-                            "inline": false
+                            "inline": true
                         },
                         {
                             "name": "**QT**",
