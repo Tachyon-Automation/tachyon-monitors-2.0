@@ -142,7 +142,7 @@ const helper = {
             if (error) throw new Error(error);
         });
     },
-    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version) {
+    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version, qt, links) {
         let color = hexToDecimal(group.color)
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
@@ -193,7 +193,17 @@ const helper = {
                             "name": "**Sizes**",
                             "value": sizeright,
                             "inline": true
-                        }
+                        },
+                        {
+                            "name": "**QT**",
+                            "value": qt,
+                            "inline": false
+                        },
+                        {
+                            "name": "**Links**",
+                            "value": links,
+                            "inline": true
+                        },
                     ],
                     "thumbnail": {
                         "url": image

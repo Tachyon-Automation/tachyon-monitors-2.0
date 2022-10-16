@@ -73,6 +73,8 @@ async function monitor(sku) {
             }
         }
         if (inStock) {
+            let qt = 'Na'
+            let links = 'Na'
             let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}`//request url
             let set = await helper.requestJson(req, method, proxy, headers) //request function
             let body2 = await set.json
@@ -85,7 +87,7 @@ async function monitor(sku) {
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
             for (let group of sites[site]) {
-                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
             }
             await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 

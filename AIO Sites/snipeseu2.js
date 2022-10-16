@@ -74,12 +74,24 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let burst = `[Burst](http://localhost:4000/qt?st=snipes&p=https://www.snipes.com/p/${sku}.html)\n`
+                let flare = `[Flare](http://127.0.0.1:5559/quicktask?product=https://www.snipes.com/p/${sku}.html)\n`
+                let ganesh = `[Ganesh](https://ganeshbot.com/api/quicktask?STORE=SNIPES&PRODUCT=${sku}&SIZE=ANY)`
+                let fr = `[FR](https://www.snipes.fr/p/${sku}.html) . `
+                let be = `[BE](https://www.snipes.be/p/${sku}.html) . `
+                let ch = `[CH](https://www.snipes.ch/p/${sku}.html) . `
+                let nl = `[NL](https://www.snipes.nl/p/${sku}.html)\n`
+                let it = `[IT](https://www.snipes.it/p/${sku}.html) . `
+                let es = `[ES](https://www.snipes.es/p/${sku}.html) . `
+                let at = `[AT](https://www.snipes.at/p/${sku}.html)`
+                let qt = burst + flare + ganesh
+                let links = fr + be + ch + nl + it + es + at
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites[site]) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 
