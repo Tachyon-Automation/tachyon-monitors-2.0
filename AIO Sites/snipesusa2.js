@@ -40,7 +40,7 @@ async function monitor(sku) {
             'cache-control': 'max-age=0',
             'User-Agent': randomUseragent.getRandom(),
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'X-PX-AUTHORIZATION': `3:040cdde2d32fb5a1c634bb5785ac3792260c8b4845487dbd18c3a5028fb1ff4d:S23DEWMN40dliFZNJ+2LDcGWyKZIdvCbKwwujPusUl9pMHXt3oSdLDu4ZY6orQt+bYM033bxuUvNhP7OsATtAQ==:1000:lcrWCNkwB+P/uDGBBoYg+WeyyxoI4rs+BIkbvA2ln2vQKr47yUkwVN+wsjNfUhN/N+l2/BlpqI+crsyUkDBe2cyaZE+zNj6JwTp8BdqJ6vtKCWFRAzktlGToMQY3LgZsEr33SS6kFrg+ewfVzKhUi9T6DTlzKhzTB46LhsTqglkrdvYPVSpe2rERVINLtopuJiE8e36l7vFi/YSGvZ8baQ==`,
+            'X-PX-AUTHORIZATION': `3:d881839f62f95801fdcd38980aa5a458d2a6a48c8330ba4f1025434644d4b6a3:s1gqDGpdeQYujzCHOQLaG8dLAQkxEMbEF7or5O/YCHHAsUloS9KSvteXbFaFH129z19R3KTcQdT1pcJig3IdAw==:1000:6GS4H3kuRCyFgDUthjtpBRNmh98O8DZnI5ps2ULhYERw3oq+NOi7fyJiUmLK5aWByS4/XXfojHCm7zWHxsdy+MYVS7WMSUofqeVPmkHfFmU9hnBY8IKI4cMhjB6qtTM6wI0d6IuTAFu/kfIvyAUOjCvZvw99Mmz+0LS0MW1ZFtJZV5nQWVXDvukvdWpAbab16WdgpIw3U64qOOT8nPWbWw==`,
             'referer': `https://platform.poq.io/clients/snipes/products?ids=${sku}`
         }
         let method = 'GET'; //request method
