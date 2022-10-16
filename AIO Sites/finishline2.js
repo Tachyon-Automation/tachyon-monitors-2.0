@@ -39,7 +39,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (body.statusCode == 499) {
