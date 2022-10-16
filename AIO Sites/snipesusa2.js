@@ -34,19 +34,16 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'accept-encoding': 'gzip, deflate, br',
-            'accept-language': 'en-US,en;q=0.9',
-            'cache-control': 'max-age=0',
             'User-Agent': randomUseragent.getRandom(),
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'X-PX-AUTHORIZATION': `3:d881839f62f95801fdcd38980aa5a458d2a6a48c8330ba4f1025434644d4b6a3:s1gqDGpdeQYujzCHOQLaG8dLAQkxEMbEF7or5O/YCHHAsUloS9KSvteXbFaFH129z19R3KTcQdT1pcJig3IdAw==:1000:6GS4H3kuRCyFgDUthjtpBRNmh98O8DZnI5ps2ULhYERw3oq+NOi7fyJiUmLK5aWByS4/XXfojHCm7zWHxsdy+MYVS7WMSUofqeVPmkHfFmU9hnBY8IKI4cMhjB6qtTM6wI0d6IuTAFu/kfIvyAUOjCvZvw99Mmz+0LS0MW1ZFtJZV5nQWVXDvukvdWpAbab16WdgpIw3U64qOOT8nPWbWw==`,
-            'referer': `https://platform.poq.io/clients/snipes/products?ids=${sku}`
+            'x-px-authorization': "1",
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
         let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
+        //console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -56,7 +53,6 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        console.log(set.response.status)
         //Define body variables
         if (body[0].details.name) {
             let inStock = false
