@@ -326,7 +326,7 @@ const helper = {
                         if (query.rows.length > 0) {
                             let SKUList = [];
                             for (let row of query.rows) {
-                                SKUList.push(`${row.sku} - ${row.waittime}ms`);
+                                SKUList.push(`${row.sku}`);
                             }
                             embed.addField(`**Monitored SKUs** (${SKUList.length})`, SKUList)
                         }

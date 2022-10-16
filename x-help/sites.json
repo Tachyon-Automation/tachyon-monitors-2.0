@@ -88,6 +88,11 @@
         "TACHYONCLIENT",
         "FITTEDACO"
     ],
+    "FINISHLINE2": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "FITTEDACO"
+    ],
     "JDSPORTS": [
         "TACHYON",
         "TACHYONCLIENT",

@@ -11,6 +11,7 @@
         "NORDSTROM2": "https://ptb.discord.com/api/webhooks/994684078894874634/i7xOo7s47yvYx1TmXJS4RC7p23Mmk7186apuGQ9D_Azxj4GumVrDA7HH-7v1qw0k3ZOb",
         "SNS": "https://discordapp.com/api/webhooks/858520463231287296/y-7h0lPYCElzjZ16Hy4YaKC0HW7uYiYLygZn6HlCY2rNJkeDuP6QPXOorX9OfyEJGYbY",
         "FINISHLINE": "https://discordapp.com/api/webhooks/814076886413737984/rBeykPOVp35RO865TZO3QjkoRuqz8QMrugZ6Dm6ATF0r70lL_Al6n7-NVuOZETaHQPLr",
+        "FINISHLINE2": "https://discordapp.com/api/webhooks/1031124146064732200/tSlER4FloNua38lq4LlmkOQaGIDuyVx8LEMWmL2d0hSVVn-RIwgaH4cMZFAKaYiBDbEw",
         "JDSPORTS": "https://discordapp.com/api/webhooks/899898255213744148/aELGdfXgAd1k6qGV5QyCyKSuGyLCauP5BHPpMyXGceMpB8QwP-i0oDAwgyfuuYsbQT9M",
         "SHIEKH": "https://discordapp.com/api/webhooks/1020932684408684594/EHuTdnJSIeFui4WHPBhYWQcTkGVa6kw4OeIiRK0X-hGJGhce0C4bCThyRaOTHjZTcqp3",
         "ENDCLOTHING": "https://discordapp.com/api/webhooks/858533199219130368/fCDemY_bococKXlXixgtssCLM2nZuQLbFMsdzWLEi-PZvJbcl4ed9VDRVPW_Unz-YcCb",
@@ -32,6 +33,7 @@
         "HIBBETT5": "https://discordapp.com/api/webhooks/902728303637577738/yE9eRI2rn-WUXRUXhy3CUrvu8DOXf-vGYOaRI3M1wSXIa70VkHHttyz4a8JVfNPNxuOP",
         "SNS": "https://discordapp.com/api/webhooks/1029546909276323861/sFOk8NtlcIkDLRhP85kuKcUb1E7gfb_NAaqT4cGOzEk050xcG29W011BkxmNp1jGDu4e",
         "FINISHLINE": "https://discordapp.com/api/webhooks/1029561730801602631/qh6V_kLua4kzzPjvLb_reEUu4AI9idtHZOUTBWnppV_shdGGuu7CHcmunUV7c8NTxp2v",
+        "FINISHLINE2": "https://discordapp.com/api/webhooks/1029561730801602631/qh6V_kLua4kzzPjvLb_reEUu4AI9idtHZOUTBWnppV_shdGGuu7CHcmunUV7c8NTxp2v",
         "JDSPORTS": "https://discordapp.com/api/webhooks/1029561976118059070/nD-7Yd4HVyQJdsAScu89KnPNj7UgBCXMg6O0TUslv7epsYvQxZ3XOnrta-czcEMOPicL",
         "SHIEKH": "https://discordapp.com/api/webhooks/1029571590473646140/XIwnM5Tr2Iq_vhJGk1rG8akWOpiYdlHBg8k8IIDXbnH0lkCpAF6V5SZ6g1N_ahYwgQYh",
         "ENDCLOTHING": "https://discordapp.com/api/webhooks/1029930313813590026/sc8EAK_EMSAUNkHi6B-kbXqo2B3pY-VQH_OPD3YcgN-_lzsrsGp6ZZMplDSMIKg7Cdq9",
@@ -149,6 +151,7 @@
         "NORDSTROM": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
         "NORDSTROM2": "https://discord.com/api/webhooks/1028413103509086278/lo3pCtP74q_3Apb25hizRuFuICAaXoCCASSCTrt8SIlnzYJm2rTCdsWLf1yN78eESpTm",
         "FINISHLINE": "https://discord.com/api/webhooks/1028413337677078608/jU6zRaYj-zrGwdu5Mym3pDqbWBDeLl51Lxj983YUSu2SY9JMyDfP2S31V__wGOyV8p9d",
+        "FINISHLINE2": "https://discord.com/api/webhooks/1028413337677078608/jU6zRaYj-zrGwdu5Mym3pDqbWBDeLl51Lxj983YUSu2SY9JMyDfP2S31V__wGOyV8p9d",
         "JDSPORTS": "https://discord.com/api/webhooks/1028413337677078608/jU6zRaYj-zrGwdu5Mym3pDqbWBDeLl51Lxj983YUSu2SY9JMyDfP2S31V__wGOyV8p9d"
     },
     "AKIRA": {
