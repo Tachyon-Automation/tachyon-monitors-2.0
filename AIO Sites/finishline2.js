@@ -33,7 +33,7 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'SSL Labs (https://www.ssllabs.com/about/assessment.html); on behalf of 69.179.157.70',
+            'User-Agent': 'Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)',
             'welove': 'maltliquor'
         }
         let method = 'GET'; //request method
