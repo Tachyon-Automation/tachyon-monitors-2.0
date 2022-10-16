@@ -192,12 +192,12 @@ const helper = {
                         {
                             "name": "**Sizes**",
                             "value": sizeright,
-                            "inline": true
+                            "inline": false
                         },
                         {
                             "name": "**QT**",
                             "value": qt,
-                            "inline": false
+                            "inline": true
                         },
                         {
                             "name": "**Links**",
