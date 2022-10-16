@@ -19,6 +19,7 @@
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1015135550442840124/xpTngFPs4cN5cIPQ-WQQ4Chr8vu4rm0sqpRfWvvudizvCn_n39YjgHU3Dbf6x172o4A7",
         "SOLEBOX": "https://discordapp.com/api/webhooks/811107530180526100/5eUXKvh-2ilOa7mqWe_oBZzax3M9V1xXNP_zhUxMWQyhOgqaxFO60tv9E35Ywm7qwb0f",
         "SNIPESEU": "https://discordapp.com/api/webhooks/850687456487538718/c_0X5wnAEE9CJW3tiuFso7hAauaH7GQ80dcrfyHq-SmPExSduRdqM44vsM05i2Ao6PlD",
+        "SNIPESEU2": "https://discordapp.com/api/webhooks/1031268242129436745/ey-pZnWy3CxKCmHbIofieedZlCs1q-sVDGmYBwqlwDdqVIDzkKDmvghH0Z38_TRCCbgs",
         "ASOS": "https://discordapp.com/api/webhooks/861772562082299906/5FQZam_xUNYQXSpRstkRrvH6ps-dsW5pfvqGE_DXUnoewGh-acOE1Rt9JzXovXJOBGMd"
     },
     "TACHYONCLIENT": {
@@ -41,6 +42,7 @@
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1029955583585034240/bExXmorCPhJqqx4HA9K0uWBhZ8EmqWD7EfOo6q1KRtgIaKMjKhbjPu-CI5d5PLA9hb9I",
         "SOLEBOX": "https://discordapp.com/api/webhooks/1029978800026566757/p1bK1UUgxEUi5DFrqgO0hDJU7EByoRPb3ly4LTP0pAxG-VpCn5ileIQVmD8jxG-Zoxnn",
         "SNIPESEU": "https://discordapp.com/api/webhooks/1030002256482938891/8nwBDnzSYmTQSuD3vyeXzKZ6tO_XIn7JVN26olhuMio0qgY_qTFKZjSwvp2uhCA6W5sA",
+        "SNIPESEU2": "https://discordapp.com/api/webhooks/1030002256482938891/8nwBDnzSYmTQSuD3vyeXzKZ6tO_XIn7JVN26olhuMio0qgY_qTFKZjSwvp2uhCA6W5sA",
         "ASOS": "https://discordapp.com/api/webhooks/1030305590636982343/Ju0QSBVljjmXGLTd_tfbuvp5PPVlJai0a5qvGlt5E3Ml98QaaF0cSAm56o33n7w4ZeJK"
     },
     "COOKOLOGY": {
@@ -168,6 +170,7 @@
         "color": "561085",
         "image": "https://media.discordapp.net/attachments/974781854643269714/990651283390222387/unknown.png?width=618&height=618",
         "SNIPESEU": "https://discord.com/api/webhooks/1007702983527632906/Q1PUD5UqARktq_iSquLitxX7_x-2IF30p1nHgWQu4LmERDCV7hN6ZvCrrjiLeTph81EG",
+        "SNIPESEU2": "https://discord.com/api/webhooks/1007702983527632906/Q1PUD5UqARktq_iSquLitxX7_x-2IF30p1nHgWQu4LmERDCV7hN6ZvCrrjiLeTph81EG",
         "SOLEBOX": "https://discord.com/api/webhooks/1007703174909546636/HJUm6ci4N2jw3aoq1xc-MLm4DaiqkMySPbb27vQ0RPhz2aECE8VEPiaIqt24i14sbLSY"
     },
     "SUPPLYFRANCE": {
@@ -175,6 +178,7 @@
         "color": "0d0d0c",
         "image": "https://media.discordapp.net/attachments/1030921309527490580/1030923602255679618/unknown.png?width=579&height=579",
         "SNIPESEU": "https://discord.com/api/webhooks/989198722741190747/L6uFaQIFZMcVxzwsFbzN6L3hTuNJBiGqOKLtGbfyjnv_5SituWk75cHrxm84U029FfQa",
+        "SNIPESEU2": "https://discord.com/api/webhooks/989198722741190747/L6uFaQIFZMcVxzwsFbzN6L3hTuNJBiGqOKLtGbfyjnv_5SituWk75cHrxm84U029FfQa",
         "SOLEBOX": "https://discord.com/api/webhooks/1030923708509990983/oKt_FrOVKHgtYE0Dex50kTdZt3yyi-Bk0hSt9fM9iZwDw1j_TsOrb9cPKU1n3uAjuXnc"
     }
 }
