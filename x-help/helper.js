@@ -50,7 +50,7 @@ const helper = {
             let json = await response.json()
             return { json, response }
         } catch (e) {
-            //console.log(e)
+            console.log(e)
         }
         return
     },
