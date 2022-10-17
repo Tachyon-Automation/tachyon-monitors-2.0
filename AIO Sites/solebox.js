@@ -35,13 +35,13 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
-            //'x-px-bypass-reason': 'The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.',
-            'X-PX-AUTHORIZATION': `3:62a8c30961b81541bcbb29f0eb043b16bc6be2d7b1d0c64b5dcf1b850330b0d1:3P9mQ7i7jh4ZEpE4l6tGGRk5wtk7Kj+i0eeljlNbxZyi0ysxsEtupkfWuwBntjgxFCjoNpAN8OZoUaFF1DW0yg==:1000:byJ1Hrz4SIiClbdQn4Y1o/sr4qYOCT0J1oaSeGAVJN7iCOHMGhqSRXqGJVdosF1j/d/MGcRMJ9bByG9RKNo7ja7PJUy9sjxibEMjcGXnqLryGYhL/Ew7jbJgMiIE4JuNjgVy1OA04ZspU69po1PdLrXHOL6btkVhbznib9bLbsF+NgUZ7iTB1Vwk3eAKKpJtlor95CGt8FCxi5DJjRrnhw==`,        
+            'x-px-authorization': "2",
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
@@ -77,12 +77,14 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let qt = 'Na'
+                let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites[site]) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 

@@ -19,6 +19,10 @@ const helper = {
         let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
+    getRandomProxy2: async function () {
+        let WEBSHARE = await require('./oculus.json');
+        return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
+    },
 
     getUSARotatingProxy: function () {
         return 'http://global.rotating.proxyrack.net:9000';
@@ -114,7 +118,31 @@ const helper = {
             //console.log(e)
         }
     },
-    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version) {
+
+    posElephentHibbett: async function (sku, title, image) {
+        const options = {
+            method: 'POST',
+            url: 'https://cloudapii.herokuapp.com/bdgfhbdfghbtb',
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                mode: '1',
+                sku: sku,
+                title: title,
+                picture: image,
+            },
+            json: true
+        };
+        try {
+            request(options)
+            //console.log("success")
+        } catch (e) {
+            //console.log(e)
+        }
+        request(options, function (error) {
+            if (error) throw new Error(error);
+        });
+    },
+    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version, qt, links) {
         let color = hexToDecimal(group.color)
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
@@ -125,7 +153,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": group.name,
@@ -165,7 +193,17 @@ const helper = {
                             "name": "**Sizes**",
                             "value": sizeright,
                             "inline": true
-                        }
+                        },
+                        {
+                            "name": "**QT**",
+                            "value": qt,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Links**",
+                            "value": links,
+                            "inline": true
+                        },
                     ],
                     "thumbnail": {
                         "url": image
@@ -298,7 +336,7 @@ const helper = {
                         if (query.rows.length > 0) {
                             let SKUList = [];
                             for (let row of query.rows) {
-                                SKUList.push(`${row.sku} - ${row.waittime}ms`);
+                                SKUList.push(`${row.sku}`);
                             }
                             embed.addField(`**Monitored SKUs** (${SKUList.length})`, SKUList)
                         }
@@ -318,8 +356,8 @@ const helper = {
         }
     }
 }
-async function getRandomProxy() {
-    let WEBSHARE = await require('./webshare.json');
+async function getRandomProxy2() {
+    let WEBSHARE = await require('./oculus.json');
     return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
 }
 async function getBodyAsText(response, ms = 1000) {

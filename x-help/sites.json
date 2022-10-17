@@ -20,7 +20,53 @@
         "BOOMINATI",
         "HELIXFLIPS",
         "FITTEDACO",
-        "AKIRA"
+        "AKIRA",
+        "CARBON"
+    ],
+    "HIBBETT2": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
+        "ELEPHANTAIO",
+        "COOKOLOGY",
+        "DROPALERT",
+        "FLIPD",
+        "ACORNFLIPS",
+        "BOOMINATI",
+        "HELIXFLIPS",
+        "FITTEDACO",
+        "AKIRA",
+        "CARBON"
+    ],
+    "HIBBETT3": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
+        "ELEPHANTAIO",
+        "COOKOLOGY",
+        "DROPALERT",
+        "FLIPD",
+        "ACORNFLIPS",
+        "BOOMINATI",
+        "HELIXFLIPS",
+        "FITTEDACO",
+        "AKIRA",
+        "CARBON"
+    ],
+    "HIBBETT5": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "SYNTHESIS",
+        "ELEPHANTAIO",
+        "COOKOLOGY",
+        "DROPALERT",
+        "FLIPD",
+        "ACORNFLIPS",
+        "BOOMINATI",
+        "HELIXFLIPS",
+        "FITTEDACO",
+        "AKIRA",
+        "CARBON"
     ],
     "NORDSTROM2": [
         "TACHYON",
@@ -38,6 +84,11 @@
         "COOKOLOGY"
     ],
     "FINISHLINE": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "FITTEDACO"
+    ],
+    "FINISHLINE2": [
         "TACHYON",
         "TACHYONCLIENT",
         "FITTEDACO"
@@ -70,15 +121,24 @@
     "SOLEBOX": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ATOMFNF"
+        "ATOMFNF",
+        "SUPPLYFRANCE"
     ],
     "SNIPESEU": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ATOMFNF"
+        "ATOMFNF",
+        "SUPPLYFRANCE"
+    ],
+    "SNIPESEU2": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "ATOMFNF",
+        "SUPPLYFRANCE"
     ],
     "ASOS": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "SUPPLYFRANCE"
     ]
 }

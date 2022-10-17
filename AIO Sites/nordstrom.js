@@ -89,6 +89,8 @@ async function monitor(sku) {
             }
         }
         if (inStock) {
+            let qt = 'Na'
+            let links = 'Na'
             title = title.split(',')[0]
             helper.posElephentNord(sizes, sku, title, price, image)
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
@@ -96,7 +98,7 @@ async function monitor(sku) {
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
             for (let group of sites[site]) {
-                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
             }
             await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 

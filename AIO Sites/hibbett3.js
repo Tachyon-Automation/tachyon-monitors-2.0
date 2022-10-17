@@ -7,9 +7,9 @@ const randomUseragent = require('random-useragent');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '810930365254467665' //channel id
-const site = 'HIBBETT'; //site name
-const version = `Hibbett v1.0` //Site version
+const CHANNEL = '1007048948374056987' //channel id
+const site = 'HIBBETT3'; //site name
+const version = `Hibbett v3.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -32,7 +32,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //let agent = randomUseragent.getRandom(); //random agent per site
         //these headers change per site
         let headers = {
@@ -40,8 +40,9 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://hibbett.com/product;.js?pid=${sku}&dwvar_${sku}&format=Ajax&abcz=${v4()}`//request url
+        let req = `https://hibbett.com/product;.js?pid=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
+        console.log(set.response.status)
         let root = HTMLParser.parse(await set.text) 
         if (set.response.status == 410) {
             console.log('Removed - ' + sku)
@@ -57,11 +58,11 @@ async function monitor(sku) {
             return
         }
         if (root.querySelector('.product-name')) {
-            let title = root.querySelector('.product-name').textContent.trim().split('&#39;').join("'").split('&quot;').join('"')
+            let title = root.querySelector('h1.product-name').textContent.trim().split('&#39;').join("'").split('&quot;').join('"')
             let price = root.querySelector('.price-sales').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
-            try { image = root.querySelector('.product-image').attributes.src.split(' ').join('').replace('small', 'medium') } catch (e) { }
-            let color = root.querySelector('.product-image').attributes.src.split(' ').join('').replace('?$small$', '').split('-')[1]
+            try { image = root.querySelector('.zoom-trap img').attributes.src.split(' ').join('').replace('small', 'medium') } catch (e) { }
+            let color = root.querySelector('.thumb-link.has-alt-image').attributes.href.split('_color=')[1]
             let url = `https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_color=${color}#Tachyon`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -81,7 +82,7 @@ async function monitor(sku) {
             if (inStock) {
                 let qt = 'Na'
                 let links = 'Na'
-                //helper.posElephentHibbett(sku, title, image)
+                helper.posElephentHibbett(sku, title, image)
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')

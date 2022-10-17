@@ -73,19 +73,21 @@ async function monitor(sku) {
             }
         }
         if (inStock) {
-            let req = `https://www.finishline.com/store/recommendations/json/productRecommendationsEndecaJson.jsp?renderType=pdp&products=${productID}:${styleID}:${colorID}%7C`//request url
+            let qt = 'Na'
+            let links = 'Na'
+            let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}`//request url
             let set = await helper.requestJson(req, method, proxy, headers) //request function
             let body2 = await set.json
-            let title = body2.productsArray[0].displayName;
-            let price = body2.productsArray[0].price.nowPrice
-            let image = body2.productsArray[0].image
+            let title = body2.product.name + ' ' + body2.product.colors.color[0].content
+            let price = body2.product.Prices.price[0].fullPrice
+            let image = body2.product.colors.color[0].thumbnail
             let url = `https://www.finishline.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
             for (let group of sites[site]) {
-                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version)
+                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
             }
             await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 

@@ -15,7 +15,7 @@ module.exports = {
             "out_file": "/dev/null"
         },
         {
-            "script": "./AIO Sites/hibbett.js",
+            "script": "./AIO Sites/hibbett2.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
@@ -29,7 +29,7 @@ module.exports = {
             "out_file": "/dev/null"
         },
         {
-            "script": "./AIO Sites/finishline.js",
+            "script": "./AIO Sites/finishline2.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
@@ -51,6 +51,13 @@ module.exports = {
         },
         {
             "script": "./AIO Sites/asos.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./AIO Sites/hibbett3.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
