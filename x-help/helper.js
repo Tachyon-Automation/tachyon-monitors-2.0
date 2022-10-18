@@ -50,8 +50,8 @@ const helper = {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
-            clearTimeout(timeoutId)
             let json = await response.json()
+            clearTimeout(timeoutId)
             return { json, response }
         } catch (e) {
             console.log(e)
@@ -63,8 +63,8 @@ const helper = {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
-            clearTimeout(timeoutId)
             resp = await getBodyAsText(response)
+            clearTimeout(timeoutId)
             return {resp, response }
         } catch (e) {
             //console.log(e)
@@ -76,8 +76,8 @@ const helper = {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal})
-            clearTimeout(timeoutId)
             let json = await response.json()
+            clearTimeout(timeoutId)
             return { json, response }
         } catch (e) {
             //console.log(e)
@@ -89,8 +89,8 @@ const helper = {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
-            clearTimeout(timeoutId)
             let text = await getBodyAsText(await response)
+            clearTimeout(timeoutId)
             return { text, response }
         } catch (e) {
             //console.log(e)
