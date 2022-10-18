@@ -36,7 +36,6 @@ async function monitor(sku) {
         //let agent = randomUseragent.getRandom(); //random agent per site
         //these headers change per site
         let headers = {
-            'cookie': v4(),
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
@@ -82,7 +81,7 @@ async function monitor(sku) {
             if (inStock) {
                 let qt = 'Na'
                 let links = 'Na'
-                helper.posElephentHibbett(sku, title, image)
+                //helper.posElephentHibbett(sku, title, image)
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
