@@ -34,14 +34,14 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
-            'x-px-authorization': "2",
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
+            'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
+            'x-px-authorization': "3:ac08116f98518486ec5360dd908ce999ee7987bf7e105c7e457da35858141939:7GZ1I82ASmY915G8xfCWCqAOwoII9kaLfdbUygqr7yiyCcFu8aOrNge0X6SZGApHwDwhTYxg+vrOuUDEfpVacA==:1000:sPz2JAE0xx9rG+IzvtFeCvg88gClwqfVNg9OlfjcbcCQfn/rkSDWtzJxl2fr/R5qQ/La9LMK18y2T19cMMBu7ts3YvyEVCvxpKk92YvdRz1Iq3VxR2b1r3XLOGzkaC4cYUb+qA8v08fuNjQlhP+1ZsAWHzUMTmx+VDgMYQ4efvw=",
+            //'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
-        let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
-        let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        let req = `https://www.solebox.com/on/demandware.store/Sites-solebox-Site/de_DE/Product-Extras;.js?format=ajax&pid=0214217700000005&format=ajax`//request url
+        let set = await helper.requestHtml(req, method, proxy, headers) //request function
+        console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);

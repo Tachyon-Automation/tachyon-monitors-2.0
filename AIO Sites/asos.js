@@ -38,7 +38,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://api-asos-com.translate.goog/product/catalogue/v3/products/${sku}?store=COM&abcz=${v4()}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (body.errorCode == "pdt_011") {
@@ -76,6 +76,7 @@ async function monitor(sku) {
             if (inStock) {
                 let qt = 'Na'
                 let links = 'Na'
+                console.log(url, title, sku, price, image, sizeright, sizeleft, stock)
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')

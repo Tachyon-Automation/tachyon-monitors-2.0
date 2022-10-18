@@ -36,7 +36,7 @@ async function monitor(sku) {
         let headers = {
             'User-Agent': "Snipes-Live/19.4.0 iOS/16.0",
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'x-px-authorization': "3:490f008a004bef2eaa127fc7d3780e380ed5ff964945a6b9fed1489275f0966f:UAlSe9dG9erfHNPPLDWylsHBojHq2c+XwN9mAlEww87DdyvHCKvX50kVmVS8BtPEUIunJxYFc5oZXvwxnPdX9Q==:1000:KLyf821hmAGQqpwc2L++v1+SVOyK0NgAaacPqIS7oCCVgdV2A0cDR/3rSyeQDNcEtu93hJBZcKBJ9BNWu3RkPU5ESIpNcsZgsBQVUyoCWoiYsyTUYu8XcJSCBEvYk9jJW2EKtXmk2D+K+SQjiFKwWhDY5MNqgAwCJepZ9eX2xaHio24oz87dFTT2OaH/vXmJK/vX5RfelQo6JhLVpgXohQ==",
+            'x-px-authorization': "3:37a9c8c7862ddf01d7069ecfb77d5eeee8527833366d117fefa6b52e257e9aee:iT/daV6YHx8MHTLflcU4DVO9xXUp//k5gJY2tLcZQ+L6onHVv2ykk3038aIw/Nschinvpgb2y7+TJ0lpm/bVEw==:1000:CK5NT8PNSAf37CcqOzIXoZUaO9EDg0bxaH7lG+qqBNT7UTGF2nTThpRMxlabA43kyJ7q4cTqRIwuQ/tGc0oFg5TNmq15NiQQNwCoCv0rOiRpRnCfuzIoLPtkf+p1JgOVpC2ri3JRA/Sp1W8S0n+Vg2XaCaEthkJOTCKDtArTLQcjQJmKpQFZ1mO44xO4L1aoCt+UEGniaUi51yh1bTsipQ==",
             //'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
