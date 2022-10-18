@@ -34,10 +34,10 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
+            'User-Agent': "Snipes-Live/19.4.0 iOS/16.0",
             'Poq-App-Identifier': '082463f6-579a-46f1-b9c9-7e2f4e01b873',
-            'x-px-authorization': "1",
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
+            'x-px-authorization': "3:490f008a004bef2eaa127fc7d3780e380ed5ff964945a6b9fed1489275f0966f:UAlSe9dG9erfHNPPLDWylsHBojHq2c+XwN9mAlEww87DdyvHCKvX50kVmVS8BtPEUIunJxYFc5oZXvwxnPdX9Q==:1000:KLyf821hmAGQqpwc2L++v1+SVOyK0NgAaacPqIS7oCCVgdV2A0cDR/3rSyeQDNcEtu93hJBZcKBJ9BNWu3RkPU5ESIpNcsZgsBQVUyoCWoiYsyTUYu8XcJSCBEvYk9jJW2EKtXmk2D+K+SQjiFKwWhDY5MNqgAwCJepZ9eX2xaHio24oz87dFTT2OaH/vXmJK/vX5RfelQo6JhLVpgXohQ==",
+            //'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
         let req = `https://platform.poq.io/clients/snipes/products?ids=${sku}`//request url
@@ -53,6 +53,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
+
         //Define body variables
         if (body[0].details.name) {
             let inStock = false
