@@ -118,6 +118,27 @@ const helper = {
             //console.log(e)
         }
     },
+    posElephentOrca: async function (sizes, sku, title, price, image) {
+        const options = {
+            method: 'POST',
+            url: 'http://51.81.82.199:5000/sendRestock',
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                offerid: sizes,
+                sitesku: sku,
+                title: title,
+                price: price,
+                image: image
+            },
+            json: true
+        };
+        try {
+            request(options)
+            console.log("success")
+        } catch (e) {
+            console.log(e)
+        }
+    },
 
     posElephentHibbett: async function (sku, title, image) {
         const options = {

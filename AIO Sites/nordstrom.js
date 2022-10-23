@@ -93,6 +93,7 @@ async function monitor(sku) {
             let links = 'Na'
             title = title.split(',')[0]
             helper.posElephentNord(sizes, sku, title, price, image)
+            helper.posElephentOrca(sizes, sku, title, price, image)
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')

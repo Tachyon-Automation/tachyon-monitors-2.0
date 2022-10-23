@@ -1,0 +1,19 @@
+const fetch = require('node-fetch');
+const fs = require('fs');
+let site = 'https://hibbett-mobileapi.prolific.io/ecommerce/products/8P423';
+async function test() {
+    let resp = await fetch("https://ads.google.com/aw_express/management/_/rpc/UrlValidationService/ValidateReachability?authuser=0&acx-v-bv=awn_express_auto_20221017-0457_RC000&acx-v-clt=1666155164364&rpcTrackingId=UrlValidationService.ValidateReachability%3A2&f.sid=-834402505317713700", {
+         "headers": {
+           "content-type": "application/x-www-form-urlencoded",
+           "x-framework-xsrf-token": "AOfzQXdbbXHWHxBGAmhViXziZZmemK9IJg:1666155164344",
+           "cookie": "S=adwords-frontend-express=rSkfLpxNwGF3c8nzNCLaao-h_yMqDLjpIj661L99JB8; SEARCH_SAMESITE=CgQIzJYB; AEC=AakniGN_OWktawBzrt0NbyoxclN4tjqpGUHOXn69BACvJIQImXr2tOubHfM; SID=PgiKw6Yq8elMTdSokPy1STP-v6au6iWlaVgzsuzU6yndJZSMnfLDHSDqwSsQeJH-7CEpXA.; __Secure-1PSID=PgiKw6Yq8elMTdSokPy1STP-v6au6iWlaVgzsuzU6yndJZSMD02E7Wz03T3GcOk6oZQNlw.; __Secure-3PSID=PgiKw6Yq8elMTdSokPy1STP-v6au6iWlaVgzsuzU6yndJZSMyXTACHKUBS_Ym73AsBWTSw.; HSID=A52iCJnXcrXhJWRGK; SSID=AxhlUuWyQxHGfqs_q; APISID=aIbq9tQS9QM2Sarw/AXZnvjWeechWX24sM; SAPISID=G4kOqbyLaAQAnCLu/Aj8Rir2JOmweaEPql; __Secure-1PAPISID=G4kOqbyLaAQAnCLu/Aj8Rir2JOmweaEPql; __Secure-3PAPISID=G4kOqbyLaAQAnCLu/Aj8Rir2JOmweaEPql; NID=511=Mu9DmNC6mZ4QMPuDMDhg0lNTabS-J5KeJmy5WhGsJmkcC1BD9Bg6Qdrf7eye1QInvsNcFD0qR7-0vsXV6TKmDsv7PLKo49NIo4mhPLqc0R16_WpieDKTwMCZKcNGxvsh7yFvfHyYohHiFqqumEmIAWIbqYx4xqoQzTgx_dPgCvWMYomllzTPynKNYm3rCx_F5IQQLVD2L_rXztB3dmZ-eg3GHKdwGIIZ7_aBig31VznvoufxVoTBF6TxKOUWNM_9pvBP-Z0uKI1-27dBcrrIzbGNX7J56qgMKNO2UiwTGfYED6pMpyPLAVGTjQcO6V3ow-wDKVEgqA; 1P_JAR=2022-10-19-4; _gcl_au=1.1.303881298.1666155157; _gid=GA1.3.757639214.1666155157; _gat_UA-113093516-1=1; _gac_UA-113093516-1=1.1666155158.Cj0KCQjwnbmaBhD-ARIsAGTPcfUM12n0TD8aJTLVd9wVp6SbsO1qcGRZN7FbU6LmUGAEdomodMxWbH0aAphWEALw_wcB; ADS_CUSTOMER_ACCOUNT_SESSION_INFO=ScCigAoksJDxsxFQz4ZP-GxBm5_virC_X-dyl1lI4m0=authuser-0; OSID=PgiKw_2wz5NdROj1Yj2Mq_XgSvQG7orcqskvL3IEABkjxvmdy8IOavxMKS5Wv9oBRsL1zg.; __Secure-OSID=PgiKw_2wz5NdROj1Yj2Mq_XgSvQG7orcqskvL3IEABkjxvmdjR-gRJC45rwR8jIIjW5bbQ.; AdsUserLocale=en_US; adwordsReferralSource=sourceid=emp&subid=us-en-ha-awa-bk-c-000!o3~Cj0KCQjwnbmaBhD-ARIsAGTPcfUM12n0TD8aJTLVd9wVp6SbsO1qcGRZN7FbU6LmUGAEdomodMxWbH0aAphWEALw_wcB~137408560317~kwd-94527731~17414652933~614317010567_amer-ha&clickid=; _gat=1; _ga=GA1.3.2121245991.1666155157; SIDCC=AEf-XMT9F-SrvHN5an2WtaNSnwU_s43y5EoKPYWN8zI7uwyf0DgZ_tmyhng6CgSgW1HyGZO5HA; __Secure-1PSIDCC=AEf-XMRHAc3IJq8PFUtiRp8leTIcsLzw3Y266WAOjUO8kXAuGzSEDUAParkSlWLKaECicBH8s1M; __Secure-3PSIDCC=AIKkIs26-22gYUskNFBME0TiKXBApesMhkfWIU8_5psF2uW3xC3A8YvEpZufnKwhILOeMtMiBnQ; _ga_J51Y85KVRZ=GS1.1.1666155156.1.1.1666155182.0.0.0",
+         },
+         "body": `hl=en_US&__lu=326017386&__u=7023490714&__c=7695201926&f.sid=-834402505317713700&ps=aw&__ar=%7B%221%22%3A%7B%223%22%3A%7B%221%22%3A%22318945974%22%7D%7D%2C%222%22%3A%22${site}%22%2C%223%22%3A1%2C%226%22%3A%7B%221%22%3A2000%2C%222%22%3A1000%7D%7D&activityContext=RootComponent.ConstructionComponent.ConstructionComponent.UrlEditorComponent.ValidatingWebsite&requestPriority=HIGH_LATENCY_SENSITIVE&activityType=INTERACTIVE&activityId=2727404738258422&uniqueFingerprint=-834402505317713700_2727404738258422_2&previousPlace=%2Faw%2Fcampaigns%2Fnew%2Fexpress&activityName=RootComponent.ConstructionComponent.ConstructionComponent.UrlEditorComponent.ValidatingWebsite&destinationPlace=%2Faw%2Fcampaigns%2Fnew%2Fexpress`,
+         "method": "POST"
+       });
+       let body = await resp.json();
+       let parse = await body["5"][0]['1'].toString();
+       fs.writeFileSync('./test.txt', await parse)
+       //console.log(parse)
+ }
+ test()
