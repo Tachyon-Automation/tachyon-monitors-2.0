@@ -69,7 +69,7 @@ async function monitor(sku) {
             for (let variant of variants) {
                 if(variant.selectable != true)
                 continue
-                sizes += `[${variant.displayValue}](https://www.snipesusa.com/tachyon-${sku}.html?size=${variant.displayValue})\n`
+                sizes += `[${variant.displayValue}](https://www.snipesusa.com/${sku}.html?size=${variant.displayValue})\n`
                 count++
                 sizeList.push(variant.displayValue);
                 if (!oldSizeList.includes(variant.displayValue))
