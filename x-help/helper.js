@@ -119,6 +119,7 @@ const helper = {
         }
     },
     posElephentOrca: async function (sizes, sku, title, price, image) {
+        await sleep(300)
         const options = {
             method: 'POST',
             url: 'http://51.81.82.199:5000/sendRestock',
@@ -139,7 +140,6 @@ const helper = {
             console.log(e)
         }
     },
-
     posElephentHibbett: async function (sku, title, image) {
         const options = {
             method: 'POST',
@@ -393,5 +393,8 @@ async function getBodyAsText(response, ms = 1000) {
         response.text(),
         timeout
     ])
+}
+async function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 module.exports = helper
