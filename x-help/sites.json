@@ -113,6 +113,12 @@
         "TACHYONCLIENT",
         "ELEPHANTAIO"
     ],
+    "SNIPESUSA": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "ELEPHANTAIO",
+        "HELIXFLIPS"
+    ],
     "SNIPESUSA2": [
         "TACHYON",
         "TACHYONCLIENT",
