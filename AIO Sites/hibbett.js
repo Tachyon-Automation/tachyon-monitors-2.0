@@ -40,9 +40,10 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://hibbett.com/product;.js?pid=${sku}&dwvar_${sku}&format=Ajax&abcz=${v4()}`//request url
+        let req = `https://hibbett.com/product;.js?pid=${sku}&dwvar_${sku}&format=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        let root = HTMLParser.parse(await set.text) 
+        //console.log(set.response.status)
+        let root = HTMLParser.parse(await set.text)
         if (set.response.status == 410) {
             console.log('Removed - ' + sku)
             return
@@ -82,6 +83,7 @@ async function monitor(sku) {
                 let qt = 'Na'
                 let links = 'Na'
                 //helper.posElephentHibbett(sku, title, image)
+                console.log(url, title, sku, price, image, stock)
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
@@ -96,7 +98,11 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        if(e.message.includes('Cannot read')){
+            monitor(sku)
+            return
+        }
+        console.log(e)
         monitor(sku)
         return
     }
