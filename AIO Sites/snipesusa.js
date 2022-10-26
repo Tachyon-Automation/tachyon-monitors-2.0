@@ -53,12 +53,22 @@ async function monitor(sku) {
         }
 
         //Define body variables
-        if (body[0].details.name) {
+        if(body.product.releaseDate.productDateRelease) {
+            let event = Date.parse(new Date(Date.now()).toISOString())
+            let event1 = Date.parse(new Date(body.product.releaseDate.productDateRelease).toISOString())
+            if (event1 > event) {
+                //console.log('Not released yet')
+                await helper.sleep(2000);
+                monitor(sku)
+                return
+            }
+        }
+        if (body.product.productName) {
             let inStock = false
             let url = `https://www.snipesusa.com/${sku}.html#Tachyon`//product url
             let title = body.product.productName
             let price = body.product.price.sales.formatted
-            let image =  body.product.images.zoom[0].url
+            let image =  'https://imageresize.24i.com/?w=300&url=' + body.product.images.zoom[0].url
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -70,7 +80,7 @@ async function monitor(sku) {
                 if(variant.selectable != true)
                 continue
                 sizes += `[${variant.displayValue}](https://www.snipesusa.com/${sku}.html?size=${variant.displayValue})\n`
-                count++
+                stock++
                 sizeList.push(variant.displayValue);
                 if (!oldSizeList.includes(variant.displayValue))
                     inStock = true;

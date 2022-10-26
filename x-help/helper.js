@@ -233,12 +233,11 @@ const helper = {
                         "text": `${version} | by Tachyon`,
                         "icon_url": group.image
                     },
-                    "timestamp": new Date().toISOString()
                 }
             ]
         }
         try {
-            let response = fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
