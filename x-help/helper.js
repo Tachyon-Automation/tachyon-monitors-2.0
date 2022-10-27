@@ -233,6 +233,7 @@ const helper = {
                         "text": `${version} | by Tachyon`,
                         "icon_url": group.image
                     },
+                    "timestamp": new Date().toISOString()
                 }
             ]
         }
@@ -299,9 +300,10 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | by Tachyon`,
+                        "text": `${version} | by Tachyon `,
                         "icon_url": group.image
                     },
+                    "timestamp": new Date().toISOString()
                 }
             ]
         }
