@@ -34,12 +34,12 @@ async function monitor(sku) {
             return;
         let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
         let headers = {
-            'cookie': v4(),
             'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
         }
         let method = 'GET'; //request method
-        let req = `https://www-sneakersnstuff-com.translate.goog/en/product/${sku}?cache=${v4()}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://www-sneakersnstuff-com.translate.goog/en/product/${sku}?_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
@@ -71,7 +71,12 @@ async function monitor(sku) {
             let sizeList = []
             let variants = root.querySelector('#product-size').querySelectorAll('option')
             let stock = 0
+            if(!root.querySelector('#product-size').textContent.includes('US')) {
+                monitor(sku)
+                return
+            }
             for (let variant of variants) {
+                console.log(variant.textContent)
                 if(variant.attributes.value.length == 0)
                 continue
                 sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`
