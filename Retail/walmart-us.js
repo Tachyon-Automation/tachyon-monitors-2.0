@@ -46,7 +46,7 @@ async function monitor(sku) {
         //console.log(set.response.status)
         let parse = set.text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
         body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
-        let status = product.sizes
+        let status = PRODUCTS[sku].sizes
         if (set.response.status == 404) {
             console.log('Removed - ' + sku)
             await helper.sleep(product.waittime);

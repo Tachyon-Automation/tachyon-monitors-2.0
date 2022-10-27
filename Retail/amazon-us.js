@@ -38,7 +38,7 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
         }
         let method = 'GET'; //request method
-        let req = `https://www-amazon-com.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://www.amazon.com/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
         //console.log(set.response.status)
         if (set.response.status != 200) {
@@ -46,7 +46,7 @@ async function monitor(sku) {
             return
         } //request function
         let root = HTMLParser.parse(await set.text)
-        let status = product.sizes
+        let status = PRODUCTS[sku].sizes
         if (root.querySelector('.a-price .a-offscreen')) {
             if (root.querySelector('.a-button-inner input[class="a-button-input"]').attributes['aria-label'].includes('Amazon.com')) {
                 let url = `https://www.amazon.com/dp/${sku}#Tachyon`

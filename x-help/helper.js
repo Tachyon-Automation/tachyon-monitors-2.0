@@ -48,7 +48,7 @@ const helper = {
     requestJson: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            const timeoutId = setTimeout(() => controller.abort(), 3000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             let json = await response.json()
             clearTimeout(timeoutId)
@@ -284,6 +284,71 @@ const helper = {
                             "name": "**Offer ID**",
                             "value": '```' + offerid + '```',
                             "inline": false
+                        },
+                        {
+                            "name": "**Links**",
+                            "value": links,
+                            "inline": true
+                        },
+                        {
+                            "name": "**QT**",
+                            "value": qt,
+                            "inline": true
+                        },
+                    ],
+                    "thumbnail": {
+                        "url": image
+                    },
+                    "footer": {
+                        "text": `${version} | by Tachyon `,
+                        "icon_url": group.image
+                    },
+                    "timestamp": new Date().toISOString()
+                }
+            ]
+        }
+        try {
+            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
+    postRetail: async function (url, title, sku, price, image, stock, group, site, version, qt, links) {
+        let color = hexToDecimal(group.color)
+        let uri = url.split('/')[2]
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": group.name,
+            "avatar_url": group.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": `https://${uri}`,
+                        "url": `https://${uri}`,
+                    },
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "fields": [
+                        {
+                            "name": "**Stock**",
+                            "value": stock + "+",
+                            "inline": true
+                        },
+                        {
+                            "name": "**Price**",
+                            "value": price,
+                            "inline": true
+                        },
+                        {
+                            "name": "**PID**",
+                            "value": sku,
+                            "inline": true
                         },
                         {
                             "name": "**Links**",
