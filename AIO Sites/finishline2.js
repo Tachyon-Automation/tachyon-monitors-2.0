@@ -34,7 +34,9 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)',
-            'welove': 'maltliquor'
+            'welove': 'maltliquor',
+            'X-Forwarded-For': v4(),
+
         }
         let method = 'GET'; //request method
         let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url

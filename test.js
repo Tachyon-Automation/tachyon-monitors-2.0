@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-let site = 'https://hibbett-mobileapi.prolific.io/ecommerce/products/8P423';
+let site = 'https://www.solebox.com/dw/shop/v19_5/products/(02109112)?client_id=37e982e8-005d-43e8-8c71-41c659b38a8c&c_app=true&locale=de-DE&expand=images,prices,availability,variations';
 async function test() {
     let resp = await fetch("https://ads.google.com/aw_express/management/_/rpc/UrlValidationService/ValidateReachability?authuser=0&acx-v-bv=awn_express_auto_20221017-0457_RC000&acx-v-clt=1666155164364&rpcTrackingId=UrlValidationService.ValidateReachability%3A2&f.sid=-834402505317713700", {
          "headers": {
