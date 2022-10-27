@@ -147,5 +147,8 @@
         "TACHYON",
         "TACHYONCLIENT",
         "SUPPLYFRANCE"
+    ],
+    "AMAZONUS": [
+        "TACHYON"
     ]
 }

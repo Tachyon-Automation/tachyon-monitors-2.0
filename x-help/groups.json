@@ -21,7 +21,9 @@
         "SOLEBOX": "https://discordapp.com/api/webhooks/811107530180526100/5eUXKvh-2ilOa7mqWe_oBZzax3M9V1xXNP_zhUxMWQyhOgqaxFO60tv9E35Ywm7qwb0f",
         "SNIPESEU": "https://discordapp.com/api/webhooks/850687456487538718/c_0X5wnAEE9CJW3tiuFso7hAauaH7GQ80dcrfyHq-SmPExSduRdqM44vsM05i2Ao6PlD",
         "SNIPESEU2": "https://discordapp.com/api/webhooks/1031268242129436745/ey-pZnWy3CxKCmHbIofieedZlCs1q-sVDGmYBwqlwDdqVIDzkKDmvghH0Z38_TRCCbgs",
+        "AMAZONUS": "https://discordapp.com/api/webhooks/834709291092541470/EJBiPU4ySE94GAB5o-mGG2SYits3ZmniEW7t0GTkkt9YriUz-lqLtaSNelRu0Q0SXctO",
         "ASOS": "https://discordapp.com/api/webhooks/861772562082299906/5FQZam_xUNYQXSpRstkRrvH6ps-dsW5pfvqGE_DXUnoewGh-acOE1Rt9JzXovXJOBGMd"
+
     },
     "TACHYONCLIENT": {
         "name": "Tachyon Monitors",
