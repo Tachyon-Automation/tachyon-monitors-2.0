@@ -8,7 +8,7 @@ module.exports = {
             "out_file": "/dev/null"
         },
         {
-            "script": "./Retail/walamart-us.js",
+            "script": "./Retail/walmart-us.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
