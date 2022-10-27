@@ -42,7 +42,7 @@ async function monitor(sku) {
         let req = `https://www.snipes.com/s/snse-DE-AT/dw/shop/v19_5/products/(${sku})?client_id=cf212f59-94d1-4314-996f-7a11871156f4&cache=${v4()}&locale=de-DE&expand=availability,+prices,+promotions,+variations`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
