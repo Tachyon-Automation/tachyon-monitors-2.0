@@ -41,7 +41,7 @@ async function monitor(sku) {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://www.walmart.com/ip/tachyon/${sku}/.js`//request url
+        let req = `https://www.walmart.com/ip/tachyon/${sku}/.js?cache=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
         //console.log(set.response.status)
         let parse = set.text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
