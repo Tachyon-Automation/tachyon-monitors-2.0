@@ -31,10 +31,13 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',        }
+            'User-Agent': randomUseragent.getRandom(),
+            'cookie': v4(),
+
+        }
         let method = 'GET'; //request method
         let req = `https://www.snipes.com/s/snse-DE-AT/dw/shop/v19_5/products/(${sku})?client_id=cf212f59-94d1-4314-996f-7a11871156f4&cache=${v4()}&locale=de-DE&expand=availability,+prices,+promotions,+variations`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function

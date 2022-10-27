@@ -35,7 +35,7 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
-            'x-px-authorization': `3:${v4()}`,
+            'x-px-authorization': `2:${v4()}`,
             'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
