@@ -12,6 +12,7 @@
     "abort-controller": "^3.0.0",
     "discord": "^0.8.2",
     "discord.js": "^12.5.1",
+    "got": "^11.8.1",
     "https-proxy-agent": "^5.0.1",
     "latest": "^0.2.0",
     "n": "^9.0.0",

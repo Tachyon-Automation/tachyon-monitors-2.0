@@ -81,7 +81,7 @@ async function monitor(sku) {
             }
         }
         await helper.sleep(product.waittime);
-        monitor(sku);
+        await monitor(sku);
         return
     } catch (e) {
         //console.log(e)
