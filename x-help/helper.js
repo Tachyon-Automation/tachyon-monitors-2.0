@@ -91,7 +91,7 @@ const helper = {
             const timeoutId = setTimeout(() => controller.abort(), 3000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             let text = await getBodyAsText(await response)
-            let html = HTMLParser.parse(await set.text)
+            let html = await HTMLParser.parse(await set.text)
             clearTimeout(timeoutId)
             return { html, response, text}
         } catch (e) {
