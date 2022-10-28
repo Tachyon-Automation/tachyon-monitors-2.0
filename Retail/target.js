@@ -60,7 +60,7 @@ async function monitor(sku) {
                         return
                     }
                     let body2 = await set.json
-                    let title = body2.data.product.item.product_description.title;
+                    let title = body2.data.product.item.product_description.title.split('&#38;').join('&').split('&#8482;').join('™').split('&#8211;').join('-')
                     let image = body2.data.product.item.enrichment.images.primary_image_url || 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg';
                     let price = body2.data.product.price.formatted_current_price;
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
