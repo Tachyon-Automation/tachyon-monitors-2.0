@@ -8,9 +8,9 @@ const fs = require('fs');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '810935871712788501' //channel id
-const site = 'Gamestop US'; //site name
-const version = `Target v1.0` //Site version
+const CHANNEL = '810936162410692659' //channel id
+const site = 'GAMESTOPUS'; //site name
+const version = `Gamestop US v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -33,49 +33,53 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy() //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
+            'User-Agent': 'GameStop_iOS/500.2.0 (iOS 15.4.1)',
         }
         let method = 'GET'; //request method
-        let req = `http://redsky.target.com/redsky_aggregations/v1/web_platform/product_fulfillment_v1?key=9f36aeafbe60771e321a7cc95a78140772ab3e96&tcin=${sku}&store_id=3259&scheduled_delivery_store_id=1154&required_store_id=3259&has_required_store_id=true`//request url
+        let req = `https://api.gamestop.com/api/v2/products?productIds=${sku}&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         }
         let body = await set.json //request function
+        if(!body.productResponses.length > 0) {
+            console.log(sku)
+            await helper.sleep(product.waittime);
+            return
+        }
         let status = PRODUCTS[sku].sizes
-            if (body.data.product.fulfillment.shipping_options.availability_status === 'IN_STOCK') {
-                let url = `https://www.target.com/p/tachyon/-/A-${sku}#Tachyon`
-                let stock = body.data.product.fulfillment.shipping_options.available_to_promise_quantity
-                if (status !== "In-Stock") {
-                    let qt = 'NA'
-                    let links = `[ATC](https://www.target.com/s?searchTerm=${sku}#Tachyon)`
-                    let req = `http://redsky.target.com/redsky_aggregations/v1/web/pdp_client_v1?key=ff457966e64d5e877fdbad070f276d18ecec4a01&tcin=${sku}&store_id=3254&has_store_id=false&pricing_store_id=3254&has_pricing_store_id=true&scheduled_delivery_store_id=none&has_scheduled_delivery_store_id=false&has_financing_options=false&&has_size_context=true&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
-                    let set = await helper.requestJson(req, method, proxy, headers) //request function
-                    if (set.response.status != 200) {
-                        monitor(sku);
-                        return
-                    }
-                    let body2 = await set.json
-                    let title = body2.data.product.item.product_description.title;
-                    let image = body2.data.product.item.enrichment.images.primary_image_url || 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg';
-                    let price = body2.data.product.price.formatted_current_price;
-                    console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                    for (let group of sites[site]) {
-                        await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
-                    }
-                    PRODUCTS[sku].sizes = 'In-Stock'
-                    await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
+        let variants = body.productResponses[0].variants
+        let stockStatus
+        for (let variant of variants) {
+            if (variant.productId == sku)
+            stockStatus = variant.available
+        }
+        if (stockStatus) {
+            let url = `https://www.gamestop.com/${sku}.html#Tachyon`
+            let stock = '1'
+            let title = body.productResponses[0].title
+            let price = body.productResponses[0].productPrice.basePriceValue.price.toString()
+            let image = body.productResponses[0].productImages[0].url
+            if (status !== "In-Stock") {
+                let qt = 'NA'
+                let links = `[ATC](https://www.gamestop.com/search/?sort=BestMatch_Desc&q=${sku}&p=1#Tachyon)`
+                console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
+                for (let group of sites[site]) {
+                    await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
                 }
-            } else {
-                if (status !== "Out-of-Stock") {
-                    PRODUCTS[sku].sizes = 'Out-of-Stock'
-                    await database.query(`update ${table} set sizes='Out-of-Stock' where sku='${sku}'`)
-                }
+                PRODUCTS[sku].sizes = 'In-Stock'
+                await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
             }
+        } else {
+            if (status !== "Out-of-Stock") {
+                PRODUCTS[sku].sizes = 'Out-of-Stock'
+                await database.query(`update ${table} set sizes='Out-of-Stock' where sku='${sku}'`)
+            }
+        }
         await helper.sleep(product.waittime);
         monitor(sku);
         return

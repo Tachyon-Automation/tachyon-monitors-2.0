@@ -156,5 +156,8 @@
     ],
     "TARGET": [
         "TACHYON"
+    ],
+    "GAMESTOPUS": [
+        "TACHYON"
     ]
 }
