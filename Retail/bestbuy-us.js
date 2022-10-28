@@ -40,7 +40,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www-bestbuy-com.translate.goog/api/3.0/priceBlocks?skus=${sku}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return

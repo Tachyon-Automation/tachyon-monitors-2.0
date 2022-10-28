@@ -40,12 +40,12 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www-amazon-com.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         } //request function
-        let root = await set.html
+        let root = set.html
         let status = PRODUCTS[sku].sizes
         if (root.querySelector('.a-price .a-offscreen')) {
             if (root.querySelector('.a-button-inner input[class="a-button-input"]').attributes['aria-label'].includes('Amazon.com')) {

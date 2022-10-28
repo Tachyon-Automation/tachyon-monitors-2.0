@@ -45,7 +45,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let root = HTMLParser.parse(await set.text)
+        let root = set.html
         let status = PRODUCTS[sku].sizes
         if (root.querySelector('#hidden-product-name')) {
             if (root.querySelector('.in-stock-msg') && !root.querySelector('img#sold-out-image')) {

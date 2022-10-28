@@ -44,7 +44,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let root = await set.html
+        let root = set.html
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
             //console.log('OOS!')
             await helper.sleep(1000);
