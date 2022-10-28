@@ -88,7 +88,7 @@ const helper = {
     requestHtml: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            const timeoutId = setTimeout(() => controller.abort(), 3000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             let text = await getBodyAsText(await response)
             clearTimeout(timeoutId)

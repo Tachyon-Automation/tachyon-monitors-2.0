@@ -35,7 +35,7 @@ async function monitor(sku) {
             return;
         let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
+            //'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         let method = 'GET'; //request method
         let req = `https://www-amazon-com.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
@@ -53,7 +53,7 @@ async function monitor(sku) {
                 let title = root.querySelector('#aod-asin-block-asin').textContent.trim().split('\n')[0]
                 let price = root.querySelector('.a-price .a-offscreen').textContent
                 let image = root.querySelector('#aod-asin-image-id').attributes.src
-                let parse = set.text.split('data-aw-aod-cart-api="')[1].split('">')[0].replaceAll('&quot;', '"')
+                let parse = root.querySelector('.a-fixed-right-grid-col.aod-atc-column.a-col-right .a-declarative').attributes['data-aod-atc-action']
                 let stock = '1'
                 parse = JSON.parse(parse)
                 let offerid = parse.oid
