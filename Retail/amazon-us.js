@@ -35,10 +35,10 @@ async function monitor(sku) {
             return;
         let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
+            'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         let method = 'GET'; //request method
-        let req = `https://www.amazon.com/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}`//request url
+        let req = `https://www-amazon-com.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
         //console.log(set.response.status)
         if (set.response.status != 200) {
