@@ -33,7 +33,7 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)',
+            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)${v4()}`,
             'welove': 'maltliquor',
             'X-Forwarded-For': v4(),
 
