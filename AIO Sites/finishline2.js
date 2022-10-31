@@ -33,17 +33,12 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)${v4()}`,
+            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)`,
             'welove': 'maltliquor',
-            'X-Forwarded-For': v4(),
-
+            'cookie': `_abck=${v4()}`
         }
         let method = 'GET'; //request method
-        let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
-        var randomBoolean = Math.random() < 0.5
-        if(randomBoolean) {
-            req = req + "/"
-        }
+        let req = `http://prodmobloy2.finishline.com/api/products/${sku}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         //console.log(set.response.status)
         let body = await set.json
