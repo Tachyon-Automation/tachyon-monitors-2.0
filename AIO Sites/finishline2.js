@@ -77,7 +77,8 @@ async function monitor(sku) {
                 styleID = product.styleId
                 colorID = product.colorId
                 colorDescription = product.colorDescription
-                title = title + ' ' + product.colorDescription
+                title = body.displayName + ' ' + product.colorDescription
+                stock = 0
                 price = product.salePriceCents/100
                 image = product.images[0].thumbnailUrl.replace('?$Thumbnail$', '')
                 url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`//product url
@@ -103,7 +104,6 @@ async function monitor(sku) {
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
                 sizes = []
                 stock = 0
-                title = body.displayName
             }
         }
         }
