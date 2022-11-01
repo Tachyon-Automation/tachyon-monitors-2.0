@@ -41,7 +41,7 @@ async function monitor(sku) {
         let method2 = 'POST'; //request method
         let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
         let set2 = await helper.requestJson(req, method2, proxy, headers)
-        if (set2.response.status != 200) {
+        if (set2.response.status != 405) {
             monitor(sku)
             return
         }
