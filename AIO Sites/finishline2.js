@@ -38,7 +38,13 @@ async function monitor(sku) {
             'cookie': `_abck=${v4()}`
         }
         let method = 'GET'; //request method
-        let req = `http://prodmobloy2.finishline.com/api/products/${sku}`//request url
+        let method2 = 'POST'; //request method
+        let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
+        let set2 = await helper.requestJson(req, method2, proxy, headers)
+        if (set2.response.status != 405) {
+            monitor(sku)
+            return
+        }
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         //console.log(set.response.status)
         let body = await set.json
@@ -74,6 +80,7 @@ async function monitor(sku) {
                 colorDescription = product.colorDescription
                 title = body.displayName + ' ' + product.colorDescription
                 stock = 0
+                sizes = []
                 price = product.salePriceCents/100
                 image = product.images[0].thumbnailUrl.replace('?$Thumbnail$', '')
                 url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`//product url
@@ -97,8 +104,6 @@ async function monitor(sku) {
                     await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
-                sizes = []
-                stock = 0
             }
         }
         }
