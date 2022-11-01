@@ -3,6 +3,7 @@ const crypto = require('crypto')
 const fetch = require('node-fetch');
 const AbortController = require('abort-controller')
 const HTTPSProxyAgent = require('https-proxy-agent')
+const HTMLParser = require('node-html-parser');
 const request = require('request-promise');
 const discordBot = require('./discord')
 const Discord = require('discord.js');
@@ -91,10 +92,11 @@ const helper = {
             const timeoutId = setTimeout(() => controller.abort(), 3000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
             let text = await getBodyAsText(await response)
+            let html = HTMLParser.parse(await text)
             clearTimeout(timeoutId)
-            return { text, response }
+            return { html, response, text}
         } catch (e) {
-            //console.log(e)
+            console.log(e)
         }
         return
     },

@@ -149,24 +149,31 @@
         "SUPPLYFRANCE"
     ],
     "AMAZONUS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "WALMARTUS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "TARGET": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "GAMESTOPUS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "USMINT": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "SAMSCLUB": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "BESTBUYUS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ]
 }

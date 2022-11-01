@@ -45,7 +45,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let root = HTMLParser.parse(await set.text)
+        let root = set.html
         let status = PRODUCTS[sku].sizes
         if (root.querySelector('.a-price .a-offscreen')) {
             if (root.querySelector('.a-button-inner input[class="a-button-input"]').attributes['aria-label'].includes('Amazon.com')) {
@@ -78,7 +78,7 @@ async function monitor(sku) {
         await monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         monitor(sku)
         return
     }

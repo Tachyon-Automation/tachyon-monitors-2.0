@@ -33,18 +33,13 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)',
+            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)`,
             'welove': 'maltliquor',
-            'X-Forwarded-For': v4(),
-
+            'cookie': `_abck=${v4()}`
         }
         let method = 'GET'; //request method
         let method2 = 'POST'; //request method
         let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
-        var randomBoolean = Math.random() < 0.5
-        if(randomBoolean) {
-            req = req + "/"
-        }
         let set2 = await helper.requestJson(req, method2, proxy, headers)
         if (set2.response.status != 200) {
             monitor(sku)
@@ -83,7 +78,9 @@ async function monitor(sku) {
                 styleID = product.styleId
                 colorID = product.colorId
                 colorDescription = product.colorDescription
-                title = title + ' ' + product.colorDescription
+                title = body.displayName + ' ' + product.colorDescription
+                stock = 0
+                sizes = []
                 price = product.salePriceCents/100
                 image = product.images[0].thumbnailUrl.replace('?$Thumbnail$', '')
                 url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`//product url
@@ -107,9 +104,6 @@ async function monitor(sku) {
                     await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
-                sizes = []
-                stock = 0
-                title = body.displayName
             }
         }
         }
