@@ -39,10 +39,16 @@ async function monitor(sku) {
 
         }
         let method = 'GET'; //request method
+        let method2 = 'POST'; //request method
         let req = `https://prodmobloy2.finishline.com/api/products/${sku}`//request url
         var randomBoolean = Math.random() < 0.5
         if(randomBoolean) {
             req = req + "/"
+        }
+        let set2 = await helper.requestJson(req, method2, proxy, headers)
+        if (set2.response.status != 200) {
+            monitor(sku)
+            return
         }
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         //console.log(set.response.status)
