@@ -30,10 +30,10 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)`,
+            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)${v4()}`,
             'welove': 'maltliquor',
             'cookie': `_abck=${v4()}`
         }
