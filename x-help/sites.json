@@ -148,6 +148,9 @@
         "TACHYONCLIENT",
         "SUPPLYFRANCE"
     ],
+    "OFFSPRING": [
+        "TACHYON"
+    ],
     "AMAZONUS": [
         "TACHYON",
         "TACHYONCLIENT"

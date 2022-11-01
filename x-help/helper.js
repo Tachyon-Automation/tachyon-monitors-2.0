@@ -96,7 +96,7 @@ const helper = {
             clearTimeout(timeoutId)
             return { html, response, text}
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         return
     },
