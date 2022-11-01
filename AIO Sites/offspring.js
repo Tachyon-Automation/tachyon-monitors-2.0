@@ -45,11 +45,11 @@ async function monitor(sku) {
             return
         }
         let root = set.html
-        if(root.querySelector('.product-launch.js-productLaunchBlock.hidden')) {
+        /* if(root.querySelector('.product-launch.js-productLaunchBlock.hidden')) {
             await helper.sleep(product.waittime);
             monitor(sku)
             return 
-        }
+        } */
         let url = `https://www.offspring.co.uk/view/product/offspring_catalog/2,20/${sku}#Tachyon`//product url
         let title = root.querySelector('.product__name').textContent.trim().split('&#39;').join("'").split('&quot;').join('"') + ' ' + root.querySelector('.product__variant').textContent.trim().split('&#39;').join("'").split('&quot;').join('"')
         let price = root.querySelector('.price__price.js-price').textContent.trim().replace('&euro; ', '€')
