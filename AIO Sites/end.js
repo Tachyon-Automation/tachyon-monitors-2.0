@@ -42,7 +42,7 @@ async function monitor(sku) {
         let body = await JSON.parse(set.resp.split('<script id="__NEXT_DATA__" type="application/json">')[1].split('</script>')[0])
         //Custom error handling
         if (set.response.status == 404) {
-            console.log('Removed - ' + sku)
+            monitor(sku)
             return
         }
         if (set.response.status != 200) {
@@ -55,8 +55,7 @@ async function monitor(sku) {
             let url = `https://www.endclothing.com/us/${sku}`//product url
             let title = body.props.initialProps.pageProps.product.name
             let price = '$' + body.props.initialProps.pageProps.product.price
-            let image = 'https://play-lh.googleusercontent.com/OuZqDwJcoCna3sbEjlV58dwBxk2bFYdgwRqe3xOphhAm5RymSSfud3qNSy4pSaRYB9M'
-            try { image = body.props.initialProps.pageProps.product.media_gallery_entries[0].file } catch (e) { } //try set image
+            let image = image = body.props.initialProps.pageProps.product.media_gallery_entries[0].file
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -89,11 +88,11 @@ async function monitor(sku) {
             }
         }
         await helper.sleep(product.waittime);
-        monitor(sku);
+        await monitor(sku);
         return
     } catch (e) {
         //console.log(e)
-        await monitor(sku)
+        monitor(sku)
         return
     }
 }
