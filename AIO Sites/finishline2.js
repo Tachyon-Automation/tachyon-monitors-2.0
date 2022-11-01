@@ -33,9 +33,8 @@ async function monitor(sku) {
         let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)${v4()}`,
+            'User-Agent': `Finish Line/2.7.3  (Android 2.7.3; Build/2.7.3)`,
             'welove': 'maltliquor',
-            'cookie': `_abck=${v4()}`
         }
         let method = 'GET'; //request method
         let method2 = 'POST'; //request method
@@ -46,7 +45,7 @@ async function monitor(sku) {
             return
         }
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         //Custom error handling
         if (body.statusCode == 499) {
