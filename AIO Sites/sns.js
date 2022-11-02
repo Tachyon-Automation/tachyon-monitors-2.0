@@ -46,7 +46,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let root = set.html
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
             //console.log('OOS!')
