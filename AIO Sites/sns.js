@@ -65,7 +65,7 @@ async function monitor(sku) {
             let price = root.querySelector('.price__current').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
             try { image = 'https://www.sneakersnstuff.com' + root.querySelector('.embed-responsive img').attributes.src } catch (e) {}
-            let url = `https://www.sneakersnstuff.com/en/product/${sku}#Tachyon`
+            let url = `https://www.sneakersnstuff.com/en/product/${sku}`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let newsku = sku.split('/')[0]
