@@ -33,14 +33,14 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
             'User-Agent': 'GameStop_iOS/500.2.0 (iOS 15.4.1)',
         }
         let method = 'GET'; //request method
         let req = `https://api.gamestop.com/api/v2/products?productIds=${sku}&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
