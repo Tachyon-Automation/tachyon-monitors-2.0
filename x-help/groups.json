@@ -28,6 +28,7 @@
         "USMINT": "https://discordapp.com/api/webhooks/814558069538422815/tv_WYxqQBsEEt6Dpf8dKek7zLjI6DmkO0D0f4af6Lns7YI7F7c_5N74SS0seX_guXRAq",
         "SAMSCLUB": "https://discordapp.com/api/webhooks/845136149092630558/WM7DpGXMGnvmuWFWDelvKOjpSlRSNotHLrbJ-xGb5osgx-0asLYFpptuDaIO7Ucq_Htm",
         "BESTBUYUS": "https://discordapp.com/api/webhooks/811814231712202774/DO4E-Bcj98VsRUG0Lp5AFMBwzMfJYT-pGInzEMulwQde6P-_CV1LA50Z_LvuKx91kmUG",
+        "BESTBUYCA": "https://discordapp.com/api/webhooks/873302731694157835/GYMA5qlPEeixCQDz6YbUHDsemco0D9rTP9xguB6ScFvkN6TUt-wZJit32teUB8nwWyL2",
         "ASOS": "https://discordapp.com/api/webhooks/861772562082299906/5FQZam_xUNYQXSpRstkRrvH6ps-dsW5pfvqGE_DXUnoewGh-acOE1Rt9JzXovXJOBGMd",
         "NEWBALANCE": "https://discord.com/api/webhooks/914671910405677126/NrIK5yLzHQQ7DMc6TNPdx_zkhBedepoYNI0Bn86el8tciZoDG7o5pifTmO2acZ1igdCG",
         "OFFSPRING": "https://discordapp.com/api/webhooks/810722379230871552/eWNoBGAx6KZJgL9SqKXbSwLmroOgQSQyjY_Qb6JL8aJ8-gQ2_jnM1E0OAZW2HEpm0bdA"
@@ -228,6 +229,5 @@
         "ASOS": "https://discordapp.com/api/webhooks/1037238885488533527/G1KeSi2GvoWF7EBklswAqxEcFju7sCAf1fHsUAB0XWnas6O8lE9OxMlPfqi9M76fkm10",
         "NEWBALANCE": "https://discordapp.com/api/webhooks/1037238922973028362/vgIlL6JNDKJ9tdKBs3XVt6mFYh3iahh6Pgfj19Okd-auR_rIjO_akJtJQ877Me2PEXj5",
         "OFFSPRING": "https://discordapp.com/api/webhooks/1037238961879404564/vWKcgL5NZ_Ll_1ac5WC8n9lzedmjdyRuvLLDvlADkx6ra6v8z6Gj0oHtlTpucPmhRD8x"
-
     }
 }

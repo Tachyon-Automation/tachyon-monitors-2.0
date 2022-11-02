@@ -202,5 +202,8 @@
         "TACHYON",
         "TACHYONCLIENT",
         "COLLECTIVE"
+    ],
+    "BESTBUYCA": [
+        "TACHYON"
     ]
 }
