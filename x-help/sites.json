@@ -201,12 +201,18 @@
         "TACHYONCLIENT",
         "COLLECTIVE"
     ],
+    "BJS": [
+        "TACHYON"
+    ],
     "BESTBUYUS": [
         "TACHYON",
         "TACHYONCLIENT",
         "COLLECTIVE"
     ],
     "BESTBUYCA": [
+        "TACHYON"
+    ],
+    "TOYSRUSCA": [
         "TACHYON"
     ]
 }

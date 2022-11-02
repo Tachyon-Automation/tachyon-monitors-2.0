@@ -8,9 +8,9 @@ const fs = require('fs');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '881045892591939624' //channel id
-const site = 'BJS'; //site name
-const version = `BJS v1.0` //Site version
+const CHANNEL = '810945522176753664' //channel id
+const site = 'TOYSRUSCA'; //site name
+const version = `Toysrus CA v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -35,33 +35,24 @@ async function monitor(sku) {
             return;
         let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
-            'origin': 'https://www.bjs.com',
-            'pragma': 'no - cache',
-            'referer': 'https://www.bjs.com/',
-            'sec-ch-ua': '" Not A;Brand"; v="99", "Chromium"; v="96", "Google Chrome"; v="96"',
-            'sec-ch-ua-mobile': '?0',
-            'sec-ch-ua-platform': "Windows",
-            'sec-fetch-dest': 'empty',
-            'sec-fetch-mode': 'cors',
-            'sec-fetch-site': 'same-site',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://api.bjs.com/digital/live/api/v1.2/pdp/10201?productId=${sku}&pageName=PDP&abcz=${v4()}`//request url
+        let req = `https://www.toysrus.ca/en/product-variation?pid=${sku}&quantity=1&mobile=true&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         }
         let body = await set.json //request function
         let status = PRODUCTS[sku].sizes
-        if (body.bjsItemsInventory[0].availInventory === true) {
-            let url = `https://www.bjs.com/product/tachyon/${sku}#Tachyon`
-            let title = body.entitledItems[0].description.name
-            let price = body.maxItemPrice
-            let image = body.productImages.thumbNailImage
-            let stock = body.entitledItems[0].description.available
+        if (body.product.availability.ats > 0) {
+            let url = `https://www.toysrus.ca/en/tachyon/${sku}.html#Tachyon`
+            let title = body.product.productName
+            let price = body.product.price.sales.formatted
+            let image = body.product.images.large[0].url
+            let stock = body.product.availability.ats
             if (status !== "In-Stock") {
                 let qt = 'NA'
                 let links = `[ATC](https://www.samsclub.com/p/tachyon/${sku}#Tachyon)`
