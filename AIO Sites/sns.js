@@ -30,23 +30,23 @@ async function startMonitoring() {
 async function monitor(sku) {
     try {
         let product = PRODUCTS[sku]
-        let agent = randomUseragent.getRandom()
         //console.log(agent)
         if (!product)
             return;
         let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': agent,
+            'user-agent': 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)',
+            'X-Forwarded-For': '35.237.4.214'
         }
 
         let method = 'GET'; //request method
-        let req = `https://sneakersnstuff-com.translate.goog/en/product/55628/new-balance-2002r?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://www.sneakersnstuff.com/en/product/${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
-        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         } //request function
+        console.log(set.response.status)
         let root = set.html
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
             //console.log('OOS!')
@@ -79,7 +79,6 @@ async function monitor(sku) {
                 return
             }
             for (let variant of variants) {
-                console.log(variant.textContent)
                 if(variant.attributes.value.length == 0)
                 continue
                 sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`
