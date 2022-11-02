@@ -30,16 +30,19 @@ async function startMonitoring() {
 async function monitor(sku) {
     try {
         let product = PRODUCTS[sku]
+        let agent = randomUseragent.getRandom()
+        //console.log(agent)
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
+            'user-agent': agent,
         }
+
         let method = 'GET'; //request method
-        let req = `https://www-sneakersnstuff-com.translate.goog/en/product/${sku}?_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://sneakersnstuff-com.translate.goog/en/product/55628/new-balance-2002r?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
