@@ -50,8 +50,7 @@ async function monitor(sku) {
             let url = `https://www.revolve.com/dp/${sku}/#Tachyon`//product url
             let title = body.productData[0].brand + ' ' + body.productData[0].name
             let price = body.productData[0].priceDisplay
-            let image = 'https://i.pinimg.com/736x/b0/64/bd/b064bd42822816bff61ce59f24da4018--revolve-clothing-texts.jpg'
-            try { image = body.productData[0].images[0] } catch (e) { } //try set image
+            let image = body.productData[0].images[0]
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
