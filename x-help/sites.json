@@ -174,7 +174,8 @@
         "COLLECTIVE"
     ],
     "AMAZONCA": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "WALMARTUS": [
         "TACHYON",
@@ -202,7 +203,8 @@
         "COLLECTIVE"
     ],
     "BJS": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "BESTBUYUS": [
         "TACHYON",
@@ -210,9 +212,11 @@
         "COLLECTIVE"
     ],
     "BESTBUYCA": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ],
     "TOYSRUSCA": [
-        "TACHYON"
+        "TACHYON",
+        "TACHYONCLIENT"
     ]
 }
