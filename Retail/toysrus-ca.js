@@ -8,9 +8,9 @@ const fs = require('fs');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '810936852969291816' //channel id
-const site = 'BESTBUYCA'; //site name
-const version = `Bestbuy CA v1.0` //Site version
+const CHANNEL = '810945522176753664' //channel id
+const site = 'TOYSRUSCA'; //site name
+const version = `Toysrus CA v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -35,10 +35,10 @@ async function monitor(sku) {
             return;
         let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0b4pre) Gecko/20100815 Minefield/4.0b4pre',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
         let method = 'GET'; //request method
-        let req = `https://www.bestbuy.ca/api/v2/json/product/${sku}?abcz=${v4()}`//request url
+        let req = `https://www.toysrus.ca/en/product-variation?pid=${sku}&quantity=1&mobile=true&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
         //console.log(set.response.status)
         if (set.response.status != 200) {
@@ -47,15 +47,15 @@ async function monitor(sku) {
         }
         let body = await set.json //request function
         let status = PRODUCTS[sku].sizes
-        if (body.availability.onlineAvailabilityCount > 0 && body.sellerId === null) {
-            let url = `https://www.bestbuy.ca/en-ca/product/Tachyon/${sku}#Tachyon`
-            let title = body.name
-            let price = '$' + body.salePrice
-            let image = body.thumbnailImage
-            let stock = body.availability.onlineAvailabilityCount
+        if (body.product.availability.ats > 0) {
+            let url = `https://www.toysrus.ca/en/tachyon/${sku}.html#Tachyon`
+            let title = body.product.productName
+            let price = body.product.price.sales.formatted
+            let image = body.product.images.large[0].url
+            let stock = body.product.availability.ats
             if (status !== "In-Stock") {
                 let qt = 'NA'
-                let links = `[ATC](https://api.bestbuy.ca/click/tachyon/${sku}/cart#Tachyon)`
+                let links = `[ATC](https://www.samsclub.com/p/tachyon/${sku}#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites[site]) {
                     await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
@@ -70,7 +70,7 @@ async function monitor(sku) {
             }
         }
         await helper.sleep(product.waittime);
-        await monitor(sku)
+        await monitor(sku);
         return
     } catch (e) {
         //console.log(e)

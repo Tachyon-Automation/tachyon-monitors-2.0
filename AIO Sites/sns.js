@@ -30,20 +30,23 @@ async function startMonitoring() {
 async function monitor(sku) {
     try {
         let product = PRODUCTS[sku]
+        //console.log(agent)
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
+            'user-agent': 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)',
+            'X-Forwarded-For': '35.237.4.214'
         }
+
         let method = 'GET'; //request method
-        let req = `https://www-sneakersnstuff-com.translate.goog/en/product/${sku}?_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://www.sneakersnstuff.com/en/product/${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
-        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         } //request function
+        //console.log(set.response.status)
         let root = set.html
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
             //console.log('OOS!')
@@ -62,7 +65,7 @@ async function monitor(sku) {
             let price = root.querySelector('.price__current').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
             try { image = 'https://www.sneakersnstuff.com' + root.querySelector('.embed-responsive img').attributes.src } catch (e) {}
-            let url = `https://www.sneakersnstuff.com/en/product/${sku}#Tachyon`
+            let url = `https://www.sneakersnstuff.com/en/product/${sku}`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let newsku = sku.split('/')[0]
@@ -76,7 +79,6 @@ async function monitor(sku) {
                 return
             }
             for (let variant of variants) {
-                console.log(variant.textContent)
                 if(variant.attributes.value.length == 0)
                 continue
                 sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`

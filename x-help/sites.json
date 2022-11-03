@@ -6,7 +6,8 @@
         "ELEPHANTAIO",
         "COOKOLOGY",
         "DROPALERT",
-        "FITTEDACO"
+        "FITTEDACO",
+        "COLLECTIVE"      
     ],
     "HIBBETT": [
         "TACHYON",
@@ -51,7 +52,8 @@
         "HELIXFLIPS",
         "FITTEDACO",
         "AKIRA",
-        "CARBON"
+        "CARBON",
+        "COLLECTIVE"
     ],
     "HIBBETT5": [
         "TACHYON",
@@ -75,13 +77,15 @@
         "ELEPHANTAIO",
         "COOKOLOGY",
         "DROPALERT",
-        "FITTEDACO"
+        "FITTEDACO",
+        "COLLECTIVE"
     ],
     "SNS": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
-        "COOKOLOGY"
+        "COOKOLOGY",
+        "COLLECTIVE"
     ],
     "FINISHLINE": [
         "TACHYON",
@@ -91,7 +95,8 @@
     "FINISHLINE2": [
         "TACHYON",
         "TACHYONCLIENT",
-        "FITTEDACO"
+        "FITTEDACO",
+        "COLLECTIVE"
     ],
     "JDSPORTS": [
         "TACHYON",
@@ -101,23 +106,27 @@
     "SHIEKH": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ELEPHANTAIO"
+        "ELEPHANTAIO",
+        "COLLECTIVE"
     ],
     "ENDCLOTHING": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ELEPHANTAIO"
+        "ELEPHANTAIO",
+        "COLLECTIVE"
     ],
     "REVOLVE": [
         "TACHYON",
         "TACHYONCLIENT",
-        "ELEPHANTAIO"
+        "ELEPHANTAIO",
+        "COLLECTIVE"
     ],
     "SNIPESUSA": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
-        "HELIXFLIPS"
+        "HELIXFLIPS",
+        "COLLECTIVE"
     ],
     "SNIPESUSA2": [
         "TACHYON",
@@ -129,7 +138,8 @@
         "TACHYON",
         "TACHYONCLIENT",
         "ATOMFNF",
-        "SUPPLYFRANCE"
+        "SUPPLYFRANCE",
+        "COLLECTIVE"
     ],
     "SNIPESEU": [
         "TACHYON",
@@ -141,44 +151,71 @@
         "TACHYON",
         "TACHYONCLIENT",
         "ATOMFNF",
-        "SUPPLYFRANCE"
+        "SUPPLYFRANCE",
+        "COLLECTIVE"
     ],
     "ASOS": [
         "TACHYON",
         "TACHYONCLIENT",
-        "SUPPLYFRANCE"
+        "SUPPLYFRANCE",
+        "COLLECTIVE"
     ],
     "OFFSPRING": [
-        "TACHYON"
+        "TACHYON",
+        "COLLECTIVE"
     ],
     "NEWBALANCE": [
-        "TACHYON"
+        "TACHYON",
+        "COLLECTIVE"
     ],
     "AMAZONUS": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "COLLECTIVE"
+    ],
+    "AMAZONCA": [
         "TACHYON",
         "TACHYONCLIENT"
     ],
     "WALMARTUS": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "COLLECTIVE"
     ],
     "TARGET": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "COLLECTIVE"
     ],
     "GAMESTOPUS": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "COLLECTIVE"
     ],
     "USMINT": [
         "TACHYON",
-        "TACHYONCLIENT"
+        "TACHYONCLIENT",
+        "COLLECTIVE"
     ],
     "SAMSCLUB": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "COLLECTIVE"
+    ],
+    "BJS": [
         "TACHYON",
         "TACHYONCLIENT"
     ],
     "BESTBUYUS": [
+        "TACHYON",
+        "TACHYONCLIENT",
+        "COLLECTIVE"
+    ],
+    "BESTBUYCA": [
+        "TACHYON",
+        "TACHYONCLIENT"
+    ],
+    "TOYSRUSCA": [
         "TACHYON",
         "TACHYONCLIENT"
     ]
