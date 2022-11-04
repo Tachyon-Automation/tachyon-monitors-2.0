@@ -38,7 +38,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.dickssportinggoods.com/p/spring/msvc/product/v5/store/15108/products/${sku}?abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status != 200) {
             monitor(sku)
@@ -57,10 +57,16 @@ async function monitor(sku) {
             let oldSizeList = await query.rows[0].sizes
             let sizeList = []
             let variants = body.data.skus
+            let set = 0
             //pars sizes for loop
             for (let size of variants) {
-                if (size.atsInventory > 0 && size.defAttributes[1].value.trim().length > 0) {
-                    sizes += `${size.defAttributes[1].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
+                if (size.defAttributes.length > 1)
+                    set = 1
+                else {
+                    set = 0
+                }
+                if (size.atsInventory > 0 && size.defAttributes[0].value.trim().length > 0) {
+                    sizes += `${size.defAttributes[set].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
                     stock += size.atsInventory
                     sizeList.push(size.id);
                     if (!oldSizeList.includes(size.id))
