@@ -238,5 +238,9 @@
     "TOYSRUSCA": [
         "TACHYON",
         "TACHYONCLIENT"
+    ],
+    "DSG": [
+        "TACHYON",
+        "HIDDEN"
     ]
 }
