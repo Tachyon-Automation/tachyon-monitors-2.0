@@ -7,7 +7,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810949419322441798' //channel id
 const site = 'FINISHLINE'; //site name
-const version = `Finishline v2.0` //Site version
+const version = `Finishline v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -31,18 +31,16 @@ async function monitor(sku) {
         if (!product)
             return;
         let proxy = await helper.getRandomProxy(); //proxy per site
-        let productID = sku.split(',')[0]
-        let styleID = sku.split(',')[1]
-        let colorID = sku.split(',')[2]
         //these headers change per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; MJ12bot/v1.4.1; http://www.majestic12.co.uk/bot.php?+)',
+            'user-agent': 'SSL Labs (https://www.ssllabs.com/about/assessment.html); on behalf of 69.179.157.70',
         }
         let method = 'GET'; //request method
-        let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}&productId=${v4()}`//request url
+        let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${sku}&productId=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Define body variables
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku)
             return
@@ -52,16 +50,26 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        let sizes = ''
+        let sizelist = []
+        let sizesparse = body.productSizes
+        let id = ''
+        for (let size of sizesparse) {
+            if (id == size.productId || size.productId == 'null')
+                continue
+            sizelist.push(size.productId)
+            id = size.productId
+        }
+        let sizeList = []
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
         let oldSizeList = query.rows[0].sizes
-        let inStock = false
-        let sizeList = []
-        let sizesparse = body.productSizes
-        let stock = 0
-        for (let size of sizesparse) {
-            if (size.sizeValue) {
-                if (size.productId === styleID + '_' + colorID) {
+        for (let vars of sizelist) {
+            let styleID = vars.split('_')[0]
+            let colorID = vars.split('_')[1]
+            let sizes = ''
+            let inStock = false
+            let stock = 0
+            for (let size of sizesparse) {
+                if (size.sizeValue && size.productId == vars) {
                     if (size.sizeClass !== 'unavailable') {
                         stock += Number(Buffer.from(size.stockLevel, 'base64'))
                         sizes += `${size.sizeValue} (${Buffer.from(size.stockLevel, 'base64').toString()})\n`
@@ -71,27 +79,28 @@ async function monitor(sku) {
                     }
                 }
             }
-        }
-        if (inStock) {
-            let qt = 'Na'
-            let links = 'Na'
-            let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}`//request url
-            let set = await helper.requestJson(req, method, proxy, headers) //request function
-            let body2 = await set.json
-            let title = body2.product.name + ' ' + body2.product.colors.color[0].content
-            let price = body2.product.Prices.price[0].fullPrice
-            let image = body2.product.colors.color[0].thumbnail
-            let url = `https://www.finishline.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
-            console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-            inStock = false;
-            let sizeright = sizes.split('\n')
-            let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-            for (let group of sites[site]) {
-                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
-            }
-            await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
+            if (inStock) {
+                let qt = 'Na'
+                let links = 'Na'
+                let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${sku}&styleId=${styleID}&colorId=${colorID}`//request url
+                let set = await helper.requestJson(req, method, proxy, headers) //request function
+                let body2 = await set.json
+                let title = body2.product.name + ' ' + body2.product.colors.color[0].content
+                let price = body2.product.Prices.price[0].fullPrice
+                let image = body2.product.colors.color[0].thumbnail
+                let url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`
+                console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
+                inStock = false;
+                let sizeright = sizes.split('\n')
+                let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
+                for (let group of sites[site]) {
+                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
+                }
+                await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 
+            }
         }
+
         await helper.sleep(product.waittime);
         monitor(sku);
         return
