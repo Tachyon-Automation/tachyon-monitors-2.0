@@ -106,7 +106,9 @@
         "SNIPESUSA": "https://discordapp.com/api/webhooks/1017569211100430427/gjF9aymUGGkadtKIUmCWFB3XzI8EamLUptAXp1vjXSbjl-9CeYYe_ZjGVxWTyPxo6Oql",
         "SNIPESUSA2": "https://discordapp.com/api/webhooks/1017569211100430427/gjF9aymUGGkadtKIUmCWFB3XzI8EamLUptAXp1vjXSbjl-9CeYYe_ZjGVxWTyPxo6Oql",
         "ENDCLOTHING": "https://discordapp.com/api/webhooks/1017575269449613434/SB4ZJ2kIMsrFHWBXV9I3atlGxq3DduipAUR0pN1VAUxdagwZwGkJV2kvF7pxk5FO1sOY",
+        "HOMEDEPOT": "https://discordapp.com/api/webhooks/1038011512889028638/FlzYIQyH7eDVFtJfb56Si56GFo2tEWRYGJgnJq3MiTe_psDq3xtyxSAvc_g4boO8mp1F",
         "REVOLVE": "https://discordapp.com/api/webhooks/1017674353564975164/7a1mr2TdVxxlO2oIY9J1wEXRWFJ2iIi6PfGpSuCpSkUr0BnGtrsYrt_Xkipv1Qd-58OJ"
+    
     },
     "CARBON": {
         "name": "Carbon",

@@ -9,7 +9,7 @@ const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '881045892591939624' //channel id
-const site = 'BJS'; //site name
+const site = 'CROCS'; //site name
 const version = `BJS v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
