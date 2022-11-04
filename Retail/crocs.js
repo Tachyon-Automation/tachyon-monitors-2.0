@@ -8,9 +8,9 @@ const fs = require('fs');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '834542125827489882' //channel id
-const site = 'DISNEY'; //site name
-const version = `Disney v1.0` //Site version
+const CHANNEL = '881045892591939624' //channel id
+const site = 'BJS'; //site name
+const version = `BJS v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -33,29 +33,38 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
+            'User-Agent': randomUseragent.getRandom(),
+            'origin': 'https://www.bjs.com',
+            'pragma': 'no - cache',
+            'referer': 'https://www.bjs.com/',
+            'sec-ch-ua': '" Not A;Brand"; v="99", "Chromium"; v="96", "Google Chrome"; v="96"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': "Windows",
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
         }
         let method = 'GET'; //request method
-        let req = `https://www-shopdisney-com.translate.goog/on/demandware.store/Sites-shopDisney-Site/default/Product-Variation?pid=${sku}&abcz=${v4()}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://api.bjs.com/digital/live/api/v1.2/pdp/10201?productId=${sku}&pageName=PDP&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         }
         let body = await set.json //request function
         let status = PRODUCTS[sku].sizes
-        if (body.product.available && body.product.availability.messages[0] == 'In Stock') {
-            let url = `https://www.shopdisney.com/tachyon-${sku}.html#Tachyon`
-            let title = body.product.images.highRes[0].title
-            let price = body.product.price.sales.formatted;
-            let image = body.product.images.highRes[0].url;
-            let stock = '1'
+        if (body.bjsItemsInventory[0].availInventory === true) {
+            let url = `https://www.bjs.com/product/tachyon/${sku}#Tachyon`
+            let title = body.entitledItems[0].description.name
+            let price = body.maxItemPrice
+            let image = body.productImages.thumbNailImage
+            let stock = body.entitledItems[0].description.available
             if (status !== "In-Stock") {
                 let qt = 'NA'
-                let links = `[ATC](https://www.shopdisney.com/tachyon-${sku}.html#Tachyon)`
+                let links = `[ATC](https://www.samsclub.com/p/tachyon/${sku}#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites[site]) {
                     await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
