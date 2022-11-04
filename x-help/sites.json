@@ -242,5 +242,11 @@
     "DSG": [
         "TACHYON",
         "HIDDEN"
+    ],
+    "MRPORTER": [
+        "TACHYON"
+    ],
+    "NETAPORTER": [
+        "TACHYON"
     ]
 }

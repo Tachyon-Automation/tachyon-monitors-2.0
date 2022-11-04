@@ -48,6 +48,20 @@ module.exports = {
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
             "out_file": "/dev/null"
+        },
+        {
+            "script": "./AIO Sites/net-a-porter.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./AIO Sites/mr-porter.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
         }
     ]
 }
