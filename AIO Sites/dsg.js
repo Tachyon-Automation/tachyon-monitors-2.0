@@ -69,10 +69,11 @@ async function monitor(sku) {
                     sizes += `${size.defAttributes[set].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
                     stock += size.atsInventory
                     sizeList.push(size.id);
-                    if (!oldSizeList.includes(size.id))
-                    stock += size.atsInventory
-                    sizes += `${size.defAttributes[set].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
+                    if (!oldSizeList.includes(size.id)) {
+                        stock += size.atsInventory
+                        sizes += `${size.defAttributes[set].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
                         inStock = true;
+                    }
                 }
             }
             if (inStock) {
