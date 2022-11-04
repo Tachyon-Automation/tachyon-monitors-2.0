@@ -7,7 +7,8 @@
         "COOKOLOGY",
         "DROPALERT",
         "FITTEDACO",
-        "COLLECTIVE"      
+        "COLLECTIVE",
+        "HIDDEN"  
     ],
     "HIBBETT": [
         "TACHYON",
@@ -53,7 +54,8 @@
         "FITTEDACO",
         "AKIRA",
         "CARBON",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "HIBBETT5": [
         "TACHYON",
@@ -78,19 +80,22 @@
         "COOKOLOGY",
         "DROPALERT",
         "FITTEDACO",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "SNS": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
         "COOKOLOGY",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "FINISHLINE": [
         "TACHYON",
         "TACHYONCLIENT",
-        "FITTEDACO"
+        "FITTEDACO",
+        "HIDDEN"
     ],
     "FINISHLINE2": [
         "TACHYON",
@@ -101,7 +106,8 @@
     "JDSPORTS": [
         "TACHYON",
         "TACHYONCLIENT",
-        "FITTEDACO"
+        "FITTEDACO",
+        "HIDDEN"
     ],
     "SHIEKH": [
         "TACHYON",
@@ -113,63 +119,74 @@
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "REVOLVE": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "SNIPESUSA": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
         "HELIXFLIPS",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "SNIPESUSA2": [
         "TACHYON",
         "TACHYONCLIENT",
         "ELEPHANTAIO",
-        "HELIXFLIPS"
+        "HELIXFLIPS",
+        "HIDDEN"
     ],
     "SOLEBOX": [
         "TACHYON",
         "TACHYONCLIENT",
         "ATOMFNF",
         "SUPPLYFRANCE",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "SNIPESEU": [
         "TACHYON",
         "TACHYONCLIENT",
         "ATOMFNF",
-        "SUPPLYFRANCE"
+        "SUPPLYFRANCE",
+        "HIDDEN"
     ],
     "SNIPESEU2": [
         "TACHYON",
         "TACHYONCLIENT",
         "ATOMFNF",
         "SUPPLYFRANCE",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "ASOS": [
         "TACHYON",
         "TACHYONCLIENT",
         "SUPPLYFRANCE",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "LVR": [
-        "TACHYON"
+        "TACHYON",
+        "HIDDEN"
     ],
     "OFFSPRING": [
         "TACHYON",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "NEWBALANCE": [
         "TACHYON",
-        "COLLECTIVE"
+        "COLLECTIVE",
+        "HIDDEN"
     ],
     "AMAZONUS": [
         "TACHYON",
