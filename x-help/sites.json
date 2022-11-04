@@ -8,7 +8,7 @@
         "DROPALERT",
         "FITTEDACO",
         "COLLECTIVE",
-        "HIDDEN"  
+        "HIDDEN"
     ],
     "HIBBETT": [
         "TACHYON",
@@ -23,7 +23,8 @@
         "HELIXFLIPS",
         "FITTEDACO",
         "AKIRA",
-        "CARBON"
+        "CARBON",
+        "HIDDEN"
     ],
     "HIBBETT2": [
         "TACHYON",
@@ -38,7 +39,8 @@
         "HELIXFLIPS",
         "FITTEDACO",
         "AKIRA",
-        "CARBON"
+        "CARBON",
+        "HIDDEN"
     ],
     "HIBBETT3": [
         "TACHYON",
@@ -58,19 +60,7 @@
         "HIDDEN"
     ],
     "HIBBETT5": [
-        "TACHYON",
-        "TACHYONCLIENT",
-        "SYNTHESIS",
-        "ELEPHANTAIO",
-        "COOKOLOGY",
-        "DROPALERT",
-        "FLIPD",
-        "ACORNFLIPS",
-        "BOOMINATI",
-        "HELIXFLIPS",
-        "FITTEDACO",
-        "AKIRA",
-        "CARBON"
+        "TACHYON"
     ],
     "NORDSTROM2": [
         "TACHYON",
@@ -257,6 +247,7 @@
         "ELEPHANTAIO"
     ],
     "DISNEY": [
-        "TACHYON"
+        "TACHYON",
+        "HIDDEN"
     ]
 }
