@@ -244,12 +244,15 @@
         "HIDDEN"
     ],
     "MRPORTER": [
-        "TACHYON"
+        "TACHYON",
+        "HIDDEN"
     ],
     "NETAPORTER": [
-        "TACHYON"
+        "TACHYON",
+        "HIDDEN"
     ],
     "HOMEDEPOT": [
-        "TACHYON"
+        "TACHYON",
+        "HIDDEN"
     ]
 }
