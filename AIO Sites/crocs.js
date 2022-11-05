@@ -115,7 +115,7 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let size of variants) {
                 if (size.inStock && size.ATS > 0) {
-                    sizes += `${size.size.replaceAll(/[^0-9\.]+/g, "")} (${size.ATS}) - ${size.UPC}\n`;
+                    sizes += `${size.size} (${size.ATS}) - ${size.UPC}\n`;
                     stock += size.ATS
                     sizeList.push(size.UPC);
                     if (!oldSizeList.includes(size.UPC)) {
