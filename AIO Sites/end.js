@@ -39,7 +39,6 @@ async function monitor(sku) {
         let req = `https://www.endclothing.com/us/${sku}?abcz=${v4()}`//request url
         let set = await helper.requestBody(req, method, proxy, headers)
         let body = await JSON.parse(set.resp.split('<script id="__NEXT_DATA__" type="application/json">')[1].split('</script>')[0])
-        console.log(set.response.status)
         if (set.response.status == 404) {
             monitor(sku)
             return
