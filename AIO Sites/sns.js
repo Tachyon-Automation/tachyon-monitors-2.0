@@ -33,9 +33,9 @@ async function monitor(sku) {
         //console.log(agent)
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy() //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)',
+            'user-agent': randomUseragent.getRandom(),
             'X-Forwarded-For': '35.237.4.214'
         }
 
@@ -46,7 +46,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let root = set.html
         if (root.querySelector('.product-view__info.product-view__info--no-shop')) {
             //console.log('OOS!')

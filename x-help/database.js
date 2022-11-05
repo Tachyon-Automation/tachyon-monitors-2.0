@@ -7,7 +7,6 @@ const pool = new pg.Pool({
     password: 'thisistooeasy',
     port: 5432,
 });
-
 module.exports = pool;
  function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

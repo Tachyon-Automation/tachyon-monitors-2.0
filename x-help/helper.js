@@ -10,7 +10,40 @@ const Discord = require('discord.js');
 const webhook = require("webhook-discord");
 const database = require('../x-help/database');
 const hexToDecimal = hex => parseInt(hex, 16)
+const mongoose = require('mongoose')
+const MONGODB_URI = 'mongodb+srv://tach_admins:0NbLD8hOkjtcHwMy@tachyon.8ameb.mongodb.net'
 const helper = {
+    dbconnect: async function () {
+          let cached = global.mongoose
+          if (!cached) {
+            cached = global.mongoose = { conn: null, promise: null }
+          }
+            if (cached.conn) {
+              return cached.conn
+            }
+          
+            if (!cached.promise) {
+              const opts = {
+                bufferCommands: false,
+              }
+          
+              cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+                return mongoose
+              })
+            }
+          
+            try {
+              cached.conn = await cached.promise
+            } catch (e) {
+              cached.promise = null
+              throw e
+            }
+            return cached.conn
+        },
+    getHooks: async function () {
+        const hooks = mongoose.model('webhooks', { name: String })
+        return hooks
+    },
 
     sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -50,7 +83,7 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let json = await response.json()
             clearTimeout(timeoutId)
             return { json, response }
@@ -64,7 +97,7 @@ const helper = {
             //console.log(body)
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: JSON.stringify(body)} )
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: JSON.stringify(body) })
             let json = await response.json()
             clearTimeout(timeoutId)
             return { json, response }
@@ -77,10 +110,10 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             resp = await getBodyAsText(response)
             clearTimeout(timeoutId)
-            return {resp, response }
+            return { resp, response }
         } catch (e) {
             //console.log(e)
             return
@@ -90,7 +123,7 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal})
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal })
             console.log(response)
             let json = await response.json()
             clearTimeout(timeoutId)
@@ -104,11 +137,11 @@ const helper = {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let text = await getBodyAsText(await response)
             let html = HTMLParser.parse(await text)
             clearTimeout(timeoutId)
-            return { html, response, text}
+            return { html, response, text }
         } catch (e) {
             //console.log(e)
         }
@@ -255,11 +288,11 @@ const helper = {
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
-            //console.log(e)
+            //onsole.log(e)
         }
         return
     },
@@ -325,7 +358,7 @@ const helper = {
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
@@ -390,7 +423,7 @@ const helper = {
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy)})
+            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {

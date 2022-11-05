@@ -13,6 +13,7 @@
         "MRPORTER": "https://discordapp.com/api/webhooks/861697997821706242/I-5GVYDhJjIoN7t01G4nXJgPST1VoKJI771hTXtF-OnaBEUMrj1tfBHD6n62U0k9wyMG",
         "NETAPORTER": "https://discordapp.com/api/webhooks/861700219686354975/JdvJgKNNHfdAc7n7vX7hLg2Vg5eU0vwU1C1J22bTqho4A33aVsWSIlHJEuvQxyOWHZ-Y",
         "DSG": "https://discordapp.com/api/webhooks/861447876310859826/WInhLiMWoHp8N4220hNIuWW7AIJSZSc4CXiOxik1kujl1ddZFvrRQFSDNXKzZIjc2E0Y",
+        "CROCS": "https://discordapp.com/api/webhooks/914671870471708703/I1ZyXLl64VNSIDGbTOKYIKFEaZWk93rFC302ELM0r5e1Da4cUKc6ZSqEiiRF9Olo_TNt",
         "HOMEDEPOT": "https://discordapp.com/api/webhooks/834603944697004033/eEHQbibxZIqKFscGx3kVIHV7bkNzAsBcLOz3842LdSKvTCQq1L4EpCZPMajbIYfuXJuh",
         "DISNEY": "https://discordapp.com/api/webhooks/835358820258676756/SCFbZAejyN7ZDMRu4NEkZhOHJT041uTQ8x9hDedT20nfHK6EPN5kBC4xNsyuthPJjTuo",
         "LVR": "https://discordapp.com/api/webhooks/900166863487631401/_MGJpbaQRs2zWHbpV_9wwvPpX9HDKYAPsBa3GodW0Ropy8i3nMdlHmHlyCrWxUDvISzr",
@@ -225,8 +226,9 @@
         "HOMEDEPOT": "https://discord.com/api/webhooks/1010721955789426748/po_oaB7lpUGUzwiW-O9W9zZ91N0TbeGPGgKt4mO8mwsWt1y7EQRT8SQ2elAqpQZPlODe",
         "DISNEY": "https://discord.com/api/webhooks/1027421286139437177/8LVwkC_6JJDgOTJR_cWMYHJodE5UKfcOGYrZOrCfAwAw0UzWYwQJSc1apOhFC1gayK_a",
         "MRPORTER": "https://discord.com/api/webhooks/1037888528262119544/IYmv0y4IKR3GcP9ouTFtGulLG2Is6wRalmTPJBLTD963QsF04FWOMxoW8h8XbCLNY46c",
-        "NETAPORTER": "https://discord.com/api/webhooks/1037888612928335932/dUVTYKiSZ1hczEPb5tumh3ItRpVxhpmsiZFOnFvnsSGabfTAiA5veedEEdatEpo6hiaq"
-        
+        "NETAPORTER": "https://discord.com/api/webhooks/1037888612928335932/dUVTYKiSZ1hczEPb5tumh3ItRpVxhpmsiZFOnFvnsSGabfTAiA5veedEEdatEpo6hiaq",
+        "CROCS": "https://discord.com/api/webhooks/1037887982369259600/lYxRtXAKTxU1ReUWzUPxF4wAdJ4kxabVqeZbeivGYGARN2f5QsbbRytwBPPOME9U_rbe"
+
     },
     "COLLECTIVE": {
         "name": "Collective Monitors",

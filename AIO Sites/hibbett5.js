@@ -31,18 +31,19 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://aggiekouv3:0ZuLB6y30id6lQdD_country-UnitedStates@proxy.packetstream.io:31112'; //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
-        let agent = randomUseragent.getRandom()
+        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+            'user-agent': 'Googlebot-News',
+            'X-FORWARDED-FOR': ip,
             'Poq-App-Version': `${v4()}`,
             'Poq-Platform': 'iOS',
             'Poq-Platform-Version': `${v4()}`,
             'Poq-Device-Model': 'iPhone',
             'x-px-bypass-reason': `${v4()}`,
             'x-px-bypass': `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:${v4()}`,     
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
             //'cookie': `_px3=${v4()};_pxhd=${v4()}`  
         }
         let method = 'GET'; //request method
@@ -55,7 +56,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        if(body.launchDate) {
+        if (body.launchDate) {
             let event = Date.parse(new Date(Date.now()).toISOString())
             let event1 = Date.parse(new Date(body.launchDate).toISOString())
             if (event1 > event) {
@@ -66,53 +67,53 @@ async function monitor(sku) {
             }
         }
         //Define body variables
-            let inStock = false;
-            let url = `https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}#Tachyon`
-            let title = body.name
-            let price = body.price
-            let parse = body.imageIds[0]
-            let image = body.imageResources[parse][0].url
-            let stock = 0
-            let sizes = []
-            let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
-            let oldSizeList = await query.rows[0].sizes
-            let sizeList = []
-            let variants = body.skus
-            let variantsa = ''
-            //pars sizes for loop
-            for (let variant of variants) {
-                if (variant.size.includes('.')) {
-                    sizevar = `00${variant.size.replace('.', '')}`
+        let inStock = false;
+        let url = `https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}#Tachyon`
+        let title = body.name
+        let price = body.price
+        let parse = body.imageIds[0]
+        let image = body.imageResources[parse][0].url
+        let stock = 0
+        let sizes = []
+        let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
+        let oldSizeList = await query.rows[0].sizes
+        let sizeList = []
+        let variants = body.skus
+        let variantsa = ''
+        //pars sizes for loop
+        for (let variant of variants) {
+            if (variant.size.includes('.')) {
+                sizevar = `00${variant.size.replace('.', '')}`
+            } else {
+                if (variant.size.length > 2) {
+                    sizevar = `0${variant.size}0`
                 } else {
-                    if (variant.size.length > 2) {
-                        sizevar = `0${variant.size}0`
-                    } else {
-                        sizevar = `00${variant.size}0`
-                    }
-                }
-                if (variant.isAvailable === true) {
-                    variantsa += `${variant.id},}`
-                    sizes += `[${variant.size}](https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}) - ${variant.id}\n`
-                    stock++
-                    sizeList.push(variant.id);
-                    if (!oldSizeList.includes(variant.id))
-                        inStock = true;
+                    sizevar = `00${variant.size}0`
                 }
             }
-            if (inStock) {
-                let qt = 'Na'
-                let links = 'Na'
-                console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                helper.posElephentHibbett(sku, title, image, variantsa)
-                inStock = false;
-                let sizeright = sizes.split('\n')
-                let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-                for (let group of sites[site]) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
-                }
-                await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
+            if (variant.isAvailable === true) {
+                variantsa += `${variant.id},}`
+                sizes += `[${variant.size}](https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}) - ${variant.id}\n`
+                stock++
+                sizeList.push(variant.id);
+                if (!oldSizeList.includes(variant.id))
+                    inStock = true;
+            }
+        }
+        if (inStock) {
+            let qt = 'Na'
+            let links = 'Na'
+            console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
+            helper.posElephentHibbett(sku, title, image, variantsa)
+            inStock = false;
+            let sizeright = sizes.split('\n')
+            let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
+            for (let group of sites[site]) {
+                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
+            }
+            await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 
-            }
+        }
         await helper.sleep(product.waittime);
         monitor(sku);
         return
