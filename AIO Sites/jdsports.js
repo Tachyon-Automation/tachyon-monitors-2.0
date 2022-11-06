@@ -81,7 +81,7 @@ async function monitor(sku) {
             let title = body2.product.name + ' ' + body2.product.colors.color[0].content
             let price = body2.product.Prices.price[0].fullPrice
             let image = body2.product.colors.color[0].thumbnail
-            let sites = await helper.dbconnect(catagory+'HIBBETT')
+            let sites = await helper.dbconnect(catagory+'FINISHLINE/JD')
             let url = `https://www.jdsports.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;

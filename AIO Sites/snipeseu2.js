@@ -77,7 +77,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory+"SNIPESEU")
                 let burst = `[Burst](http://localhost:4000/qt?st=snipes&p=https://www.snipes.com/p/${sku}.html)\n`
                 let flare = `[Flare](http://127.0.0.1:5559/quicktask?product=https://www.snipes.com/p/${sku}.html)\n`
                 let ganesh = `[Ganesh](https://ganeshbot.com/api/quicktask?STORE=SNIPES&PRODUCT=${sku}&SIZE=ANY)`

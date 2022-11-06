@@ -80,7 +80,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory+'FINISHLINE/JD')
                 let qt = 'Na'
                 let links = 'Na'
                 let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${sku}&styleId=${styleID}&colorId=${colorID}`//request url
