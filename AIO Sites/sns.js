@@ -31,11 +31,12 @@ async function monitor(sku) {
     try {
         let product = PRODUCTS[sku]
         //console.log(agent)
+        //let agent = randomUseragent.getRandom();
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            'user-agent': randomUseragent.getRandom(),
+            'user-agent': 'SuperBot/4.4.0.60 (Windows XP)',
             'X-Forwarded-For': '35.237.4.214'
         }
 
@@ -96,7 +97,7 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
-                    helper.postAIO(url, title, newsku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
+                    helper.postAIO(url, title, newsku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
             }

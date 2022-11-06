@@ -88,7 +88,7 @@ async function monitor(sku) {
         }
         }
         if (inStock) {
-            let sites = await helper.dbconnect(catagory+site)
+            let sites = await helper.dbconnect(catagory+"NORDSTROM")
             let qt = 'Na'
             let links = 'Na'
             title = title.split(',')[0]

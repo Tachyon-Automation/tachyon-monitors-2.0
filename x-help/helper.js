@@ -208,7 +208,7 @@ const helper = {
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": site.group.embed.name,
+            "username": site.group.name,
             "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
@@ -347,7 +347,7 @@ const helper = {
         }
         return
     },
-    postRetail: async function (url, title, sku, price, image, stock, group, version, qt, links) {
+    postRetail: async function (url, title, sku, price, image, stock, site, version, qt, links) {
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         let proxy = await getRandomProxy2();

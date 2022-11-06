@@ -49,7 +49,7 @@ async function monitor(sku) {
         }
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
             'User-Agent': 'yacybot (/global; amd64 Linux 5.1.0-gentoo; java 1.8.0_201; Europe/de) http://yacy.net/bot.html',
