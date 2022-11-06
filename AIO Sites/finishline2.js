@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -7,6 +6,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '1031118814861070357' //channel id
 const site = 'FINISHLINE2'; //site name
+const catagory = 'AIO'
 const version = `Finishline v3.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -93,14 +93,15 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let sites = await helper.dbconnect(catagory+site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-                for (let group of sites[site]) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
+                for (let group of sites) {
+                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
             }

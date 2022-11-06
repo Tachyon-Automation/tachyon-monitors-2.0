@@ -10,36 +10,17 @@ const Discord = require('discord.js');
 const webhook = require("webhook-discord");
 const database = require('../x-help/database');
 const hexToDecimal = hex => parseInt(hex, 16)
+const Site = require('./modelsite')
+const group = require('./modelgroup')
 const mongoose = require('mongoose')
-const MONGODB_URI = 'mongodb+srv://tach_admins:0NbLD8hOkjtcHwMy@tachyon.8ameb.mongodb.net'
+const { Schema} = mongoose
+const MONGODB_URI = 'mongodb+srv://tach_admins:0NbLD8hOkjtcHwMy@tachyon.8ameb.mongodb.net/tachyonMain'
 const helper = {
-    dbconnect: async function () {
-          let cached = global.mongoose
-          if (!cached) {
-            cached = global.mongoose = { conn: null, promise: null }
-          }
-            if (cached.conn) {
-              return cached.conn
-            }
-          
-            if (!cached.promise) {
-              const opts = {
-                bufferCommands: false,
-              }
-          
-              cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-                return mongoose
-              })
-            }
-          
-            try {
-              cached.conn = await cached.promise
-            } catch (e) {
-              cached.promise = null
-              throw e
-            }
-            return cached.conn
-        },
+    dbconnect: async function (s) {
+        await mongoose.connect(MONGODB_URI)
+        let sites = await Site.find({ name: s}).populate('group')
+        return sites
+    },
     getHooks: async function () {
         const hooks = mongoose.model('webhooks', { name: String })
         return hooks
@@ -213,8 +194,8 @@ const helper = {
             if (error) throw new Error(error);
         });
     },
-    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, group, site, version, qt, links) {
-        let color = hexToDecimal(group.color)
+    postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, site, version, qt, links) {
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
         sizeright = sizeright.join('\n')
@@ -227,8 +208,8 @@ const helper = {
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": group.name,
-            "avatar_url": group.image,
+            "username": site.group.embed.name,
+            "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
                 {
@@ -280,15 +261,15 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | by Tachyon`,
-                        "icon_url": group.image
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "icon_url": site.group.embed.image
                     },
                     "timestamp": new Date().toISOString()
                 }
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
@@ -296,14 +277,14 @@ const helper = {
         }
         return
     },
-    postAmazon: async function (url, title, sku, price, image, stock, offerid, group, site, version, qt, links) {
-        let color = hexToDecimal(group.color)
+    postAmazon: async function (url, title, sku, price, image, stock, offerid, site, version, qt, links) {
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": group.name,
-            "avatar_url": group.image,
+            "username": site.group.embed.name,
+            "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
                 {
@@ -350,30 +331,30 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | by Tachyon `,
-                        "icon_url": group.image
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "icon_url": site.group.embed.image
                     },
                     "timestamp": new Date().toISOString()
                 }
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
-            //console.log(e)
+            console.log(e)
         }
         return
     },
-    postRetail: async function (url, title, sku, price, image, stock, group, site, version, qt, links) {
-        let color = hexToDecimal(group.color)
+    postRetail: async function (url, title, sku, price, image, stock, group, version, qt, links) {
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": group.name,
-            "avatar_url": group.image,
+            "username": site.group.embed.name,
+            "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
                 {
@@ -415,15 +396,15 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | by Tachyon `,
-                        "icon_url": group.image
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "icon_url": site.group.embed.image
                     },
                     "timestamp": new Date().toISOString()
                 }
             ]
         }
         try {
-            let response = await fetch(group[site], { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {

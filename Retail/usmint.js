@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -10,6 +9,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810952829392257046' //channel id
 const site = 'USMINT'; //site name
+const catagory = 'RETAIL'
 const version = `US Mint v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -55,11 +55,12 @@ async function monitor(sku) {
                 let image = 'https://cdn.discordapp.com/attachments/810952829392257046/973721563776053329/unknown.png'
                 let stock = root.querySelector('.input-text').attributes["data-available"].split('.')[0]
                 if (status !== "In-Stock") {
+                    let sites = await helper.dbconnect(catagory+site)
                     let qt = 'NA'
                     let links = `[ATC](https://catalog.usmint.gov/on/demandware.store/Sites-USM-Site/default/Cart-MiniAddProduct?pid=${sku})`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                    for (let group of sites[site]) {
-                        await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
+                    for (let group of sites) {
+                        await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

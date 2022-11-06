@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const { Schema } = mongoose
 
 const GroupSchema = new Schema(
@@ -12,5 +11,5 @@ const GroupSchema = new Schema(
   },
   { timestamps: true }
 )
-const group = mongoose.model('Site', GroupSchema)
+const group = mongoose.model('Group', GroupSchema)
 module.exports = group

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
-const SiteSchema = new Schema(
+const SiteSchema = new mongoose.Schema(
   {
     name: String,
     group: { type: Schema.Types.ObjectId, ref: 'Group' },

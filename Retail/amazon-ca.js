@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -10,6 +9,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '901934921315135548' //channel id
 const site = 'AMAZONCA'; //site name
+const catagory = 'RETAIL'
 const version = `Amazon CA v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -58,10 +58,11 @@ async function monitor(sku) {
                 parse = JSON.parse(parse)
                 let offerid = parse.oid
                 if (status !== "In-Stock") {
+                    let sites = await helper.dbconnect(catagory+site)
                     let qt = 'NA'
                     let links = `[ATC](https://www.amazon.ca/gp/product/handle-buy-box/ref=dp_start-bbf_1_glance?offerListingID=${offerid}&ASIN=${sku}&isMerchantExclusive=0&merchantID=A3DWYIK6Y9EEQB&isAddon=0&nodeID=&sellingCustomerID=&qid=&sr=&storeID=&tagActionCode=&viewID=glance&rebateId=&ctaDeviceType=desktop&ctaPageType=detail&usePrimeHandler=0&sourceCustomerOrgListID=&sourceCustomerOrgListItemID=&wlPopCommand=&itemCount=20&quantity.1=1&asin.1=${sku}&submit.buy-now=Submit&dropdown-selection=&dropdown-selection-ubb=)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                    for (let group of sites[site]) {
+                    for (let group of sites) {
                         await helper.postAmazon(url, title, sku, price, image, stock, offerid, groups[group], site, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'

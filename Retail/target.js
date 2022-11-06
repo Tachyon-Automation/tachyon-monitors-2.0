@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -10,6 +9,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810935871712788501' //channel id
 const site = 'TARGET'; //site name
+const catagory = 'RETAIL'
 const version = `Target v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -59,13 +59,14 @@ async function monitor(sku) {
                         monitor(sku);
                         return
                     }
+                    let sites = await helper.dbconnect(catagory+site)
                     let body2 = await set.json
                     let title = body2.data.product.item.product_description.title.split('&#38;').join('&').split('&#8482;').join('™').split('&#8211;').join('-')
                     let image = body2.data.product.item.enrichment.images.primary_image_url || 'https://www.thermaxglobal.com/wp-content/uploads/2020/05/image-not-found.jpg';
                     let price = body2.data.product.price.formatted_current_price;
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                    for (let group of sites[site]) {
-                        await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
+                    for (let group of sites) {
+                        await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

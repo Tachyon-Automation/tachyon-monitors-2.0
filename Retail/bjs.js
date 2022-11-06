@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -10,6 +9,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '881045892591939624' //channel id
 const site = 'BJS'; //site name
+const catagory = 'RETAIL'
 const version = `BJS v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -63,11 +63,12 @@ async function monitor(sku) {
             let image = body.productImages.thumbNailImage
             let stock = body.entitledItems[0].description.available
             if (status !== "In-Stock") {
+                let sites = await helper.dbconnect(catagory+site)
                 let qt = 'NA'
                 let links = `[ATC](https://www.samsclub.com/p/tachyon/${sku}#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                for (let group of sites[site]) {
-                    await helper.postRetail(url, title, sku, price, image, stock, groups[group], site, version, qt, links)
+                for (let group of sites) {
+                    await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'
                 await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

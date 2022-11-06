@@ -1,6 +1,5 @@
 
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -10,6 +9,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810935848899444777' //channel id
 const site = 'WALMARTUS'; //site name
+const catagory = 'RETAIL'
 const version = `Walmart US v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -65,10 +65,11 @@ async function monitor(sku) {
                 let stock = '1'
                 let offerid = body.props.pageProps.initialData.data.product.offerId
                 if (status !== "In-Stock") {
+                    let sites = await helper.dbconnect(catagory+site)
                     let qt = 'NA'
                     let links = `[ATC](http://goto.walmart.com/c/2242082/565706/9383?veh=aff&sourceid=imp_000011112222333344&prodsku=${sku}&u=http%3A%2F%2Faffil.walmart.com%2Fcart%2Fbuynow%3F%3Dveh%3Daff%26affs%3Dsdk%26affsdkversion%3D%26affsdktype%3Djs%26affsdkcomp%3Dbuynowbutton%26colorscheme%3Dorange%26sizescheme%3Dprimary%26affsdkreferer%3Dhttp%253A%252F%252Faffil.walmart.com%26items%3D${sku}%7C1%26upcs%3D)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
-                    for (let group of sites[site]) {
+                    for (let group of sites) {
                         await helper.postAmazon(url, title, sku, price, image, stock, offerid, groups[group], site, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'

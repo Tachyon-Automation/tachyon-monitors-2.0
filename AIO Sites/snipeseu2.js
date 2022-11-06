@@ -1,5 +1,4 @@
 const helper = require('../x-help/helper');
-const sites = require('../x-help/sites.json');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
@@ -8,6 +7,7 @@ const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '1031268085560266762' //channel id
 const site = 'SNIPESEU2'; //site name
+const catagory = 'AIO'
 const version = `Snipes v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
@@ -77,6 +77,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let sites = await helper.dbconnect(catagory+site)
                 let burst = `[Burst](http://localhost:4000/qt?st=snipes&p=https://www.snipes.com/p/${sku}.html)\n`
                 let flare = `[Flare](http://127.0.0.1:5559/quicktask?product=https://www.snipes.com/p/${sku}.html)\n`
                 let ganesh = `[Ganesh](https://ganeshbot.com/api/quicktask?STORE=SNIPES&PRODUCT=${sku}&SIZE=ANY)`
@@ -93,8 +94,8 @@ async function monitor(sku) {
                 inStock = false;
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
-                for (let group of sites[site]) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, groups[group], site, version, qt, links)
+                for (let group of sites) {
+                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 
