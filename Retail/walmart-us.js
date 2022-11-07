@@ -23,7 +23,6 @@ async function startMonitoring() {
             waittime: row.waittime,
             sizes: row.sizes
         }
-        monitor(row.sku)
     }
     console.log(`[${site}] Monitoring all SKUs!`)
 }
@@ -33,6 +32,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
+            
         let proxy = await helper.getRandomProxy(); //proxy per site
         //let agent = randomUseragent.getRandom(); //random agent per site
         //these headers change per site
@@ -43,10 +43,11 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.walmart.com/ip/tachyon/${sku}/.js?cache=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let parse = set.text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
         body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
         let status = PRODUCTS[sku].sizes
+
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -82,7 +83,7 @@ async function monitor(sku) {
                 }
             }
         await helper.sleep(product.waittime);
-        await monitor(sku);
+        monitor(sku);
         return
     } catch (e) {
         if(e.message.includes('Cannot read')){
