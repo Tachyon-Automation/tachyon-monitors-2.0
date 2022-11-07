@@ -53,6 +53,12 @@ module.exports = {
             "watch": true,
             "max_memory_restart": "1000M",
 
+        },
+        {
+            "script": "./AIO Sites/newbalance.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+
         }
     ]
 }
