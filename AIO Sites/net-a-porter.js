@@ -79,7 +79,7 @@ async function monitor(sku) {
                 }
               }
             if (inStock) {
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory+'NET-A-PORTER')
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
