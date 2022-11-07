@@ -30,17 +30,17 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'user-agent': 'SSL Labs (https://www.ssllabs.com/about/assessment.html); on behalf of 69.179.157.70',
+            'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         let method = 'GET'; //request method
-        let req = `https://www.finishline.com/store/browse/json/productSizesJson.jsp?productId=${sku}&productId=${v4()}`//request url
+        let req = `https://www-finishline-com.translate.goog/store/browse/json/productSizesJson.jsp?productId=${sku}&productId=${v4()}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Define body variables
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku)
             return
@@ -83,12 +83,12 @@ async function monitor(sku) {
                 let sites = await helper.dbconnect(catagory+'FINISHLINE/JD')
                 let qt = 'Na'
                 let links = 'Na'
-                let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${sku}&styleId=${styleID}&colorId=${colorID}`//request url
+                let req = `https://www-finishline-com.translate.goog/store/browse/gadgets/productLookupJSON.jsp?productId=${sku}&styleId=${styleID}&colorId=${colorID}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
                 let set = await helper.requestJson(req, method, proxy, headers) //request function
                 let body2 = await set.json
-                let title = body2.product.name + ' ' + body2.product.colors.color[0].content
-                let price = body2.product.Prices.price[0].fullPrice
-                let image = body2.product.colors.color[0].thumbnail
+                let title = body2.product.name + ' ' + body2.product.colorDescriptions.colorDescription.content
+                let price = body2.product.Prices.price.fullPrice
+                let image = body2.product.colors.color.thumbnail
                 let url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 inStock = false;
@@ -106,7 +106,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         monitor(sku)
         return
     }
