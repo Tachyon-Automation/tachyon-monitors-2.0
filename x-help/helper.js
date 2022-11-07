@@ -283,7 +283,7 @@ const helper = {
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": site.group.embed.name,
+            "username": site.group.name,
             "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
@@ -353,7 +353,7 @@ const helper = {
         let proxy = await getRandomProxy2();
         let body =
         {
-            "username": site.group.embed.name,
+            "username": site.group.name,
             "avatar_url": site.group.embed.image,
             "content": null,
             "embeds": [
