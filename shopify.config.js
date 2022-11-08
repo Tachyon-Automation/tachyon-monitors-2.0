@@ -1,7 +1,7 @@
 module.exports = {
     "apps": [
         {
-            "script": "./shopify/sites.js",
+            "script": "./shopify/shopify.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
