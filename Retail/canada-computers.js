@@ -60,7 +60,7 @@ async function monitor(sku) {
                     let links = `[ATC](https://www.canadacomputers.com/shopping_cart.php?action=bundle_add_to_cart&item0=${sku}&qty0=1d)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                     for (let group of sites) {
-                        await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

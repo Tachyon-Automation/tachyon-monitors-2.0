@@ -59,7 +59,7 @@ async function monitor(sku) {
                 let links = `[ATC](https://api.bestbuy.ca/click/tachyon/${sku}/cart#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites) {
-                    await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'
                 await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

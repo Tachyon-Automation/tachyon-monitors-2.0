@@ -28,7 +28,7 @@ async function monitor(sku) {
                 let links = `[ATC](https://www.crocs.com/${sku}.html#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites) {
-                    await helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'
                 await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
@@ -132,7 +132,7 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
-                    await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 

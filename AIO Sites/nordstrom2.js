@@ -99,7 +99,7 @@ async function monitor(sku) {
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
             for (let group of sites) {
-                await helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
             }
             await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
         }

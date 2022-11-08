@@ -13,12 +13,12 @@ const hexToDecimal = hex => parseInt(hex, 16)
 const Site = require('./modelsite')
 const group = require('./modelgroup')
 const mongoose = require('mongoose')
-const { Schema} = mongoose
+const { Schema } = mongoose
 const MONGODB_URI = 'mongodb+srv://tach_admins:0NbLD8hOkjtcHwMy@tachyon.8ameb.mongodb.net/tachyonMain'
 const helper = {
     dbconnect: async function (s) {
         await mongoose.connect(MONGODB_URI)
-        let sites = await Site.find({ name: s}).populate('group')
+        let sites = await Site.find({ name: s }).populate('group')
         return sites
     },
     getHooks: async function () {
@@ -274,6 +274,89 @@ const helper = {
                 throw "Failed to send webhook"
         } catch (e) {
             //onsole.log(e)
+        }
+        return
+    },
+    postShopify: async function (url, title, price, type, image, sizeright, sizeleft, stock, site, version, qt, links) {
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        let uri = url.split('/')[2]
+        sizeleft = sizeleft.join('\n')
+        sizeright = sizeright.join('\n')
+        if (sizeright.length == 0) {
+            sizeright = "-"
+        }
+        if (sizeleft.length == 0) {
+            sizeleft = "-"
+        }
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": `https://${uri}`,
+                        "url": `https://${uri}`,
+                    },
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "fields": [
+                        {
+                            "name": "**Stock**",
+                            "value": stock + "+",
+                            "inline": true
+                        },
+                        {
+                            "name": "**Price**",
+                            "value": price,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Type**",
+                            "value": type,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeleft,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeright,
+                            "inline": true
+                        },
+                        {
+                            "name": "**QT**",
+                            "value": qt,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Links**",
+                            "value": links,
+                            "inline": true
+                        },
+                    ],
+                    "thumbnail": {
+                        "url": image
+                    },
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "icon_url": site.group.embed.image
+                    },
+                    "timestamp": new Date().toISOString()
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //console.log(e)
         }
         return
     },
