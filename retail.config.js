@@ -91,5 +91,12 @@ module.exports = {
             "error_file": "/dev/null",
             "out_file": "/dev/null"
         },
+        {
+            "script": "./Retail/curry-uk.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
     ]
 }
