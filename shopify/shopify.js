@@ -40,6 +40,14 @@ monitors.push(new ShopifyMonitor("https://limitededt.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://burnrubbersneakers.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.bandier.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://it.oneblockdown.it", 'NONE'))
+monitors.push(new ShopifyMonitor("https://exclusivefitted.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://sportsworld165.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://www.myfitteds.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://www.shopcapcity.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://pvtchworktvb.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://madebyerickshop.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://chonchispins.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://capsulehats.com", 'HATS'))
 for(let monitor of monitors) {
     monitor.monitor();
 }
