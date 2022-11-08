@@ -48,6 +48,9 @@ monitors.push(new ShopifyMonitor("https://pvtchworktvb.com", 'HATS'))
 monitors.push(new ShopifyMonitor("https://madebyerickshop.com", 'HATS'))
 monitors.push(new ShopifyMonitor("https://chonchispins.com", 'HATS'))
 monitors.push(new ShopifyMonitor("https://capsulehats.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://www.hatclub.com", 'HATS'))
+monitors.push(new ShopifyMonitor("https://www.sneakerbaas.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.proj3ct.it", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }
