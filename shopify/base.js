@@ -2,7 +2,6 @@ const helper = require('../x-help/helper');
 const HTTPSProxyAgent = require('https-proxy-agent')
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const catagory = "SHOPIFY"
 const version = `Shopify v1.0`
 let DBSITE
 class ShopifyMonitor {
@@ -13,7 +12,7 @@ class ShopifyMonitor {
     checkpoint;
 
     constructor(website, dbsite) {
-        DBSITE = catagory + dbsite
+        this.DBSITE = "SHOPIFY"+ dbsite
         this.WEBSITE = website;
         this.products = [];
     }
@@ -30,7 +29,7 @@ class ShopifyMonitor {
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
-        if (DBSITE == "SHOPIFYFUNKO") {
+        if (this.DBSITE == "SHOPIFYFUNKO") {
             URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -102,10 +101,9 @@ class ShopifyMonitor {
                 } else {
                     webhookType = "New Product";
                 }
-
                 if (webhookType) {
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
-                    let sites = await helper.dbconnect(DBSITE)
+                    let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
                     let qt = `Na`
                     let links = 'Na'
