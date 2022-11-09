@@ -58,7 +58,7 @@ class ShopifyMonitor {
                 this.monitorProducts();
                 return;
             }
-            if (this.lastHash) {
+            if (!this.lastHash) {
                 this.lastHash = currentHash;
                 this.products = body.products;
                 this.monitorProducts();
