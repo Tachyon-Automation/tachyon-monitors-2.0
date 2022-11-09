@@ -58,7 +58,7 @@ class ShopifyMonitor {
                 this.monitorProducts();
                 return;
             }
-            if (!this.lastHash) {
+            if (this.lastHash) {
                 this.lastHash = currentHash;
                 this.products = body.products;
                 this.monitorProducts();
@@ -72,7 +72,7 @@ class ShopifyMonitor {
                 let stock = 0
                 for (let variant of product.variants) {
                     if (variant.available && !variants.includes(variant.id)) {
-                        if (JSON.stringify(variant).includes("inventory_quantity")) {
+                        if (variant.inventory_quantity) {
                             variants.push(variant.id);
                             sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
                             price = variant.price;
@@ -109,6 +109,7 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
+                    await helper.sleep(1000000)
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
