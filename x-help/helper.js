@@ -305,8 +305,8 @@ const helper = {
                     "color": color,
                     "fields": [
                         {
-                            "name": "**Stock**",
-                            "value": stock + "+",
+                            "name": "**Type**",
+                            "value": type,
                             "inline": true
                         },
                         {
@@ -315,8 +315,8 @@ const helper = {
                             "inline": true
                         },
                         {
-                            "name": "**Type**",
-                            "value": type,
+                            "name": "**Stock**",
+                            "value": stock + "+",
                             "inline": true
                         },
                         {
