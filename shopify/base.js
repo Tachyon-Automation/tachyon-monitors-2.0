@@ -144,20 +144,25 @@ class ShopifyMonitor {
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
+        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS") {
+            URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/checkout?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`;  //Or you can use ?collection or ?a or ?q
+            headers = {
+                'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
+            }
+        }
         try {
             let set = await helper.requestBody(URL, method, proxy, headers) //request function
-            //console.log(set.response.status, this.WEBSITE)
+            console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 302) {
                 errored = true;
             }
             if (errored) {
+                this.monitorAntibot()
                 return;
             }
             let location = set.response.headers.raw()["location"];
             if (location)
                 location = location[0];
-            // console.log(URL)
-            // console.log(location)
             if (location && location.includes('password')) {
                 if (this.password !== "Up") {
                     if (this.password) {
@@ -186,12 +191,12 @@ class ShopifyMonitor {
                     }
                 }
             }
-            await helper.sleep(2000)
+            await helper.sleep(1000)
             this.monitorAntibot();
             return;
         } catch (err) {
-            //console.log(err)
             this.monitorAntibot()
+            return;
         }
     }
     findProduct(id, products) {
