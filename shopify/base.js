@@ -22,6 +22,8 @@ class ShopifyMonitor {
         this.monitorProducts("1", "250");
         await helper.sleep(100);
         this.monitorProducts("1", "250")
+        await helper.sleep(100);
+        this.monitorProducts("1", "250")
     }
 
     async monitorProducts(page, limit) {
