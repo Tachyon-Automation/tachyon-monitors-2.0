@@ -21,6 +21,8 @@ monitors.push(new ShopifyMonitor("https://usgstore.com.au", 'NONE'))
 monitors.push(new ShopifyMonitor("https://creme321.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.leafproxies.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.onenessboutique.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.manorphx.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.bandier.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }
