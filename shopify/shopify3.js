@@ -16,7 +16,9 @@ monitors.push(new ShopifyMonitor("https://momentumshop.ca", 'UNFILTEREDCA'))
 monitors.push(new ShopifyMonitor("https://lessoneseven.com", 'UNFILTEREDCA'))
 monitors.push(new ShopifyMonitor("https://cncpts.com", 'CNCPTS'))
 monitors.push(new ShopifyMonitor("https://gallery.canary---yellow.com", 'CANARYYELLOW'))
-
+monitors.push(new ShopifyMonitor("https://www.hoopsheaven.com.au", 'NONE'))
+monitors.push(new ShopifyMonitor("https://usgstore.com.au", 'NONE'))
+monitors.push(new ShopifyMonitor("https://creme321.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }

@@ -110,7 +110,6 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    await helper.sleep(1111111111)
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
