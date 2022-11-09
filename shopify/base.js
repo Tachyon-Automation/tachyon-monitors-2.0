@@ -12,7 +12,7 @@ class ShopifyMonitor {
     checkpoint;
 
     constructor(website, dbsite) {
-        this.DBSITE = "SHOPIFY"+ dbsite
+        this.DBSITE = "SHOPIFY" + dbsite
         this.WEBSITE = website;
         this.products = [];
     }
@@ -40,7 +40,7 @@ class ShopifyMonitor {
             let method = 'GET'; //request method
 
             let set = await helper.requestJson(URL, method, proxy, headers) //request function
-            console.log(set.response.status, this.WEBSITE)
+            //console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 monitor(sku)
                 return
@@ -73,10 +73,17 @@ class ShopifyMonitor {
                 let stock = 0
                 for (let variant of product.variants) {
                     if (variant.available && !variants.includes(variant.id)) {
-                        variants.push(variant.id);
-                        sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
-                        price = variant.price;
-                        stock++
+                        if (JSON.stringify(variant).includes("inventory_quantity")) {
+                            variants.push(variant.id);
+                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
+                            price = variant.price;
+                            stock += variant.inventory_quantity
+                        } else {
+                            variants.push(variant.id);
+                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
+                            price = variant.price;
+                            stock++
+                        }
                     }
                 }
                 let inStock = variants.length > 0;
@@ -103,6 +110,7 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
+                    await helper.sleep(1111111111)
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
