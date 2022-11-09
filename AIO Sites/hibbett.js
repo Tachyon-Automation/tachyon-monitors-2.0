@@ -95,7 +95,7 @@ async function monitor(sku) {
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
             }
         }
-        await helper.sleep(product.waittime);
+        //await helper.sleep(product.waittime);
         monitor(sku);
         return
     } catch (e) {
