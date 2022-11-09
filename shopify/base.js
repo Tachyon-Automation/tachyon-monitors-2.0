@@ -42,7 +42,7 @@ class ShopifyMonitor {
             let method = 'GET'; //request method
 
             let set = await helper.requestJson(URL, method, proxy, headers) //request function
-            console.log(set.response.status, this.WEBSITE)
+            //console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 monitor(sku)
                 return
