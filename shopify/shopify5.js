@@ -18,6 +18,11 @@ monitors.push(new ShopifyMonitor("https://amigoskateshop.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://njskateshop.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://owlandgoosegifts.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://lustmexico.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://atmos.co.id", 'NONE'))
+monitors.push(new ShopifyMonitor("https://us.bape.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://imranpotato.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://finessestore.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://antisocialcollective.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
