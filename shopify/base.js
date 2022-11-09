@@ -152,7 +152,7 @@ class ShopifyMonitor {
         }
         try {
             let set = await helper.requestBody(URL, method, proxy, headers) //request function
-            console.log(set.response.status, this.WEBSITE)
+            //console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 302) {
                 errored = true;
             }
