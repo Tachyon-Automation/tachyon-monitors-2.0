@@ -2,7 +2,7 @@ const helper = require('../x-help/helper');
 const HTTPSProxyAgent = require('https-proxy-agent')
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const version = `Shopify v1.0`
+const version = `Shopify v2.0`
 let DBSITE
 class ShopifyMonitor {
 
@@ -18,12 +18,15 @@ class ShopifyMonitor {
     }
 
     async monitor() {
-        this.monitorProducts();
-        this.monitorProducts();
+        this.monitorProducts("1", "250");
+        await helper.sleep(1000);
+        this.monitorProducts("1", "250")
+        await helper.sleep(1000);
+        this.monitorProducts("1", "250");
         //this.monitorAntibot();
     }
 
-    async monitorProducts(page = 1, limit = 200) {
+    async monitorProducts(page, limit) {
         let proxy = await helper.getRandomProxy();
         let URL = this.WEBSITE + `/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
@@ -39,7 +42,7 @@ class ShopifyMonitor {
             let method = 'GET'; //request method
 
             let set = await helper.requestJson(URL, method, proxy, headers) //request function
-            //console.log(set.response.status, this.WEBSITE)
+            console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 monitor(sku)
                 return
@@ -48,20 +51,20 @@ class ShopifyMonitor {
                 let cache = set.response.headers.raw()["x-cache"];
                 if (cache != 'miss') {
                     console.log("Missing Cache header");
-                    this.monitorProducts()
+                    this.monitorProducts(page, limit)
                     return;
                 }
             }
             let body = await set.json
             let currentHash = body
             if (currentHash == this.lastHash) {
-                this.monitorProducts();
+                this.monitorProducts(page, limit);
                 return;
             }
             if (!this.lastHash) {
                 this.lastHash = currentHash;
                 this.products = body.products;
-                this.monitorProducts();
+                this.monitorProducts(page, limit);
                 return;
             }
             for (let product of body.products) {
@@ -90,7 +93,6 @@ class ShopifyMonitor {
                     continue;
                 }
                 let oldProduct = this.findProduct(product.id, this.products);
-                let oldSizes = "";
                 if (oldProduct) {
                     let oldVariants = [];
                     for (let variant of oldProduct.variants) {
@@ -127,12 +129,12 @@ class ShopifyMonitor {
                 }
             }
             this.lastHash = currentHash;
-            this.products = body.products;
-            this.monitorProducts()
+            this.products = body.products
+            this.monitorProducts(page, limit)
         } catch (err) {
             //console.log(err)
             //console.log(this.WEBSITE)
-            this.monitorProducts()
+            this.monitorProducts(page, limit)
         }
     }
     findProduct(id, products) {

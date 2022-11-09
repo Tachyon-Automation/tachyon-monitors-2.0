@@ -42,7 +42,8 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://hibbett.com/on/demandware.store/Sites-Hibbett-US-Site/default/Stylitics-ShowProductDetails;.js?pid=${sku}&pid=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        let root = HTMLParser.parse(await set.text) 
+        //console.log(set.response.status)
+        let root = set.html
         if (set.response.status == 410) {
             console.log('Removed - ' + sku)
             return
