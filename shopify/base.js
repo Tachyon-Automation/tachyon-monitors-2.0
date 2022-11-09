@@ -23,7 +23,7 @@ class ShopifyMonitor {
         //this.monitorAntibot();
     }
 
-    async monitorProducts(page = 1, limit = 100) {
+    async monitorProducts(page = 1, limit = 200) {
         let proxy = await helper.getRandomProxy();
         let URL = this.WEBSITE + `/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
