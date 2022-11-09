@@ -24,6 +24,9 @@ monitors.push(new ShopifyMonitor("https://imranpotato.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://finessestore.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://antisocialcollective.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://alumniofny.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://primitiveskate.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.svrn.com", 'NONE'))
+
 //
 for(let monitor of monitors) {
     monitor.monitor();
