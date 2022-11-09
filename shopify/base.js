@@ -20,6 +20,7 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorProducts();
         this.monitorProducts();
+        this.monitorProducts();
         //this.monitorAntibot();
     }
 
@@ -29,7 +30,7 @@ class ShopifyMonitor {
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
-        if (this.DBSITE == "SHOPIFYFUNKO") {
+        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS") {
             URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
