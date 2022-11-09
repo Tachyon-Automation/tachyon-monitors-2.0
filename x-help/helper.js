@@ -277,6 +277,40 @@ const helper = {
         }
         return
     },
+    postPassword: async function (site, site, status, version) {
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": site,
+                        "url": site,
+                    },
+                    "title": status,
+                    "url": site,
+                    "color": color,
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "icon_url": site.group.embed.image
+                    },
+                    "timestamp": new Date().toISOString()
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //onsole.log(e)
+        }
+        return
+    },
     postShopify: async function (url, title, price, type, image, sizeright, sizeleft, stock, site, version, qt, links) {
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]

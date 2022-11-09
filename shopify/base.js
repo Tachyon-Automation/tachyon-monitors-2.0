@@ -18,12 +18,12 @@ class ShopifyMonitor {
     }
 
     async monitor() {
+        this.monitorAntibot();
         this.monitorProducts("1", "250");
         await helper.sleep(200);
         this.monitorProducts("1", "250")
         await helper.sleep(200);
         this.monitorProducts("1", "250");
-        //this.monitorAntibot();
     }
 
     async monitorProducts(page, limit) {
@@ -40,9 +40,8 @@ class ShopifyMonitor {
         }
         try {
             let method = 'GET'; //request method
-
             let set = await helper.requestJson(URL, method, proxy, headers) //request function
-            //console.log(set.response.status, this.WEBSITE)
+            console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 monitor(sku)
                 return
@@ -135,6 +134,64 @@ class ShopifyMonitor {
             //console.log(err)
             //console.log(this.WEBSITE)
             this.monitorProducts(page, limit)
+        }
+    }
+    async monitorAntibot() {
+        let errored = false;
+        let URL = this.WEBSITE + "/checkout";
+        let proxy = await helper.getRandomProxy();
+        let method = 'GET'; //request method
+        let headers = {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+        }
+        try {
+            let set = await helper.requestBody(URL, method, proxy, headers) //request function
+            //console.log(set.response.status, this.WEBSITE)
+            if (set.response.status != 302) {
+                errored = true;
+            }
+            if (errored) {
+                return;
+            }
+            let location = set.response.headers.raw()["location"];
+            if (location)
+                location = location[0];
+            // console.log(URL)
+            // console.log(location)
+            if (location && location.includes('password')) {
+                if (this.password !== "Up") {
+                    if (this.password) {
+                        let sites = await helper.dbconnect(this.DBSITE)
+                        for (let group of sites) {
+                            helper.postPassword(this.WEBSITE, group, 'Password Page Up!', version)
+                        }
+                        let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
+                        for (let group of password) {
+                            helper.postPassword(this.WEBSITE, group, 'Password Page Up!', version)
+                        }
+                    }
+                    this.password = "Up";
+                    console.log(`[SHOPIFY] (${this.WEBSITE}) Password Page Up!`);
+                }
+            }
+            else if (this.password === "Up") {
+                if (this.password) {
+                    let sites = await helper.dbconnect(this.DBSITE)
+                    for (let group of sites) {
+                        helper.postPassword(this.WEBSITE, group, 'Password Page Down!', version)
+                    }
+                    let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
+                    for (let group of password) {
+                        helper.postPassword(this.WEBSITE, group, 'Password Page Down!', version)
+                    }
+                }
+            }
+            await helper.sleep(2000)
+            this.monitorAntibot();
+            return;
+        } catch (err) {
+            //console.log(err)
+            this.monitorAntibot()
         }
     }
     findProduct(id, products) {
