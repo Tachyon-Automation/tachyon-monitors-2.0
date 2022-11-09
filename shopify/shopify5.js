@@ -30,7 +30,8 @@ monitors.push(new ShopifyMonitor("https://snkrroom.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://hlorenzo.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://empireskate.co.nz", 'NONE'))
 monitors.push(new ShopifyMonitor("https://feature.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://feature.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://gbny.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://topsandbottomsusa.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
