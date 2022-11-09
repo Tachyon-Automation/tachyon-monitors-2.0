@@ -26,7 +26,11 @@ monitors.push(new ShopifyMonitor("https://antisocialcollective.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://alumniofny.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://primitiveskate.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.svrn.com", 'NONE'))
-
+monitors.push(new ShopifyMonitor("https://snkrroom.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://hlorenzo.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://empireskate.co.nz", 'NONE'))
+monitors.push(new ShopifyMonitor("https://feature.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://feature.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
