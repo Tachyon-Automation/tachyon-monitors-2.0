@@ -20,7 +20,6 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorProducts();
         this.monitorProducts();
-        this.monitorProducts();
         //this.monitorAntibot();
     }
 

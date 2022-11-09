@@ -19,6 +19,8 @@ monitors.push(new ShopifyMonitor("https://gallery.canary---yellow.com", 'CANARYY
 monitors.push(new ShopifyMonitor("https://www.hoopsheaven.com.au", 'NONE'))
 monitors.push(new ShopifyMonitor("https://usgstore.com.au", 'NONE'))
 monitors.push(new ShopifyMonitor("https://creme321.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.leafproxies.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.onenessboutique.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }
