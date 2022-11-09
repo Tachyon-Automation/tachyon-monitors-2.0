@@ -109,9 +109,9 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
+                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let qt = `Na`
                     let links = 'Na'
                     let sizeright = sizes.split('\n')
