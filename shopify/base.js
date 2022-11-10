@@ -86,7 +86,7 @@ class ShopifyMonitor {
                             if(option == null)
                             option = variant.option1
                             variants.push(variant.id);
-                            sizes += `[${variant.option2}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
+                            sizes += `[${option}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
                             price = variant.price;
                             stock++
                         }
