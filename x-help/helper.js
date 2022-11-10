@@ -318,8 +318,7 @@ const helper = {
         }
         return
     },
-    postShopify: async function (url, title, price, type, image, sizeright, sizeleft, stock, site, version, qt, links) {
-        let date = new Date()
+    postShopify: async function (url, title, price, type, image, sizeright, sizeleft, stock, site, version, qt, links, date) {
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
