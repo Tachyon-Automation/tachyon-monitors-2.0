@@ -25,11 +25,9 @@ const helper = {
         const hooks = mongoose.model('webhooks', { name: String })
         return hooks
     },
-
     sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
-
     getRandomProxy: async function () {
         let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
@@ -38,15 +36,12 @@ const helper = {
         let WEBSHARE = await require('./oculus.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
-
     getUSARotatingProxy: function () {
         return 'http://global.rotating.proxyrack.net:9000';
     },
-
     getMixedRotatingProxy: function () {
         return 'http://global.rotating.proxyrack.net:9000'
     },
-
     getBodyAsText(response, ms = 1000) {
         let timeout = new Promise((resolve, reject) => {
             let id = setTimeout(() => {
@@ -54,7 +49,6 @@ const helper = {
                 reject('helper.js, Response to Text conversion timed out in ' + ms + 'ms.')
             }, ms)
         })
-
         return Promise.race([
             response.text(),
             timeout
@@ -63,7 +57,7 @@ const helper = {
     requestShopify: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 1500)
+            const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let json = await response.json()
             clearTimeout(timeoutId)

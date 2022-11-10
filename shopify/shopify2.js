@@ -1,5 +1,4 @@
 let ShopifyMonitor = require('./base.js');
-const helper = require('../x-help/helper');
 let monitors = [];
 monitors.push(new ShopifyMonitor("https://shop.doverstreetmarket.com", 'DSMUK'))
 monitors.push(new ShopifyMonitor("https://space23.it", 'NONE'))
