@@ -283,7 +283,7 @@ const helper = {
         }
         return
     },
-    postPassword: async function (site, site, status, version) {
+    postPassword: async function (website, site, status, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let proxy = await getRandomProxy2();
@@ -295,11 +295,11 @@ const helper = {
             "embeds": [
                 {
                     "author": {
-                        "name": site,
-                        "url": site,
+                        "name": website,
+                        "url": website,
                     },
                     "title": status,
-                    "url": site,
+                    "url": website,
                     "color": color,
                     "footer": {
                         "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
