@@ -308,7 +308,7 @@ const helper = {
                     "url": site,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().split('T')[1].replace('Z','')} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -390,7 +390,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().split('T')[1].replace('Z','')} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }                
                 }
@@ -459,7 +459,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().split('T')[1].replace('Z','')} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -523,7 +523,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().split('T')[1].replace('Z','')} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
