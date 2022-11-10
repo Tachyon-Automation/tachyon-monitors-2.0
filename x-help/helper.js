@@ -130,7 +130,7 @@ const helper = {
             clearTimeout(timeoutId)
             return { html, response, text }
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         return
     },
@@ -552,6 +552,45 @@ const helper = {
                     "fields": [{
                         "name": "Reddit post in",
                         "value": `[r/${sub.toLowerCase()}](https://www.reddit.com/r/${sub.toLowerCase()}/)`
+                      }],
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "icon_url": site.group.embed.image
+                    }
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //onsole.log(e)
+        }
+        return
+    },
+    postSlickdeals: async function(url, title, red, site, version){
+        let date = new Date()
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": 'https://slickdeals.net',
+                        "url": 'https://slickdeals.net',
+                        "icon_url": 'https://media.discordapp.net/attachments/809958634019618866/861323148510494750/icon.png'
+                    },
+                    "fields": [{
+                        "name": "Posted in",
+                        "value": `[${red.split('-')[1]}](https://slickdeals.net/forums/forumdisplay.php?f=${red.split('-')[0]})`
                       }],
                     "title": title,
                     "url": url,
