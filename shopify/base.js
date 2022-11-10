@@ -16,15 +16,15 @@ class ShopifyMonitor {
     }
 
     async monitor() {
-        this.monitorAntibot();
+        //this.monitorAntibot();
         this.monitorProducts("1", "250");
         this.monitorProducts("1", "250");
         this.monitorProducts("1", "250");
     }
 
     async monitorProducts(page, limit) {
-        let proxy = await helper.getRandomProxy();
-        let URL = this.WEBSITE + `/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'
+        URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
@@ -37,7 +37,6 @@ class ShopifyMonitor {
         try {
             let method = 'GET'; //request method
             let set = await helper.requestShopify(URL, method, proxy, headers) //request function
-            console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 this.monitorProducts(page, limit)
                 return
