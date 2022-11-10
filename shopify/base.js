@@ -20,6 +20,7 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
+        this.monitorProducts("1", "50");
         this.monitorProducts("1", "25");
     }
 
@@ -107,7 +108,6 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    await helper.sleep(1000000)
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${new Date().toISOString()} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
