@@ -16,6 +16,9 @@ monitors.push(new ShopifyMonitor("https://ferraramarketinc.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://finalmouse.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.tcg-stadium.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://shopjustsports.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://laborskateshop.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://stay-rooted.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://stay-rooted.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
