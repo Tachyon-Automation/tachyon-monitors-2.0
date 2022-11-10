@@ -107,7 +107,6 @@ class ShopifyMonitor {
                 if (webhookType) {
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${new Date().toISOString()} - ${product.title}`)
-                    await helper.sleep(11111111)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
                     let qt = `Na`
