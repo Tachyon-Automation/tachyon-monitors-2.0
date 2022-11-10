@@ -133,10 +133,8 @@ class ShopifyMonitor {
                     //if(product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy')  || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt')&& !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                 }
             }
-            let delay = requestTimeTaken / 3
             this.lastHash = currentHash;
             this.products = body.products
-            await helper.sleep(delay)
             this.monitorProducts(page, limit)
         } catch (err) {
             //console.log(err)
