@@ -66,8 +66,6 @@ async function monitor(sku) {
                     set = 0
                 }
                 if (size.atsInventory > 0 && size.defAttributes[0].value.trim().length > 0) {
-                    sizes += `${size.defAttributes[set].value.trim()} (${size.atsInventory}) - ${size.id} \n`;
-                    stock += size.atsInventory
                     sizeList.push(size.id);
                     if (!oldSizeList.includes(size.id)) {
                         stock += size.atsInventory

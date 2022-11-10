@@ -33,7 +33,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //let agent = randomUseragent.getRandom(); //random agent per site
         //these headers change per site
         let headers = {
@@ -42,10 +42,10 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://hibbett.com/product;.js?pid=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let root = set.html 
         if (set.response.status == 410) {
-            console.log('Removed - ' + sku)
+            //console.log('Removed - ' + sku)
             return
         }
         if (set.response.status != 200) {

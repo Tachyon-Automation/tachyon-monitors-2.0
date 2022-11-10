@@ -83,9 +83,10 @@ async function monitor(sku) {
                 stock += Number(vars[id].totalQuantityAvailable) //total count or quantity
                 sizeList.push(vars[id].rmsSkuId);
                 price = vars[id].displayPrice //price set for vars
-                if (!oldSizeList.includes(vars[id].rmsSkuId))// oldSizeList.includes this size
+                if (!oldSizeList.includes(vars[id].rmsSkuId)) {// oldSizeList.includes this size
                     inStock = true;
                     title = title + vars[id].colorDisplayValue + ","
+                }
             }
         }
         if (inStock) {
