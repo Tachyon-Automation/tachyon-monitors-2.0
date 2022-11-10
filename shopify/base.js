@@ -126,9 +126,10 @@ class ShopifyMonitor {
                     //if(product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy')  || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt')&& !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                 }
             }
-            let delay = 0 - requestTimeTaken / 2
+            let delay = requestTimeTaken / 2
             this.lastHash = currentHash;
             this.products = body.products
+            console.log(delay)
             await helper.sleep(delay <= 0 ? 0 : delay)
             this.monitorProducts(page, limit)
         } catch (err) {
