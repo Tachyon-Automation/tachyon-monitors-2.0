@@ -19,7 +19,7 @@ monitors.push(new ShopifyMonitor("https://shopjustsports.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://laborskateshop.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://stay-rooted.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://leencustoms.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://leencustoms.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://futurerfrnce.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
