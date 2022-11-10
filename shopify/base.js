@@ -17,13 +17,13 @@ class ShopifyMonitor {
 
     async monitor() {
         //this.monitorAntibot();
-        this.monitorProducts("1", "100");
-        this.monitorProducts("1", "100");
-        this.monitorProducts("1", "100");
+        this.monitorProducts("1", "250");
+        this.monitorProducts("1", "250");
+        this.monitorProducts("1", "250");
     }
 
     async monitorProducts(page, limit) {
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let URL =`${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -37,6 +37,7 @@ class ShopifyMonitor {
         try {
             let method = 'GET'; //request method
             let set = await helper.requestShopify(URL, method, proxy, headers) //request function
+            //console.log(set.response.status )
             if (set.response.status != 200) {
                 this.monitorProducts(page, limit)
                 return
@@ -49,7 +50,7 @@ class ShopifyMonitor {
                     return;
                 }
             }
-            let body = await set.json
+            let body = set.json
             let currentHash = body
             if (currentHash == this.lastHash) {
                 this.monitorProducts(page, limit);
@@ -106,7 +107,7 @@ class ShopifyMonitor {
                 }
                 if (webhookType) {
                     let date = new Date()
-                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${new Date().toISOString()} - ${product.title}`)
+                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${date} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
                     let qt = `Na`
@@ -127,8 +128,8 @@ class ShopifyMonitor {
             this.products = body.products
             this.monitorProducts(page, limit)
         } catch (err) {
-            console.log(err)
-            console.log(this.WEBSITE)
+            //console.log(err)
+            //console.log(this.WEBSITE)
             this.monitorProducts(page, limit)
         }
     }

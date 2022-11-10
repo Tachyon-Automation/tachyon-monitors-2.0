@@ -57,7 +57,7 @@ const helper = {
     requestShopify: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            const timeoutId = setTimeout(() => controller.abort(), 1000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let json = await response.json()
             clearTimeout(timeoutId)
@@ -110,9 +110,8 @@ const helper = {
     requestJson2: async function (site, method, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            const timeoutId = setTimeout(() => controller.abort(), 1000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal })
-            console.log(response)
             let json = await response.json()
             clearTimeout(timeoutId)
             return { json, response }
