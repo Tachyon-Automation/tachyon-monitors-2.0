@@ -79,7 +79,7 @@ class ShopifyMonitor {
                             stock += variant.inventory_quantity
                         } else {
                             variants.push(variant.id);
-                            sizes += `[${variant.option1}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
+                            sizes += `[${variant.option2}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
                             price = variant.price;
                             stock++
                         }
