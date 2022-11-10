@@ -73,6 +73,9 @@ async function monitor(sku) {
             }
         }
         if (inStock) {
+            let AIO = await helper.dbconnect("AIOFILTEREDUS")
+            let sites = await helper.dbconnect(catagory+site)
+
             let qt = 'Na'
             let links = 'Na'
             let req = `https://www.jdsports.com/store/browse/gadgets/productLookupJSON.jsp?productId=${productID}&styleId=${styleID}&colorId=${colorID}`//request url
@@ -81,13 +84,15 @@ async function monitor(sku) {
             let title = body2.product.name + ' ' + body2.product.colors.color[0].content
             let price = body2.product.Prices.price[0].fullPrice
             let image = body2.product.colors.color[0].thumbnail
-            let sites = await helper.dbconnect(catagory+'FINISHLINE/JD')
             let url = `https://www.jdsports.com/store/product/tachyon/${productID}?styleId=${styleID}&colorId=${colorID}#Tachyon`
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
             for (let group of sites) {
+                helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+            }
+            for (let group of AIO) {
                 helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
             }
             await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);

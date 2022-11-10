@@ -81,6 +81,7 @@ async function monitor(sku) {
 
             if (inStock) {
                 let sites = await helper.dbconnect(catagory+'HIBBETT')
+                let AIO = await helper.dbconnect("AIOFILTEREDUS")
                 let qt = 'Na'
                 let links = 'Na'
                 //helper.posElephentHibbett(sku, title, image)
@@ -89,6 +90,9 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
+                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                }
+                for (let group of AIO) {
                     helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);

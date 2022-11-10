@@ -42,7 +42,7 @@ async function monitor(sku) {
         let req = `https://www.snipes.com/s/snse-DE-AT/dw/shop/v19_5/products/(${sku})?client_id=cf212f59-94d1-4314-996f-7a11871156f4&cache=${v4()}&locale=de-DE&expand=availability,+prices,+promotions,+variations`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -77,6 +77,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let AIO = await helper.dbconnect("AIOFILTEREDEU")
                 let sites = await helper.dbconnect(catagory+"SNIPESEU")
                 let burst = `[Burst](http://localhost:4000/qt?st=snipes&p=https://www.snipes.com/p/${sku}.html)\n`
                 let flare = `[Flare](http://127.0.0.1:5559/quicktask?product=https://www.snipes.com/p/${sku}.html)\n`
@@ -95,6 +96,9 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
+                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                }
+                for (let group of AIO) {
                     helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);

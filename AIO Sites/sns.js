@@ -89,6 +89,7 @@ async function monitor(sku) {
                     inStock = true;
             }
             if (inStock) {
+                let AIO = await helper.dbconnect("AIOFILTEREDUS")
                 let sites = await helper.dbconnect(catagory+site)
                 let qt = 'Na'
                 let links = 'Na'
@@ -98,6 +99,9 @@ async function monitor(sku) {
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
                     helper.postAIO(url, title, newsku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                }
+                for (let group of AIO) {
+                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
             }

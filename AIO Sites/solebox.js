@@ -43,7 +43,7 @@ async function monitor(sku) {
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
+        //console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
@@ -79,6 +79,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
+                let AIO = await helper.dbconnect("AIOFILTEREDEU")
                 let sites = await helper.dbconnect(catagory+site)
                 let qt = 'Na'
                 let links = 'Na'
@@ -87,6 +88,9 @@ async function monitor(sku) {
                 let sizeright = sizes.split('\n')
                 let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                 for (let group of sites) {
+                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                }
+                for (let group of AIO) {
                     helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
