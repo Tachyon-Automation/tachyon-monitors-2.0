@@ -7,7 +7,7 @@ monitors.push(new ShopifyMonitor("https://shop.ccs.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://www.303boards.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://area51store.co.nz", 'NONE'))
 monitors.push(new ShopifyMonitor("https://twofeetundr.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://twofeetundr.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://chalicecollectibles.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
