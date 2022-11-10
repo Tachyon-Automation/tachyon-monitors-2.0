@@ -70,11 +70,15 @@ class ShopifyMonitor {
                 let sizes = ""
                 let price = ""
                 let stock = 0
+                let option
                 for (let variant of product.variants) {
                     if (variant.available && !variants.includes(variant.id)) {
                         if (variant.inventory_quantity) {
                             variants.push(variant.id);
-                            sizes += `[${variant.option2}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
+                            option = variant.option2
+                            if(option == null)
+                            option = variant.option1
+                            sizes += `[${option}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
                             price = variant.price;
                             stock += variant.inventory_quantity
                         } else {
