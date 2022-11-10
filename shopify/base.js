@@ -20,11 +20,11 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
-        this.monitorProducts("1", "250")
+        this.monitorProducts("1", "250");
     }
 
     async monitorProducts(page, limit) {
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let URL = this.WEBSITE + `/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
@@ -37,7 +37,7 @@ class ShopifyMonitor {
         }
         try {
             let method = 'GET'; //request method
-            let set = await helper.requestJson(URL, method, proxy, headers) //request function
+            let set = await helper.requestShopify(URL, method, proxy, headers) //request function
             //console.log(set.response.status, this.WEBSITE)
             if (set.response.status != 200) {
                 monitor(sku)
@@ -107,9 +107,10 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
+                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${new Date().toISOString()} - ${product.title}`)
+
                     let sites = await helper.dbconnect(this.DBSITE)
                     let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
-                    console.log(`[SHOPIFY] (${this.WEBSITE}) ${webhookType} - ${product.title}`)
                     let qt = `Na`
                     let links = 'Na'
                     let sizeright = sizes.split('\n')

@@ -60,6 +60,19 @@ const helper = {
             timeout
         ])
     },
+    requestShopify: async function (site, method, proxy, headers) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1500)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
+            let json = await response.json()
+            clearTimeout(timeoutId)
+            return { json, response }
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
     requestJson: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
@@ -261,10 +274,9 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
                         "icon_url": site.group.embed.image
-                    },
-                    "timestamp": new Date().toISOString()
+                    }
                 }
             ]
         }
@@ -295,10 +307,9 @@ const helper = {
                     "url": site,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
                         "icon_url": site.group.embed.image
-                    },
-                    "timestamp": new Date().toISOString()
+                    }
                 }
             ]
         }
@@ -378,10 +389,9 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
                         "icon_url": site.group.embed.image
-                    },
-                    "timestamp": new Date().toISOString()
+                    }                
                 }
             ]
         }
@@ -448,10 +458,9 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
                         "icon_url": site.group.embed.image
-                    },
-                    "timestamp": new Date().toISOString()
+                    }
                 }
             ]
         }
@@ -513,10 +522,9 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon `,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
                         "icon_url": site.group.embed.image
-                    },
-                    "timestamp": new Date().toISOString()
+                    }
                 }
             ]
         }
