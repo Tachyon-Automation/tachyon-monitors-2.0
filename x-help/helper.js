@@ -291,6 +291,7 @@ const helper = {
         return
     },
     postPassword: async function (site, site, status, version) {
+        let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let proxy = await getRandomProxy2();
         let body =
@@ -324,6 +325,7 @@ const helper = {
         return
     },
     postShopify: async function (url, title, price, type, image, sizeright, sizeleft, stock, site, version, qt, links) {
+        let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
@@ -406,6 +408,7 @@ const helper = {
         return
     },
     postAmazon: async function (url, title, sku, price, image, stock, offerid, site, version, qt, links) {
+        let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         let proxy = await getRandomProxy2();
@@ -475,6 +478,7 @@ const helper = {
         return
     },
     postRetail: async function (url, title, sku, price, image, stock, site, version, qt, links) {
+        let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         let proxy = await getRandomProxy2();
