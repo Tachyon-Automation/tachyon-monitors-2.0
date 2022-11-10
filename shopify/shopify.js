@@ -29,12 +29,6 @@ monitors.push(new ShopifyMonitor("https://eflash.doverstreetmarket.com", 'DSMUK'
 monitors.push(new ShopifyMonitor("https://shop-us.doverstreetmarket.com", 'DSMUS'))
 monitors.push(new ShopifyMonitor("https://shop-sg.doverstreetmarket.com", 'DSMSG'))
 monitors.push(new ShopifyMonitor("https://shop-jp.doverstreetmarket.com", 'DSMJP'))
-monitors.push(new ShopifyMonitor("https://shopwss.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://ficegallery.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://ferraramarketinc.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://finalmouse.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://www.tcg-stadium.com", 'NONE'))
-monitors.push(new ShopifyMonitor("https://shopjustsports.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }

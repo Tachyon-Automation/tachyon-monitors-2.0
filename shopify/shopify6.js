@@ -8,6 +8,14 @@ monitors.push(new ShopifyMonitor("https://www.303boards.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://area51store.co.nz", 'NONE'))
 monitors.push(new ShopifyMonitor("https://twofeetundr.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://chalicecollectibles.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://futurerfrnce.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://store.taylorswift.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://shopwss.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://ficegallery.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://ferraramarketinc.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://finalmouse.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://www.tcg-stadium.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://shopjustsports.com", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
