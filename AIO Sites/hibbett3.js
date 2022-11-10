@@ -45,7 +45,7 @@ async function monitor(sku) {
         console.log(set.response.status)
         let root = set.html 
         if (set.response.status == 410) {
-            //console.log('Removed - ' + sku)
+            console.log('Removed - ' + sku)
             return
         }
         if (set.response.status != 200) {

@@ -1,6 +1,6 @@
 const helper = require('../x-help/helper');
 const { v4 } = require('uuid');
-const version = `Shopify v2.0`
+const version = `Shopify v3.0`
 let DBSITE
 class ShopifyMonitor {
 
@@ -18,12 +18,10 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
-        this.monitorProducts("1", "250");
-        this.monitorProducts("1", "250");
     }
 
     async monitorProducts(page, limit) {
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let URL =`${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -37,7 +35,7 @@ class ShopifyMonitor {
         try {
             let method = 'GET'; //request method
             let set = await helper.requestShopify(URL, method, proxy, headers) //request function
-            //console.log(set.response.status )
+            console.log(set.response.status )
             if (set.response.status != 200) {
                 this.monitorProducts(page, limit)
                 return
