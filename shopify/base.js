@@ -18,6 +18,7 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
+        await helper.sleep(200)
         this.monitorProducts("1", "250");
     }
 
