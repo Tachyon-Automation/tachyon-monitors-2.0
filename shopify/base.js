@@ -130,8 +130,8 @@ class ShopifyMonitor {
             this.products = body.products
             this.monitorProducts(page, limit)
         } catch (err) {
-            //console.log(err)
-            //console.log(this.WEBSITE)
+            console.log(err)
+            console.log(this.WEBSITE)
             this.monitorProducts(page, limit)
         }
     }
