@@ -534,6 +534,44 @@ const helper = {
         }
         return
     },
+    postReddit: async function(url, title, sub, site, version){
+        let date = new Date()
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": 'Reddit Monitor',
+                        "icon_url": 'https://media.discordapp.net/attachments/820804762459045910/821418521971523624/iDdntscPf-nfWKqzHRGFmhVxZm4hZgaKe5oyFws-yzA.webp?width=531&height=531'
+                    },
+                    "fields": [{
+                        "name": "Reddit post in",
+                        "value": `[r/${sub.toLowerCase()}](https://www.reddit.com/r/${sub.toLowerCase()}/)`
+                      }],
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "icon_url": site.group.embed.image
+                    }
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //onsole.log(e)
+        }
+        return
+    },
     discordbot: async function (CHANNEL, PRODUCTS, TABLE, monitor, SITE) {
         try {
             discordBot.getClient.on('message', async function (msg) {
