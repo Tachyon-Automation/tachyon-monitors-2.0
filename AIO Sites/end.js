@@ -84,7 +84,7 @@ async function monitor(sku) {
                     helper.postAIO(url, title, pid, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 for (let group of AIO) {
-                    helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
+                    helper.postAIO(url, title, pid, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
 
