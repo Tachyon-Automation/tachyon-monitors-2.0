@@ -23,6 +23,7 @@ class ShopifyMonitor {
     }
 
     async monitorProducts(page, limit) {
+        let start = Date.now()
         let proxy = await helper.getRandomProxy();
         let URL =`${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
@@ -50,6 +51,7 @@ class ShopifyMonitor {
                     return;
                 }
             }
+            let requestTimeTaken = Date.now() - start
             let body = set.json
             let currentHash = body
             if (currentHash == this.lastHash) {
@@ -124,8 +126,10 @@ class ShopifyMonitor {
                     //if(product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy')  || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt')&& !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                 }
             }
+            let delay = requestTimeTaken / 3
             this.lastHash = currentHash;
             this.products = body.products
+            await helper.sleep(delay)
             this.monitorProducts(page, limit)
         } catch (err) {
             //console.log(err)
