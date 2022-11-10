@@ -41,6 +41,42 @@ module.exports = {
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
             "out_file": "/dev/null"
+        },
+        {
+            "script": "./shopify/shopify7.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./shopify/shopify8.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./shopify/shopify9.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./shopify/shopify10.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
+        },
+        {
+            "script": "./shopify/shopify11.js",
+            "watch": true,
+            "max_memory_restart": "1000M",
+            "error_file": "/dev/null",
+            "out_file": "/dev/null"
         }
+    
     ]
 }
