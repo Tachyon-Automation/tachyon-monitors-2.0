@@ -208,6 +208,7 @@ const helper = {
         });
     },
     postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, site, version, qt, links) {
+        let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
         sizeleft = sizeleft.join('\n')
@@ -274,7 +275,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().split('T')[1].replace('Z','')} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
