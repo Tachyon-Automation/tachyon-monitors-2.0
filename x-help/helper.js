@@ -274,7 +274,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -307,7 +307,7 @@ const helper = {
                     "url": site,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -389,7 +389,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST`,
                         "icon_url": site.group.embed.image
                     }                
                 }
@@ -458,7 +458,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -522,7 +522,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST}`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${new Date().toISOString().split('T')[1].replace('Z','')} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
