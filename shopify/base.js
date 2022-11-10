@@ -74,7 +74,7 @@ class ShopifyMonitor {
                     if (variant.available && !variants.includes(variant.id)) {
                         if (variant.inventory_quantity) {
                             variants.push(variant.id);
-                            sizes += `[${variant.option1}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
+                            sizes += `[${variant.option2}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
                             price = variant.price;
                             stock += variant.inventory_quantity
                         } else {
