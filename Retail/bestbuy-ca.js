@@ -33,7 +33,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy() //proxy per site
+        let proxy = await helper.getRandomProxy2() //proxy per site
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0b4pre) Gecko/20100815 Minefield/4.0b4pre',
         }
