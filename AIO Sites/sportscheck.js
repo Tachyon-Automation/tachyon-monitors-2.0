@@ -33,42 +33,45 @@ async function monitor(sku) {
         let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+            'User-Agent': "Mozilla/5.0 (compatible; Google-Site-Verification/1.0)",
         }
+
         let method = 'GET'; //request method
-        let req = `https://api.canadiantire.ca/search/api/chek/v0/products?q=${sku}&_=${Date.now()}&abcz=${v4()}`//request url
-        let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
-        let body = await set.json
+        let req = `https://www.sportchek.ca/product/${v4()}-${sku}.html`//request url
+        let set = await helper.requestHtml(req, method, proxy, headers) //request function
+        let body = await set.text
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
-        //Define body variables
-        if (body.totalResults > 0) {
+        let json = await JSON.parse(body.split('type="application/ld+json">')[1].split('</script>')[0])
+        if (json[0].name) {
             let inStock = false;
             let url = `https://www.sportchek.ca/product/Tachyon-Monitors-${sku}.html`//product url
-            let title = body.items[0].title
-            let price = body.items[0].price.toString()
-            let image = 'https:' + body.items[0].imageAndColor[0].imageUrl
+            let title = json[0].name
+            let price
+            let image = json[0].image
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let oldSizeList = await query.rows[0].sizes
             let sizeList = []
-            let variants = body.filters[3].values
+            let variants = json[0].offers
             //pars sizes for loop
             for (let size of variants) {
-                    sizes += `${size.value}\n`;
-                    stock++
-                    sizeList.push(size.value);
-                    if (!oldSizeList.includes(size.value)) {
-                        inStock = true;
+                if(size.availability == 'OutOfStock') 
+                continue
+                sizes += `[${size.additionalProperty[0].value}](${size.url})\n`;
+                price = size.price
+                stock++
+                sizeList.push(size.additionalProperty[0].value);
+                if (!oldSizeList.includes(size.additionalProperty[0].value)) {
+                    inStock = true;
                 }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
