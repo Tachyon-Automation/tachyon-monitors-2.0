@@ -66,11 +66,15 @@ async function monitor(sku) {
                 let offerid = body.props.pageProps.initialData.data.product.offerId
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
+                    let retail = await helper.dbconnect("RETAILFILTEREDUS")
                     let qt = 'NA'
                     let links = `[ATC](http://goto.walmart.com/c/2242082/565706/9383?veh=aff&sourceid=imp_000011112222333344&prodsku=${sku}&u=http%3A%2F%2Faffil.walmart.com%2Fcart%2Fbuynow%3F%3Dveh%3Daff%26affs%3Dsdk%26affsdkversion%3D%26affsdktype%3Djs%26affsdkcomp%3Dbuynowbutton%26colorscheme%3Dorange%26sizescheme%3Dprimary%26affsdkreferer%3Dhttp%253A%252F%252Faffil.walmart.com%26items%3D${sku}%7C1%26upcs%3D)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                     for (let group of sites) {
                         await helper.postAmazon(url, title, sku, price, image, stock, offerid, group, version, qt, links)
+                    }
+                    for (let group of retail) {
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

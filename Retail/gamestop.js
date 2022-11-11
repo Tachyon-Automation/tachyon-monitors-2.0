@@ -66,10 +66,14 @@ async function monitor(sku) {
             let image = body.productResponses[0].productImages[0].url
             if (status !== "In-Stock") {
                 let sites = await helper.dbconnect(catagory+site)
+                let retail = await helper.dbconnect("RETAILFILTEREDUS")
                 let qt = 'NA'
                 let links = `[ATC](https://www.gamestop.com/search/?sort=BestMatch_Desc&q=${sku}&p=1#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites) {
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                }
+                for (let group of retail) {
                     helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'

@@ -56,10 +56,14 @@ async function monitor(sku) {
                 let stock = '1'
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
+                    let retail = await helper.dbconnect("RETAILFILTEREDCA")
                     let qt = 'NA'
                     let links = `[ATC](https://www.canadacomputers.com/shopping_cart.php?action=bundle_add_to_cart&item0=${sku}&qty0=1d)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                     for (let group of sites) {
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                    }
+                    for (let group of retail) {
                         helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'

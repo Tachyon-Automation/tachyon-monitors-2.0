@@ -62,10 +62,14 @@ async function monitor(sku) {
                 let image = body2.product.images['l-large'][0].url
                 let stock = body.payload[0].quantityAvailable
                 let sites = await helper.dbconnect(catagory+site)
+                let retail = await helper.dbconnect("RETAILFILTEREDEU")
                 let qt = 'NA'
                 let links = `[ATC](https://www.currys.co.uk/search?q=${sku}#Tachyon)`
                 //console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites) {
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                }
+                for (let group of retail) {
                     helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'

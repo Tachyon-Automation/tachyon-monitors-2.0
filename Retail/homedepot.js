@@ -70,10 +70,14 @@ async function monitor(sku) {
             let stock = body.data.product.fulfillment.fulfillmentOptions[1].services[0].locations[0].inventory.quantity
             if (status !== "In-Stock") {
                 let sites = await helper.dbconnect(catagory+site)
+                let retail = await helper.dbconnect("RETAILFILTEREDUS")
                 let qt = 'NA'
                 let links = `[ATC](https://www.homedepot.com/p/tachyon/${sku}#Tachyon)`
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                 for (let group of sites) {
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                }
+                for (let group of retail) {
                     helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'

@@ -56,10 +56,14 @@ async function monitor(sku) {
                 let stock = root.querySelector('.input-text').attributes["data-available"].split('.')[0]
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
+                    let retail = await helper.dbconnect("RETAILFILTEREDUS")
                     let qt = 'NA'
                     let links = `[ATC](https://catalog.usmint.gov/on/demandware.store/Sites-USM-Site/default/Cart-MiniAddProduct?pid=${sku})`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                     for (let group of sites) {
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                    }
+                    for (let group of retail) {
                         helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
