@@ -33,19 +33,19 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy2() //proxy per site
         let headers = {
-            //'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
+            'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         let method = 'GET'; //request method
-        let req = `https://www-canadacomputers-com.translate.goog/product_info.php?cPath=21_273_274&item_id=${sku}&abcz=${v4()}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=nui`//request url
+        let req = `https://www.canadacomputers.com/product_info.php?cPath=21_273_274&item_id=${sku}&abcz=${v4()}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
         if (set.response.status != 200) {
             monitor(sku);
             return
         } //request function
         let root = set.html
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let status = PRODUCTS[sku].sizes
         if (root.querySelector('.h3.mb-0')) {
             if (root.querySelector('#btn-addCart')) {
