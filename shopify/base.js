@@ -18,13 +18,12 @@ class ShopifyMonitor {
     async monitor() {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
-        this.monitorProducts("1", "250");
     }
 
     async monitorProducts(page, limit) {
         let start = Date.now()
-        let proxy = await helper.getRandomProxy2();
-        let URL =`${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
+        let proxy = 'http://usa.rotating.proxyrack.net:9000';
+        URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
@@ -133,7 +132,7 @@ class ShopifyMonitor {
             //console.log(this.WEBSITE
             function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
-              }
+            }
             await helper.sleep(getRandomInt(200))
             this.monitorProducts(page, limit)
         }
