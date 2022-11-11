@@ -24,12 +24,12 @@ class ShopifyMonitor {
     async monitorProducts(page, limit) {
         let start = Date.now()
         let proxy = 'http://usa.rotating.proxyrack.net:9000';
-        URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
+        URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS") {
-            URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
+            URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
             }
