@@ -31,7 +31,8 @@ monitors.push(new ShopifyMonitor("https://www.westnyc.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://juicestore.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://corporategotem.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://safari-zone.com", 'NONE'))
-
+monitors.push(new ShopifyMonitor("https://soleclassics.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://sneakerboxshop.ca", 'UNFILTEREDCA'))
 //
 for(let monitor of monitors) {
     monitor.monitor();
