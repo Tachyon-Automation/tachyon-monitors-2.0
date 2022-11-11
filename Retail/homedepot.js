@@ -31,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = helper.getRandomProxy2() //proxy per site
+        let proxy = await helper.getRandomProxy2() //proxy per site
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
             'Content-Type': 'application/json',
