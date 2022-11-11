@@ -42,7 +42,7 @@ const helper = {
     getMixedRotatingProxy: function () {
         return 'http://global.rotating.proxyrack.net:9000'
     },
-    getBodyAsText(response, ms = 1000) {
+    getBodyAsText(response, ms = 500) {
         let timeout = new Promise((resolve, reject) => {
             let id = setTimeout(() => {
                 clearTimeout(id);
@@ -57,7 +57,7 @@ const helper = {
     requestShopify: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000)
+            const timeoutId = setTimeout(() => controller.abort(), 2500)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let json = await response.json()
             clearTimeout(timeoutId)

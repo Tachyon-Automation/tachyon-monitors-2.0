@@ -2,6 +2,8 @@ const helper = require('../x-help/helper');
 const { v4 } = require('uuid');
 const version = `Shopify v3.0`
 let DBSITE
+let products = [];
+let lastHash
 class ShopifyMonitor {
 
     products;
@@ -12,19 +14,18 @@ class ShopifyMonitor {
     constructor(website, dbsite) {
         this.DBSITE = "SHOPIFY" + dbsite
         this.WEBSITE = website;
-        this.products = [];
     }
 
     async monitor() {
         this.monitorAntibot();
-        this.monitorProducts("1", "250");
-        this.monitorProducts("1", "250");
+        this.monitorProducts("1", "250", lastHash, products);
+        this.monitorProducts("1", "25", lastHash, products);
     }
 
-    async monitorProducts(page, limit) {
+    async monitorProducts(page, limit, lastHash, products) {
         let start = Date.now()
-        let proxy = 'http://usa.rotating.proxyrack.net:9000';
-        URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
+        let proxy = await helper.getRandomProxy2();
+        let URL =`${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
@@ -39,28 +40,28 @@ class ShopifyMonitor {
             let set = await helper.requestShopify(URL, method, proxy, headers) //request function
             //console.log(set.response.status )
             if (set.response.status != 200) {
-                this.monitorProducts(page, limit)
+                this.monitorProducts(page, limit, lastHash, products)
                 return
             }
             if (!URL.includes('translate.goog')) {
                 let cache = set.response.headers.raw()["x-cache"];
                 if (cache != 'miss') {
                     console.log("Missing Cache header");
-                    this.monitorProducts(page, limit)
+                    this.monitorProducts(page, limit, lastHash, products)
                     return;
                 }
             }
             let requestTimeTaken = Date.now() - start
             let body = set.json
             let currentHash = body
-            if (currentHash == this.lastHash) {
-                this.monitorProducts(page, limit);
+            if (currentHash == lastHash) {
+                this.monitorProducts(page, limit, lastHash, products);
                 return;
             }
-            if (!this.lastHash) {
-                this.lastHash = currentHash;
-                this.products = body.products;
-                this.monitorProducts(page, limit);
+            if (!lastHash) {
+                lastHash = currentHash;
+                products = body.products;
+                this.monitorProducts(page, limit, lastHash, products);
                 return;
             }
             for (let product of body.products) {
@@ -88,7 +89,7 @@ class ShopifyMonitor {
                 if (!inStock) {
                     continue;
                 }
-                let oldProduct = this.findProduct(product.id, this.products);
+                let oldProduct = this.findProduct(product.id, products);
                 if (oldProduct) {
                     let oldVariants = [];
                     for (let variant of oldProduct.variants) {
@@ -125,17 +126,13 @@ class ShopifyMonitor {
                     //if(product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy')  || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt')&& !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                 }
             }
-            this.lastHash = currentHash;
-            this.products = body.products
-            this.monitorProducts(page, limit)
+            lastHash = currentHash;
+            products = body.products
+            this.monitorProducts(page, limit, lastHash, products)
         } catch (err) {
-            //console.log(err)
+            console.log(err)
             //console.log(this.WEBSITE
-            function getRandomInt(max) {
-                return Math.floor(Math.random() * max);
-            }
-            await helper.sleep(getRandomInt(200))
-            this.monitorProducts(page, limit)
+            this.monitorProducts(page, limit, lastHash, products)
         }
     }
     async monitorAntibot() {
