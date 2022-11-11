@@ -33,7 +33,7 @@ async function monitor(sku) {
         let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; ia_archiver/1.0; +http://www.alexa.com/help/webmasters; crawler@alexa.com)',
+            'user-agent': 'Mozilla/5.0 (compatible; MJ12bot/v1.4.5; http://www.majestic12.co.uk/bot.php?+)',
             'Accept': 'application/vnd.nord.pdp.v1+json',
             'consumer-id': 'recs-PDP_1',
         }
