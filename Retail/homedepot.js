@@ -1,10 +1,8 @@
 const helper = require('../x-help/helper');
-const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
 const randomUseragent = require('random-useragent');
 const fs = require('fs');
-const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '833822048467025920' //channel id
@@ -33,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = helper.getRandomProxy2() //proxy per site
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
             'Content-Type': 'application/json',

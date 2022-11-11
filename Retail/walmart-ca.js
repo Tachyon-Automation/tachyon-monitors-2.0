@@ -1,0 +1,93 @@
+const helper = require('../x-help/helper');
+const groups = require('../x-help/groups.json');
+const database = require('../x-help/database');
+const discordBot = require('../x-help/discord')
+const randomUseragent = require('random-useragent');
+const fs = require('fs');
+const HTMLParser = require('node-html-parser');
+const Discord = require('discord.js');
+const { v4 } = require('uuid');
+const CHANNEL = '810941156124524626' //channel id
+const site = 'WALMARTCA'; //site name
+const catagory = 'RETAIL'
+const version = `BJS v1.0` //Site version
+const table = site.toLowerCase();
+discordBot.login();
+let PRODUCTS = {}
+startMonitoring()
+async function startMonitoring() {
+    let SKUList = await database.query(`SELECT * from ${table}`);
+    for (let row of SKUList.rows) {
+        PRODUCTS[row.sku] = {
+            sku: row.sku,
+            waittime: row.waittime,
+            sizes: row.sizes
+        }
+        monitor(row.sku)
+    }
+    console.log(`[${site}] Monitoring all SKUs!`)
+}
+
+async function monitor(sku) {
+    try {
+        let product = PRODUCTS[sku]
+        if (!product)
+            return;
+        let proxy = await helper.getRandomProxy() //proxy per site
+        let agent = randomUseragent.getRandom();
+        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+
+        let headers = {
+            'user-agent': agent,
+            'X-Forwarded-For': ip,
+            'x-px-authorization': `2:${v4()}`,
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk." 
+        }
+        let method = 'GET'; //request method
+        let req = `https://www-walmart-ca.translate.goog/api/ip/6000203692693?isUPC=false&includePriceOfferAvailability=true&allOffers=true&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let set = await helper.requestJson(req, method, proxy, headers)
+        console.log(set.response.status)
+        if (set.response.status != 200) {
+            monitor(sku);
+            return
+        }
+        console.log(agent)
+        let body = await set.json //request function
+        let status = PRODUCTS[sku].sizes
+        if (body.bjsItemsInventory[0].availInventory === true) {
+            let url = `https://www.bjs.com/product/tachyon/${sku}#Tachyon`
+            let title = body.entitledItems[0].description.name
+            let price = body.maxItemPrice
+            let image = body.productImages.thumbNailImage
+            let stock = body.entitledItems[0].description.available
+            if (status !== "In-Stock") {
+                let sites = await helper.dbconnect(catagory + site)
+                let retail = await helper.dbconnect("RETAILFILTEREDUS")
+                let qt = 'NA'
+                let links = `[ATC](https://www.samsclub.com/p/tachyon/${sku}#Tachyon)`
+                console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
+                for (let group of sites) {
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                }
+                for (let group of retail) {
+                    helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                }
+                PRODUCTS[sku].sizes = 'In-Stock'
+                await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
+            }
+        } else {
+            if (status !== "Out-of-Stock") {
+                PRODUCTS[sku].sizes = 'Out-of-Stock'
+                await database.query(`update ${table} set sizes='Out-of-Stock' where sku='${sku}'`)
+            }
+        }
+        await helper.sleep(product.waittime);
+        monitor(sku);
+        return
+    } catch (e) {
+        console.log(e)
+        monitor(sku)
+        return
+    }
+}
+helper.discordbot(CHANNEL, PRODUCTS, table, monitor, site)
