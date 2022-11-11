@@ -19,7 +19,6 @@ class ShopifyMonitor {
         this.monitorAntibot();
         this.monitorProducts("1", "250");
         this.monitorProducts("1", "250");
-
     }
 
     async monitorProducts(page, limit) {
@@ -70,23 +69,16 @@ class ShopifyMonitor {
                 let sizes = ""
                 let price = ""
                 let stock = 0
-                let option
                 for (let variant of product.variants) {
                     if (variant.available && !variants.includes(variant.id)) {
                         if (variant.inventory_quantity) {
                             variants.push(variant.id);
-                            option = variant.option2
-                            if(option == null)
-                            option = variant.option1
-                            sizes += `[${option}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
+                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
                             price = variant.price;
                             stock += variant.inventory_quantity
                         } else {
-                            option = variant.option2
-                            if(option == null)
-                            option = variant.option1
                             variants.push(variant.id);
-                            sizes += `[${option}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
+                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
                             price = variant.price;
                             stock++
                         }
@@ -138,7 +130,11 @@ class ShopifyMonitor {
             this.monitorProducts(page, limit)
         } catch (err) {
             //console.log(err)
-            //console.log(this.WEBSITE)
+            //console.log(this.WEBSITE
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+              }
+            await helper.sleep(getRandomInt(200))
             this.monitorProducts(page, limit)
         }
     }
