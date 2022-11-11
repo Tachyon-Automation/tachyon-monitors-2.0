@@ -8,7 +8,6 @@ monitors.push(new ShopifyMonitor("https://shop-usa.palaceskateboards.com", 'PALA
 monitors.push(new ShopifyMonitor("https://shoepalace.com", 'SHOEPALACE'))
 monitors.push(new ShopifyMonitor("https://ycmc.com", 'YCMC'))
 monitors.push(new ShopifyMonitor("https://packershoes.com", 'PACKER'))
-monitors.push(new ShopifyMonitor("https://bape.com", 'BAPE'))
 monitors.push(new ShopifyMonitor("https://jimmyjazz.com", 'JIMMYJAZZ'))
 monitors.push(new ShopifyMonitor("https://shopnicekicks.com", 'SNK'))
 monitors.push(new ShopifyMonitor("https://exclusivefitted.com", 'EXCLUSIVEFITTED'))
