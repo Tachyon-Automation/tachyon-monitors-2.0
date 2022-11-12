@@ -82,7 +82,7 @@ async function monitor(region, juststarted, oldProducts) {
             }
         }
         juststarted = false
-        await helper.sleep(5000);
+        await helper.sleep(1000);
         monitor(region, juststarted, oldProducts)
         return
     } catch (e) {
