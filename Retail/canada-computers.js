@@ -52,7 +52,7 @@ async function monitor(sku) {
                 let url = `${json.offers.url}#Tachyon`
                 let title = json.name
                 let price = json.offers.price
-                let image = 'https://imageresize.24i.com/?w=300&url=' + json.image
+                let image = 'https://images.weserv.nl/?url=' + json.image
                 let stock = '1'
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
