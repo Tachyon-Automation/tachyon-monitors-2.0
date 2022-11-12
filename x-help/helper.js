@@ -63,7 +63,7 @@ const helper = {
             clearTimeout(timeoutId)
             return { json, response }
         } catch (e) {
-            //console.log(e)
+            console.log(e)
         }
         return
     },
