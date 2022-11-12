@@ -44,15 +44,15 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let root = set.html
-        console.log(set.response.status)
+        let body = set.html
+        let json = await JSON.parse(body.split('type="application/ld+json">')[1].split('</script>')[0])
         let status = PRODUCTS[sku].sizes
-        if (root.querySelector('.h3.mb-0')) {
-            if (root.querySelector('#btn-addCart')) {
-                let url = `https://www.canadacomputers.com/product_info.php?cPath=4_64_1969&item_id=${sku}#Tachyon`
-                let title = root.querySelector('.h3.mb-0').textContent;
-                let price = root.querySelector('.h2-big').textContent;
-                let image = root.querySelector('.colorbox').attributes.href;
+        if (json.name) {
+            if (json.availability == 'https://schema.org/InStock') {
+                let url = `${json.offers.url}#Tachyon`
+                let title = json.name
+                let price = json.offers.price
+                let image = json.image
                 let stock = '1'
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
