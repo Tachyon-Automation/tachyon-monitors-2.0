@@ -283,6 +283,78 @@ const helper = {
         }
         return
     },
+    postSnkrs: async function (url, title, sku, price, image, sizeright, sizeleft, releaseType, site, version, uri) {
+        let date = new Date()
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        sizeleft = sizeleft.join('\n')
+        sizeright = sizeright.join('\n')
+        if (sizeright.length == 0) {
+            sizeright = "-"
+        }
+        if (sizeleft.length == 0) {
+            sizeleft = "-"
+        }
+        let proxy = await helper.getRandomProxy();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": uri,
+                        "url": uri,
+                    },
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "fields": [
+                        {
+                            "name": "**SKU**",
+                            "value": sku,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Price**",
+                            "value": price,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Launch Type**",
+                            "value": releaseType,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeleft,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeright,
+                            "inline": true
+                        }
+                    ],
+                    "thumbnail": {
+                        "url": image
+                    },
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "icon_url": site.group.embed.image
+                    }
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            console.log(e)
+        }
+        return
+    },
     postPassword: async function (website, site, status, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
