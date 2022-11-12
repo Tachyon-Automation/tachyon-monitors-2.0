@@ -10,13 +10,15 @@ discordBot.login();
 startMonitoring()
 async function startMonitoring() {
     for (let region of regions) {
-        monitor(region)
+        let juststarted = true
+        let oldProducts = []
+        monitor(region, juststarted, oldProducts)
     }
 
 }
 console.log(`[${catagory}] Monitoring all SKUs!`)
 
-async function monitor(region, juststarted = true) {
+async function monitor(region, juststarted, oldProducts) {
     try {
         let proxy = await helper.getRandomProxy(); //proxy per site
         let headers = {
@@ -34,11 +36,10 @@ async function monitor(region, juststarted = true) {
             "Connection": 'keep-alive',
         }
         let method = 'GET';
-        let oldProducts = []
         let req = `https://api.nike.com/product_feed/threads/v2/?anchor=0&count=60&filter=marketplace(${region.MARKETPLACE})&filter=language(${region.LANGUAGE})&filter=channelId(${region.CHANNELID})&filter=exclusiveAccess(true,false)&fields=active,id,lastFetchTime,productInfo,${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
         if (set.response.status != 200) {
-            monitor(region)
+            monitor(region, juststarted, oldProducts)
             return
         }
         let body = await set.json
@@ -51,6 +52,7 @@ async function monitor(region, juststarted = true) {
             let sku = productInfo.productContent.globalPid
             if (oldProducts.includes(sku))
                 continue;
+            oldProducts.push(sku)
             if (juststarted)
                 continue
             let title = productInfo.productContent.fullTitle + " - " + productInfo.productContent.colorDescription;
@@ -70,7 +72,6 @@ async function monitor(region, juststarted = true) {
                     }
                 }
             }
-            oldProducts.push(sku)
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             let sizeright = sizes.split('\n')
             let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
@@ -82,11 +83,11 @@ async function monitor(region, juststarted = true) {
         }
         juststarted = false
         await helper.sleep(5000);
-        monitor(region);
+        monitor(region, juststarted, oldProducts)
         return
     } catch (e) {
         console.log(e)
-        monitor(region)
+        monitor(region, juststarted, oldProducts)
         return
     }
 }

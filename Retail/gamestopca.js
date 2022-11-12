@@ -7,10 +7,10 @@ const fs = require('fs');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '901934921315135548' //channel id
-const site = 'AMAZONCA'; //site name
+const CHANNEL = '852729195741970522' //channel id
+const site = 'GAMESTOPCA'; //site name
 const catagory = 'RETAIL'
-const version = `Amazon CA v1.0` //Site version
+const version = `Gamestop CA v1.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -33,26 +33,26 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
             'user-agent': 'Mozilla/5.0 (Linux; Android 5.0; SM-G920A) AppleWebKit (KHTML, like Gecko) Chrome Mobile Safari (compatible; AdsBot-Google-Mobile; +http://www.google.com/mobile/adsbot.html)',
         }
         let method = 'GET'; //request method
-        let req = `https://www-amazon-ca.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=el&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
-        let set = await helper.requestHtml(req, method, proxy, headers)
+        let req = `https://www.gamestop.ca/Toys-Collectibles/Games/${sku}`//request url
+        let set = await helper.requestHtml2(req, method, proxy, headers)
         //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         } //request function
-        let root = set.html
+        let root = set.text
         let status = product.sizes
-        if (root.querySelector('.a-price .a-offscreen')) {
-            if (root.querySelector('.a-button-inner input[class="a-button-input"]').attributes['aria-label'].includes('Amazon.ca')) {
+        if (root.querySelector('.availabilityImg')) {
+            if (root.querySelector('.availabilityImg').attributes.src === '/Content/Images/deliveryAvailable.png') {
                 let url = `https://www.amazon.ca/dp/${sku}#Tachyon`
-                let title = root.querySelector('#aod-asin-block-asin').textContent.trim().split('\n')[0]
-                let price = root.querySelector('.a-price .a-offscreen').textContent
-                let image = root.querySelector('#aod-asin-image-id').attributes.src
+                let title = root.querySelector('.prodTitle span').textContent.replace('&nbsp;','').trim()
+                let price = root.querySelector('.prodPriceCont.valuteCont.pricetext').textContent
+                let image = root.querySelector('.prodImg.max').attributes.href
                 let parse = set.text.split('data-aw-aod-cart-api="')[1].split('">')[0].replaceAll('&quot;', '"')
                 let stock = '1'
                 parse = JSON.parse(parse)

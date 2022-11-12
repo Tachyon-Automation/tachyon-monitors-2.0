@@ -33,6 +33,7 @@ monitors.push(new ShopifyMonitor("https://corporategotem.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://safari-zone.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://soleclassics.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://sneakerboxshop.ca", 'UNFILTEREDCA'))
+monitors.push(new ShopifyMonitor("https://drinkprime.uk", 'NONE'))
 //
 for(let monitor of monitors) {
     monitor.monitor();

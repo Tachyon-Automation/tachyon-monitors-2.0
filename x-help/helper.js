@@ -134,6 +134,20 @@ const helper = {
         }
         return
     },
+    requestHtml2: async function (site, method, proxy, headers) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
+            let text = await response.text()
+            let html = HTMLParser.parse(text)
+            clearTimeout(timeoutId)
+            return { html, response, text }
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
     posElephentNord: async function (sizes, sku, title, price, image) {
         const options = {
             method: 'POST',
