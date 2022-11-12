@@ -294,7 +294,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let body =
         {
             "username": site.group.name,
