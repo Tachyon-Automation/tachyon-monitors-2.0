@@ -44,15 +44,15 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let body = set.html
+        let body = set.text
         let json = await JSON.parse(body.split('type="application/ld+json">')[1].split('</script>')[0])
         let status = PRODUCTS[sku].sizes
         if (json.name) {
-            if (json.availability == 'https://schema.org/InStock') {
+            if (json.offers.availability == 'https://schema.org/InStock') {
                 let url = `${json.offers.url}#Tachyon`
                 let title = json.name
                 let price = json.offers.price
-                let image = json.image
+                let image = 'https://imageresize.24i.com/?w=' + json.image
                 let stock = '1'
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
@@ -80,7 +80,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         monitor(sku)
         return
     }
