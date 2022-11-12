@@ -36,6 +36,10 @@ monitors.push(new ShopifyMonitor("https://drinkprime.uk", 'NONE'))
 monitors.push(new ShopifyMonitor("https://oqium.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://thenextdoor.fr", 'NONE'))
 monitors.push(new ShopifyMonitor("https://zulusgames.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://solestop.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://laced.com.au", 'NONE'))
+monitors.push(new ShopifyMonitor("https://thepremierstore.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://eastsidegolf.com", 'NONE'))
 //
 //
 for(let monitor of monitors) {
