@@ -60,10 +60,10 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let size of variants) {
                 if (size.quantity > 0) {
-                    sizes += `${size.size} - (${size.quantity})\n`;
-                    stock += Number(size.quantity)
                     sizeList.push(size.size);
                     if (!oldSizeList.includes(size.size)) {
+                        sizes += `${size.size} - (${size.quantity})\n`;
+                        stock += Number(size.quantity)
                         inStock = true;
                     }
                 }

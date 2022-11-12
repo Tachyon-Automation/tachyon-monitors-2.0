@@ -71,17 +71,18 @@ async function monitor(sku) {
             for (let size of sizesparse) {
                 if (size.sizeValue && size.productId == vars) {
                     if (size.sizeClass !== 'unavailable') {
-                        stock += Number(Buffer.from(size.stockLevel, 'base64'))
-                        sizes += `${size.sizeValue} (${Buffer.from(size.stockLevel, 'base64').toString()})\n`
                         sizeList.push(size.sizeValue);
-                        if (!oldSizeList.includes(size.sizeValue))
-                            inStock = true;
+                        if (!oldSizeList.includes(size.sizeValue)) {
+                            stock += Number(Buffer.from(size.stockLevel, 'base64'))
+                        sizes += `${size.sizeValue} (${Buffer.from(size.stockLevel, 'base64').toString()})\n`
+                        inStock = true;
+                        }
                     }
                 }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+'FINISHLINE/JD')
+                let sites = await helper.dbconnect(catagory + 'FINISHLINE/JD')
                 let qt = 'Na'
                 let links = 'Na'
                 let req = `https://www.finishline.com/store/browse/gadgets/productLookupJSON.jsp?productId=${sku}&styleId=${styleID}&colorId=${colorID}`//request url

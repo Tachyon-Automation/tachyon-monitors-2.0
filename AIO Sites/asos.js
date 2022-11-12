@@ -67,14 +67,15 @@ async function monitor(sku) {
             for (variant of body.variants) {
                 if (variant.isInStock !== true)
                     continue
-                sizes += `${variant.displaySizeText.replace('UK ', '')} UK\n`
-                stock++
                 sizeList.push(variant.displaySizeText);
-                if (!oldSizeList.includes(variant.displaySizeText))
+                if (!oldSizeList.includes(variant.displaySizeText)) {
+                    sizes += `${variant.displaySizeText.replace('UK ', '')} UK\n`
+                    stock++
                     inStock = true;
+                }
             }
             if (inStock) {
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
                 let qt = 'Na'
                 let links = 'Na'

@@ -63,15 +63,16 @@ async function monitor(sku) {
         let oldSizeList = query.rows[0].sizes
         let sizesparse = root.querySelectorAll('.tabs__panel.tabs__panel--active .product__sizes-option:not(.product__sizes-option.product__sizes-option--disabled)')
         for (let size of sizesparse) {
-            stock++
-          sizes += `[${size.querySelector('.product__sizes-size-1').textContent}](https://www.offspring.co.uk/view/product/offspring_catalog/5,22/${sku}?size=${size.attributes['data-value']})\n`;
-          sizeList.push(size.querySelector('.product__sizes-size-1').textContent);
-          if (!oldSizeList.includes(size.querySelector('.product__sizes-size-1').textContent))
-            inStock = true;
+            if (!oldSizeList.includes(size.querySelector('.product__sizes-size-1').textContent)) {
+                stock++
+                sizes += `[${size.querySelector('.product__sizes-size-1').textContent}](https://www.offspring.co.uk/view/product/offspring_catalog/5,22/${sku}?size=${size.attributes['data-value']})\n`;
+                sizeList.push(size.querySelector('.product__sizes-size-1').textContent);
+                inStock = true;
+            }
         }
         if (inStock) {
             let AIO = await helper.dbconnect("AIOFILTEREDEU")
-            let sites = await helper.dbconnect(catagory+site)
+            let sites = await helper.dbconnect(catagory + site)
             let qt = 'Na'
             let links = 'Na'
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

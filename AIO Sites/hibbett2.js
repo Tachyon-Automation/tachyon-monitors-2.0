@@ -78,11 +78,12 @@ async function monitor(sku) {
             let variants = root.querySelectorAll('.selectable.size')
             let stock = 0
             for (let variant of variants) {
-                sizes += `${variant.querySelector('.swatchanchor').textContent.split('size').join('').split('Size').join('').trim()}\n`
-                stock++
                 sizeList.push(variant.querySelector('.swatchanchor').textContent.split('size').join('').split('Size').join('').trim());
-                if (!oldSizeList.includes(variant.querySelector('.swatchanchor').textContent.split('size').join('').split('Size').join('').trim()))
+                if (!oldSizeList.includes(variant.querySelector('.swatchanchor').textContent.split('size').join('').split('Size').join('').trim())) {
+                    sizes += `${variant.querySelector('.swatchanchor').textContent.split('size').join('').split('Size').join('').trim()}\n`
+                    stock++
                     inStock = true;
+                }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")

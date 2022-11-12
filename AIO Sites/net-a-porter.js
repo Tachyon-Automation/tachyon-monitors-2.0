@@ -74,8 +74,11 @@ async function monitor(sku) {
                   sizes += `${variant.size.labelSize} \n`
                   stock++
                   sizeList.push(variant.size.labelSize);
-                  if (!oldSizeList.includes(variant.size.labelSize))
+                  if (!oldSizeList.includes(variant.size.labelSize)) {
+                    sizes += `${variant.size.labelSize} \n`
+                    stock++
                     inStock = true;
+                  }
                 }
               }
             if (inStock) {

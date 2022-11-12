@@ -115,10 +115,10 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let size of variants) {
                 if (size.inStock && size.ATS > 0) {
-                    sizes += `${size.size} (${size.ATS}) - ${size.UPC}\n`;
-                    stock += size.ATS
                     sizeList.push(size.UPC);
                     if (!oldSizeList.includes(size.UPC)) {
+                        sizes += `${size.size} (${size.ATS}) - ${size.UPC}\n`;
+                        stock += size.ATS
                         inStock = true;
                     }
                 }

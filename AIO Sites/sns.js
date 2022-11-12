@@ -65,7 +65,7 @@ async function monitor(sku) {
             let title = root.querySelector('.product-view__title span').textContent.trim()
             let price = root.querySelector('.price__current').textContent.trim()
             let image = 'https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829'
-            try { image = 'https://www.sneakersnstuff.com' + root.querySelector('.embed-responsive img').attributes.src } catch (e) {}
+            try { image = 'https://www.sneakersnstuff.com' + root.querySelector('.embed-responsive img').attributes.src } catch (e) { }
             let url = `https://www.sneakersnstuff.com/en/product/${sku}`
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -75,22 +75,23 @@ async function monitor(sku) {
             let sizeList = []
             let variants = root.querySelector('#product-size').querySelectorAll('option')
             let stock = 0
-            if(!root.querySelector('#product-size').textContent.includes('US')) {
+            if (!root.querySelector('#product-size').textContent.includes('US')) {
                 monitor(sku)
                 return
             }
             for (let variant of variants) {
-                if(variant.attributes.value.length == 0)
-                continue
-                sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`
-                stock++
+                if (variant.attributes.value.length == 0)
+                    continue
                 sizeList.push(variant.textContent.trim());
-                if (!oldSizeList.includes(variant.textContent.trim()))
+                if (!oldSizeList.includes(variant.textContent.trim())) {
+                    sizes += `${variant.textContent.trim()} - ${variant.attributes.value}\n`
+                    stock++
                     inStock = true;
+                }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

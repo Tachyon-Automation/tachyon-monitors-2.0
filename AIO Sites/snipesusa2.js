@@ -72,19 +72,18 @@ async function monitor(sku) {
             for (let variant of variants) {
                 if (body[0].variants[variant].stock.available != true)
                     continue
-
-                price = body[0].variants[variant].prices.USD.nowFormatted
-                sizes += `[${body[0].variants[variant].forms.size.value}](https://www.snipesusa.com/${body[0].variants[variant].id}.html#Tachyon) (${body[0].variants[variant].stock.quantity}) - ${body[0].variants[variant].id}\n`
-                stock += Number(body[0].variants[variant].stock.quantity)
                 sizeList.push(body[0].variants[variant].id);
                 if (!oldSizeList.includes(body[0].variants[variant].id)) {
                     inStock = true;
+                    price = body[0].variants[variant].prices.USD.nowFormatted
+                    sizes += `[${body[0].variants[variant].forms.size.value}](https://www.snipesusa.com/${body[0].variants[variant].id}.html#Tachyon) (${body[0].variants[variant].stock.quantity}) - ${body[0].variants[variant].id}\n`
+                    stock += Number(body[0].variants[variant].stock.quantity)
                     image = 'https://imageresize.24i.com/?w=300&url=' + body[0].variants[variant].images.default[0]
                 }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+"SNIPESUS")
+                let sites = await helper.dbconnect(catagory + "SNIPESUS")
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

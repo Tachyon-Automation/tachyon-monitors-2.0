@@ -35,7 +35,7 @@ async function monitor(sku) {
         let pluses = ''
         let random = Math.floor(Math.random() * 3) + 1
         for (let i = 0; i < random; i++) {
-          pluses += '+'
+            pluses += '+'
         }
         let headers = {
             'User-Agent': "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
@@ -71,16 +71,17 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let variant of variants) {
                 if (variant.buyable === true) {
-                  sizes += `${variant.size.labelSize} \n`
-                  stock++
-                  sizeList.push(variant.size.labelSize);
-                  if (!oldSizeList.includes(variant.size.labelSize))
-                    inStock = true;
+                    sizeList.push(variant.size.labelSize);
+                    if (!oldSizeList.includes(variant.size.labelSize)) {
+                        sizes += `${variant.size.labelSize} \n`
+                        stock++
+                        inStock = true;
+                    }
                 }
-              }
+            }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+'MR-PORTER')
+                let sites = await helper.dbconnect(catagory + 'MR-PORTER')
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

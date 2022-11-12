@@ -38,7 +38,7 @@ class ShopifyMonitor {
         try {
             let method = 'GET'; //request method
             let set = await helper.requestShopify(URL, method, proxy, headers) //request function
-            console.log(set.response.status )
+            //console.log(set.response.status )
             if (set.response.status != 200) {
                 this.monitorProducts(page, limit, lastHash, products)
                 return

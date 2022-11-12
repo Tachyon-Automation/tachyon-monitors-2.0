@@ -61,15 +61,16 @@ async function monitor(sku) {
             for (let variant of variants) {
                 if (variant.selectable !== true)
                     continue
-                sizes += `[${variant.id}](https://www.newbalance.com/${sku}.html#dwvar_${sku}_size=${variant.id}&pid=${sku}&quantity=1) - ${variant.variantID}\n`
-                stock++
                 sizeList.push(variant.id);
-                if (!oldSizeList.includes(variant.id))
+                if (!oldSizeList.includes(variant.id)) {
+                    sizes += `[${variant.id}](https://www.newbalance.com/${sku}.html#dwvar_${sku}_size=${variant.id}&pid=${sku}&quantity=1) - ${variant.variantID}\n`
+                    stock++
                     inStock = true;
+                }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

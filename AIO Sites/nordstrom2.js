@@ -77,13 +77,13 @@ async function monitor(sku) {
         //pars sizes for loop
         for (let id of skus) { //loops through all sizes
             if (vars[id].isAvailable === true || vars[id].totalQuantityAvailable > 0) { //if oss or in stock
-                sizes += `${vars[id].sizeId} (${vars[id].totalQuantityAvailable}) - ${vars[id].rmsSkuId}\n`//size parse
-                stock += Number(vars[id].totalQuantityAvailable) //total count or quantity
                 sizeList.push(vars[id].rmsSkuId);
                 price = vars[id].displayPrice //price set for vars
                 if (!oldSizeList.includes(vars[id].rmsSkuId)) {// oldSizeList.includes this size
-                    inStock = true;
+                    sizes += `${vars[id].sizeId} (${vars[id].totalQuantityAvailable}) - ${vars[id].rmsSkuId}\n`//size parse
+                    stock += Number(vars[id].totalQuantityAvailable) //total count or quantity
                     title = title + vars[id].colorDisplayValue + ","
+                    inStock = true;
             }
         }
         }

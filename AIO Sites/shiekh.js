@@ -56,16 +56,16 @@ async function monitor(sku) {
             return
         }
         //Define body variables
-        if(body.release_date) {
-        let event = Date.parse(new Date(Date.now()).toISOString())
-        let event1 = Date.parse(new Date(body.release_date).toISOString())
-        if (event1 > event) {
-            //console.log('Not released yet')
-            await helper.sleep(2000);
-            monitor(sku)
-            return
+        if (body.release_date) {
+            let event = Date.parse(new Date(Date.now()).toISOString())
+            let event1 = Date.parse(new Date(body.release_date).toISOString())
+            if (event1 > event) {
+                //console.log('Not released yet')
+                await helper.sleep(2000);
+                monitor(sku)
+                return
+            }
         }
-    }
         if (body.size.length > 0) {
             let inStock = false;
             let url = `https://shiekh.com/${body.url_path}.html#Tachyon`//product url
@@ -84,18 +84,18 @@ async function monitor(sku) {
             //pars sizes for loop
             for (let size of sizesparse) {
                 if (size.in_stock == true) {
-                    sizes += `[${size.value}](${url}?size) (${size.qty}) - ${size.size_id}` + '\n';
-                    option_value += `${size.size_id},`
-                    stock += Number(size.qty)
                     sizeList.push(size.value);
                     if (!oldSizeList.includes(size.value)) {
+                        sizes += `[${size.value}](${url}?size) (${size.qty}) - ${size.size_id}` + '\n';
+                        option_value += `${size.size_id},`
+                        stock += Number(size.qty)
                         inStock = true;
                     }
                 }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

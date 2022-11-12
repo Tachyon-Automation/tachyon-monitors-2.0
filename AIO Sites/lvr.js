@@ -91,15 +91,16 @@ async function monitor(sku) {
             let variants = body.AvailabilityByColor[0].SizeAvailability
             //pars sizes for loop
             for (let variant of variants) {
-                stock += Number(variant.QuantitiesTotal.Available)
-                sizes += `${variant.SizeValue} (${variant.QuantitiesTotal.Available})\n`
                 sizeList.push(variant.SizeValue);
-                if (!oldSizeList.includes(variant.SizeValue))
+                if (!oldSizeList.includes(variant.SizeValue)) {
+                    stock += Number(variant.QuantitiesTotal.Available)
+                    sizes += `${variant.SizeValue} (${variant.QuantitiesTotal.Available})\n`
                     inStock = true;
+                }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDEU")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

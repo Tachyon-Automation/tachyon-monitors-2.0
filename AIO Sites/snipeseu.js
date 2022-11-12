@@ -36,7 +36,7 @@ async function monitor(sku) {
         let headers = {
             'User-Agent': randomUseragent.getRandom(),
             'x-px-authorization': "1",
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."    
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
         }
         let method = 'GET'; //request method
         let req = `https://www.snipes.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
@@ -68,17 +68,17 @@ async function monitor(sku) {
             //pars sizes for l
             for (let size of variants) {
                 if (size.isOrderable === true) {
-                    sizes += `[${size.value}](https://www.snipes.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
-                    stock++
                     sizeList.push(size.value);
                     if (!oldSizeList.includes(size.value)) {
+                        sizes += `[${size.value}](https://www.snipes.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
+                        stock++
                         inStock = true;
                     }
                 }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDEU")
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

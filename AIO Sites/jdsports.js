@@ -63,11 +63,12 @@ async function monitor(sku) {
             if (size.sizeValue) {
                 if (size.productId === styleID + '_' + colorID) {
                     if (size.sizeClass !== 'unavailable') {
-                        stock += Number(Buffer.from(size.stockLevel, 'base64'))
-                        sizes += `${size.sizeValue} (${Buffer.from(size.stockLevel, 'base64').toString()})\n`
                         sizeList.push(size.sizeValue);
-                        if (!oldSizeList.includes(size.sizeValue))
+                        if (!oldSizeList.includes(size.sizeValue)) {
+                            stock += Number(Buffer.from(size.stockLevel, 'base64'))
+                            sizes += `${size.sizeValue} (${Buffer.from(size.stockLevel, 'base64').toString()})\n`
                             inStock = true;
+                        }
                     }
                 }
             }

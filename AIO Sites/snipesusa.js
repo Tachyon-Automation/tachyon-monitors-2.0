@@ -53,7 +53,7 @@ async function monitor(sku) {
         }
 
         //Define body variables
-        if(body.product.releaseDate.productDateRelease) {
+        if (body.product.releaseDate.productDateRelease) {
             let event = Date.parse(new Date(Date.now()).toISOString())
             let event1 = Date.parse(new Date(body.product.releaseDate.productDateRelease).toISOString())
             if (event1 > event) {
@@ -68,7 +68,7 @@ async function monitor(sku) {
             let url = `https://www.snipesusa.com/${sku}.html#Tachyon`//product url
             let title = body.product.productName
             let price = body.product.price.sales.formatted
-            let image =  'https://imageresize.24i.com/?w=300&url=' + body.product.images.zoom[0].url
+            let image = 'https://imageresize.24i.com/?w=300&url=' + body.product.images.zoom[0].url
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -77,17 +77,18 @@ async function monitor(sku) {
             let variants = body.product.variationAttributes[1].values
             //pars sizes for l
             for (let variant of variants) {
-                if(variant.selectable != true)
-                continue
-                sizes += `[${variant.displayValue}](https://www.snipesusa.com/${sku}.html?size=${variant.displayValue})\n`
-                stock++
+                if (variant.selectable != true)
+                    continue
                 sizeList.push(variant.displayValue);
-                if (!oldSizeList.includes(variant.displayValue))
+                if (!oldSizeList.includes(variant.displayValue)) {
+                    sizes += `[${variant.displayValue}](https://www.snipesusa.com/${sku}.html?size=${variant.displayValue})\n`
+                    stock++
                     inStock = true;
+                }
             }
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
-                let sites = await helper.dbconnect(catagory+"SNIPESUS")
+                let sites = await helper.dbconnect(catagory + "SNIPESUS")
                 let qt = 'Na'
                 let links = 'Na'
                 console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)

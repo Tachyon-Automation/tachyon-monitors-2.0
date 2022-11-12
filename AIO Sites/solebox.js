@@ -70,10 +70,10 @@ async function monitor(sku) {
             //pars sizes for l
             for (let size of variants) {
                 if (size.isOrderable === true) {
-                    sizes += `[${size.value}](https://www.solebox.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
-                    stock++
                     sizeList.push(size.value);
                     if (!oldSizeList.includes(size.value)) {
+                        sizes += `[${size.value}](https://www.solebox.com/${size.variantId}.html#Tachyon) - ${size.variantId.trim()}\n`;
+                        stock++
                         inStock = true;
                     }
                 }

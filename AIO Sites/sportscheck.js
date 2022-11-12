@@ -59,13 +59,13 @@ async function monitor(sku) {
             let variants = json[0].offers
             //pars sizes for loop
             for (let size of variants) {
-                if(size.availability == 'OutOfStock') 
-                continue
-                sizes += `[${size.additionalProperty[0].value}](${size.url})\n`;
-                price = size.price
-                stock++
+                if (size.availability == 'OutOfStock')
+                    continue
                 sizeList.push(size.additionalProperty[0].value);
                 if (!oldSizeList.includes(size.additionalProperty[0].value)) {
+                    sizes += `[${size.additionalProperty[0].value}](${size.url})\n`;
+                    price = size.price
+                    stock++
                     inStock = true;
                 }
             }

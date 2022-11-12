@@ -92,12 +92,13 @@ async function monitor(sku) {
                 }
             }
             if (variant.isAvailable === true) {
-                variantsa += `${variant.id},}`
-                sizes += `[${variant.size}](https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}) - ${variant.id}\n`
-                stock++
                 sizeList.push(variant.id);
-                if (!oldSizeList.includes(variant.id))
+                if (!oldSizeList.includes(variant.id)) {
+                    variantsa += `${variant.id},}`
+                    sizes += `[${variant.size}](https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}) - ${variant.id}\n`
+                    stock++
                     inStock = true;
+                }
             }
         }
         if (inStock) {

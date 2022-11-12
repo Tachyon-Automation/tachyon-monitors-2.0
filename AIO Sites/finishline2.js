@@ -85,11 +85,12 @@ async function monitor(sku) {
                 url = `https://www.finishline.com/store/product/tachyon/${sku}?styleId=${styleID}&colorId=${colorID}#Tachyon`//product url
             for (variant of product.skus) {
                 if (variant.quantityAvailable > 0) {
-                sizes += `${variant.size} (${variant.quantityAvailable}) - ${variant.skuId}\n`
-                stock += variant.quantityAvailable
                 sizeList.push(variant.skuId);
-                if (!oldSizeList.includes(variant.skuId))
+                if (!oldSizeList.includes(variant.skuId)) {
+                    sizes += `${variant.size} (${variant.quantityAvailable}) - ${variant.skuId}\n`
+                    stock += variant.quantityAvailable
                     inStock = true;
+                }
                 }
             }
             if (inStock) {

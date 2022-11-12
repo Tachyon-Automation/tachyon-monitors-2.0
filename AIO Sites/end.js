@@ -62,16 +62,17 @@ async function monitor(sku) {
             let variants = body.props.initialProps.pageProps.product.options[0].values
             //pars sizes for loop
             for (let variant of variants) {
-                if(variant.in_stock !== true)
-                continue
-                sizes += `[${variant.label}](https://www.endclothing.com/us/${sku}?size=${variant.label.replace(' ','')})\n`
-                stock++
+                if (variant.in_stock !== true)
+                    continue
                 sizeList.push(variant.label);
-                if (!oldSizeList.includes(variant.label))
-                  inStock = true;
-              }
+                if (!oldSizeList.includes(variant.label)) {
+                    sizes += `[${variant.label}](https://www.endclothing.com/us/${sku}?size=${variant.label.replace(' ', '')})\n`
+                    stock++
+                    inStock = true;
+                }
+            }
             if (inStock) {
-                let sites = await helper.dbconnect(catagory+"END")
+                let sites = await helper.dbconnect(catagory + "END")
                 let AIO = await helper.dbconnect("AIOFILTEREDUS")
                 let qt = 'Na'
                 let links = 'Na'
