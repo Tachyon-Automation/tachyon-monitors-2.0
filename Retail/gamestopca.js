@@ -45,29 +45,26 @@ async function monitor(sku) {
             monitor(sku);
             return
         } //request function
-        let root = set.text
+        let root = set.html
         let status = product.sizes
         if (root.querySelector('.availabilityImg')) {
             if (root.querySelector('.availabilityImg').attributes.src === '/Content/Images/deliveryAvailable.png') {
-                let url = `https://www.amazon.ca/dp/${sku}#Tachyon`
+                let url = `https://www.gamestop.ca/Toys-Collectibles/Games/${sku}#Tachyon`
                 let title = root.querySelector('.prodTitle span').textContent.replace('&nbsp;','').trim()
                 let price = root.querySelector('.prodPriceCont.valuteCont.pricetext').textContent
                 let image = root.querySelector('.prodImg.max').attributes.href
-                let parse = set.text.split('data-aw-aod-cart-api="')[1].split('">')[0].replaceAll('&quot;', '"')
                 let stock = '1'
-                parse = JSON.parse(parse)
-                let offerid = parse.oid
                 if (status !== "In-Stock") {
                     let sites = await helper.dbconnect(catagory+site)
                     let retail = await helper.dbconnect("RETAILFILTEREDCA")
                     let qt = 'NA'
-                    let links = `[ATC](https://www.amazon.ca/gp/product/handle-buy-box/ref=dp_start-bbf_1_glance?offerListingID=${offerid}&ASIN=${sku}&isMerchantExclusive=0&merchantID=A3DWYIK6Y9EEQB&isAddon=0&nodeID=&sellingCustomerID=&qid=&sr=&storeID=&tagActionCode=&viewID=glance&rebateId=&ctaDeviceType=desktop&ctaPageType=detail&usePrimeHandler=0&sourceCustomerOrgListID=&sourceCustomerOrgListItemID=&wlPopCommand=&itemCount=20&quantity.1=1&asin.1=${sku}&submit.buy-now=Submit&dropdown-selection=&dropdown-selection-ubb=)`
+                    let links = `[ATC](https://www.gamestop.ca/Toys-Collectibles/Games/${sku}#Tachyon)`
                     console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
                     for (let group of sites) {
-                        helper.postAmazon(url, title, sku, price, image, stock, offerid, group, version, qt, links)
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     for (let group of retail) {
-                        helper.postAmazon(url, title, sku, price, image, stock, offerid, group, version, qt, links)
+                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
