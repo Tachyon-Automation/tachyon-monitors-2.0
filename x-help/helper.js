@@ -268,7 +268,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -302,7 +302,7 @@ const helper = {
                     "url": website,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -384,9 +384,9 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
-                    }                
+                    }
                 }
             ]
         }
@@ -454,7 +454,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -519,7 +519,7 @@ const helper = {
                         "url": image
                     },
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -534,7 +534,7 @@ const helper = {
         }
         return
     },
-    postReddit: async function(url, title, sub, site, version){
+    postReddit: async function (url, title, sub, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let proxy = await getRandomProxy2();
@@ -552,12 +552,12 @@ const helper = {
                     "fields": [{
                         "name": "Reddit post in",
                         "value": `[r/${sub.toLowerCase()}](https://www.reddit.com/r/${sub.toLowerCase()}/)`
-                      }],
+                    }],
                     "title": title,
                     "url": url,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
@@ -572,7 +572,7 @@ const helper = {
         }
         return
     },
-    postSlickdeals: async function(url, title, red, site, version){
+    postSlickdeals: async function (url, title, red, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let proxy = await getRandomProxy2();
@@ -591,12 +591,12 @@ const helper = {
                     "fields": [{
                         "name": "Posted in",
                         "value": `[${red.split('-')[1]}](https://slickdeals.net/forums/forumdisplay.php?f=${red.split('-')[0]})`
-                      }],
+                    }],
                     "title": title,
                     "url": url,
                     "color": color,
                     "footer": {
-                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours()+':'+date.getMinutes()+ ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
                         "icon_url": site.group.embed.image
                     }
                 }
