@@ -38,11 +38,11 @@ async function monitor(region, juststarted, oldProducts) {
         let method = 'GET';
         let req = `https://api.nike.com/product_feed/threads/v2/?anchor=0&count=60&filter=marketplace(${region.MARKETPLACE})&filter=language(${region.LANGUAGE})&filter=channelId(${region.CHANNELID})&filter=exclusiveAccess(true,false)&fields=active,id,lastFetchTime,productInfo,${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(region, juststarted, oldProducts)
             return
         }
-        console.log(set.response.status)
         let body = await set.json
         for (let product of body.objects) {
             if (!product.productInfo)
@@ -83,11 +83,10 @@ async function monitor(region, juststarted, oldProducts) {
             }
         }
         juststarted = false
-        await helper.sleep(2000);
         monitor(region, juststarted, oldProducts)
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(region, juststarted, oldProducts)
         return
     }
