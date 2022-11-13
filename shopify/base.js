@@ -117,7 +117,7 @@ class ShopifyMonitor {
                     let sizeright = sizes.split('\n')
                     let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                     if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
-                        let filterd = await helper.dbconnect("FILTEREDUS")
+                        let filterd = await helper.dbconnect("SHOPIFYFILTEREDUS")
                         for (let group of filterd) {
                             helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
