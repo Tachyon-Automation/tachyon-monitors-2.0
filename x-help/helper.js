@@ -297,7 +297,7 @@ const helper = {
         }
         return
     },
-    postSnkrs: async function (url, title, sku, price, image, sizeright, sizeleft, releaseType, site, version, uri) {
+    postSnkrs: async function (url, title, sku, price, image, sizeright, sizeleft, releaseType, site, version, uri, releaseDateFormatted) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         sizeleft = sizeleft.join('\n')
@@ -324,6 +324,11 @@ const helper = {
                     "url": url,
                     "color": color,
                     "fields": [
+                        {
+                            "name": "**Launch Date**",
+                            "value": releaseDateFormatted,
+                            "inline": false
+                        },
                         {
                             "name": "**SKU**",
                             "value": sku,

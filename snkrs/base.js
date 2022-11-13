@@ -42,6 +42,7 @@ async function monitor(region, juststarted, oldProducts) {
             monitor(region, juststarted, oldProducts)
             return
         }
+        console.log(set.response.status)
         let body = await set.json
         for (let product of body.objects) {
             if (!product.productInfo)
@@ -78,11 +79,11 @@ async function monitor(region, juststarted, oldProducts) {
             let sites = await helper.dbconnect(catagory + region.MARKETPLACE)
             let uri = `https://nike.com/${region.MARKETPLACE === 'us' ? '' : region.MARKETPLACE.toLowerCase()}`
             for (let group of sites) {
-                helper.postSnkrs(url, title, sku, price, image, sizeright, sizeleft, releaseType, group, version, uri)
+                helper.postSnkrs(url, title, sku, price, image, sizeright, sizeleft, releaseType, group, version, uri, releaseDateFormatted)
             }
         }
         juststarted = false
-        await helper.sleep(1000);
+        await helper.sleep(2000);
         monitor(region, juststarted, oldProducts)
         return
     } catch (e) {
