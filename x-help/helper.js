@@ -57,7 +57,7 @@ const helper = {
     requestShopify: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2500)
+            const timeoutId = setTimeout(() => controller.abort(), 2000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
             let json = await response.json()
             clearTimeout(timeoutId)
@@ -250,6 +250,93 @@ const helper = {
                         {
                             "name": "**Price**",
                             "value": price,
+                            "inline": true
+                        },
+                        {
+                            "name": "**PID**",
+                            "value": sku,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeleft,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Sizes**",
+                            "value": sizeright,
+                            "inline": true
+                        },
+                        {
+                            "name": "**QT**",
+                            "value": qt,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Links**",
+                            "value": links,
+                            "inline": true
+                        },
+                    ],
+                    "thumbnail": {
+                        "url": image
+                    },
+                    "footer": {
+                        "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
+                        "icon_url": site.group.embed.image
+                    }
+                }
+            ]
+        }
+        try {
+            let response = await fetch(site.webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), agent: await new HTTPSProxyAgent(proxy) })
+            if (await response.status !== 204)
+                throw "Failed to send webhook"
+        } catch (e) {
+            //onsole.log(e)
+        }
+        return
+    },
+    postSupreme: async function (url, title, sku, price, image, catagory, itmColor, sizeright, sizeleft, site, version, qt, links) {
+        let date = new Date()
+        let color = hexToDecimal(site.group.embed.color.replace('#', ''))
+        sizeleft = sizeleft.join('\n')
+        sizeright = sizeright.join('\n')
+        if (sizeright.length == 0) {
+            sizeright = "-"
+        }
+        if (sizeleft.length == 0) {
+            sizeleft = "-"
+        }
+        let proxy = await getRandomProxy2();
+        let body =
+        {
+            "username": site.group.name,
+            "avatar_url": site.group.embed.image,
+            "content": null,
+            "embeds": [
+                {
+                    "author": {
+                        "name": `https://www.supremenewyork.com`,
+                        "url": `https://www.supremenewyork.com`,
+                    },
+                    "title": title,
+                    "url": url,
+                    "color": color,
+                    "fields": [
+                        {
+                            "name": "**Price**",
+                            "value": price,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Catagory**",
+                            "value": catagory,
+                            "inline": true
+                        },
+                        {
+                            "name": "**Color**",
+                            "value": itmColor,
                             "inline": true
                         },
                         {
