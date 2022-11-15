@@ -30,16 +30,17 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
             'User-Agent': "Mozilla/5.0 (compatible; Google-Site-Verification/1.0)",
         }
 
         let method = 'GET'; //request method
-        let req = `https://www.sportchek.ca/product/${v4()}-${sku}.html`//request url
+        let req = `https://www-sportchek-ca.translate.goog/product/${v4()}-${sku}.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
         let set = await helper.requestHtml(req, method, proxy, headers) //request function
         let body = await set.text
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku)
             return
@@ -92,7 +93,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         monitor(sku)
         return
     }
