@@ -114,7 +114,7 @@ async function monitor(sku) {
                     helper.postAIO(url, title, sku, price, image, sizeright, sizeleft, stock, group, version, qt, links)
                 }
                 await database.query(`update ${table} set sizes='${JSON.stringify(sizeList)}' where sku='${sku}'`);
-
+                await helper.sleep(150000)
             }
         }
         await helper.sleep(product.waittime);
