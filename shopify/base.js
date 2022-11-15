@@ -106,12 +106,12 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    let set = await helper.requestShopify(`${this.WEBSITE + "/products/" + product.handle}.json?order=${v4()}`, method, proxy, headers) //request function
-                    if (set.response.status != 200) {
+                    let set2 = await helper.requestShopify(`${this.WEBSITE + "/products/" + product.handle}.json?order=${v4()}`, method, proxy, headers) //request function
+                    if (set2.response.status != 200) {
                         this.monitorProducts(page, limit, lastHash, products)
                         return
                     }
-                    let variantse = await set.json.product.variants
+                    let variantse = await set2.json.product.variants
                     if (variantse[0].inventory_quantity) {
                         sizes = ''
                         stock = 0
