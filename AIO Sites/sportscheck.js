@@ -71,7 +71,7 @@ async function monitor(sku) {
                 }
             }
             if (inStock) {
-                let AIO = await helper.dbconnect("AIOFILTEREDUS")
+                let AIO = await helper.dbconnect("AIOFILTEREDCA")
                 let sites = await helper.dbconnect(catagory + site)
                 let qt = 'Na'
                 let links = 'Na'
