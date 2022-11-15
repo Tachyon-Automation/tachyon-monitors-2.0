@@ -53,6 +53,7 @@ class ShopifyMonitor {
                 }
             }
             let requestTimeTaken = Date.now() - start
+            console.log(requestTimeTaken, limit)
             let body = set.json
             let currentHash = body
             if (currentHash == lastHash) {
@@ -73,17 +74,10 @@ class ShopifyMonitor {
                 let stock = 0
                 for (let variant of product.variants) {
                     if (variant.available && !variants.includes(variant.id)) {
-                        if (variant.inventory_quantity) {
-                            variants.push(variant.id);
-                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (${variant.inventory_quantity})\n`
-                            price = variant.price;
-                            stock += variant.inventory_quantity
-                        } else {
-                            variants.push(variant.id);
-                            sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
-                            price = variant.price;
-                            stock++
-                        }
+                        variants.push(variant.id);
+                        sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) (1+)\n`
+                        price = variant.price;
+                        stock++
                     }
                 }
                 let inStock = variants.length > 0;
@@ -109,6 +103,22 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
+                    let set = await helper.requestShopify(`${this.WEBSITE + "/products/" + product.handle}.json?order=${v4()}`, method, proxy, headers) //request function
+                    if (set.response.status != 200) {
+                        this.monitorProducts(page, limit, lastHash, products)
+                        return
+                    }
+                    let variantse = await set.json.product.variants
+                    if (variantse[0].inventory_quantity) {
+                        sizes = ''
+                        stock = 0
+                        for (let variant of variantse) {
+                            if (variant.available) {
+                                sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) [${variant.inventory_quantity}]\n`
+                                stock += variant.inventory_quantity
+                            }
+                        }
+                    }
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${date} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
