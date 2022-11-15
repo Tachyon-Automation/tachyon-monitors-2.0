@@ -74,6 +74,7 @@ async function monitor(sku) {
                 }
                 PRODUCTS[sku].sizes = 'In-Stock'
                 await database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)
+                await helper.sleep(150000)
             }
         } else {
             if (status !== "Out-of-Stock") {
