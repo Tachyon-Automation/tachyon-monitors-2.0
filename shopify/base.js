@@ -116,7 +116,7 @@ class ShopifyMonitor {
                         sizes = ''
                         stock = 0
                         for (let variant of variantse) {
-                            if (variant.available) {
+                            if (variant.inventory_quantity > 0) {
                                 sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) [${variant.inventory_quantity}]\n`
                                 stock += variant.inventory_quantity
                             }
