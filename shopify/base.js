@@ -17,15 +17,16 @@ class ShopifyMonitor {
     }
 
     async monitor() {
-        this.monitorAntibot();
+        //this.monitorAntibot();
         this.monitorProducts("1", "250", lastHash, products);
-        this.monitorProducts("2", "150", lastHash, products);
-        this.monitorProducts("1", "20", lastHash, products);
+        this.monitorProducts("2", "250", lastHash, products);
+        this.monitorProducts("1", "25", lastHash, products);
+
     }
 
     async monitorProducts(page, limit, lastHash, products) {
         let start = Date.now()
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let URL = `${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -46,14 +47,16 @@ class ShopifyMonitor {
             }
             if (!URL.includes('translate.goog')) {
                 let cache = set.response.headers.raw()["x-cache"];
-                if (cache != 'miss') {
-                    console.log("Missing Cache header");
+                if (cache == 'miss, MISS')
+                    cache = 'miss'
+                if (cache != 'miss' || cache == 'hit, server, MISS') {
+                    console.log("Missing Cache header", this.WEBSITE, cache);
                     this.monitorProducts(page, limit, lastHash, products)
                     return;
                 }
             }
             let requestTimeTaken = Date.now() - start
-            console.log(requestTimeTaken, limit)
+            //console.log(requestTimeTaken, limit)
             let body = set.json
             let currentHash = body
             if (currentHash == lastHash) {
@@ -170,7 +173,7 @@ class ShopifyMonitor {
             products = body.products
             this.monitorProducts(page, limit, lastHash, products)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             //console.log(this.WEBSITE
             this.monitorProducts(page, limit, lastHash, products)
         }
