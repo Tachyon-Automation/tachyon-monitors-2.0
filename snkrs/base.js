@@ -62,7 +62,7 @@ async function monitor(region, juststarted, oldProducts) {
             let releaseType = productInfo.launchView.method;
             let releaseDateFormatted = moment(productInfo.launchView.startEntryDate);
             releaseDateFormatted = releaseDateFormatted.utc().format('YYYY-MM-DD') + " " + releaseDateFormatted.utc().format('HH:mm:ss') + " (UTC)"
-            let url = `https://nike.com/${region.MARKETPLACE === 'us' ? '' : region.MARKETPLACE.toLowerCase()}/launch/t/${productInfo.productContent.slug}`
+            let url = `https://nike.com/${region.MARKETPLACE === 'US' ? '' : region.MARKETPLACE.toLowerCase()}/launch/t/${productInfo.productContent.slug}`
             let sizes = '';
             if (productInfo.availableSkus) {
                 for (let size of productInfo.availableSkus) {
