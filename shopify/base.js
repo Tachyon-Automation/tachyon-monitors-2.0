@@ -20,7 +20,9 @@ class ShopifyMonitor {
         //this.monitorAntibot();
         this.monitorProducts("1", "250", lastHash, products);
         this.monitorProducts("2", "250", lastHash, products);
-        this.monitorProducts("1", "150", lastHash, products);
+        this.monitorProducts("1", "100", lastHash, products);
+        this.monitorProducts("1", "50", lastHash, products);
+
 
     }
 
