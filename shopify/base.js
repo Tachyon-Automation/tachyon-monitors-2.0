@@ -130,39 +130,39 @@ class ShopifyMonitor {
                     let sizeright = sizes.split('\n')
                     let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                     for (let group of sites) {
-                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                     }
                     if (this.WEBSITE.includes('.com') && !this.WEBSITE.includes('.au') && !this.WEBSITE.includes('.jp') && !this.WEBSITE.includes('.nl') && !this.WEBSITE.includes('.ca') && !this.WEBSITE.includes('.uk') && !this.WEBSITE.includes('.mx') && !this.WEBSITE.includes('.nz') && !this.WEBSITE.includes('.id') && !this.WEBSITE.includes('.fr') && !this.WEBSITE.includes('.cc') && !this.WEBSITE.includes('.sg')) {
                         let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
                         for (let group of unfilteredus) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if
                         (this.WEBSITE.includes('.ca')) {
                         let unfilteredca = await helper.dbconnect("SHOPIFYUNFILTEREDCA")
                         for (let group of unfilteredca) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : 'https://shopify.com', sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else {
                         let unfilteredeu = await helper.dbconnect("SHOPIFYUNFILTEREDEU")
                         for (let group of unfilteredeu) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     }
                     if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks') && this.WEBSITE.includes('.com') && !this.WEBSITE.includes('.au') && !this.WEBSITE.includes('.jp') && !this.WEBSITE.includes('.nl') && !this.WEBSITE.includes('.ca') && !this.WEBSITE.includes('.uk') && !this.WEBSITE.includes('.mx') && !this.WEBSITE.includes('.nz') && !this.WEBSITE.includes('.id') && !this.WEBSITE.includes('.fr') && !this.WEBSITE.includes('.cc') && !this.WEBSITE.includes('.co')) {
                         let filterdus = await helper.dbconnect("SHOPIFYFILTEREDUS")
                         for (let group of filterdus) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks') && this.WEBSITE.includes('.ca')) {
                         let filterdca = await helper.dbconnect("SHOPIFYFILTEREDCA")
                         for (let group of filterdca) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                         let filterdeu = await helper.dbconnect("SHOPIFYFILTEREDEU")
                         for (let group of filterdeu) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     }
                     // -shirt, -short, -pant, -sock
@@ -173,7 +173,7 @@ class ShopifyMonitor {
             products = body.products
             this.monitorProducts(page, limit, lastHash, products)
         } catch (err) {
-            console.log(err)
+            //console.log(err)
             //console.log(this.WEBSITE
             this.monitorProducts(page, limit, lastHash, products)
         }
