@@ -1,6 +1,6 @@
 const helper = require('../x-help/helper');
 const { v4 } = require('uuid');
-const version = `Shopify v3.0`
+const version = `Shopify v4.0`
 let DBSITE
 let products = [];
 let lastHash
@@ -18,11 +18,10 @@ class ShopifyMonitor {
 
     async monitor() {
         //this.monitorAntibot();
-        this.monitorProducts("1", "50", lastHash, products);
-        this.monitorProducts("1", "250", lastHash, products);
-        this.monitorProducts("2", "250", lastHash, products);
-        this.monitorProducts("3", "250", lastHash, products);
-
+        this.monitorProducts("1", "25", lastHash, products)
+        this.monitorProducts("1", "75", lastHash, products)
+        this.monitorProducts("1", "150", lastHash, products)
+        this.monitorProducts("1", "250", lastHash, products)
     }
 
     async monitorProducts(page, limit, lastHash, products) {
