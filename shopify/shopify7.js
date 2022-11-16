@@ -38,6 +38,7 @@ monitors.push(new ShopifyMonitor("https://ldrs1354.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://minmaxgames.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://crownminded.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://embassy.co.nz", 'NONE'))
+monitors.push(new ShopifyMonitor("https://hufworldwide.com", 'NONE'))
 //
 //
 for(let monitor of monitors) {

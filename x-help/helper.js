@@ -461,7 +461,7 @@ const helper = {
         }
         return
     },
-    postPassword: async function (website, site, status, version) {
+    postPassword: async function (website, site, status, version, image) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let proxy = await getRandomProxy2();
@@ -475,9 +475,9 @@ const helper = {
                     "author": {
                         "name": website,
                         "url": website,
+                        "icon_url": image,
                     },
-                    "title": status,
-                    "url": website,
+                    "description": status,
                     "color": color,
                     "footer": {
                         "text": `${version} | ${site.group.embed.footer} by Tachyon - ${date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds()} EST`,
@@ -491,7 +491,7 @@ const helper = {
             if (await response.status !== 204)
                 throw "Failed to send webhook"
         } catch (e) {
-            //onsole.log(e)
+            console.log(e)
         }
         return
     },

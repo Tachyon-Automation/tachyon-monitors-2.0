@@ -17,7 +17,7 @@ class ShopifyMonitor {
     }
 
     async monitor() {
-        //this.monitorAntibot();
+        this.monitorAntibot();
         this.monitorProducts("1", "25", lastHash, products)
         this.monitorProducts("1", "150", lastHash, products)
         this.monitorProducts("1", "250", lastHash, products)
@@ -130,39 +130,39 @@ class ShopifyMonitor {
                     let sizeright = sizes.split('\n')
                     let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
                     for (let group of sites) {
-                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                     }
                     if (this.WEBSITE.includes('.com') && !this.WEBSITE.includes('.au') && !this.WEBSITE.includes('.jp') && !this.WEBSITE.includes('.nl') && !this.WEBSITE.includes('.ca') && !this.WEBSITE.includes('.uk') && !this.WEBSITE.includes('.mx') && !this.WEBSITE.includes('.nz') && !this.WEBSITE.includes('.id') && !this.WEBSITE.includes('.fr') && !this.WEBSITE.includes('.cc') && !this.WEBSITE.includes('.sg')) {
                         let unfilteredus = await helper.dbconnect("SHOPIFYUNFILTEREDUS")
                         for (let group of unfilteredus) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if
                         (this.WEBSITE.includes('.ca')) {
                         let unfilteredca = await helper.dbconnect("SHOPIFYUNFILTEREDCA")
                         for (let group of unfilteredca) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else {
                         let unfilteredeu = await helper.dbconnect("SHOPIFYUNFILTEREDEU")
                         for (let group of unfilteredeu) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     }
                     if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks') && this.WEBSITE.includes('.com') && !this.WEBSITE.includes('.au') && !this.WEBSITE.includes('.jp') && !this.WEBSITE.includes('.nl') && !this.WEBSITE.includes('.ca') && !this.WEBSITE.includes('.uk') && !this.WEBSITE.includes('.mx') && !this.WEBSITE.includes('.nz') && !this.WEBSITE.includes('.id') && !this.WEBSITE.includes('.fr') && !this.WEBSITE.includes('.cc') && !this.WEBSITE.includes('.co')) {
                         let filterdus = await helper.dbconnect("SHOPIFYFILTEREDUS")
                         for (let group of filterdus) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks') && this.WEBSITE.includes('.ca')) {
                         let filterdca = await helper.dbconnect("SHOPIFYFILTEREDCA")
                         for (let group of filterdca) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else if (product.title.toLowerCase().includes('jordan') || product.title.toLowerCase().includes('foam') || product.title.toLowerCase().includes('air force') || product.title.toLowerCase().includes('newbalance') || product.title.toLowerCase().includes('yeezy') || product.title.toLowerCase().includes('slide') || product.title.toLowerCase().includes('dunk') && !product.title.toLowerCase().includes('shirt') && !product.title.toLowerCase().includes('shorts') && !product.title.toLowerCase().includes('socks')) {
                         let filterdeu = await helper.dbconnect("SHOPIFYFILTEREDEU")
                         for (let group of filterdeu) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : "https://media.discordapp.net/attachments/820804762459045910/821401274053820466/Copy_of_Copy_of_Copy_of_Copy_of_Untitled_5.png?width=829&height=829", sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     }
                     // -shirt, -short, -pant, -sock
@@ -179,57 +179,62 @@ class ShopifyMonitor {
         }
     }
     async monitorAntibot() {
-        let errored = false;
+        let justStarted = true
         let URL = this.WEBSITE + "/checkout";
         let proxy = await helper.getRandomProxy();
         let method = 'GET'; //request method
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
         }
-        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS") {
-            URL = `${this.WEBSITE.split('.').join('-')}.translate.goog/checkout?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`;  //Or you can use ?collection or ?a or ?q
+        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS" || this.WEBSITE.includes('oqium.com')) {
+            URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/checkout?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
             }
         }
         try {
             let set = await helper.requestBody(URL, method, proxy, headers) //request function
-            //console.log(set.response.status, this.WEBSITE)
-            if (set.response.status != 302) {
-                errored = true;
-            }
-            if (errored) {
+            //console.log(set.response.status)
+            if (set.response.status != 200) {
                 this.monitorAntibot()
                 return;
             }
-            let location = set.response.headers.raw()["location"];
-            if (location)
-                location = location[0];
-            if (location && location.includes('password')) {
+            let image = 'https://cdn.shopify.com/static/share-image-common.jpg'
+            image = 'http:' + set.resp.split('<link rel="shortcut icon" href="')[1].split('" type="')[0]
+            if (set.response.url.includes('password')) {
                 if (this.password !== "Up") {
-                    if (this.password) {
-                        let sites = await helper.dbconnect(this.DBSITE)
-                        for (let group of sites) {
-                            helper.postPassword(this.WEBSITE, group, 'Password Page Up!', version)
-                        }
-                        let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
-                        for (let group of password) {
-                            helper.postPassword(this.WEBSITE, group, 'Password Page Up!', version)
-                        }
+                    this.password = "Up"
+                    if(justStarted) {
+                        this.monitorAntibot();
+                        justStarted = false;
+                        return;
                     }
-                    this.password = "Up";
                     console.log(`[SHOPIFY] (${this.WEBSITE}) Password Page Up!`);
-                }
-            }
-            else if (this.password === "Up") {
-                if (this.password) {
                     let sites = await helper.dbconnect(this.DBSITE)
                     for (let group of sites) {
-                        helper.postPassword(this.WEBSITE, group, 'Password Page Down!', version)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is down!`, 'Pass v1.0', image)
                     }
                     let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
                     for (let group of password) {
-                        helper.postPassword(this.WEBSITE, group, 'Password Page Down!', version)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is down!`, 'Pass v1.0', image)
+                    }
+                }
+            } else {
+                if (this.password !== "Down") {
+                    this.password = "Down"
+                    if(justStarted) {
+                        this.monitorAntibot();
+                        justStarted = false;
+                        return;
+                    }
+                    console.log(`[SHOPIFY] (${this.WEBSITE}) Password Page Down!`);
+                    let sites = await helper.dbconnect(this.DBSITE)
+                    for (let group of sites) {
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is up!`, 'Pass v1.0', image)
+                    }
+                    let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
+                    for (let group of password) {
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is up!`, 'Pass v1.0', image)
                     }
                 }
             }
@@ -237,6 +242,7 @@ class ShopifyMonitor {
             this.monitorAntibot();
             return;
         } catch (err) {
+            //console.log(err)
             this.monitorAntibot()
             return;
         }
