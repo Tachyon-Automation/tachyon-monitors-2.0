@@ -149,10 +149,14 @@ class ShopifyMonitor {
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${date} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
+                    let all = await helper.dbconnect('SHOPIFYUNFILTEREDALL')
                     let qt = `Na`
                     let links = 'Na'
                     let sizeright = sizes.split('\n')
                     let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
+                    for (let group of all) {
+                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
+                    }
                     for (let group of sites) {
                         helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                     }
