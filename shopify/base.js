@@ -30,7 +30,7 @@ class ShopifyMonitor {
 
     async monitorProducts(page, limit, lastHash, products) {
         let start = Date.now()
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let URL = `${this.WEBSITE}/products.json?page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
