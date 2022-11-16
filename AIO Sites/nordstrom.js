@@ -34,14 +34,16 @@ async function monitor(sku) {
             return;
         let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
+        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let agent  = randomUseragent.getRandom();
         let headers = {
             'user-agent': agent,
+            'X-FORWARDED-FOR': ip,
             'Accept': 'application/vnd.nord.pdp.v1+json',
-            'consumer-id': 'recs-PDP_1',
+            'consumer-id': 'admin-PDP_1',
         }
         let method = 'GET'; //request method
-        let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
+        let req = `https://www.nordstrom.com/api/style/${sku}.js?cache=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Custom error handling
