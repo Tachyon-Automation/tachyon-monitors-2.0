@@ -238,7 +238,7 @@ class ShopifyMonitor {
                     }
                 }
             }
-            await helper.sleep(1000)
+            await helper.sleep(2000)
             this.monitorAntibot();
             return;
         } catch (err) {
