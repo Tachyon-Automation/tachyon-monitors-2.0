@@ -56,7 +56,7 @@ class ShopifyMonitor {
                 }
             }
             let requestTimeTaken = Date.now() - start
-            console.log(requestTimeTaken, limit)
+            //console.log(requestTimeTaken, limit)
             let body = set.json
             let currentHash = body
             if (currentHash == lastHash) {
@@ -173,7 +173,7 @@ class ShopifyMonitor {
             products = body.products
             this.monitorProducts(page, limit, lastHash, products)
         } catch (err) {
-            //console.log(err)
+            console.log(err)
             //console.log(this.WEBSITE
             this.monitorProducts(page, limit, lastHash, products)
         }
