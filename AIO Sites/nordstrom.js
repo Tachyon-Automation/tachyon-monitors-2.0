@@ -2,6 +2,8 @@ const helper = require('../x-help/helper');
 const groups = require('../x-help/groups.json');
 const database = require('../x-help/database');
 const discordBot = require('../x-help/discord')
+const randomUseragent = require('random-useragent');
+
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
 const CHANNEL = '810745640837185547' //channel id
@@ -32,8 +34,9 @@ async function monitor(sku) {
             return;
         let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
+        let agent  = randomUseragent.getRandom();
         let headers = {
-            'user-agent': 'Mozilla/5.0 (compatible; MJ12bot/v1.4.5; http://www.majestic12.co.uk/bot.php?+)',
+            'user-agent': agent,
             'Accept': 'application/vnd.nord.pdp.v1+json',
             'consumer-id': 'recs-PDP_1',
         }
@@ -46,6 +49,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
+        console.log(agent)
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return

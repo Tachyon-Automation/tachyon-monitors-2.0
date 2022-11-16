@@ -120,6 +120,21 @@ const helper = {
         }
         return
     },
+    requestWalmart: async function (site, method, proxy, headers) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
+            let text = await response.text()
+            let parse = await text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
+            let body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
+            clearTimeout(timeoutId)
+            return { body, response, text }
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
     requestHtml: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
