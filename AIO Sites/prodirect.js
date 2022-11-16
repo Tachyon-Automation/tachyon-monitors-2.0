@@ -32,22 +32,27 @@ async function monitor(sku) {
         if (!product)
             return;
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
-        let agent = randomUseragent.getRandom();
-        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
-
         //these headers change per site
         let headers = {
-            'User-Agent': agent,
-            'x-forwarded-for': ip,
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 7.0; Nexus 9 Build/NRD90R) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Safari/537.36',
+            'x-forwarded-for': '156.50.185.242',
             'pragma': 'no-cache',
+            'cache-control': 'no-cache',
+            'accept': 'application/json, text/plain, */*',
+            'accept-language': 'en-US,en;q=0.9',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-origin',
             'cache-control': 'no-cache',
             'referer': `https://www.prodirectsport.com/soccer/p/womens-air-jordan-1-low-sanddrift-washed-teal-sail-womens-shoes-263243/`,
             'accept': 'application/json, text/plain, */*',
+            'accept-encoding': 'gzip, deflate, br',
         }
         let method = 'GET'; //request method
-        let req = `https://www.prodirectsport.com/client/api/product/${sku}/availability`//request url
+        let req = `http://prodirectsport.com/client/api/product/${sku}/availability`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku)
             return
@@ -108,7 +113,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(sku)
         return
     }

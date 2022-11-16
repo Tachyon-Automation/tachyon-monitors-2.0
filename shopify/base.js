@@ -56,7 +56,7 @@ class ShopifyMonitor {
                 }
             }
             let requestTimeTaken = Date.now() - start
-            //console.log(requestTimeTaken, limit)
+            console.log(requestTimeTaken, limit)
             let body = set.json
             let currentHash = body
             if (currentHash == lastHash) {

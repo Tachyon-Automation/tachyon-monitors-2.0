@@ -3,7 +3,14 @@ const { v4 } = require('uuid');
 const version = `Supreme v1.0`
 let oldSizeList = []
 let justStarted = true
-monitorProducts()
+monitor()
+async function monitor() {
+    monitorProducts()
+    monitorProducts()
+    monitorProducts()
+    monitorProducts()
+    monitorProducts()
+}
 async function monitorProducts() {
     let proxy = await helper.getRandomProxy2();
     let URL = `https://www.supremenewyork.com/mobile_stock.json?order=${v4()}`;  //Or you can use ?collection or ?a or ?q
@@ -24,7 +31,7 @@ async function monitorProducts() {
             let sitecatagory = category
             let products = body.products_and_categories[category];
             for (let product of products) {
-                let price = '$' + product.price / 1000
+                let price = '$' + product.price / 100
                 let title = product.name
                 let sku = product.id;
                 let pdp = `https://www.supremenewyork.com/shop/${sku}.json`
@@ -61,6 +68,7 @@ async function monitorProducts() {
                 }
             }
         }
+        console.log('yes')
         justStarted = false
         monitorProducts()
     } catch (err) {
