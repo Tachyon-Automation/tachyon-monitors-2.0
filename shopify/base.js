@@ -112,7 +112,7 @@ class ShopifyMonitor {
                         return
                     }
                     let variantse = await set2.json.product.variants
-                    if (variantse[0].inventory_quantity) {
+                    if (JSON.stringify(variantse).includes('inventory_quantity')) {
                         sizes = ''
                         stock = 0
                         for (let variant of variantse) {
