@@ -141,7 +141,7 @@ class ShopifyMonitor {
                         (this.WEBSITE.includes('.ca')) {
                         let unfilteredca = await helper.dbconnect("SHOPIFYUNFILTEREDCA")
                         for (let group of unfilteredca) {
-                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] || product.images[0].src, sizeright, sizeleft, stock, group, version, qt, links, date)
+                            helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : 'https://shopify.com', sizeright, sizeleft, stock, group, version, qt, links, date)
                         }
                     } else {
                         let unfilteredeu = await helper.dbconnect("SHOPIFYUNFILTEREDEU")
