@@ -106,19 +106,37 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    let set2 = await helper.requestShopify(`${this.WEBSITE + "/products/" + product.handle}.json?order=${v4()}`, method, proxy, headers) //request function
-                    if (set2.response.status != 200) {
-                        this.monitorProducts(page, limit, lastHash, products)
-                        return
-                    }
-                    let variantse = await set2.json.product.variants
-                    if (JSON.stringify(variantse).includes('inventory_quantity')) {
+                    if (this.WEBSITE.includes('https://kith.com')) {
+                        let set3 = await helper.requestBody(`${this.WEBSITE + "/products/" + product.handle}?order=${v4()}`, method, proxy, headers) //request function
+                        if (set3.response.status != 200) {
+                            this.monitorProducts(page, limit, lastHash, products)
+                            return
+                        }
+                        let body3 = set3.resp.split('application/json" data-product-json>')[1].split('</script>')[0].trim()
+                        body3 = await JSON.parse(body3)
                         sizes = ''
                         stock = 0
-                        for (let variant of variantse) {
+                        for (let variant of body3.variants) {
                             if (variant.inventory_quantity > 0) {
                                 sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) [${variant.inventory_quantity}]\n`
                                 stock += variant.inventory_quantity
+                            }
+                        }
+                    } else {
+                        let set2 = await helper.requestShopify(`${this.WEBSITE + "/products/" + product.handle}.json?order=${v4()}`, method, proxy, headers) //request function
+                        if (set2.response.status != 200) {
+                            this.monitorProducts(page, limit, lastHash, products)
+                            return
+                        }
+                        let variantse = await set2.json.product.variants
+                        if (JSON.stringify(variantse).includes('inventory_quantity')) {
+                            sizes = ''
+                            stock = 0
+                            for (let variant of variantse) {
+                                if (variant.inventory_quantity > 0) {
+                                    sizes += `[${variant.title}](${this.WEBSITE}/cart/${variant.id}:1) | [QT](http://tachyonrobotics.com) [${variant.inventory_quantity}]\n`
+                                    stock += variant.inventory_quantity
+                                }
                             }
                         }
                     }
@@ -204,7 +222,7 @@ class ShopifyMonitor {
             if (set.response.url.includes('password')) {
                 if (this.password !== "Up") {
                     this.password = "Up"
-                    if(justStarted) {
+                    if (justStarted) {
                         this.monitorAntibot();
                         justStarted = false;
                         return;
@@ -222,7 +240,7 @@ class ShopifyMonitor {
             } else {
                 if (this.password !== "Down") {
                     this.password = "Down"
-                    if(justStarted) {
+                    if (justStarted) {
                         this.monitorAntibot();
                         justStarted = false;
                         return;
