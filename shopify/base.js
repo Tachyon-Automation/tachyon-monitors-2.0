@@ -106,13 +106,19 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
-                    if (this.WEBSITE.includes('https://kith.com')) {
+                    if (this.WEBSITE.includes('https://kith.com') || this.WEBSITE.includes('https://jimmyjazz.com')) {
                         let set3 = await helper.requestBody(`${this.WEBSITE + "/products/" + product.handle}?order=${v4()}`, method, proxy, headers) //request function
                         if (set3.response.status != 200) {
                             this.monitorProducts(page, limit, lastHash, products)
                             return
                         }
-                        let body3 = set3.resp.split('application/json" data-product-json>')[1].split('</script>')[0].trim()
+                        let body3
+                        if (this.WEBSITE.includes('https://jimmyjazz.com')) {
+                            body3 = set3.resp.split('js-product-json\n>')[1].split('</script>')[0].trim()
+                        }
+                        if (this.WEBSITE.includes('https://kith.com')) {
+                            body3 = set3.resp.split('application/json" data-product-json>')[1].split('</script>')[0].trim()
+                        }
                         body3 = await JSON.parse(body3)
                         sizes = ''
                         stock = 0
