@@ -20,8 +20,10 @@ class ShopifyMonitor {
         //this.monitorAntibot();
         this.monitorProducts("1", "125", lastHash, products);
         this.monitorProducts("2", "125", lastHash, products);
-        this.monitorProducts("3", "125", lastHash, products);
-        this.monitorProducts("4", "125", lastHash, products);
+        this.monitorProducts("1", "125", lastHash, products);
+        this.monitorProducts("2", "125", lastHash, products);
+        this.monitorProducts("2", "250", lastHash, products);
+        this.monitorProducts("3", "250", lastHash, products);
     }
 
     async monitorProducts(page, limit, lastHash, products) {
