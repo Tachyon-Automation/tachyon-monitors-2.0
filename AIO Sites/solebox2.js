@@ -82,7 +82,7 @@ async function monitor(sku) {
                 if (size.attributes['data-code'] == 'instock') {
                     sizeList.push(size.attributes.value);
                     if (!oldSizeList.includes(size.attributes.value)) {
-                        sizes += `[${size.textContent.split(':')[0].trim()}](https://www.solebox.com/${size.attributes.value}.html#Tachyon) - ${size.attributes.value}\n`;
+                        sizes += `[${size.textContent.split(':')[0].trim()}](https://www.solebox.com/${size.attributes.value}.html#Tachyon)\n`;
                         stock++
                         inStock = true;
                     }

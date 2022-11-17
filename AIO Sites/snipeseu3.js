@@ -68,9 +68,10 @@ async function monitor(sku) {
             let inStock = false
             let url = `https://www.snipes.com/${sku}.html#Tachyon`
             let title = root.querySelector('.b-product-tile-title.b-product-tile-text').textContent
-            let price = root.querySelector('.b-product-tile-price-item').textContent
+            let price = root.querySelector('.b-product-tile-price-item').textContent.replace('&euro; ', '') + ' EUR'
+            if(price.includes('null'))
+            price = 'Na'
             let image = root.querySelector('img').attributes['data-src']
-            console.log(image)
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -81,13 +82,14 @@ async function monitor(sku) {
             for (let size of variants) {
                 if (size.attributes['data-code'] == 'instock') {
                     sizeList.push(size.attributes.value);
+                    sizes += `[${size.textContent.split(':')[0].trim()}](https://snipes.com/${size.attributes.value}.html#Tachyon)\n`;
+                    stock++
                     if (!oldSizeList.includes(size.attributes.value)) {
-                        sizes += `[${size.textContent.split(':')[0].trim()}](https://snipes.com/${size.attributes.value}.html#Tachyon) - ${size.attributes.value}\n`;
-                        stock++
                         inStock = true;
                     }
                 }
             }
+            console.log(sizes)
             if (inStock) {
                 let AIO = await helper.dbconnect("AIOFILTEREDEU")
                 let sites = await helper.dbconnect(catagory + site)
