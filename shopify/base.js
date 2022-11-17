@@ -31,7 +31,8 @@ class ShopifyMonitor {
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
-        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS"|| this.DBSITE == "SHOPIFYKITH"|| this.DBSITE == "SHOPIFYUNDEFEATED" || this.DBSITE == "SHOPIFYSNK"  || this.DBSITE == "SHOPIFYPACKER" || this.DBSITE == "SHOPIFYSLAMJAM") {
+        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS" || this.DBSITE == "SHOPIFYPACKER" || this.WEBSITE == "https://hatclub.com" || this.WEBSITE == "https://oqium.com") {
+            proxy = 'http://usa.rotating.proxyrack.net:9000';
             URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -149,10 +150,14 @@ class ShopifyMonitor {
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${date} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
+                    let all = await helper.dbconnect('SHOPIFYUNFILTEREDALL')
                     let qt = `Na`
                     let links = 'Na'
                     let sizeright = sizes.split('\n')
                     let sizeleft = sizeright.splice(0, Math.floor(sizeright.length / 2))
+                    for (let group of all) {
+                        helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
+                    }
                     for (let group of sites) {
                         helper.postShopify(this.WEBSITE + "/products/" + product.handle, product.title, price, webhookType, product.images[0] ? product.images[0].src : null, sizeright, sizeleft, stock, group, version, qt, links, date)
                     }

@@ -94,6 +94,21 @@ const helper = {
         }
         return
     },
+    requestJson4: async function (site, method, proxy, headers, body) {
+        try {
+            //console.log(body)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: body })
+            let text = await response.text()
+            let html = HTMLParser.parse(text)
+            clearTimeout(timeoutId)
+            return { html, response, text }
+        } catch (e) {
+            console.log(e)
+        }
+        return
+    },
     requestBody: async function (site, method, proxy, headers) {
         try {
             const controller = new AbortController();
@@ -115,6 +130,21 @@ const helper = {
             let json = await response.json()
             clearTimeout(timeoutId)
             return { json, response }
+        } catch (e) {
+            //console.log(e)
+        }
+        return
+    },
+    requestWalmart: async function (site, method, proxy, headers) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy) })
+            let text = await response.text()
+            let parse = await text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
+            let body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
+            clearTimeout(timeoutId)
+            return { body, response, text }
         } catch (e) {
             //console.log(e)
         }

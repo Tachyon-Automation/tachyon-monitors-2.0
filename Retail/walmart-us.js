@@ -23,6 +23,7 @@ async function startMonitoring() {
             waittime: row.waittime,
             sizes: row.sizes
         }
+        monitor(row.sku)
     }
     console.log(`[${site}] Monitoring all SKUs!`)
 }
@@ -31,8 +32,7 @@ async function monitor(sku) {
     try {
         let product = PRODUCTS[sku]
         if (!product)
-            return;
-            
+            return;  
         let proxy = await helper.getRandomProxy(); //proxy per site
         //let agent = randomUseragent.getRandom(); //random agent per site
         //these headers change per site
@@ -42,12 +42,10 @@ async function monitor(sku) {
         }
         let method = 'GET'; //request method
         let req = `https://www.walmart.com/ip/tachyon/${sku}/.js?cache=${v4()}`//request url
-        let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        console.log(set.response.status)
-        let parse = set.text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
-        body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
+        let set = await helper.requestWalmart(req, method, proxy, headers) //request function
+        let body = set.body;
         let status = PRODUCTS[sku].sizes
-
+        //console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -74,7 +72,7 @@ async function monitor(sku) {
                         await helper.postAmazon(url, title, sku, price, image, stock, offerid, group, version, qt, links)
                     }
                     for (let group of retail) {
-                        helper.postRetail(url, title, sku, price, image, stock, group, version, qt, links)
+                        helper.postAmazon(url, title, sku, price, image, stock, offerid, group, version, qt, links)
                     }
                     PRODUCTS[sku].sizes = 'In-Stock'
                     database.query(`update ${table} set sizes='In-Stock' where sku='${sku}'`)

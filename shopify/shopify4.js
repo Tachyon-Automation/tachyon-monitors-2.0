@@ -30,7 +30,11 @@ monitors.push(new ShopifyMonitor("https://ruleofnext.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://xhibition.co", 'NONE'))
 monitors.push(new ShopifyMonitor("https://bbcicecream.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://atmosusa.com", 'NONE'))
-
+monitors.push(new ShopifyMonitor("https://mct.tokyo", 'NONE'))
+monitors.push(new ShopifyMonitor("https://aj7.bephiesbeautysupply.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://modernpriorities.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://suede-store.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://soorploomclothier.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }

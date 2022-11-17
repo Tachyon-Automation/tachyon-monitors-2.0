@@ -5,10 +5,10 @@ const discordBot = require('../x-help/discord')
 const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '834542352394879046' //channel id
-const site = 'SNIPESEU'; //site name
+const CHANNEL = '810930267102773248' //channel id
+const site = 'SOLEBOX'; //site name
 const catagory = 'AIO'
-const version = `Snipes v1.0` //Site version
+const version = `Solebox v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -31,17 +31,27 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //these headers change per site
-        let headers = {
-            'User-Agent': randomUseragent.getRandom(),
-            'x-px-authorization': "1",
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
+        let data = {
+            'auid': '',
+            'scid': 'c6b45dde5e2193ea815d6525e3',
+            'pid0': sku
         }
-        let method = 'GET'; //request method
-        let req = `https://www.snipes.com/p/${v4()}-${sku}.html;.js?abcz=${v4()}`//request url
-        let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        let body = await JSON.parse(set.text.split('<script type="application/ld+json">')[1].split('</script>')[0])
+        let headers = {
+            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+            'content-type': 'application/x-www-form-urlencoded',
+        }
+        var formBody = [];
+        for (var property in data) {
+          var encodedKey = encodeURIComponent(property);
+          var encodedValue = encodeURIComponent(data[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+        let method = 'POST'; //request method
+        let req = `https://www.solebox.com/on/demandware.store/Sites-solebox-Site/en_DE/CQRecomm-Start?${v4()}`//request url
+        let set = await helper.requestJson4(req, method, proxy, headers, formBody) //request function
         let root = set.html
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
@@ -52,26 +62,27 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
+
         //Define body variables
-        if (body.offers.availability == 'http://schema.org/InStock') {
+        if (root.querySelector('.b-product-tile-title.b-product-tile-text')) {
             let inStock = false
-            let url = `https://www.snipes.com/${sku}.html#Tachyon`
-            let title = body.name
-            let price = body.offers.price + ' ' + body.offers.priceCurrency
-            let image = body.image[0]
+            let url = `https://www.solebox.com/${sku}.html#Tachyon`
+            let title = root.querySelector('.b-product-tile-title.b-product-tile-text').textContent
+            let price = root.querySelector('.b-product-tile-price-item').textContent
+            let image = root.querySelector('img').attributes['data-src']
+            console.log(image)
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let oldSizeList = await query.rows[0].sizes
-            let sizeList = [] 
-            let variants = root.querySelectorAll('.b-swatch-value-wrapper')
-
+            let sizeList = []
+            let variants = root.querySelectorAll('.b-cart-select-size.js-variant')
             //pars sizes for l
             for (let size of variants) {
-                if (size.innerHTML.includes('b-swatch-value--orderable')) {
-                    sizeList.push(size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']);
-                    if (!oldSizeList.includes(size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id'])) {
-                        sizes += `[${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-value']}](https://www.snipes.com/${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']}.html#Tachyon) - ${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']}\n`;
+                if (size.attributes['data-code'] == 'instock') {
+                    sizeList.push(size.attributes.value);
+                    if (!oldSizeList.includes(size.attributes.value)) {
+                        sizes += `[${size.textContent.split(':')[0].trim()}](https://www.solebox.com/${size.attributes.value}.html#Tachyon)\n`;
                         stock++
                         inStock = true;
                     }
@@ -100,7 +111,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         monitor(sku)
         return
     }
