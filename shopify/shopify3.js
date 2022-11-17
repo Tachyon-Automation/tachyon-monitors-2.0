@@ -28,6 +28,7 @@ monitors.push(new ShopifyMonitor("https://concrete.nl", 'NONE'))
 monitors.push(new ShopifyMonitor("https://cncpts.ae", 'NONE'))
 monitors.push(new ShopifyMonitor("https://chronotoys.com", 'NONE'))
 monitors.push(new ShopifyMonitor("https://centre214.com", 'NONE'))
+monitors.push(new ShopifyMonitor("https://ddtstore.com", 'NONE'))
 for(let monitor of monitors) {
     monitor.monitor();
 }
