@@ -50,7 +50,7 @@ async function monitor(sku) {
         }
         formBody = formBody.join("&");
         let method = 'POST'; //request method
-        let req = `https://www.solebox.com/on/demandware.store/Sites-solebox-Site/en_IT/CQRecomm-Start?${v4()}`//request url
+        let req = `https://www.solebox.com/on/demandware.store/Sites-solebox-Site/en_DE/CQRecomm-Start?${v4()}`//request url
         let set = await helper.requestJson4(req, method, proxy, headers, formBody) //request function
         let root = set.html
         if (set.response.status == 404) {
