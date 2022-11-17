@@ -31,7 +31,8 @@ class ShopifyMonitor {
         let headers = {
             'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
-        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS"|| this.DBSITE == "SHOPIFYKITH"|| this.DBSITE == "SHOPIFYUNDEFEATED" || this.DBSITE == "SHOPIFYSNK"  || this.DBSITE == "SHOPIFYPACKER" || this.DBSITE == "SHOPIFYPACKER") {
+        if (this.DBSITE == "SHOPIFYFUNKO" || this.DBSITE == "SHOPIFYCNCPTS" || this.DBSITE == "SHOPIFYPACKER" || this.WEBSITE == "https://hatclub.com") {
+            proxy = 'http://usa.rotating.proxyrack.net:9000';
             URL = `${this.WEBSITE.split('-').join('--').split('.').join('-')}.translate.goog/products.json?collection=pop&page=${page}&limit=${limit}&order=${v4()}`;  //Or you can use ?collection or ?a or ?q
             headers = {
                 'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
