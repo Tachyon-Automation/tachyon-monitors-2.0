@@ -3,7 +3,7 @@ let monitors = [];
 monitors.push(new ShopifyMonitor("https://deadstock.ca", 'DEADSTOCK'))
 monitors.push(new ShopifyMonitor("https://size.ca", 'SIZECA'))
 monitors.push(new ShopifyMonitor("https://jdsports.ca", 'JDSPORTSCA'))
-monitors.push(new ShopifyMonitor("https://nrml.ca", 'NRMLCA'))
+monitors.push(new ShopifyMonitor("https://nrml.ca", 'NRML'))
 monitors.push(new ShopifyMonitor("https://shop.havenshop.com", 'HAVEN'))
 monitors.push(new ShopifyMonitor("https://capsuletoronto.com", 'CAPSULE'))
 monitors.push(new ShopifyMonitor("https://nomadshop.net", 'NOMAD'))
