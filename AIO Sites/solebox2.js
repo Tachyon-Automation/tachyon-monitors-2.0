@@ -31,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy2(); //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let data = {
             'auid': '',
@@ -70,7 +70,6 @@ async function monitor(sku) {
             let title = root.querySelector('.b-product-tile-title.b-product-tile-text').textContent
             let price = root.querySelector('.b-product-tile-price-item').textContent
             let image = root.querySelector('img').attributes['data-src']
-            console.log(image)
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -111,7 +110,7 @@ async function monitor(sku) {
         monitor(sku);
         return
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         monitor(sku)
         return
     }

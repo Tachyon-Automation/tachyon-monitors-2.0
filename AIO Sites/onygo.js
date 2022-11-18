@@ -5,10 +5,10 @@ const discordBot = require('../x-help/discord')
 const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
-const CHANNEL = '834542352394879046' //channel id
-const site = 'SNIPESEU'; //site name
+const CHANNEL = '849893085398958100' //channel id
+const site = 'ONYGO'; //site name
 const catagory = 'AIO'
-const version = `Snipes v1.0` //Site version
+const version = `Onygo v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -39,20 +39,24 @@ async function monitor(sku) {
             'pid0': sku
         }
         let headers = {
-            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
             'content-type': 'application/x-www-form-urlencoded',
+            'x-px-authorization': "2",
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.",
+            'X-FORWARDED-FOR': '8.8.8.8'
         }
         var formBody = [];
         for (var property in data) {
-            var encodedKey = encodeURIComponent(property);
-            var encodedValue = encodeURIComponent(data[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
+          var encodedKey = encodeURIComponent(property);
+          var encodedValue = encodeURIComponent(data[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
         let method = 'POST'; //request method
-        let req = `https://www.snipes.com/on/demandware.store/Sites-snse-DE-AT-Site/en/CQRecomm-Start?${v4()}`//request url
+        let req = `https://www.onygo.com/on/demandware.store/Sites-solebox-Site/de_DE/CQRecomm-Start?${v4()}`//request url
         let set = await helper.requestJson4(req, method, proxy, headers, formBody) //request function
         let root = set.html
+        console.log(set.text)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -66,11 +70,10 @@ async function monitor(sku) {
         //Define body variables
         if (root.querySelector('.b-product-tile-title.b-product-tile-text')) {
             let inStock = false
-            let url = `https://www.snipes.com/${sku}.html#Tachyon`
+            let url = `https://www.onygo.com/${sku}.html#Tachyon`
             let title = root.querySelector('.b-product-tile-title.b-product-tile-text').textContent
-            let price = root.querySelector('.b-product-tile-price-item').textContent.replace('&euro; ', '') + ' EUR'
-            if (price.includes('null'))
-                price = 'Na'
+            console.log(title)
+            let price = root.querySelector('.b-product-tile-price-item').textContent
             let image = root.querySelector('img').attributes['data-src']
             let stock = 0
             let sizes = []
@@ -82,9 +85,9 @@ async function monitor(sku) {
             for (let size of variants) {
                 if (size.attributes['data-code'] == 'instock') {
                     sizeList.push(size.attributes.value);
-                    sizes += `[${size.textContent.split(':')[0].trim()}](https://snipes.com/${size.attributes.value}.html#Tachyon)\n`;
-                    stock++
                     if (!oldSizeList.includes(size.attributes.value)) {
+                        sizes += `[${size.textContent.split(':')[0].trim()}](https://www.onygo.com/${size.attributes.value}.html#Tachyon)\n`;
+                        stock++
                         inStock = true;
                     }
                 }
