@@ -33,20 +33,22 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
+        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
             'User-Agent': 'GameStop_iOS/500.2.0 (iOS 15.4.1)',
+            'X-FORWARDED-FOR': ip,
         }
         let method = 'GET'; //request method
         let req = `https://api.gamestop.com/api/v2/products?productIds=${sku}&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers)
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return
         }
         let body = await set.json //request function
-        if(!body.productResponses.length > 0) {
+        if (!body.productResponses.length > 0) {
             console.log(sku)
             await helper.sleep(product.waittime);
             return
@@ -56,7 +58,7 @@ async function monitor(sku) {
         let stockStatus
         for (let variant of variants) {
             if (variant.productId == sku)
-            stockStatus = variant.available
+                stockStatus = variant.available
         }
         if (stockStatus) {
             let url = `https://www.gamestop.com/${sku}.html#Tachyon`
@@ -65,7 +67,7 @@ async function monitor(sku) {
             let price = body.productResponses[0].productPrice.basePriceValue.price.toString()
             let image = body.productResponses[0].productImages[0].url
             if (status !== "In-Stock") {
-                let sites = await helper.dbconnect(catagory+site)
+                let sites = await helper.dbconnect(catagory + site)
                 let retail = await helper.dbconnect("RETAILFILTEREDUS")
                 let qt = 'NA'
                 let links = `[ATC](https://www.gamestop.com/search/?sort=BestMatch_Desc&q=${sku}&p=1#Tachyon)`
