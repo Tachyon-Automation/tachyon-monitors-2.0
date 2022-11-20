@@ -12,7 +12,7 @@ async function monitor() {
     monitorProducts()
 }
 async function monitorProducts() {
-    let proxy = await helper.getRandomProxy();
+    let proxy = await helper.getRandomProxy2();
     let URL = `https://www.supremenewyork.com/mobile_stock.json?order=${v4()}`;  //Or you can use ?collection or ?a or ?q
     let headers = {
         'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',

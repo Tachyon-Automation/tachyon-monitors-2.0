@@ -28,14 +28,10 @@ async function startMonitoring() {
     console.log(`[${site}] Monitoring all SKUs!`)
     headers = {
         'user-agent': 'Googlebot-News',
-        'X-FORWARDED-FOR': '69.146.186.29',
-        'Poq-App-Version': '9b75f98c-5c89-45ca-94bd-c5fb278382fe',
-        'Poq-Platform': 'iOS',
-        'Poq-Platform-Version': 'bd8a66c3-0079-4572-b391-3e57c8877ec2',
-        'Poq-Device-Model': '0de88708-2dd5-4baa-b2ce-1920ccd1df56',
-        'x-px-bypass-reason': '110be188-729e-4296-a2e6-335f65fc8af5',
-        'x-px-bypass': '9e8cdd9a-e412-4637-9e32-8e82b6b6ec3a',
-        'X-PX-AUTHORIZATION': '3:fb432524-3945-452f-bc03-9aa38b805ca5'
+        'X-FORWARDED-FOR': '50.206.43.38',
+        'x-px-bypass-reason': `${v4()}`,
+        'x-px-bypass': `${v4()}`,
+        'X-PX-AUTHORIZATION': `2:${v4()}`,
     }
 }
 
@@ -60,14 +56,9 @@ async function monitor(sku) {
                 headers = {
                     'user-agent': 'Googlebot-News',
                     'X-FORWARDED-FOR': ip,
-                    'Poq-App-Version': `${v4()}`,
-                    'Poq-Platform': 'iOS',
-                    'Poq-Platform-Version': `${v4()}`,
-                    'Poq-Device-Model': `${v4()}`,
                     'x-px-bypass-reason': `${v4()}`,
                     'x-px-bypass': `${v4()}`,
-                    'X-PX-AUTHORIZATION': `3:${v4()}`,
-                    'cookie': `_px3=${v4()};_pxhd=${v4()}`  
+                    'X-PX-AUTHORIZATION': `2:${v4()}`,
                 }
                 count = 0
             }
