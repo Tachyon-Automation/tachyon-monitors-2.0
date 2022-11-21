@@ -63,6 +63,8 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
+        console.log(set.response.status)
+
         if (body.launchDate) {
             let event = Date.parse(new Date(Date.now()).toISOString())
             let event1 = Date.parse(new Date(body.launchDate).toISOString())
@@ -142,20 +144,21 @@ async function genheadersd() {
         let method = 'GET';
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+        let random = v4()
         let head = {
-            'user-agent': randomUseragent.getRandom(),
-            'X-FORWARDED-FOR': ip,
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
+
             'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'user-agent': randomUseragent.getRandom(),
+            'X-PX-ORIGINAL-PROXY-PROXY': proxy,
+            [v4()]: v4(),
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D8273?pid=${v4()}`//request url
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
-        //Custom error handling
         if (set2.response.status != 200) {
             genheadersd()
             return
         }
+        //Custom error handling
         console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
