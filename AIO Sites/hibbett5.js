@@ -141,10 +141,6 @@ async function monitor(sku) {
 
 async function genheadersd() {
     try {
-        if (headers.length > 50) {
-            genheadersd()
-            return 
-        }
         let method = 'GET';
         let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
@@ -159,6 +155,10 @@ async function genheadersd() {
             'X-PX-ORIGINAL-TOKEN': `${v4()}`,
             'cookie': `_px3=${v4()};_pxhd=${v4()}`,
             [v4()]: v4(),
+        }
+        if (headers.length > 50) {
+            genheadersd()
+            return 
         }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
