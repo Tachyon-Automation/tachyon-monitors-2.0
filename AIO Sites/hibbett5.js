@@ -15,28 +15,11 @@ let PRODUCTS = {}
 let headers
 let count = 0
 let header
+for (let i = 0; i < 20; i++) {
+    genheadersd()
+}
 startMonitoring()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
-genheadersd()
 async function startMonitoring() {
-    await helper.sleep(10000)
     let SKUList = await database.query(`SELECT * from ${table}`);
     for (let row of SKUList.rows) {
         PRODUCTS[row.sku] = {
