@@ -49,7 +49,7 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
         //Custom error handling
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             count++
             if (count > 10) {
