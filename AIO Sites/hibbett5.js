@@ -34,6 +34,7 @@ genheadersd()
 genheadersd()
 genheadersd()
 genheadersd()
+genheadersd()
 async function startMonitoring() {
     await helper.sleep(10000)
     let SKUList = await database.query(`SELECT * from ${table}`);
