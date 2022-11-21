@@ -141,6 +141,10 @@ async function monitor(sku) {
 
 async function genheadersd() {
     try {
+        if (headers.length > 50) {
+            genheadersd()
+            return 
+        }
         let method = 'GET';
         let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
