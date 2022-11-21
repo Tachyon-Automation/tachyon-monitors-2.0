@@ -88,7 +88,7 @@ async function monitor(sku) {
         let oldSizeList = await query.rows[0].sizes
         let sizeList = []
         let variants = body.skus
-        let variantsa = ''
+        let variantsa = []
         //pars sizes for loop
         for (let variant of variants) {
             if (variant.size.includes('.')) {
@@ -103,7 +103,7 @@ async function monitor(sku) {
             if (variant.isAvailable === true) {
                 sizeList.push(variant.id);
                 if (!oldSizeList.includes(variant.id)) {
-                    variantsa += `${variant.id},}`
+                    variantsa.push(variant.id + `_https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}`)
                     sizes += `[${variant.size}](https://www.hibbett.com/product?pid=${sku}&dwvar_${sku}_size=${sizevar}&dwvar_${sku}_color=${variant.color.id}) - ${variant.id}\n`
                     stock++
                     inStock = true;

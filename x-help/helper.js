@@ -221,22 +221,23 @@ const helper = {
             console.log(e)
         }
     },
-    posElephentHibbett: async function (sku, title, image) {
+    posElephentHibbett: async function (sku, title, image, vars) {
         const options = {
             method: 'POST',
-            url: 'https://cloudapii.herokuapp.com/bdgfhbdfghbtb',
+            url: 'https://cloudapii.herokuapp.com/gergerg',
             headers: { 'Content-Type': 'application/json' },
             body: {
                 mode: '1',
-                sku: sku,
                 title: title,
-                picture: image,
+                sku: sku,
+                vars: vars,
+                image: image,
             },
             json: true
         };
         try {
             request(options)
-            //console.log("success")
+            console.log("success")
         } catch (e) {
             //console.log(e)
         }
