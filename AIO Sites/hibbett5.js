@@ -144,23 +144,23 @@ async function genheadersd() {
         let method = 'GET';
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+        let random = v4()
         let head = {
-            "accept-language": `${v4()}`,
-            "cache-control": `${v4()}`,
-            "if-none-match": `${v4()}`,
-            "sec-ch-ua": `${v4()}`,
-            "sec-ch-ua-mobile": `${v4()}`,
-            "sec-ch-ua-platform": `${v4()}`,
-            "sec-fetch-dest": `${v4()}`,
-            "sec-fetch-mode": `${v4()}`,
-            "sec-fetch-site": `${v4()}`,
-            "sec-fetch-user": `${v4()}`,
-            "upgrade-insecure-requests": `${v4()}`,
-            "cookie": `${v4()}`,
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
+
             'X-PX-AUTHORIZATION': `3:${v4()}`,
             'user-agent': randomUseragent.getRandom(),
+            'X-FORWARDED-FOR': ip,
+            'X-PX-ORIGINAL-TOKEN': `${v4()}`,
+            'X-PX-ORIGINAL-URL': `https://www.hibbett.com/product?pid=${v4()}&dwvar_${v4()}`,
+            'X-PX-ORIGINAL-USER-AGENT': randomUseragent.getRandom(),
+            'X-PX-ORIGINAL-IP': ip,
+            'X-PX-ORIGINAL-PROXY': proxy,
+            'X-PX-ORIGINAL-PROXY-TOKEN': `${v4()}`,
+            'X-PX-ORIGINAL-PROXY-URL': `https://www.hibbett.com/product?pid=${v4()}&dwvar_${v4()}`,
+            'X-PX-ORIGINAL-PROXY-USER-AGENT': randomUseragent.getRandom(),
+            'X-PX-ORIGINAL-PROXY-IP': ip,
+            'X-PX-ORIGINAL-PROXY-PROXY': proxy,
+           [v4()]: v4(),
         }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
@@ -169,7 +169,7 @@ async function genheadersd() {
             return
         }
         //Custom error handling
-        //console.log(headers.length)
+        console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
