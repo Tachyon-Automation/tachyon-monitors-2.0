@@ -22,14 +22,14 @@ module.exports = {
             "out_file": "/dev/null"
         },
         {
-            "script": "./AIO Sites/snipeseu3.js",
+            "script": "./AIO Sites/snipeseu.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
             "out_file": "/dev/null"
         },
         {
-            "script": "./AIO Sites/solebox2.js",
+            "script": "./AIO Sites/solebox.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",

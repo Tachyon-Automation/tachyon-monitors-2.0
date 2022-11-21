@@ -31,18 +31,23 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
+        var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {
-            'User-Agent': randomUseragent.getRandom(),
-            'x-px-authorization': "1",
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
+            'user-agent': randomUseragent.getRandom(),
+            'X-FORWARDED-FOR': ip,
+            "cookie": `${v4()}`,
+            'x-px-bypass-reason': `${v4()}`,
+            'x-px-bypass': `${v4()}`,
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
+            [v4()]: v4(),
         }
         let method = 'GET'; //request method
-        let req = `https://www.snipes.com/p/${v4()}-${sku}.html;.js?abcz=${v4()}`//request url
-        let set = await helper.requestHtml(req, method, proxy, headers) //request function
-        let body = await JSON.parse(set.text.split('<script type="application/ld+json">')[1].split('</script>')[0])
-        let root = set.html
+        let req = `https://www.snipes.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
+        let set = await helper.requestJson(req, method, proxy, headers) //request function
+        let body = await set.json
+        //console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -53,25 +58,24 @@ async function monitor(sku) {
             return
         }
         //Define body variables
-        if (body.offers.availability == 'http://schema.org/InStock') {
+        if (body.product.productName) {
             let inStock = false
             let url = `https://www.snipes.com/${sku}.html#Tachyon`
-            let title = body.name
-            let price = body.offers.price + ' ' + body.offers.priceCurrency
-            let image = body.image[0]
+            let title = body.product.brand + ' ' + body.product.productName
+            let price = body.product.price.sales.formatted
+            let image = body.product.images[0].pdp.srcM
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let oldSizeList = await query.rows[0].sizes
-            let sizeList = [] 
-            let variants = root.querySelectorAll('.b-swatch-value-wrapper')
-
+            let sizeList = []
+            let variants = body.product.variationAttributes[1].values
             //pars sizes for l
             for (let size of variants) {
-                if (size.innerHTML.includes('b-swatch-value--orderable')) {
-                    sizeList.push(size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']);
-                    if (!oldSizeList.includes(size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id'])) {
-                        sizes += `[${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-value']}](https://www.snipes.com/${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']}.html#Tachyon) - ${size.querySelector('.js-pdp-attribute-btn.b-pdp-swatch-link.js-pdp-attribute-btn--size').attributes['data-variant-id']}\n`;
+                if (size.isOrderable === true) {
+                    sizeList.push(size.variantId);
+                    if (!oldSizeList.includes(size.variantId)) {
+                        sizes += `[${size.value}](https://www.snipes.com/${size.variantId}.html#Tachyon)\n`;
                         stock++
                         inStock = true;
                     }

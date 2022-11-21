@@ -144,12 +144,13 @@ async function genheadersd() {
         let method = 'GET';
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
-        let random = v4()
         let head = {
-
-            'X-PX-AUTHORIZATION': `3:${v4()}`,
             'user-agent': randomUseragent.getRandom(),
-            'X-PX-ORIGINAL-PROXY-PROXY': proxy,
+            'X-FORWARDED-FOR': ip,
+            "cookie": `${v4()}`,
+            'x-px-bypass-reason': `${v4()}`,
+            'x-px-bypass': `${v4()}`,
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
             [v4()]: v4(),
         }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
