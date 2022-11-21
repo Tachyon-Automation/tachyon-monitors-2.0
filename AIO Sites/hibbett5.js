@@ -53,16 +53,18 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             count++
-            if (count > 30) {
+            if (count > 20) {
                 header = headers.shift()
                 count = 0
             }
             monitor(sku)
             return
         }
+        console.log(set.response.status)
+
         if (body.launchDate) {
             let event = Date.parse(new Date(Date.now()).toISOString())
             let event1 = Date.parse(new Date(body.launchDate).toISOString())
@@ -143,18 +145,31 @@ async function genheadersd() {
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': randomUseragent.getRandom(),
-            'X-FORWARDED-FOR': ip,
+            "accept-language": `${v4()}`,
+            "cache-control": `${v4()}`,
+            "if-none-match": `${v4()}`,
+            "sec-ch-ua": `${v4()}`,
+            "sec-ch-ua-mobile": `${v4()}`,
+            "sec-ch-ua-platform": `${v4()}`,
+            "sec-fetch-dest": `${v4()}`,
+            "sec-fetch-mode": `${v4()}`,
+            "sec-fetch-site": `${v4()}`,
+            "sec-fetch-user": `${v4()}`,
+            "upgrade-insecure-requests": `${v4()}`,
+            "cookie": `${v4()}`,
+            'x-px-bypass-reason': `${v4()}`,
+            'x-px-bypass': `${v4()}`,
             'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'user-agent': randomUseragent.getRandom(),
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2484?pid=${v4()}`//request url
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
-        //Custom error handling
         if (set2.response.status != 200) {
             genheadersd()
             return
         }
-        console.log(headers.length)
+        //Custom error handling
+        //console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
