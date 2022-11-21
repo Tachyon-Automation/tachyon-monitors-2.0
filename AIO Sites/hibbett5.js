@@ -60,7 +60,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy2(); //proxy per site
+        let proxy = await helper.getRandomProxy(); //proxy per site
         //these headers change per site
         let method = 'GET'; //request method
         //console.log(headers.length)
