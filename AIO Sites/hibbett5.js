@@ -53,10 +53,10 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             count++
-            if (count > 20) {
+            if (count > 30) {
                 header = headers.shift()
                 count = 0
             }
@@ -143,11 +143,9 @@ async function genheadersd() {
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': 'Googlebot-News',
+            'user-agent': randomUseragent.getRandom(),
             'X-FORWARDED-FOR': ip,
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
-            'X-PX-AUTHORIZATION': `2:${v4()}`,
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
         }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2484?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
