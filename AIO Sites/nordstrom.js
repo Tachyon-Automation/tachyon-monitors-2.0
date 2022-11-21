@@ -32,31 +32,32 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = await helper.getRandomProxy(); //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //these headers change per site
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
-        let agent  = randomUseragent.getRandom();
+        let agent = randomUseragent.getRandom();
         let headers = {
-            'user-agent': agent,
-            'X-FORWARDED-FOR': ip,
-            'Accept': 'application/vnd.nord.pdp.v1+json',
-            'consumer-id': 'admin-PDP_1',
+            'user-agent': 'device=iPhone14,2;deviceType=iPhone;os=iOS;osVersion=16.0;appVersion=9.11;carrier=None;appName=fla-ios',
+            'Accept': ' application/vnd.offer.v1+json',
+            'Nord-Client-Id': 'APP01031',
         }
+
+        
         let method = 'GET'; //request method
-        let req = `https://www.nordstrom.com/api/style/${sku}.js?cache=${v4()}`//request url
-        let set = await helper.requestJson(req, method, proxy, headers) //request function
+        let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
+        let set = await helper.requestBody(req, method, proxy, headers) //request function
         let body = await set.json
-        //Custom error handling
+        console.log(await set.resp)
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
-        console.log(agent)
+        console.log(set.response.status)
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             console.log('[NORDSTROM] ' + sku + ' not found!')
             return
         }
-        
+
         //Define body variables
         let ids = body.skus.allIds
         if (ids.length < 0) {
@@ -70,7 +71,7 @@ async function monitor(sku) {
         let price = '' //price set
         let parse = body.defaultGalleryMedia.styleMediaId
         let image = 'https://pbs.twimg.com/profile_images/1159538934977662976/4gmIcgkZ_400x400.png'
-        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop } catch (e) {} //try set image
+        try { image = body.styleMedia.byId[parse].imageMediaUri.smallDesktop } catch (e) { } //try set image
         let stock = 0
         let sizes = []
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
@@ -98,7 +99,7 @@ async function monitor(sku) {
         }
         if (inStock) {
             let AIO = await helper.dbconnect("AIOFILTEREDUS")
-            let sites = await helper.dbconnect(catagory+site)
+            let sites = await helper.dbconnect(catagory + site)
             let qt = 'Na'
             let links = 'Na'
             title = title.split(',')[0]
