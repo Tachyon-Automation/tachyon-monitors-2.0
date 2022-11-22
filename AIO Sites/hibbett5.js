@@ -31,11 +31,10 @@ async function startMonitoring() {
     }
     console.log(`[${site}] Monitoring all SKUs!`)
     headers = [{
-        'user-agent': 'Googlebot-News',
         'X-FORWARDED-FOR': '50.206.43.38',
-        'x-px-bypass-reason': `${v4()}`,
-        'x-px-bypass': `${v4()}`,
-        'X-PX-AUTHORIZATION': `2:${v4()}`,
+        'user-agent': randomUseragent.getRandom(),
+        'X-PX-AUTHORIZATION': `3:${v4()}`,
+        [v4()]: v4(),
     }]
 }
 
@@ -142,15 +141,12 @@ async function monitor(sku) {
 async function genheadersd() {
     try {
         let method = 'GET';
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': randomUseragent.getRandom(),
+            'user-agent': 'googlebot',
             'X-FORWARDED-FOR': ip,
-            "cookie": `${v4()}`,
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'X-PX-AUTHORIZATION': `2:${v4()}`,
             [v4()]: v4(),
         }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
