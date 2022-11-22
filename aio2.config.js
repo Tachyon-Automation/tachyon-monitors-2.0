@@ -43,7 +43,7 @@ module.exports = {
             "out_file": "/dev/null"
         },
         {
-            "script": "./AIO Sites/lvr.js",
+            "script": "./AIO Sites/lvr2.js",
             "watch": true,
             "max_memory_restart": "1000M",
             "error_file": "/dev/null",
