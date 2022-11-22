@@ -15,7 +15,7 @@ let PRODUCTS = {}
 let headers
 let count = 0
 let header
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 25; i++) {
     genheadersd()
 }
 startMonitoring()
