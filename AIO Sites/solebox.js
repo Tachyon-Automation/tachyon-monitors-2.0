@@ -31,22 +31,24 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //these headers change per site
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {
             'user-agent': randomUseragent.getRandom(),
             'X-FORWARDED-FOR': ip,
             "cookie": `${v4()}`,
-            'x-px-bypass-reason': `${v4()}`,
-            'x-px-bypass': `${v4()}`,
             'X-PX-AUTHORIZATION': `3:${v4()}`,
-            [v4()]: v4(),
         }
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            headers[v4()] = v4()
+        }
+        console.log(headers)
         let method = 'GET'; //request method
         let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
-        //console.log(set.response.status)
+        console.log(set.response.status)
         let body = await set.json
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);

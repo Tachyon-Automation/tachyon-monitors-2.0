@@ -47,12 +47,12 @@ async function monitor(sku) {
         //these headers change per site
         let method = 'GET'; //request method
         //console.log(headers.length)
-        let req = `https://hibbett-mobileapi.prolific.io/ecommerce/products/${sku}?pid=${v4()}`//request url
+        let req = `https://hibbett-mobileapi.prolific.io/ecommerce/products/${sku}?customerId=${v4()}`//request url
         //console.log(headers[0])
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             count++
             if (count > 20) {
@@ -62,7 +62,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
-        console.log(set.response.status)
+        //console.log(set.response.status)
 
         if (body.launchDate) {
             let event = Date.parse(new Date(Date.now()).toISOString())
@@ -144,13 +144,17 @@ async function genheadersd() {
         let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': 'googlebot',
+            'user-agent': 'Hibbett | CG/6.0.0 (com.hibbett.hibbett-sports; build:10723; iOS 16.0.0) Alamofire/5.0.0-rc.3',
             'X-FORWARDED-FOR': ip,
             'X-PX-AUTHORIZATION': `2:${v4()}`,
-            [v4()]: v4(),
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            head[v4()] = v4()
+        }
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?customerId=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
+        //console.log(set2.response.status)
         if (set2.response.status != 200) {
             genheadersd()
             return

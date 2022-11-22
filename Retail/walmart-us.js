@@ -38,14 +38,14 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'cookie': v4(),
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36',
+            'user-agent': randomUseragent.getRandom(),
         }
         let method = 'GET'; //request method
         let req = `https://www.walmart.com/ip/tachyon/${sku}/.js?cache=${v4()}`//request url
         let set = await helper.requestWalmart(req, method, proxy, headers) //request function
         let body = set.body;
         let status = PRODUCTS[sku].sizes
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);

@@ -426,7 +426,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await helper.getRandomProxy2();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -952,7 +952,7 @@ const helper = {
     }
 }
 async function getRandomProxy2() {
-    let WEBSHARE = await require('./oculus.json');
+    let WEBSHARE = await require('./webshare.json');
     return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
 }
 async function getBodyAsText(response, ms = 1000) {

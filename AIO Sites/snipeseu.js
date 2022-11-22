@@ -38,10 +38,12 @@ async function monitor(sku) {
             'user-agent': randomUseragent.getRandom(),
             'X-FORWARDED-FOR': ip,
             "cookie": `${v4()}`,
-            'x-px-bypass-reason': `${v4()}`,
             'x-px-bypass': `${v4()}`,
             'X-PX-AUTHORIZATION': `3:${v4()}`,
-            [v4()]: v4(),
+        }
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            headers[v4()] = v4()
         }
         let method = 'GET'; //request method
         let req = `https://www.snipes.com/de_DE/p/${sku}.html?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
