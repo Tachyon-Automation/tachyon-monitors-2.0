@@ -257,7 +257,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -339,7 +339,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -426,7 +426,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await helper.getRandomProxy2();
+        let proxy = await helper.getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -495,7 +495,7 @@ const helper = {
     postPassword: async function (website, site, status, version, image) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -537,7 +537,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -612,7 +612,7 @@ const helper = {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -682,7 +682,7 @@ const helper = {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -746,7 +746,7 @@ const helper = {
     postReddit: async function (url, title, sub, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
@@ -784,7 +784,7 @@ const helper = {
     postSlickdeals: async function (url, title, red, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy2();
+        let proxy = await getRandomProxy();
         let body =
         {
             "username": site.group.name,
