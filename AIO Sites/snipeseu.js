@@ -38,7 +38,6 @@ async function monitor(sku) {
             'user-agent': randomUseragent.getRandom(),
             'X-FORWARDED-FOR': ip,
             "cookie": `${v4()}`,
-            'x-px-bypass-reason': `${v4()}`,
             'x-px-bypass': `${v4()}`,
             'X-PX-AUTHORIZATION': `3:${v4()}`,
             [v4()]: v4(),
@@ -47,7 +46,7 @@ async function monitor(sku) {
         let req = `https://www.snipes.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
