@@ -55,17 +55,18 @@ async function monitor(sku) {
             'user-agent': 'device=iPhone14,2;deviceType=iPhone;os=iOS;osVersion=16.0;appVersion=9.11;carrier=None;appName=fla-ios',
             'Accept': ' application/vnd.offer.v1+json',
             'Nord-Client-Id': 'APP01031',
-            'X-a8S6k1NS-e': cookie,
+            'X-a8S6k1NS-E': cookie,
         }
+
         let method = 'GET'; //request method
         let req = `https://api.nordstrom.com/offer/${sku}?apikey=kHeUEacPjrHY8SZXnLC8qGYSPXK0XJX5`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
-        console.log(set.response.status )
         if (body.errorcode == 'ERROR_STYLE_NOT_FOUND') {
             //console.log('[NORDSTROM] ' + sku + ' not found!')
             return

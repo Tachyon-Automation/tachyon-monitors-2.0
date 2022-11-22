@@ -15,7 +15,7 @@ let PRODUCTS = {}
 let headers
 let count = 0
 let header
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 100; i++) {
     genheadersd()
 }
 startMonitoring()
@@ -48,12 +48,12 @@ async function monitor(sku) {
         //these headers change per site
         let method = 'GET'; //request method
         //console.log(headers.length)
-        let req = `https://hibbett-mobileapi.prolific.io/ecommerce/products/${sku}?pid=${v4()}`//request url
+        let req = `https://hibbett-mobileapi.prolific.io/ecommerce/products/${sku}?customerId=${v4()}`//request url
         //console.log(headers[0])
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             count++
             if (count > 20) {
@@ -145,21 +145,15 @@ async function genheadersd() {
         let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': randomUseragent.getRandom(),
+            'user-agent': 'Hibbett | CG/6.0.0 (com.hibbett.hibbett-sports; build:10723; iOS 16.0.0) Alamofire/5.0.0-rc.3',
             'X-FORWARDED-FOR': ip,
-            'Poq-App-Version': `${v4()}`,
-            'Poq-Platform': 'iOS',
-            'Poq-Platform-Version': `${v4()}`,
-            'Poq-Device-Model': 'iPhone',
-            'X-PX-AUTHORIZATION': `3`,
-            'X-PX-ORIGINAL-TOKEN': `${v4()}`,
-            'cookie': `_px3=${v4()};_pxhd=${v4()}`,
+            'X-PX-AUTHORIZATION': `2:${v4()}`,
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
             head[v4()] = v4()
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?customerId=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
         //console.log(set2.response.status)
         if (set2.response.status != 200) {
@@ -167,6 +161,7 @@ async function genheadersd() {
             return
         }
         //Custom error handling
+        console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
