@@ -156,10 +156,7 @@ async function genheadersd() {
             'cookie': `_px3=${v4()};_pxhd=${v4()}`,
             [v4()]: v4(),
         }
-        if (headers.length > 50) {
-            genheadersd()
-            return 
-        }
+
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
         //console.log(set2.response.status)
@@ -168,7 +165,6 @@ async function genheadersd() {
             return
         }
         //Custom error handling
-        console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
