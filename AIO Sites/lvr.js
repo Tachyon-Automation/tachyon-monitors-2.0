@@ -9,7 +9,7 @@ const { Console } = require('console');
 const CHANNEL = '849674744496128050' //channel id
 const site = 'LVR'; //site name
 const catagory = 'AIO'
-const version = `LVR v1.0` //Site version
+const version = `LVR v2.0` //Site version
 const table = site.toLowerCase();
 discordBot.login();
 let PRODUCTS = {}
@@ -52,50 +52,39 @@ async function monitor(sku) {
         let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
         //these headers change per site
         let headers = {
-            'User-Agent': 'yacybot (/global; amd64 Linux 5.1.0-gentoo; java 1.8.0_201; Europe/de) http://yacy.net/bot.html',
-            '__lvr_mobile_api_token__': `${data}~hmac=${hmac}`,
+            'User-Agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
         }
         let method = 'GET'; //request method
-        let method2 = 'PUT'; //request method
-        let req = `https://api.luisaviaroma.com/lvrapprk/public/v1/itemminimal?format=json&Language=EN&Country=US&CurrencyView=USD&CurrencyFatt=USD&App=true&ItemCode=${sku}&SeasonId=${seasonid}&CollectionId=${collectionid}&ItemId=${itemid}`//request url
-        let set2 = await helper.requestBody(req, method2, proxy, headers)
-        if (set2.response.status != 501) {
-            monitor(sku)
-            return
-        }
-        let set = await helper.requestJson(req, method, proxy, headers) //request function
-        console.log(set.response.status)
-        let body = await set.json
-        if (set.response.status === 404) {
-            await helper.sleep(product.waittime);
-            monitor(sku)
-            return
-        }
-
+        let req = `https://www-luisaviaroma-com.translate.goog/${sku}?id=${v4()}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let set = await helper.requestBody(req, method, proxy, headers)
         if (set.response.status != 200) {
             monitor(sku)
             return
         }
+        let parse = await set.resp.split('<script>window.__BODY_MODEL__ = ')[1].split(';window.hydratecounter')[0].trim()
+        let body = await JSON.parse(parse)
         //Define body variables
-        if (body.DesignerText) {
+        if (body.Availability) {
             let inStock = false;
             let url = `https://www.luisaviaroma.com/${sku}#Tachyon`//product url
-            let title = body.DesignerText + ' ' + body.DescriptionText + ' ' + body.AvailabilityByColor[0].Description.toUpperCase()
-            let price = body.AvailabilityByColor[0].SizeAvailability[0].Pricing.Prices[0].ListPrice.toString()
+            let title = body.PageTitle
+            let price
             let image = 'https://i.imgur.com/UYW8kfZ.png'
             let stock = 0
             let sizes = []
             let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
             let oldSizeList = await query.rows[0].sizes
             let sizeList = []
-            let variants = body.AvailabilityByColor[0].SizeAvailability
+            let variants = body.Availability
             //pars sizes for loop
             for (let variant of variants) {
                 sizeList.push(variant.SizeValue);
                 if (!oldSizeList.includes(variant.SizeValue)) {
-                    stock += Number(variant.QuantitiesTotal.Available)
-                    sizes += `${variant.SizeValue} (${variant.QuantitiesTotal.Available})\n`
+                    stock++
+                    sizes += `${variant.SizeValue}\n`
                     inStock = true;
+                    price = variant.Pricing.Prices[0].FinalPrice
+                    console.log(price)
                 }
             }
             if (inStock) {
