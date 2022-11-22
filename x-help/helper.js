@@ -28,7 +28,7 @@ const helper = {
     sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
-    getRandomProxy: async function () {
+    getRandomProxy2: async function () {
         let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
@@ -257,7 +257,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -339,7 +339,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -426,7 +426,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -495,7 +495,7 @@ const helper = {
     postPassword: async function (website, site, status, version, image) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -537,7 +537,7 @@ const helper = {
         if (sizeleft.length == 0) {
             sizeleft = "-"
         }
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -612,7 +612,7 @@ const helper = {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -682,7 +682,7 @@ const helper = {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
         let uri = url.split('/')[2]
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -746,7 +746,7 @@ const helper = {
     postReddit: async function (url, title, sub, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -784,7 +784,7 @@ const helper = {
     postSlickdeals: async function (url, title, red, site, version) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
-        let proxy = await getRandomProxy();
+        let proxy = await getRandomProxy2();
         let body =
         {
             "username": site.group.name,
@@ -952,7 +952,7 @@ const helper = {
     }
 }
 async function getRandomProxy2() {
-    let WEBSHARE = await require('./oculus.json');
+    let WEBSHARE = await require('./webshare.json');
     return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
 }
 async function getBodyAsText(response, ms = 1000) {
