@@ -154,9 +154,11 @@ async function genheadersd() {
             'X-PX-AUTHORIZATION': `3`,
             'X-PX-ORIGINAL-TOKEN': `${v4()}`,
             'cookie': `_px3=${v4()};_pxhd=${v4()}`,
-            [v4()]: v4(),
         }
-
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            head[v4()] = v4()
+        }
         let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?pid=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
         //console.log(set2.response.status)

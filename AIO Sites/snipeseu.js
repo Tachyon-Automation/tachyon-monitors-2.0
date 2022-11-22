@@ -40,13 +40,16 @@ async function monitor(sku) {
             "cookie": `${v4()}`,
             'x-px-bypass': `${v4()}`,
             'X-PX-AUTHORIZATION': `3:${v4()}`,
-            [v4()]: v4(),
+        }
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            headers[v4()] = v4()
         }
         let method = 'GET'; //request method
-        let req = `https://www.snipes.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
+        let req = `https://www.snipes.com/de_DE/p/${sku}.html?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         let body = await set.json
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
