@@ -142,7 +142,7 @@ async function monitor(sku) {
 async function genheadersd() {
     try {
         let method = 'GET';
-        let proxy = await helper.getRandomProxy2();
+        let proxy = await helper.getRandomProxy();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
             'user-agent': randomUseragent.getRandom(),
