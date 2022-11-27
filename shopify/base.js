@@ -107,6 +107,7 @@ class ShopifyMonitor {
                     webhookType = "New Product";
                 }
                 if (webhookType) {
+                    /*
                     if (this.WEBSITE.includes('https://kith.com') || this.WEBSITE.includes('https://jimmyjazz.com')) {
                         let set3 = await helper.requestBody(`${this.WEBSITE + "/products/" + product.handle}?order=${v4()}`, method, proxy, headers) //request function
                         if (set3.response.status != 200) {
@@ -147,6 +148,7 @@ class ShopifyMonitor {
                             }
                         }
                     }
+                    */
                     let date = new Date()
                     console.log(`[SHOPIFY] (${this.WEBSITE}) ${date} - ${product.title}`)
                     let sites = await helper.dbconnect(this.DBSITE)
