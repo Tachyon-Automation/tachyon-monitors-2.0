@@ -89,6 +89,8 @@ async function monitor(sku) {
         let oldSizeList = await query.rows[0].sizes
         let sizeList = []
         let ids = body.skus
+        let vars = []
+        let color = ''
         for (let id of ids) {
             if (id.sellingControls[0].availability.quantity > 0) {
                 sizeList.push(id.ids.rmsSku.id);
@@ -97,6 +99,8 @@ async function monitor(sku) {
                     sizes += `${id.productAttributes.size.name} (${id.sellingControls[0].availability.quantity}) - ${id.ids.rmsSku.id}\n`
                     stock += Number(id.sellingControls[0].availability.quantity)
                     price = '$' + id.sellingControls[0].price.regular.price.units
+                    color = vars[id].colorDisplayValue
+                    vars.push(id.ids.rmsSku.id)
                 }
             }
         }
@@ -107,7 +111,7 @@ async function monitor(sku) {
             let links = 'Na'
             title = title.split(',')[0]
             helper.posElephentNord(sizes, sku, title, price, image)
-            helper.posElephentOrca(sizes, sku, title, price, image)
+            helper.posElephentOrca(vars, sku, price, image, color)
             console.log(`[time: ${new Date().toISOString()}, product: ${sku}, title: ${title}]`)
             inStock = false;
             let sizeright = sizes.split('\n')

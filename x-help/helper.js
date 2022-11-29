@@ -199,17 +199,18 @@ const helper = {
             //console.log(e)
         }
     },
-    posElephentOrca: async function (sizes, sku, title, price, image) {
+    posElephentOrca: async function (sizes, sku, price, image, color) {
         await sleep(300)
         const options = {
             method: 'POST',
-            url: 'http://51.81.82.199:5000/sendRestock',
+            url: 'http://51.81.82.199:5001/restock',
             headers: { 'Content-Type': 'application/json' },
             body: {
-                offerid: sizes,
-                sitesku: sku,
-                title: title,
+                sku: sizes,
+                product: sku,
+                type: nordstrom,
                 price: price,
+                colorwave: color,
                 image: image
             },
             json: true
