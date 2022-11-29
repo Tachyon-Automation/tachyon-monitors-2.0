@@ -31,7 +31,7 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000'; //proxy per site
+        let proxy = await helper.getRandomProxy2(); //proxy per site
         //these headers change per site
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {

@@ -38,8 +38,13 @@ async function monitor(sku) {
         //these headers change per site
         let headers = {
             'User-Agent': 'Shiekh Shoes/10.6 (com.shiekh.shoes.ios; build:1233; iOS 16.0.0) Alamofire/5.6.1',
-            'x-px-authorization': `2:eyJ1IjoiOTk3OTYyNjEtNjZiOC0xMWVkLWJkMmYtNzk3MjQxNzg2MTQyIiwidiI6Ijc2YzlkMmUwLTM2NjYtMTFlZC1iNDU4LTY5NDE0ZDY3NTQ0YiIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiJlODNjYjQ1Nzg2ZDNjMGE4NTQzNjk2ZGM3ODhmMTYxOGFjMDE3MDk3ZTdmNDk3MzhkMTM0MjUyNDdkYzVjODM5In0=`,
-            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk."
+            "cookie": `${v4()}`,
+            'x-px-bypass': `${v4()}`,
+            'X-PX-AUTHORIZATION': `2:${v4()}`,
+        }
+        let rando = Math.floor(Math.random() * 25)
+        for (let i = 0; i < rando; i++) {
+            headers[v4()] = v4()
         }
         let method = 'GET'; //request method
         let req = `https://api.shiekh.com/api/V1/extend/products/${pid}/.js`//request url

@@ -31,11 +31,10 @@ async function startMonitoring() {
     }
     console.log(`[${site}] Monitoring all SKUs!`)
     headers = [{
-        'user-agent': 'Googlebot-News',
         'X-FORWARDED-FOR': '50.206.43.38',
-        'x-px-bypass-reason': `${v4()}`,
-        'x-px-bypass': `${v4()}`,
-        'X-PX-AUTHORIZATION': `2:${v4()}`,
+        'user-agent': randomUseragent.getRandom(),
+        'X-PX-AUTHORIZATION': `3:${v4()}`,
+        [v4()]: v4(),
     }]
 }
 
@@ -53,7 +52,7 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             count++
             if (count > 20) {
@@ -142,32 +141,40 @@ async function monitor(sku) {
 async function genheadersd() {
     try {
         let method = 'GET';
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'user-agent': 'Hibbett | CG/6.0.0 (com.hibbett.hibbett-sports; build:10723; iOS 16.0.0) Alamofire/5.0.0-rc.3',
-            'X-FORWARDED-FOR': ip,
-            'X-PX-AUTHORIZATION': `2:${v4()}`,
+            'Accept': `${v4()}`,
+            'version': `${v4()}`,
+            'user-agent': randomUseragent.getRandom(),
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'cookie': `_px3=${v4()}`,
+            'x-api-key': `${v4()}`,
+            'platform': `${v4()}`,
+            'Accept-Encoding': `${v4()}`,
+            'Content-Type': `${v4()}`,
+            'Connection': `${v4()}`,
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
             head[v4()] = v4()
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/D2487?customerId=${v4()}`//request url
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/6P423?ustomerId=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
-        //console.log(set2.response.status)
+        console.log(set2.response.status)
         if (set2.response.status != 200) {
             genheadersd()
             return
         }
+        console.log(head)
         //Custom error handling
-        console.log(headers.length)
+        //onsole.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
         genheadersd()
     } catch (e) {
-        //console.log(e)
+        console.log(e)
         genheadersd()
         return
     }

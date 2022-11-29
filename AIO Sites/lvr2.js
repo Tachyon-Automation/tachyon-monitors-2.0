@@ -10,7 +10,7 @@ async function monitor() {
     monitorProducts()
 }
 async function monitorProducts() {
-    let proxy = 'http://usa.rotating.proxyrack.net:9000';
+    let proxy = await helper.getRandomProxy();
     let URL = `https://www-luisaviaroma-com.translate.goog/en-us/shop/men/shoes/sneakers?lvrid=_gm_i4_c97&SortType=NewIn&ajax=true&id=${v4()}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`;  //Or you can use ?collection or ?a or ?q
     let headers = {
         'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
@@ -18,7 +18,7 @@ async function monitorProducts() {
     try {
         let method = 'GET';
         let set = await helper.requestShopify(URL, method, proxy, headers)
-        //console.log(set.response.status )
+        console.log(set.response.status )
         if (set.response.status != 200) {
             monitorProducts()
             return

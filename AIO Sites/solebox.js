@@ -38,15 +38,16 @@ async function monitor(sku) {
             'user-agent': randomUseragent.getRandom(),
             'X-FORWARDED-FOR': ip,
             "cookie": `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'X-PX-AUTHORIZATION': `3:eyJ1IjoiODZkNDI3ZmEtNmFhYi0xMWVkLWI1YjAtNDY3MjZiNDk2YzZlIiwidiI6Ijc2YzlkMmUwLTM2NjYtMTFlZC1iNDU4LTY5NDE0ZDY3NTQ0YiIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiIwMzJkNTc2YzY4N2RhYWIwNTFmNTFkNDZmZTlmMTE4OTdlYTRkNTdlM2Y4NWNjOTM5MmI0YTI4NjNjOWY5OWU3In0=; _pxhd=lPH41GfGgz6gXgTEdN0mXRi-0c2uWvyZRZlEZe5OSyPy4RBRGL1T4sTCyA6M4n/gac8Yb5ltgkGgkEKpvCPo8w==:9TLRjcAGNAIWV6ub/Bi0ywZKNlzWNTp2foX70jNybqUwfsMk9gBODoQaYiRPLySshCESLb0XswA2SNy7CXIfkx6ei30LpVjrcIOzA62LOkE=`,
+
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
             headers[v4()] = v4()
         }
-        console.log(headers)
+        //console.log(headers)
         let method = 'GET'; //request method
-        let req = `https://www.solebox.com/de_DE/p/${sku}.html;.js?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
+        let req = `https://www.solebox.com/de_DE/p/${sku}.html?dwvar_1_size=1&format=ajax&abcz=${v4()}`//request url
         let set = await helper.requestJson(req, method, proxy, headers) //request function
         console.log(set.response.status)
         let body = await set.json
