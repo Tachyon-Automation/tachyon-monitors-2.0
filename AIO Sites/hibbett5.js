@@ -10,6 +10,7 @@ const site = 'HIBBETT'; //site name
 const catagory = 'AIO'
 const version = `Hibbett v5.0` //Site version
 const table = site.toLowerCase();
+const genCookie = require('../x-help/pxgen');
 discordBot.login();
 let PRODUCTS = {}
 let headers
@@ -52,7 +53,7 @@ async function monitor(sku) {
         let set = await helper.requestJson(req, method, proxy, headers[0]) //request function
         let body = await set.json
         //Custom error handling
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status != 200) {
             count++
             if (count > 20) {
@@ -143,17 +144,17 @@ async function genheadersd() {
         let method = 'GET';
         let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
+        let cookie = await genCookie(proxy)
         let head = {
-            'user-agent': randomUseragent.getRandom(),
+            'user-agent': 'Hibbett | CG/6.0.0 (com.hibbett.hibbett-sports; build:10723; iOS 16.0.0) Alamofire/5.0.0-rc.3',
             'X-FORWARDED-FOR': ip,
             'Poq-App-Version': `${v4()}`,
             'Poq-Platform': 'iOS',
             'Poq-Platform-Version': `${v4()}`,
             'Poq-Device-Model': 'iPhone',
             'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.",
-            'X-PX-AUTHORIZATION': `3:cdbacdd7c4e9094cab2f0a4fd261c563c611084cef86f5a887aeac6a41389311:Vn1ouymONQj4J7xlhKYENZHcP+k1BRzxwLlzdFKggf+rTYhB2mX1lHIbQmZ3uiSEE6Ls4PgQD10bADHTfFwBfw==:1000:NawXzewT1eAaIL+LshbmcdzUWuvv6TkqcQ8QO+RTzi/Xc5TL3sBsv9zRSUAi/hfbSFDDqjqqh1ldwLh9xw2PC4iPOsyTtaOPBG2RI0RDTt2BqhSamXiIvVmF5SdL5DYCWQk9ZzsBxprtGbG6lV3K4OzA1VPcC47u7PWD5uBHEI4mCID+HX7ZeFcaQ8B1aba9z134tsbDkAwmuMxVzHzdgw==`,
+            'X-PX-AUTHORIZATION': `3:${cookie}`,
             //'cookie': `_px3=${v4()};_pxhd=${v4()}` 
-
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
@@ -170,7 +171,7 @@ async function genheadersd() {
             return
         }
         //Custom error handling
-        //console.log(headers.length)
+        console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }

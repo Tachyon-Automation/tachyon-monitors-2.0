@@ -35,11 +35,16 @@ async function monitor(sku) {
         //these headers change per site
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {
+            'Accept': `${v4()}`,
+            'version': `${v4()}`,
             'user-agent': randomUseragent.getRandom(),
-            'X-FORWARDED-FOR': ip,
-            "cookie": `${v4()}`,
-            'X-PX-AUTHORIZATION': `3:eyJ1IjoiODZkNDI3ZmEtNmFhYi0xMWVkLWI1YjAtNDY3MjZiNDk2YzZlIiwidiI6Ijc2YzlkMmUwLTM2NjYtMTFlZC1iNDU4LTY5NDE0ZDY3NTQ0YiIsInQiOjE1NjE1MDcyMDAwMDAsImgiOiIwMzJkNTc2YzY4N2RhYWIwNTFmNTFkNDZmZTlmMTE4OTdlYTRkNTdlM2Y4NWNjOTM5MmI0YTI4NjNjOWY5OWU3In0=; _pxhd=lPH41GfGgz6gXgTEdN0mXRi-0c2uWvyZRZlEZe5OSyPy4RBRGL1T4sTCyA6M4n/gac8Yb5ltgkGgkEKpvCPo8w==:9TLRjcAGNAIWV6ub/Bi0ywZKNlzWNTp2foX70jNybqUwfsMk9gBODoQaYiRPLySshCESLb0XswA2SNy7CXIfkx6ei30LpVjrcIOzA62LOkE=`,
-
+            'X-PX-AUTHORIZATION': `3:${v4()}`,
+            'cookie': `_px3=${v4()}`,
+            'x-api-key': `${v4()}`,
+            'platform': `${v4()}`,
+            'Accept-Encoding': `${v4()}`,
+            'Content-Type': `${v4()}`,
+            'Connection': `${v4()}`,
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {

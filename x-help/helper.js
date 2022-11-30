@@ -28,6 +28,9 @@ const helper = {
     sleep: function (ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
+    getRandomNumber: function (min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    },
     getRandomProxy: async function () {
         let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]

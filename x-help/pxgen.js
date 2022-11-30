@@ -1,15 +1,9 @@
-const pxHelper = require('./px-helper.js');
-const pxHelper = require('./helper.js');
+const pxHelper = require('../px-helper');
 const collector = require('./index.js')
 const fetch = require('node-fetch');
-const { v4: uuidv4 } = require('uuid')
-const https = require('https')
 const HTTPSProxyAgent = require('https-proxy-agent');
-const httpsAgent = new https.Agent({ keepAlive: true });
 const moment = require('moment');
-
 let userAgent = "";
-
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -216,7 +210,6 @@ async function postPX3(payloadEncrypted, px2, appID, tag, fTag, uuid, seq, en, c
     }
 }
 
-
 function genPX2Payload(uuid) {
     let payload = [
         {
@@ -265,10 +258,6 @@ async function postPX2(payloadEncrypted, appID, tag, fTag, uuid, seq, en, pc, si
                 "Referrer-Policy": "strict-origin-when-cross-origin"
             },
             agent: agent,
-            // proxy: {
-            //     host: '127.0.0.1',
-            //     port: 8888
-            // },
             "body": t,
             "method": "POST",
         });
@@ -321,8 +310,6 @@ function getPX2(px2Response, px2Payload, sid, vid, cts, uuid) {
 
 async function genCookie(proxy) {
     try {
-        console.log("+++++++++HIBBETT-COOKIE+++++++++")
-        console.log("PROXY: " + proxy)
         let agent = proxy || proxy === '' ? new HTTPSProxyAgent(proxy) : null
         let uuid = pxHelper.Kr();
         let px2Payload = genPX2Payload(uuid);
@@ -338,25 +325,12 @@ async function genCookie(proxy) {
         let px3PayloadEncrypted = pxHelper.encodePayload(JSON.stringify(px3Payload), uuid, px2.sts)
         let pcPX3 = pxHelper.genPC(px3Payload, uuid, 'v8.0.2', '278');
         let px3Result = await postPX3(px3PayloadEncrypted, px2, 'PXAJDckzHD', 'v8.0.2', '278', uuid, '1', 'NTA', px2.cs, pcPX3, sid ? sid : px2.sid, vid ? vid : px2.vid, cts ? cts : px2.cts, '2', agent);
-        let px3Cookie = ''
-        let pxdeCookie = ''
-        for (let a of px3Result.do) {
-            let args = a.split("|");
-            if (args[1] === '_px3') {
-                px3Cookie = args[3];
-            }
-            if (args[1] === '_pxde') {
-                pxdeCookie = args[3];
-            }
-        }
+        let px3Cookie = px3Result.do[0].split("|")[3]
+        //console.log(px3Cookie)
         return px3Cookie;
     } catch (e) {
         //console.log(e)
         return
     }
 }
-
-
-genCookie()
-
 module.exports = genCookie
