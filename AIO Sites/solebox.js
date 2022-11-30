@@ -5,6 +5,7 @@ const discordBot = require('../x-help/discord')
 const randomUseragent = require('random-useragent');
 const Discord = require('discord.js');
 const { v4 } = require('uuid');
+const genCookie = require('../x-help/pxgen2');
 const CHANNEL = '810930267102773248' //channel id
 const site = 'SOLEBOX'; //site name
 const catagory = 'AIO'
@@ -33,18 +34,17 @@ async function monitor(sku) {
             return;
         let proxy = await helper.getRandomProxy2(); //proxy per site
         //these headers change per site
+        let cookie = await genCookie(proxy)
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let headers = {
-            'Accept': `${v4()}`,
-            'version': `${v4()}`,
-            'user-agent': randomUseragent.getRandom(),
-            'X-PX-AUTHORIZATION': `3:${v4()}`,
-            'cookie': `_px3=${v4()}`,
-            'x-api-key': `${v4()}`,
-            'platform': `${v4()}`,
-            'Accept-Encoding': `${v4()}`,
-            'Content-Type': `${v4()}`,
-            'Connection': `${v4()}`,
+            'user-agent': 'Hibbett | CG/6.0.0 (com.hibbett.hibbett-sports; build:10723; iOS 16.0.0) Alamofire/5.0.0-rc.3',
+            'X-FORWARDED-FOR': ip,
+            'Poq-App-Version': `${v4()}`,
+            'Poq-Platform': 'iOS',
+            'Poq-Platform-Version': `${v4()}`,
+            'Poq-Device-Model': 'iPhone',
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.",
+            'X-PX-AUTHORIZATION': `3:${cookie}`,
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
