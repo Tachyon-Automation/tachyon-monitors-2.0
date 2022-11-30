@@ -29,6 +29,7 @@ async function startMonitoring() {
             sizes: row.sizes
         }
         monitor(row.sku)
+        monitor(row.sku)
     }
     console.log(`[${site}] Monitoring all SKUs!`)
     headers = [{
