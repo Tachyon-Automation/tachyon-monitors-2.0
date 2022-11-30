@@ -159,7 +159,7 @@ async function genheadersd() {
         
         //console.log(head)
 
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/6P423?customerId=${v4()}`//request url
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/E7496?customerId=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
         //console.log(set2.response.status)
         if (set2.response.status != 200) {
@@ -167,7 +167,7 @@ async function genheadersd() {
             return
         }
         //Custom error handling
-        console.log(headers.length)
+        console.log(cookie)
         if (headers.length < 200) {
             headers.push(head)
         }
