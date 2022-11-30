@@ -167,7 +167,7 @@ async function genheadersd() {
             return
         }
         //Custom error handling
-        console.log(cookie)
+        console.log(headers.length)
         if (headers.length < 200) {
             headers.push(head)
         }
