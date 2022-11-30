@@ -144,37 +144,39 @@ async function genheadersd() {
         let proxy = await helper.getRandomProxy2();
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let head = {
-            'Accept': `${v4()}`,
-            'version': `${v4()}`,
             'user-agent': randomUseragent.getRandom(),
-            'X-PX-AUTHORIZATION': `3:${v4()}`,
-            'cookie': `_px3=${v4()}`,
-            'x-api-key': `${v4()}`,
-            'platform': `${v4()}`,
-            'Accept-Encoding': `${v4()}`,
-            'Content-Type': `${v4()}`,
-            'Connection': `${v4()}`,
+            'X-FORWARDED-FOR': ip,
+            'Poq-App-Version': `${v4()}`,
+            'Poq-Platform': 'iOS',
+            'Poq-Platform-Version': `${v4()}`,
+            'Poq-Device-Model': 'iPhone',
+            'x-px-bypass-reason': "The%20certificate%20for%20this%20server%20is%20invalid.%20You%20might%20be%20connecting%20to%20a%20server%20that%20is%20pretending%20to%20be%20%E2%80%9Cpx-conf.perimeterx.net%E2%80%9D%20which%20could%20put%20your%20confidential%20information%20at%20risk.",
+            'X-PX-AUTHORIZATION': `3:cdbacdd7c4e9094cab2f0a4fd261c563c611084cef86f5a887aeac6a41389311:Vn1ouymONQj4J7xlhKYENZHcP+k1BRzxwLlzdFKggf+rTYhB2mX1lHIbQmZ3uiSEE6Ls4PgQD10bADHTfFwBfw==:1000:NawXzewT1eAaIL+LshbmcdzUWuvv6TkqcQ8QO+RTzi/Xc5TL3sBsv9zRSUAi/hfbSFDDqjqqh1ldwLh9xw2PC4iPOsyTtaOPBG2RI0RDTt2BqhSamXiIvVmF5SdL5DYCWQk9ZzsBxprtGbG6lV3K4OzA1VPcC47u7PWD5uBHEI4mCID+HX7ZeFcaQ8B1aba9z134tsbDkAwmuMxVzHzdgw==`,
+            //'cookie': `_px3=${v4()};_pxhd=${v4()}` 
+
         }
         let rando = Math.floor(Math.random() * 25)
         for (let i = 0; i < rando; i++) {
             head[v4()] = v4()
         }
-        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/6P423?ustomerId=${v4()}`//request url
+        
+        //console.log(head)
+
+        let req2 = `https://hibbett-mobileapi.prolific.io/ecommerce/products/6P423?customerId=${v4()}`//request url
         let set2 = await helper.requestJson(req2, method, proxy, head) //request function
-        console.log(set2.response.status)
+        //console.log(set2.response.status)
         if (set2.response.status != 200) {
             genheadersd()
             return
         }
-        console.log(head)
         //Custom error handling
-        //onsole.log(headers.length)
+        //console.log(headers.length)
         if (headers.length < 50) {
             headers.push(head)
         }
         genheadersd()
     } catch (e) {
-        console.log(e)
+        //console.log(e)
         genheadersd()
         return
     }
