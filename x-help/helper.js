@@ -956,7 +956,7 @@ const helper = {
     }
 }
 async function getRandomProxy2() {
-    let WEBSHARE = await require('./webshare.json');
+    let WEBSHARE = await require('./oculus.json');
     return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
 }
 async function getBodyAsText(response, ms = 1000) {
