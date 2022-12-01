@@ -249,6 +249,28 @@ const helper = {
             if (error) throw new Error(error);
         });
     },
+    posElephentWalmart: async function (sku, offerid, title) {
+        const options = {
+            method: 'POST',
+            url: 'https://cloudapii.herokuapp.com/wapi',
+            headers: { 'Content-Type': 'application/json' },
+            body: {
+                offerid: offerid,
+                sitesku: sku,
+                title: title,
+            },
+            json: true
+        };
+        try {
+            request(options)
+            console.log("success")
+        } catch (e) {
+            //console.log(e)
+        }
+        request(options, function (error) {
+            if (error) throw new Error(error);
+        });
+    },
     postAIO: async function (url, title, sku, price, image, sizeright, sizeleft, stock, site, version, qt, links) {
         let date = new Date()
         let color = hexToDecimal(site.group.embed.color.replace('#', ''))
