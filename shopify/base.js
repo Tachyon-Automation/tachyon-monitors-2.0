@@ -18,10 +18,11 @@ class ShopifyMonitor {
 
     async monitor() {
         this.monitorAntibot();
-        this.monitorProducts("1", "25", lastHash, products)
-        this.monitorProducts("1", "150", lastHash, products)
+        this.monitorProducts("1", "50", lastHash, products)
         this.monitorProducts("1", "250", lastHash, products)
         this.monitorProducts("2", "250", lastHash, products)
+        this.monitorProducts("3", "250", lastHash, products)
+
     }
 
     async monitorProducts(page, limit, lastHash, products) {
@@ -212,7 +213,7 @@ class ShopifyMonitor {
     async monitorAntibot() {
         let justStarted = true
         let URL = this.WEBSITE + "/checkout";
-        let proxy = await helper.getRandomProxy();
+        let proxy = await helper.getRandomProxy2();
         let method = 'GET'; //request method
         let headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
@@ -226,7 +227,7 @@ class ShopifyMonitor {
         try {
             let set = await helper.requestBody(URL, method, proxy, headers) //request function
             //console.log(set.response.status)
-            if (set.response.status != 200) {
+            if (set.response.status == 403) {
                 this.monitorAntibot()
                 return;
             }
@@ -243,11 +244,11 @@ class ShopifyMonitor {
                     console.log(`[SHOPIFY] (${this.WEBSITE}) Password Page Up!`);
                     let sites = await helper.dbconnect(this.DBSITE)
                     for (let group of sites) {
-                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is down!`, 'Pass v1.0', image)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is Up!`, 'Pass v1.0', image)
                     }
                     let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
                     for (let group of password) {
-                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is down!`, 'Pass v1.0', image)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is Up!`, 'Pass v1.0', image)
                     }
                 }
             } else {
@@ -261,11 +262,11 @@ class ShopifyMonitor {
                     console.log(`[SHOPIFY] (${this.WEBSITE}) Password Page Down!`);
                     let sites = await helper.dbconnect(this.DBSITE)
                     for (let group of sites) {
-                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is up!`, 'Pass v1.0', image)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is Down!`, 'Pass v1.0', image)
                     }
                     let password = await helper.dbconnect("SHOPIFYPINGSPASSWORD")
                     for (let group of password) {
-                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is up!`, 'Pass v1.0', image)
+                        helper.postPassword(this.WEBSITE, group, `Password page on ${this.WEBSITE} is Down!`, 'Pass v1.0', image)
                     }
                 }
             }
