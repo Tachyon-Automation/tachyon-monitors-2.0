@@ -37,17 +37,16 @@ async function monitor(sku) {
         var ip = (Math.floor(Math.random() * 255) + 1) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255));
         let agent = randomUseragent.getRandom();
         let headers = {
-            'user-agent': 'device=iPhone14,2;deviceType=iPhone;os=iOS;osVersion=16.0;appVersion=9.11;carrier=None;appName=fla-ios',
+            'user-agent': agent,
             'Accept': ' application/vnd.offer.v1+json',
             'Nord-Client-Id': 'APP01031',
         }
 
         
         let method = 'GET'; //request method
-        let req = `https://www.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
+        let req = `https://mobile.nordstrom.com/api/style/${sku}?cache=${v4()}`//request url
         let set = await helper.requestBody(req, method, proxy, headers) //request function
         let body = await set.json
-        console.log(await set.resp)
         if (set.response.status != 200) {
             monitor(sku)
             return
@@ -65,6 +64,7 @@ async function monitor(sku) {
             monitor(sku)
             return
         }
+        console.log(agent)
         let inStock = false;
         let url = `https://www.nordstrom.com/s/${sku}#Tachyon`//product url
         let title = body.productTitle + " "

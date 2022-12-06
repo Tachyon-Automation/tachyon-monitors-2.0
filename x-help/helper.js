@@ -85,7 +85,6 @@ const helper = {
     },
     requestJson3: async function (site, method, proxy, headers, body) {
         try {
-            //console.log(body)
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: JSON.stringify(body) })
@@ -102,7 +101,7 @@ const helper = {
             //console.log(body)
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 3000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: body })
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: JSON.stringify(body) })
             let text = await response.text()
             let html = HTMLParser.parse(text)
             clearTimeout(timeoutId)
