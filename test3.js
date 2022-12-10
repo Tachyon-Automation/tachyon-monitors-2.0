@@ -8,12 +8,12 @@ const { v4 } = require('uuid');
 let count = 0
 let success = 0
 monitor()
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 300; i++) {
   monitor()
 }
 async function monitor() {
   try {
-    let proxy = await helper.getRandomProxy2() //proxy per site
+    let proxy = await helper.getRandomProxy() //proxy per site
     let headers = {
       "accept": "*/*",
       "accept-encoding": "gzip, deflate, br",
@@ -33,12 +33,12 @@ async function monitor() {
     let skus = []
     let items = ['7', '8', '9', 'B']
     let items2 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 25; i++) {
       let item = items[Math.floor(Math.random() * items.length)]
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 8; i++) {
         rms += items2[Math.floor(Math.random() * items2.length)]
       }
-      let sku = `B0${item + rms}`
+      let sku = `B0${rms}`
       rms = ''
       skus.push(sku)
     }
@@ -55,7 +55,7 @@ async function monitor() {
       "content": {
         "includeOutOfStock": true
       },
-      "includeOutOfStock": false,
+      "includeOutOfStock": true,
       "endpoint": "ajax-data",
       "ASINList": skus
     }
@@ -76,6 +76,7 @@ async function monitor() {
         let query = await database.query(`SELECT * from ${table} where sku='${sku}'`);
         if (query.rows.length > 0)
         continue
+        console.log(sku)
         database.query(`insert into ${table}(sku) values('${sku}')`)
       }
       success += set.json.products.length

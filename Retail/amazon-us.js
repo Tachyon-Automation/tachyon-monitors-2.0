@@ -33,14 +33,14 @@ async function monitor(sku) {
         let product = PRODUCTS[sku]
         if (!product)
             return;
-        let proxy = 'http://usa.rotating.proxyrack.net:9000' //proxy per site
+        let proxy = await helper.getRandomProxy() //proxy per site
         let headers = {
-            //'user-agent': 'Mozilla/5.0 (compatible; Google-Site-Verification/1.0)',
+            'user-agent': 'Sosospider+(+http://help.soso.com/webspider.htm)',
         }
         let method = 'GET'; //request method
-        let req = `https://www-amazon-com.translate.goog/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp`//request url
+        let req = `https://www.amazon.com/gp/product/ajax/ref=dp_aod_ALL_mbc?experienceId=aodAjaxMain&asin=${sku}`//request url
         let set = await helper.requestHtml(req, method, proxy, headers)
-        //console.log(set.response.status)
+        console.log(set.response.status)
         if (set.response.status != 200) {
             monitor(sku);
             return

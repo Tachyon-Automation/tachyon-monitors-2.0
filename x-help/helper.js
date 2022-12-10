@@ -12,7 +12,8 @@ const database = require('../x-help/database');
 const hexToDecimal = hex => parseInt(hex, 16)
 const Site = require('./modelsite')
 const group = require('./modelgroup')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { error } = require('console');
 const { Schema } = mongoose
 const MONGODB_URI = 'mongodb+srv://tach_admins:0NbLD8hOkjtcHwMy@tachyon.8ameb.mongodb.net/tachyonMain'
 const helper = {
@@ -36,7 +37,7 @@ const helper = {
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
     getRandomProxy2: async function () {
-        let WEBSHARE = await require('./oculus.json');
+        let WEBSHARE = await require('./webshare.json');
         return WEBSHARE[Math.floor(Math.random() * (0 - WEBSHARE.length)) + WEBSHARE.length]
     },
     getUSARotatingProxy: function () {
@@ -100,8 +101,8 @@ const helper = {
         try {
             //console.log(body)
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 3000)
-            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: JSON.stringify(body) })
+            const timeoutId = setTimeout(() => controller.abort(), 20000)
+            let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: body })
             let text = await response.text()
             let html = HTMLParser.parse(text)
             clearTimeout(timeoutId)
