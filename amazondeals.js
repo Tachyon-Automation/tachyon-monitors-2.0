@@ -16,13 +16,13 @@ async function startSet() {
   while (true) {
     skulist = await database.query(`SELECT * from ${table}`);
     asinslegth = skulist.rows.length
-    await helper.sleep(300000)
+    await helper.sleep(6000)
   }
 }
 async function startMonitor() {
   skulist = await database.query(`SELECT * from ${table}`);
   asinslegth = skulist.rows.length
-  for (i = 0; i < 300; i++) {
+  for (i = 0; i < 200; i++) {
     let products = []
     for (j = 0; j < 25; j++) {
       try {
@@ -94,30 +94,30 @@ async function monitor(products) {
       let title = product.title.displayString
       //let image = product.swatchImages.dimensions[0].dimensionValues[0].imageAttributes.media.url
       let asin = product.asin
+      let totalprice = 0
       let totalsavings = 0
-      //console.log(product.buyingOptions.length)
       if (product.productCategory.websiteDisplayGroup.displayString == 'eBooks' || product.productCategory.websiteDisplayGroup.displayString == 'Book' || product.productCategory.websiteDisplayGroup.displayString == 'Audible')
         continue
       for (let buyingOption of product.buyingOptions) {
         if (buyingOption.availability.type == 'OUT_OF_STOCK')
           continue
         try {
-          if (buyingOption.price.basisPrice && totalprice < uyingOption.price.basisPrice.moneyValueOrRange.value.amount) {
+          if (buyingOption.price.basisPrice && totalprice <= buyingOption.price.basisPrice.moneyValueOrRange.value.amount) {
             totalprice = buyingOption.price.basisPrice.moneyValueOrRange.value.amount
           } else {
-            if (buyingOption.price.priceToPay.moneyValueOrRange.range && totalprice < buyingOption.price.priceToPay.moneyValueOrRange.range.min)
+            if (buyingOption.price.priceToPay.moneyValueOrRange.range && totalprice <= buyingOption.price.priceToPay.moneyValueOrRange.range.min)
               totalprice = buyingOption.price.priceToPay.moneyValueOrRange.range.min
             else {
-              if(totalprice < buyingOption.price.priceToPay.moneyValueOrRange.value.amount)
+              if(totalprice <= buyingOption.price.priceToPay.moneyValueOrRange.value.amount)
               totalprice = buyingOption.price.priceToPay.moneyValueOrRange.value.amount
             }
           }
-        } catch (e) { }
+        } catch (e) {}
         try {
           if (buyingOption.promotionsUnified.length = 1 && buyingOption.promotionsUnified.summary.unifiedIds.length > 0 && buyingOption.promotionsUnified.summary.length == 5 && buyingOption.promotionsUnified.summary.accessConfirmationShortMessage.fragments) {
             totalsavings += buyingOption.promotionsUnified.summary.accessConfirmationShortMessage.fragments[0].money.amount
           }
-        } catch (e) { }
+        } catch (e) {}
         try {
           if (buyingOption.promotionsUnified.length = 1 && buyingOption.promotionsUnified.summary.unifiedIds.length > 0 && buyingOption.promotionsUnified.summary.length == 5 && buyingOption.promotionsUnified.summary.mediumMessage.label.includes('%')) {
             totalsavings += Number(buyingOption.promotionsUnified.summary.mediumMessage.label.text.replace('Save ', '').replace('%', '')) / 100 * totalprice
@@ -128,8 +128,8 @@ async function monitor(products) {
         }
       }
       if (totalsavings > 0) {
-        if ((totalsavings / totalprice) * 100 > 20) {
-          //console.log(asin, totalsavings, totalprice)
+        if ((totalsavings/totalprice)*100 >= 50) {
+         //console.log(asin, totalsavings, totalprice)
         }
         if (totalsavings >= totalprice) {
           console.log(asin, totalsavings, totalprice)
@@ -145,3 +145,6 @@ async function monitor(products) {
   }
 
 }
+//https://www.amazon.com/gp/goldbox?deals-widget=%257B%2522version%2522%253A1%252C%2522viewIndex%2522%253A120%252C%2522presetId%2522%253A%2522AB48D68973BA06D9DFD05723DA760601%2522%252C%2522prime%2522%253Atrue%252C%2522sorting%2522%253A%2522BY_SCORE%2522%257D
+//https://www.amazon.com/gp/goldbox?deals-widget=%257B%2522version%2522%253A1%252C%2522viewIndex%2522%253A0%252C%2522presetId%2522%253A%2522AB48D68973BA06D9DFD05723DA760601%2522%252C%2522prime%2522%253Atrue%252C%2522sorting%2522%253A%2522BY_SCORE%2522%257D
+//https://www.amazon.com/gp/goldbox?deals-widget=%257B%2522version%2522%253A1%252C%2522viewIndex%2522%253A60%252C%2522presetId%2522%253A%2522AB48D68973BA06D9DFD05723DA760601%2522%252C%2522prime%2522%253Atrue%252C%2522sorting%2522%253A%2522BY_SCORE%2522%257D
