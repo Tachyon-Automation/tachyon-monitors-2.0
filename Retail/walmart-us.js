@@ -64,7 +64,7 @@ async function monitor(sku) {
                 let stock = '1'
                 let offerid = body.props.pageProps.initialData.data.product.offerId
                 if (status !== "In-Stock") {
-                    console.log(set.text)
+                    //console.log(set.text)
                     helper.posElephentWalmart(sku, offerid, title)
                     let sites = await helper.dbconnect(catagory+site)
                     let retail = await helper.dbconnect("RETAILFILTEREDUS")
