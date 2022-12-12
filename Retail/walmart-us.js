@@ -41,7 +41,7 @@ async function monitor(sku) {
             'user-agent': randomUseragent.getRandom(),
         }
         let method = 'GET'; //request method
-        let req = `https://www.walmart.com/ip/tachyon/${sku}/.js?cache=${v4()}`//request url
+        let req = `https://www.walmart.com/ip/${v4()}/${sku}/.js?cache=${v4()}`//request url
         let set = await helper.requestWalmart(req, method, proxy, headers) //request function
         let body = set.body;
         let status = PRODUCTS[sku].sizes
