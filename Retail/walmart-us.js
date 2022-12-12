@@ -55,8 +55,8 @@ async function monitor(sku) {
             monitor(sku);
             return
         }
-        
-            if (body.props.pageProps.initialData.data.product.sellerId == 'F55CDC31AB754BB68FE0B39041159D63' && body.props.pageProps.initialData.data.product.availabilityStatus == 'IN_STOCK' && body.props.pageProps.initialData.data.product.shippingOption.availabilityStatus == 'AVAILABLE') {
+
+            if (body.props.pageProps.initialData.data.product.sellerId == 'F55CDC31AB754BB68FE0B39041159D63' && body.props.pageProps.initialData.data.product.fulfillmentType != 'STORE' && body.props.pageProps.initialData.data.product.shippingOption.availabilityStatus == 'AVAILABLE') {
                 let url = `https://www.walmart.com/ip/tachyon/${sku}#Tachyon`
                 let title = body.props.pageProps.initialData.data.product.name
                 let price = body.props.pageProps.initialData.data.product.priceInfo.currentPrice.priceDisplay
@@ -64,6 +64,7 @@ async function monitor(sku) {
                 let stock = '1'
                 let offerid = body.props.pageProps.initialData.data.product.offerId
                 if (status !== "In-Stock") {
+                    console.log(set.text)
                     helper.posElephentWalmart(sku, offerid, title)
                     let sites = await helper.dbconnect(catagory+site)
                     let retail = await helper.dbconnect("RETAILFILTEREDUS")

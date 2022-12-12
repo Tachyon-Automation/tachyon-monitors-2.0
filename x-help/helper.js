@@ -146,6 +146,7 @@ const helper = {
             let text = await response.text()
             let parse = await text.split('">{"p')[1].split('scriptLoader":[]}')[0].trim()
             let body = await JSON.parse('{"p' + parse + 'scriptLoader":[]}')
+            text = '{"p' + parse + 'scriptLoader":[]}'
             clearTimeout(timeoutId)
             return { body, response, text }
         } catch (e) {
