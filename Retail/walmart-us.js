@@ -45,7 +45,7 @@ async function monitor(sku) {
         let set = await helper.requestWalmart(req, method, proxy, headers) //request function
         let body = set.body;
         let status = PRODUCTS[sku].sizes
-        console.log(set.response.status)
+        //console.log(set.response.status)
         if (set.response.status == 404) {
             await helper.sleep(product.waittime);
             monitor(sku);
@@ -55,6 +55,7 @@ async function monitor(sku) {
             monitor(sku);
             return
         }
+        
             if (body.props.pageProps.initialData.data.product.sellerId == 'F55CDC31AB754BB68FE0B39041159D63' && body.props.pageProps.initialData.data.product.availabilityStatus == 'IN_STOCK' && body.props.pageProps.initialData.data.product.shippingOption.availabilityStatus == 'AVAILABLE') {
                 let url = `https://www.walmart.com/ip/tachyon/${sku}#Tachyon`
                 let title = body.props.pageProps.initialData.data.product.name
