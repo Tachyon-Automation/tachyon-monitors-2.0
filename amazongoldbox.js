@@ -47,12 +47,13 @@ async function monitor() {
       return
     }
     //offset += 3000
-    let products = await set.resp.split(`('slot-15', {"widgetId":"`)[1].split('})')[0]
+    let products = await set.resp.split(`('slot-15',`)[1].split('})')[0]
     products = await JSON.parse('{"widgetId":"' + products + '}')
     quary += 30
     if (products.prefetchedData.aapiSearchDealsTotalCount < quary) {
       quary = 0
     }
+    
     console.log(quary)
     for (let product of products.prefetchedData.aapiGetDealsList[0].entities) {
       asin = 'B071YKRSBX'

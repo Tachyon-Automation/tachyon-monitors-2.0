@@ -101,7 +101,7 @@ const helper = {
         try {
             //console.log(body)
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 20000)
+            const timeoutId = setTimeout(() => controller.abort(), 5000)
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: body })
             let text = await response.text()
             let html = HTMLParser.parse(text)

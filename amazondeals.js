@@ -22,9 +22,9 @@ async function startSet() {
 async function startMonitor() {
   skulist = await database.query(`SELECT * from ${table}`);
   asinslegth = skulist.rows.length
-  for (i = 0; i < 200; i++) {
+  for (i = 0; i < 300; i++) {
     let products = []
-    for (j = 0; j < 25; j++) {
+    for (j = 0; j < 30; j++) {
       try {
         products.push(skulist.rows[asinstotal + j].sku)
       } catch (e) { }
@@ -39,101 +39,57 @@ async function monitor(products) {
     let proxy = await helper.getRandomProxy() //proxy per site
     let headers = {
       "accept": "*/*",
-      "accept-encoding": "gzip, deflate, br",
-      "cache-control": "max-age=0",
-      "content-type": "application/json",
-      "dnt": "1",
-      "sec-fetch-dest": "document",
-      "sec-fetch-mode": "navigate",
-      "sec-fetch-site": "none",
-      "sec-fetch-user": "?1",
-      "sec-gpc": "1",
-      "upgrade-insecure-requests": "1",
+      "x-amz-acp-params": "tok=JMk1ilIzYvfpKP_3W1FrspccfAtiCzxtgJA60ucHLTg;ts=1670852860499;rid=7XC062R6ESYF2TDCTDNA;d1=213;d2=V4;tpm=CGHDB.content-id;ref=rp",
+      "cookie": `x-main="pnGYktozOY8iXT2XFOhK5S5MNOliyp?mnw29x0k??pmqTYXaLNcalN7zNytnDlNU"; at-main=Atza|IwEBIKgD8lBb5tucNx6tqQd0Y_hgFn7g2sSVJRxw5Y8geWg-ODtwFzF5M63KJ1BMTqlvrlhJnwT5r-YBVpztwZwd5Uv0TujKEls6PJ1XkGDnPcB4d6W0sl9TxZE6jMIYQZAxV2THZL61ikbPDoj_popeSVlLaPbn6GStSOjvI2FLzkzqp4wGzBRIWcuo4U_n21MceRbxYUtOuxEm907JsfQ86KF0wfXGoPBMlXo4cUW2ba8giQ;`,
       "user-agent": 'Sosospider+(+http://help.soso.com/webspider.htm)',
     }
     let method = 'POST'; //request method
-    let body = {
-      "requestContext": {
-        "obfuscatedMarketplaceId": "ATVPDKIKX0DER",
-        "obfuscatedMerchantId": "ATVPDKIKX0DER",
-        "language": "en-US",
-        "sessionId": "",
-        "currency": "USD",
-        "amazonApiAjaxEndpoint": "data.amazon.com"
-      },
-      "content": {
-        "includeOutOfStock": true
-      },
-      "includeOutOfStock": true,
-      "endpoint": "ajax-data",
-      "ASINList": products,
+    let setasins = []
+    for (let asin of products) {
+      let seter = `{\"id\":\"${asin}\",\"index\":0,\"linkParameters\":{\"dataType\":\"Map\",\"value\":[[\"pd_rd_i\",\"\"]]},\"metadataMap\":{\"dataType\":\"Map\",\"value\":[]}}`
+      setasins.push(seter)
     }
-
-    let req = `https://www.amazon.com/juvec`//request url
-    //console.log(req, method, proxy, headers, body)
-    let set = await helper.requestJson3(req, method, proxy, headers, body)
-    //console.log(set.response.status)
+    let body = JSON.stringify({ "indexes": [], "ids": setasins, "almCardContextJson": "{}" })
+    let req = `https://www.amazon.com/acp/buy-again-aisle-carousel-mobile/buy-again-aisle-carousel-mobile-18e5b038-781c-4185-af34-514e37cc9f2d-1670537684944/getCarouselItems`//request url
+    let set = await helper.requestJson4(req, method, proxy, headers, body)
     if (set.response.status != 200) {
       monitor(products);
       return
     }
-    asinstotal += 25
+    asinstotal += 30
     //console.log(asinstotal)
     if (asinstotal > asinslegth) {
       asinstotal = 0
       return
     }
     products = []
-    for (j = 0; j < 25; j++) {
+    for (j = 0; j < 30; j++) {
       try {
         products.push(skulist.rows[asinstotal + j].sku)
       } catch (e) { }
     }
     //console.log(set.json.products)
-    for (let product of set.json.products) {
-      let title = product.title.displayString
-      //let image = product.swatchImages.dimensions[0].dimensionValues[0].imageAttributes.media.url
-      let asin = product.asin
-      let totalprice = 0
+    let root = set.html
+    parse = root.querySelectorAll('li[class="a-carousel-card-fragment"]')
+    for (let product of parse) {
       let totalsavings = 0
-      if (product.productCategory.websiteDisplayGroup.displayString == 'eBooks' || product.productCategory.websiteDisplayGroup.displayString == 'Book' || product.productCategory.websiteDisplayGroup.displayString == 'Audible')
-        continue
-      for (let buyingOption of product.buyingOptions) {
-        if (buyingOption.availability.type == 'OUT_OF_STOCK')
-          continue
-        try {
-          if (buyingOption.price.basisPrice && totalprice <= buyingOption.price.basisPrice.moneyValueOrRange.value.amount) {
-            totalprice = buyingOption.price.basisPrice.moneyValueOrRange.value.amount
-          } else {
-            if (buyingOption.price.priceToPay.moneyValueOrRange.range && totalprice <= buyingOption.price.priceToPay.moneyValueOrRange.range.min)
-              totalprice = buyingOption.price.priceToPay.moneyValueOrRange.range.min
-            else {
-              if(totalprice <= buyingOption.price.priceToPay.moneyValueOrRange.value.amount)
-              totalprice = buyingOption.price.priceToPay.moneyValueOrRange.value.amount
-            }
-          }
-        } catch (e) {}
-        try {
-          if (buyingOption.promotionsUnified.length = 1 && buyingOption.promotionsUnified.summary.unifiedIds.length > 0 && buyingOption.promotionsUnified.summary.length == 5 && buyingOption.promotionsUnified.summary.accessConfirmationShortMessage.fragments) {
-            totalsavings += buyingOption.promotionsUnified.summary.accessConfirmationShortMessage.fragments[0].money.amount
-          }
-        } catch (e) {}
-        try {
-          if (buyingOption.promotionsUnified.length = 1 && buyingOption.promotionsUnified.summary.unifiedIds.length > 0 && buyingOption.promotionsUnified.summary.length == 5 && buyingOption.promotionsUnified.summary.mediumMessage.label.includes('%')) {
-            totalsavings += Number(buyingOption.promotionsUnified.summary.mediumMessage.label.text.replace('Save ', '').replace('%', '')) / 100 * totalprice
-          }
-        } catch (e) { }
-        if (buyingOption.price.savings) {
-          totalsavings += buyingOption.price.savings.money.amount
-        }
+      if (set.text.includes('Out of stock'))
+      continue
+      let title = product.querySelector('.a-size-small.a-color-base').textContent
+      //console.log(title)
+      //let image = product.swatchImages.dimensions[0].dimensionValues[0].imageAttributes.media.url
+      let asin = product.querySelector('.a-section.a-spacing-none').attributes['data-asin']
+      let originalprice = Number(product.querySelector('._YnV5L_strikethroughPrice_3-ZUw .a-offscreen').textContent.replace('$', ''))
+      let totalprice = Number(product.querySelector('._YnV5L_singlePriceToPay_1QbWS .a-offscreen').textContent.replace('$', ''))
+      totalsavings += originalprice - totalprice
+      if (set.text.includes('a-label a-checkbox-label')) {
+        totalsavings += Number(product.querySelector('.a-label.a-checkbox-label').textContent.replace('Save $', ''))
       }
-      if (totalsavings > 0) {
-        if ((totalsavings/totalprice)*100 >= 50) {
-         //console.log(asin, totalsavings, totalprice)
-        }
-        if (totalsavings >= totalprice) {
-          console.log(asin, totalsavings, totalprice)
-        }
+      if ((totalsavings / originalprice) * 100 >= 90) {
+        console.log(asin, totalsavings, originalprice)
+      }
+      if (totalsavings >= originalprice) {
+        console.log(asin, totalsavings, originalprice)
       }
     }
     monitor(products);
