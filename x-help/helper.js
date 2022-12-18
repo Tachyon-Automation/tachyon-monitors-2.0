@@ -105,6 +105,7 @@ const helper = {
             let response = await fetch(site, { method: method, headers: headers, signal: controller.signal, agent: await new HTTPSProxyAgent(proxy), body: body })
             let text = await response.text()
             let html = HTMLParser.parse(text)
+            //console.log(response.status)
             clearTimeout(timeoutId)
             return { html, response, text }
         } catch (e) {

@@ -3,6 +3,7 @@ const fs = require('fs');
 const database = require('./x-help/database');
 const HTMLParser = require('node-html-parser');
 const Discord = require('discord.js');
+const randomUseragent = require('random-useragent');
 const table = 'amazondeal'
 const { v4 } = require('uuid');
 const { Console } = require('console');
@@ -22,7 +23,7 @@ async function startSet() {
 async function startMonitor() {
   skulist = await database.query(`SELECT * from ${table}`);
   asinslegth = skulist.rows.length
-  for (i = 0; i < 300; i++) {
+  for (i = 0; i < 100; i++) {
     let products = []
     for (j = 0; j < 30; j++) {
       try {
@@ -36,12 +37,13 @@ async function startMonitor() {
 }
 async function monitor(products) {
   try {
+    let agent = randomUseragent.getRandom() //user agent per site
     let proxy = await helper.getRandomProxy() //proxy per site
     let headers = {
       "accept": "*/*",
       "x-amz-acp-params": "tok=JMk1ilIzYvfpKP_3W1FrspccfAtiCzxtgJA60ucHLTg;ts=1670852860499;rid=7XC062R6ESYF2TDCTDNA;d1=213;d2=V4;tpm=CGHDB.content-id;ref=rp",
       "cookie": `x-main="pnGYktozOY8iXT2XFOhK5S5MNOliyp?mnw29x0k??pmqTYXaLNcalN7zNytnDlNU"; at-main=Atza|IwEBIKgD8lBb5tucNx6tqQd0Y_hgFn7g2sSVJRxw5Y8geWg-ODtwFzF5M63KJ1BMTqlvrlhJnwT5r-YBVpztwZwd5Uv0TujKEls6PJ1XkGDnPcB4d6W0sl9TxZE6jMIYQZAxV2THZL61ikbPDoj_popeSVlLaPbn6GStSOjvI2FLzkzqp4wGzBRIWcuo4U_n21MceRbxYUtOuxEm907JsfQ86KF0wfXGoPBMlXo4cUW2ba8giQ;`,
-      "user-agent": 'Sosospider+(+http://help.soso.com/webspider.htm)',
+      "user-agent": agent,
     }
     let method = 'POST'; //request method
     let setasins = []
@@ -50,14 +52,14 @@ async function monitor(products) {
       setasins.push(seter)
     }
     let body = JSON.stringify({ "indexes": [], "ids": setasins, "almCardContextJson": "{}" })
-    let req = `https://www.amazon.com/acp/buy-again-aisle-carousel-mobile/buy-again-aisle-carousel-mobile-18e5b038-781c-4185-af34-514e37cc9f2d-1670537684944/getCarouselItems`//request url
+    let req = `https://www.amazon.com/acp/buy-again-aisle-carousel-mobile/buy-again-aisle-carousel-mobile-58c77881-2b5c-4342-85b1-2f5058573eba-1671149182699/getCarouselItems`//request url
     let set = await helper.requestJson4(req, method, proxy, headers, body)
     if (set.response.status != 200) {
       monitor(products);
       return
     }
     asinstotal += 30
-    //console.log(asinstotal)
+    //console.log(set.response.status)
     if (asinstotal > asinslegth) {
       asinstotal = 0
       return
