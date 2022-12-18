@@ -56,7 +56,7 @@ async function monitor(sku) {
             return
         }
 
-            if (body.props.pageProps.initialData.data.product.sellerId == 'F55CDC31AB754BB68FE0B39041159D63' && body.props.pageProps.initialData.data.product.fulfillmentType != 'STORE'&& body.props.pageProps.initialData.data.product.fulfillmentType != 'FC' && body.props.pageProps.initialData.data.product.shippingOption.availabilityStatus == 'AVAILABLE') {
+            if (body.props.pageProps.initialData.data.product.sellerId == 'F55CDC31AB754BB68FE0B39041159D63' && body.props.pageProps.initialData.data.product.fulfillmentType != 'STORE' && body.props.pageProps.initialData.data.product.shippingOption.availabilityStatus == 'AVAILABLE') {
                 let url = `https://www.walmart.com/ip/tachyon/${sku}#Tachyon`
                 let title = body.props.pageProps.initialData.data.product.name
                 let price = body.props.pageProps.initialData.data.product.priceInfo.currentPrice.priceDisplay
