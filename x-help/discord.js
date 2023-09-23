@@ -6,7 +6,7 @@ const bot = {
 commandPrefix: '!',
 getClient: client,
 login: function () {
-    client.login('ODEzODI3MjM1NjMwMjg0ODcw.YDU9rQ.RDvTv-BEthEGYDmr9vv2hUfMQac');
+    client.login('clentkey');
     console.log("Discord Bot Logging in..");
 },
 sendChannelMessage: function (id, message) {
