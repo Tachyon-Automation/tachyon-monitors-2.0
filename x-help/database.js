@@ -2,7 +2,7 @@ const pg = require('pg');
 const helper = require('./helper');
 const pool = new pg.Pool({
     user: 'postgres',
-    host: '143.244.222.127',
+    host: 'ip',
     database: 'monitors',
     password: 'thisistooeasy',
     port: 5432,
